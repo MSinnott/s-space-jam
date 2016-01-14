@@ -1,9 +1,18 @@
+import java.io.File;
+import java.io.IOException;
+
 /**
- * Created by Administrator on 1/14/2016.
+ * Created by Administratuh on 1/14/2016.
  */
 public class baseRunner {
-
+    
     public static void main(String[] args){
-        System.out.println("Hello World!");
+        File file = new File("Music/loc.wav"); //grabbing music file
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+        
 }
