@@ -1,8 +1,12 @@
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.IOException;
+import com.sun.media.sound.WaveFileWriter;
+import sun.audio.AudioStream;
+
+import java.io.*;
 import javax.sound.sampled.*;
+import javax.sound.sampled.spi.AudioFileWriter;
 import javax.swing.*;
+
+import static javax.sound.sampled.AudioFileFormat.Type.WAVE;
 
 public class baseRunner {
     
@@ -21,7 +25,6 @@ public class baseRunner {
         mainWindow.pack();
         mainWindow.setSize(480, 480);
         mainWindow.add(panel);
-
         
         //see if this works. I pulled it off of stack overflow --a
         AudioInputStream audioIn = null;
@@ -33,8 +36,9 @@ public class baseRunner {
             e.printStackTrace();
         }
         DataInputStream dataIn = new DataInputStream(audioIn);
+        AudioFormat format;
         try {
-            AudioFormat format = audioIn.getFormat();
+            format = audioIn.getFormat();
             samples = new byte[(int)(audioIn.getFrameLength() * format.getFrameSize())];
             System.out.println(samples.length);
             dataIn.readFully(samples);
@@ -43,6 +47,18 @@ public class baseRunner {
         } finally {
             dataIn.close();
         }
+
+        Clip clip = null;
+        try {
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(audioFile));
+        } catch (LineUnavailableException e) {
+            e.printStackTrace();
+        } catch (UnsupportedAudioFileException e) {
+            e.printStackTrace();
+        }
+        clip.start();
+
     }
         
 }
