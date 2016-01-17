@@ -24,6 +24,22 @@ public class baseRunner {
         samples = audioFile.getAudioBytes();
         System.out.println(samples.length);
 
+        //makes a file that play 2 tones, one on each channel!!!
+        byte[] newSamples = new byte[4 * 22050 * 10];
+        int leftSide;
+        int rightSide;
+        for(int i = 0; i < newSamples.length; i+= 4){
+            leftSide = (int) (8000 * Math.sin(2 * Math.PI * i / 500));
+            rightSide = (int) (8000 * Math.sin(2 * Math.PI * i / 400));
+            newSamples[i] = (byte) (leftSide & 255);
+            newSamples[i+1] = (byte) ((leftSide / 256) & 255);
+            newSamples[i+2] = (byte) (rightSide & 255);
+            newSamples[i+3] = (byte) ((rightSide / 256) & 255);
+        }
+
+        AudioFileManager newFile = new AudioFileManager(newSamples);
+        newFile.buildFile("testing/resc/new.wav");
+
         Clip audioClip = audioFile.getClip();
         audioClip.start();
 

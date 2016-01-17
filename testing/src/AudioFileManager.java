@@ -11,8 +11,9 @@ public class AudioFileManager {
     private DataInputStream dataIn  = null;
     private AudioFormat format;
     private byte[] samples = null;
-    private int sampleRate = 22050;
-    private int byteRate = 88200;
+    private static int SAMPLERATE = 22050;
+    private int sampleRate;
+    private int byteRate;
 
     private static String WAVHEADER = "RIFF____WAVEfmt ____________________data";
 
@@ -87,50 +88,57 @@ public class AudioFileManager {
         }
         return audioBytes;
     }
-
-    //!!!!!!!!!!!!!!!!!!!needs testing!!!!!!!!!!!!!!!!!!!
+    
     public void buildFile(String filepath) throws IOException {
         int chunkSize = samples.length + 40;
         audioFile = new File(filepath);
         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(audioFile));
-        byte[] writeOut = buildHeader(chunkSize);
+        byte[] writeOut = new byte[chunkSize];
+        byte[] header = buildHeader(chunkSize, 22050);
+        for(int i = 0; i < header.length; i++){
+            writeOut[i] = header[i];
+        }
         for(int i = 40; i < chunkSize; i++){
-            writeOut[i] = samples[i];
+            writeOut[i] = samples[i - 40];
         }
         fileOut.write(writeOut);
     }
 
-    public byte[] buildHeader(int chunkSize){
-        byte[] header = new byte[chunkSize];
+    public static byte[] buildHeader(int chunkSize, int sampleRate){
+        if(sampleRate == -1){
+            sampleRate = SAMPLERATE;
+        }
+        byte[] header = new byte[40];
         byte[] headerSkeleton = WAVHEADER.getBytes();
         for(int i = 0; i < headerSkeleton.length; i++) {
             header[i] = headerSkeleton[i];
         }
         for(int i = 4; i < 8; i++) {
-            header[i] = (byte) (chunkSize % 16);
-            chunkSize /= 100;
+            header[i] = (byte) (chunkSize & 255);
+            chunkSize /= 256;
         }
-        header[20] = (byte) (16);
+        header[16] = (byte) (16);
+        header[17] = (byte) (0);
+        header[18] = (byte) (0);
+        header[19] = (byte) (0);
+        header[20] = (byte) (1);
         header[21] = (byte) (0);
-        header[22] = (byte) (0);
+        header[22] = (byte) (2);
         header[23] = (byte) (0);
-        header[24] = (byte) (1);
-        header[25] = (byte) (0);
-        header[26] = (byte) (2);
-        header[27] = (byte) (0);
-        for(int i = 28; i < 32; i++) {
-            header[i] = (byte) (sampleRate % 16);
-            sampleRate /= 100;
+        int writeVal = sampleRate;
+        for(int i = 24; i < 28; i++) {
+            header[i] = (byte) (writeVal & 255);
+            writeVal /= 256;
         }
-        byteRate = 4 * sampleRate;
-        for(int i = 32; i < 36; i++){
-            header[i] = (byte) (4 * byteRate % 16);
-            byteRate /= 100;
+        int byteRate = 4 * sampleRate;
+        for(int i = 28; i < 32; i++){
+            header[i] = (byte) (byteRate & 255);
+            byteRate /= 256;
         }
-        header[36] = (byte) (4);
-        header[37] = (byte) (0);
-        header[38] = (byte) (1);
-        header[39] = (byte) (0);
+        header[32] = (byte) (4);
+        header[33] = (byte) (0);
+        header[34] = (byte) (16);
+        header[35] = (byte) (0);
 
         return header;
     }
