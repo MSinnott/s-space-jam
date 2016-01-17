@@ -5,7 +5,7 @@ import javax.swing.*;
 public class baseRunner {
     
     public static void main(String[] args) throws IOException {
-        AudioFileManager audioFile = new AudioFileManager("testing/resc/space oddity.au");
+        AudioFileManager audioFile = new AudioFileManager("testing/resc/space oddity.wav");
         //grabbing music audioFile --a
         byte[] samples;
 
@@ -22,27 +22,41 @@ public class baseRunner {
         mainWindow.add(panel);
 
         samples = audioFile.getAudioBytes();
-        System.out.println(samples.length);
 
-        //makes a file that play 2 tones, one on each channel!!!
-        byte[] newSamples = new byte[4 * 22050 * 10];
-        int leftSide;
-        int rightSide;
-        for(int i = 0; i < newSamples.length; i+= 4){
-            leftSide = (int) (8000 * Math.sin(2 * Math.PI * i / 500));
-            rightSide = (int) (8000 * Math.sin(2 * Math.PI * i / 400));
-            newSamples[i] = (byte) (leftSide & 255);
-            newSamples[i+1] = (byte) ((leftSide / 256) & 255);
-            newSamples[i+2] = (byte) (rightSide & 255);
-            newSamples[i+3] = (byte) ((rightSide / 256) & 255);
-        }
-
+        byte[] newSamples = getStereoTone(800, 500, 22050 * 4*2);
+        newSamples = concat(newSamples, getStereoTone(1600, 600, 22050*4*3));
         AudioFileManager newFile = new AudioFileManager(newSamples);
         newFile.buildFile("testing/resc/new.wav");
 
         Clip audioClip = audioFile.getClip();
         audioClip.start();
 
+    }
+
+    public static byte[] getStereoTone(int freqLeft, int freqRight, int numSamples){
+        byte[] tone = new byte[numSamples];
+        int rightSide;
+        int leftSide;
+        for(int i = 0; i < numSamples; i+= 4){
+            leftSide = (int) (8000 * Math.sin(2 * Math.PI * i / freqLeft));
+            rightSide = (int) (8000 * Math.sin(2 * Math.PI * i / freqRight));
+            tone[i] = (byte) (leftSide & 255);
+            tone[i+1] = (byte) ((leftSide / 256) & 255);
+            tone[i+2] = (byte) (rightSide & 255);
+            tone[i+3] = (byte) ((rightSide / 256) & 255);
+        }
+        return tone;
+    }
+
+    public static byte[] concat(byte[] arr1, byte[] arr2){
+        byte[] arrConcat = new byte[arr1.length + arr2.length];
+        for(int i = 0; i < arr1.length; i++){
+            arrConcat[i] = arr1[i];
+        }
+        for(int i = 0; i < arr2.length; i++){
+            arrConcat[i+arr1.length] = arr2[i];
+        }
+        return arrConcat;
     }
         
 }

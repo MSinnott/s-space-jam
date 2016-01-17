@@ -11,11 +11,8 @@ public class AudioFileManager {
     private DataInputStream dataIn  = null;
     private AudioFormat format;
     private byte[] samples = null;
-    private static int SAMPLERATE = 22050;
-    private int sampleRate;
-    private int byteRate;
-
-    private static String WAVHEADER = "RIFF____WAVEfmt ____________________data";
+    private static final int DEFAULTSAMPLERATE = 22050;
+    private static final String WAVHEADER = "RIFF____WAVEfmt ____________________data";
 
     public AudioFileManager(String filepath){
         audioFile = new File(filepath);
@@ -25,7 +22,6 @@ public class AudioFileManager {
             dataIn = new DataInputStream(audioIn);
             format = audioIn.getFormat();
             samples = new byte[(int)(audioIn.getFrameLength() * format.getFrameSize())];
-            System.out.println(samples.length);
             dataIn.readFully(samples);
 
         } catch (UnsupportedAudioFileException e) {
@@ -43,7 +39,6 @@ public class AudioFileManager {
             dataIn = new DataInputStream(audioIn);
             format = audioIn.getFormat();
             samples = new byte[(int)(audioIn.getFrameLength() * format.getFrameSize())];
-            System.out.println(samples.length);
             dataIn.readFully(samples);
 
         } catch (UnsupportedAudioFileException e) {
@@ -57,38 +52,38 @@ public class AudioFileManager {
         samples = samplesIn;
     }
 
-    public AudioFileManager(double[] samplesIn){
+    public AudioFileManager(float[] samplesIn){
         samples = getAudioBytes(samplesIn);
     }
 
-    public double[] getAudioData(){
-        double[] doubleSamples = new double[samples.length];
+    public float[] getAudioData(){
+        float[] floatSamples = new float[samples.length];
         for(int i = 0; i < samples.length; i++) {
-            doubleSamples[i] = (double) samples[i];
+            floatSamples[i] = (float) samples[i];
         }
-        return doubleSamples;
+        return floatSamples;
     }
 
-    public static double[] getAudioData(byte[] bytes){
-        double[] doubleSamples = new double[bytes.length];
+    public static float[] getAudioData(byte[] bytes){
+        float[] floatSamples = new float[bytes.length];
         for(int i = 0; i < bytes.length; i++) {
-            doubleSamples[i] = (double) bytes[i];
+            floatSamples[i] = (float) bytes[i];
         }
-        return doubleSamples;
+        return floatSamples;
     }
 
     public byte[] getAudioBytes(){
         return samples;
     }
 
-    public static byte[] getAudioBytes(double[] audioData){
+    public static byte[] getAudioBytes(float[] audioData){
         byte[] audioBytes = new byte[audioData.length];
         for(int i = 0; i < audioData.length; i++){
             audioBytes[i] = (byte) audioData[i];
         }
         return audioBytes;
     }
-    
+
     public void buildFile(String filepath) throws IOException {
         int chunkSize = samples.length + 40;
         audioFile = new File(filepath);
@@ -106,7 +101,7 @@ public class AudioFileManager {
 
     public static byte[] buildHeader(int chunkSize, int sampleRate){
         if(sampleRate == -1){
-            sampleRate = SAMPLERATE;
+            sampleRate = DEFAULTSAMPLERATE;
         }
         byte[] header = new byte[40];
         byte[] headerSkeleton = WAVHEADER.getBytes();
