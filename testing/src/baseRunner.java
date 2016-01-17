@@ -1,17 +1,12 @@
-import com.sun.media.sound.WaveFileWriter;
-import sun.audio.AudioStream;
-
 import java.io.*;
 import javax.sound.sampled.*;
-import javax.sound.sampled.spi.AudioFileWriter;
 import javax.swing.*;
-
-import static javax.sound.sampled.AudioFileFormat.Type.WAVE;
 
 public class baseRunner {
     
     public static void main(String[] args) throws IOException {
-        File audioFile = new File("testing/resc/space oddity.au"); //grabbing music audioFile --a
+        AudioFileManager audioFile = new AudioFileManager("testing/resc/space oddity.au");
+        //grabbing music audioFile --a
         byte[] samples;
 
         //making and initializing window --m
@@ -25,39 +20,12 @@ public class baseRunner {
         mainWindow.pack();
         mainWindow.setSize(480, 480);
         mainWindow.add(panel);
-        
-        //see if this works. I pulled it off of stack overflow --a
-        AudioInputStream audioIn = null;
-        try {
-            audioIn = AudioSystem.getAudioInputStream(audioFile);
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        DataInputStream dataIn = new DataInputStream(audioIn);
-        AudioFormat format;
-        try {
-            format = audioIn.getFormat();
-            samples = new byte[(int)(audioIn.getFrameLength() * format.getFrameSize())];
-            System.out.println(samples.length);
-            dataIn.readFully(samples);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            dataIn.close();
-        }
 
-        Clip clip = null;
-        try {
-            clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(audioFile));
-        } catch (LineUnavailableException e) {
-            e.printStackTrace();
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        }
-        clip.start();
+        samples = audioFile.getAudioBytes();
+        System.out.println(samples.length);
+
+        Clip audioClip = audioFile.getClip();
+        audioClip.start();
 
     }
         
