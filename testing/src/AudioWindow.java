@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.File;
+import java.util.ArrayList;
 
 public class AudioWindow extends JInternalFrame{
 
@@ -11,10 +12,23 @@ public class AudioWindow extends JInternalFrame{
     private MainPane pane;
     private short[] data;
     private AudioFileManager audioFile;
+    private JDesktopPane desktop;
+    private ArrayList<AudioWindow> audioWindows;
     private AudioWindow audioWindow = this;
 
-    public AudioWindow(String name, int width, int height, AudioFileManager fman){
+    JMenuBar menuBar;
+    JMenu fileMenu;
+    JMenuItem cloneButton;
+    JMenuItem exitButton;
+    JMenu opMenu;
+    JMenuItem ftransformButton;
+    JMenuItem scaleButton;
+
+    public AudioWindow(String name, int width, int height, AudioFileManager fman, JDesktopPane aDesk, ArrayList<AudioWindow> audioWindows){
         super(name);
+
+        desktop = aDesk;
+        this.audioWindows = audioWindows;
 
         this.setSize(width, height);
         this.setResizable(true);
@@ -41,55 +55,63 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public void buildMenus(){
-        JMenuBar menuBar = new JMenuBar();
-        menuBar.setBackground(AudioDesktop.bgColor);
-        menuBar.setForeground(AudioDesktop.txtColor);
+        menuBar = new JMenuBar();
+
         this.add(menuBar, BorderLayout.NORTH);
 
-        JMenu fileMenu = new JMenu("File");
-        fileMenu.setBackground(AudioDesktop.bgColor);
-        fileMenu.setForeground(AudioDesktop.txtColor);
+        fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
 
-        JMenuItem cloneButton = new JMenuItem("Clone");
-        cloneButton.setBackground(AudioDesktop.bgColor);
-        cloneButton.setForeground(AudioDesktop.txtColor);
+        cloneButton = new JMenuItem("Clone");
         fileMenu.add(cloneButton);
         cloneButton.addActionListener(new CloneAction(this));
 
-        JMenuItem exitButton = new JMenuItem("Exit");
-        exitButton.setBackground(AudioDesktop.bgColor);
-        exitButton.setForeground(AudioDesktop.txtColor);
+        exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
         exitButton.addActionListener(new CloseAction(this));
 
-        JMenu opMenu = new JMenu("Operations");
-        opMenu.setBackground(AudioDesktop.bgColor);
-        opMenu.setForeground(AudioDesktop.txtColor);
+        opMenu = new JMenu("Operations");
         menuBar.add(opMenu);
 
-        JMenuItem ftransformButton = new JMenuItem("Forward FFT");
-        ftransformButton.setBackground(AudioDesktop.bgColor);
-        ftransformButton.setForeground(AudioDesktop.txtColor);
+        ftransformButton = new JMenuItem("Forward FFT");
         opMenu.add(ftransformButton);
         ftransformButton.addActionListener(new forwardFFtAction());
 
-        JMenuItem scaleButton = new JMenuItem("Scale Vertically");
-        scaleButton.setBackground(AudioDesktop.bgColor);
-        scaleButton.setForeground(AudioDesktop.txtColor);
+        scaleButton = new JMenuItem("Scale Vertically");
         opMenu.add(scaleButton);
         scaleButton.addActionListener(new scaleAction());
+
+        resetColors();
+    }
+
+    public void resetColors(){
+        menuBar.setBackground(AudioDesktop.bgColor);
+        menuBar.setForeground(AudioDesktop.txtColor);
+        fileMenu.setBackground(AudioDesktop.bgColor);
+        fileMenu.setForeground(AudioDesktop.txtColor);
+        cloneButton.setBackground(AudioDesktop.bgColor);
+        cloneButton.setForeground(AudioDesktop.txtColor);
+        exitButton.setBackground(AudioDesktop.bgColor);
+        exitButton.setForeground(AudioDesktop.txtColor);
+        opMenu.setBackground(AudioDesktop.bgColor);
+        opMenu.setForeground(AudioDesktop.txtColor);
+        ftransformButton.setBackground(AudioDesktop.bgColor);
+        ftransformButton.setForeground(AudioDesktop.txtColor);
+        scaleButton.setBackground(AudioDesktop.bgColor);
+        scaleButton.setForeground(AudioDesktop.txtColor);
     }
 
     public class CloneAction extends AbstractAction {
+
         private AudioWindow audioWindow;
         public CloneAction(AudioWindow window){
             audioWindow = window;
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            AudioWindow clone = new AudioWindow(audioWindow.getName(), audioWindow.getWidth(), audioWindow.getHeight(), audioWindow.audioFile);
-            audioWindow.getParent().add(clone);
+            AudioWindow clone = new AudioWindow(audioWindow.getName(), audioWindow.getWidth(), audioWindow.getHeight(), audioWindow.audioFile, desktop, audioWindows);
+            desktop.add(clone);
+            audioWindows.add(clone);
             clone.moveToFront();
         }
     }

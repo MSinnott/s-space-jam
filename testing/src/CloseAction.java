@@ -30,8 +30,7 @@ public class CloseAction extends AbstractAction {
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if(windowToClose != null) windowToClose.dispose();
-                if(frameToClose != null) frameToClose.dispose();
+                closeItem();
                 closeDialog.dispose();
             }
         });
@@ -43,7 +42,6 @@ public class CloseAction extends AbstractAction {
         });
         closeDialog.add(closeButton, BorderLayout.CENTER);
         closeDialog.add(cancelButton, BorderLayout.EAST);
-        closeDialog.setVisible(true);
         if(windowToClose != null){
             closeDialog.setLocation(windowToClose.getX() + 240, windowToClose.getY() + 240);
         }
@@ -52,5 +50,11 @@ public class CloseAction extends AbstractAction {
         }
         closeDialog.setSize(200, 64);
         closeDialog.setResizable(false);
+        closeDialog.setVisible(true);
+    }
+
+    private void closeItem(){
+        if(windowToClose != null) windowToClose.dispose();
+        if(frameToClose != null) frameToClose.dispose();
     }
 }
