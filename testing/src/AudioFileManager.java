@@ -3,6 +3,8 @@ import java.io.*;
 
 /*
     Class that handles audio I/O --reading, writing, etc
+
+    when writing to the audio file, its a byte array. otherwise, its a short array
  */
 public class AudioFileManager {
 
@@ -52,34 +54,35 @@ public class AudioFileManager {
         samples = samplesIn;
     }
 
-    public AudioFileManager(float[] samplesIn){
+    public AudioFileManager(short[] samplesIn){
         samples = getAudioBytes(samplesIn);
     }
 
-    public float[] getAudioData(){
-        float[] floatSamples = new float[samples.length];
-        for(int i = 0; i < samples.length; i++) {
-            floatSamples[i] = (float) samples[i];
+    public short[] getAudioData(){
+        short[] shortSamples = new short[samples.length / 2];
+        for(int i = 0; i < shortSamples.length; i+=1) {
+            shortSamples[i] = (short) (samples[2*i] + samples[2*i+1] * 256);
         }
-        return floatSamples;
+        return shortSamples;
     }
 
-    public static float[] getAudioData(byte[] bytes){
-        float[] floatSamples = new float[bytes.length];
-        for(int i = 0; i < bytes.length; i++) {
-            floatSamples[i] = (float) bytes[i];
+    public static short[] getAudioData(byte[] bytes){
+        short[] shortSamples = new short[bytes.length / 2];
+        for(int i = 0; i < shortSamples.length; i+=1) {
+            shortSamples[i] = (short) (bytes[2*i] + bytes[2*i+1] * 256);
         }
-        return floatSamples;
+        return shortSamples;
     }
 
     public byte[] getAudioBytes(){
         return samples;
     }
 
-    public static byte[] getAudioBytes(float[] audioData){
-        byte[] audioBytes = new byte[audioData.length];
-        for(int i = 0; i < audioData.length; i++){
-            audioBytes[i] = (byte) audioData[i];
+    public static byte[] getAudioBytes(short[] audioData){
+        byte[] audioBytes = new byte[2*audioData.length];
+        for(int i = 0; i < audioData.length; i+=1){
+            audioBytes[2*i+1] = (byte) (audioData[i] & 255);
+            audioBytes[2*i] = (byte) ((audioData[i] / 256) & 255);
         }
         return audioBytes;
     }
@@ -97,6 +100,7 @@ public class AudioFileManager {
             writeOut[i] = samples[i - 40];
         }
         fileOut.write(writeOut);
+        fileOut.close();
     }
 
     public static byte[] buildHeader(int chunkSize, int sampleRate){

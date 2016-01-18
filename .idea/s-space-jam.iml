@@ -8,5 +8,19 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="JTransforms-3.1-with-dependencies" level="project" />
+    <orderEntry type="library" name="JTransforms-3.1-sources" level="project" />
+    <orderEntry type="library" name="JTransforms-3.1-javadoc" level="project" />
+    <orderEntry type="library" name="JTransforms-3.1-javadoc (2)" level="project" />
+    <orderEntry type="module-library">
+      <library name="FFT">
+        <CLASSES />
+        <JAVADOC>
+          <root url="jar://$MODULE_DIR$/lib/JTransforms-3.1-javadoc.jar!/" />
+        </JAVADOC>
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="JTransforms-3.1-sources (2)" level="project" />
   </component>
 </module>
