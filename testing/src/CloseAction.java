@@ -44,7 +44,12 @@ public class CloseAction extends AbstractAction {
         closeDialog.add(closeButton, BorderLayout.CENTER);
         closeDialog.add(cancelButton, BorderLayout.EAST);
         closeDialog.setVisible(true);
-        closeDialog.setLocation(480, 480);
+        if(windowToClose != null){
+            closeDialog.setLocation(windowToClose.getX() + 240, windowToClose.getY() + 240);
+        }
+        if(frameToClose != null){
+            closeDialog.setLocation(frameToClose.getX() + 240, frameToClose.getY() + 240);
+        }
         closeDialog.setSize(200, 64);
         closeDialog.setResizable(false);
     }

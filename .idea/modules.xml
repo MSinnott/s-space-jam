@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ButtonActions/ButtonActions.iml" filepath="$PROJECT_DIR$/ButtonActions/ButtonActions.iml" />
       <module fileurl="file://$PROJECT_DIR$/fftLib/fftLib.iml" filepath="$PROJECT_DIR$/fftLib/fftLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/s-space-jam.iml" filepath="$PROJECT_DIR$/.idea/s-space-jam.iml" />
     </modules>

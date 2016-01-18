@@ -8,6 +8,7 @@ public class AudioDesktop extends JFrame{
     public static final Color bgColor = new Color(252, 53, 0);
     public static final Color fgColor = new Color(252, 127, 3);
     public static final Color accColor = new Color(255, 201, 8);
+    public static final Color lnColor = new Color(29, 46, 255);
     public static final Color txtColor = new Color(255, 255, 255);
 
     private JDesktopPane desktop;
@@ -19,7 +20,7 @@ public class AudioDesktop extends JFrame{
         this.setLayout(new BorderLayout());
         this.add(desktop, BorderLayout.CENTER);
         this.setSize(width, height);
-        this.setVisible(true);
+
         this.setResizable(true);
         this.setBackground(bgColor);
         this.setForeground(txtColor);
@@ -57,10 +58,14 @@ public class AudioDesktop extends JFrame{
         fileMenu.add(exitButton);
         exitButton.addActionListener(new CloseAction(this));
 
+
+        this.setVisible(true);
+        this.invalidate();
+        this.repaint();
+
     }
 
     public class OpenFile extends AbstractAction {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
@@ -71,7 +76,7 @@ public class AudioDesktop extends JFrame{
             fileChooser.setFileFilter(filter);
             int returnVal = fileChooser.showOpenDialog(desktop);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
-                desktop.add(new AudioWindow(fileChooser.getSelectedFile().getName(), 200, 100,fileChooser.getSelectedFile()));
+                desktop.add(new AudioWindow(fileChooser.getSelectedFile().getName(), 200, 100, new AudioFileManager(fileChooser.getSelectedFile())));
             }
         }
     }

@@ -4,7 +4,7 @@
 
 /*Class that handles the transformation of the byte array to s-space from t-space
 *
-* Work in Progress....
+* Work in Progress.... we have a FFT class --m
 * */
 
 

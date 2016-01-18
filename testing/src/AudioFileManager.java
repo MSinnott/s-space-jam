@@ -5,6 +5,8 @@ import java.io.*;
     Class that handles audio I/O --reading, writing, etc
 
     when writing to the audio file, its a byte array. otherwise, its a short array
+
+    when the audio file is transformed, this data changes as well
  */
 public class AudioFileManager {
 
@@ -14,7 +16,7 @@ public class AudioFileManager {
     private DataInputStream dataIn  = null;
     private AudioFormat format;
     private byte[] samples = null;
-    private static final int DEFAULTSAMPLERATE = 22050;
+    private static final int DEFAULTSAMPLERATE = 44100;
     private static final String WAVHEADER = "RIFF____WAVEfmt ____________________data";
 
     public AudioFileManager(String filepath){
@@ -93,7 +95,7 @@ public class AudioFileManager {
         audioFile = new File(filepath);
         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(audioFile));
         byte[] writeOut = new byte[chunkSize];
-        byte[] header = buildHeader(chunkSize, 22050);
+        byte[] header = buildHeader(chunkSize, DEFAULTSAMPLERATE);
         for(int i = 0; i < header.length; i++){
             writeOut[i] = header[i];
         }
@@ -158,6 +160,7 @@ public class AudioFileManager {
         return clip;
     }
 
+    //put transformations on the audio data below
     public short[] scale(double scale){
         short[] vals = getAudioData();
         for(int i = 0; i < vals.length; i++){
@@ -167,7 +170,7 @@ public class AudioFileManager {
         return vals;
     }
 
-    public short[] transform(){
+    public short[] ftransform(){
         short[] vals = getAudioData();
         fft =  new ComplexDoubleFFT(vals.length / 2);
         double[] toTransform = new double[vals.length];
@@ -179,7 +182,53 @@ public class AudioFileManager {
         for(int i = 0; i < toTransform.length; i++){
             res[i] = (short) toTransform[i];
         }
+        samples = getAudioBytes(res);
         return res;
+    }
+
+    public short[] btransform(){
+        short[] vals = getAudioData();
+        fft =  new ComplexDoubleFFT(vals.length / 2);
+        double[] toTransform = new double[vals.length];
+        for(int i = 0; i< toTransform.length; i++){
+            toTransform[i] = (double) vals[i];
+        }
+        fft.bt(toTransform);
+        short[] res = new short[toTransform.length];
+        for(int i = 0; i < toTransform.length; i++){
+            res[i] = (short) toTransform[i];
+        }
+        samples = getAudioBytes(res);
+        return res;
+    }
+
+    public short[] pMult(short[] toMult){
+        int end = toMult.length;
+        short[] vals = getAudioData();
+        if (vals.length < end) end = vals.length;
+        for(int i = 0; i < end; i++){
+            vals[i] *= toMult[i];
+        }
+        samples = getAudioBytes(vals);
+        return vals;
+    }
+
+    public short[] pAdd(short[] toAdd){
+        int end = toAdd.length;
+        short[] vals = getAudioData();
+        if (vals.length < end) end = vals.length;
+        for(int i = 0; i < end; i++){
+            vals[i] += toAdd[i];
+        }
+        samples = getAudioBytes(vals);
+        return vals;
+    }
+
+    public short[] clip(int startVal, int endVal){
+        for(int i = 0; i < samples.length; i++){
+            if(i > startVal && i < endVal) { samples[i] = 0; }
+        }
+        return getAudioData(samples);
     }
 
 }

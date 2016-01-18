@@ -1,5 +1,4 @@
 import java.io.*;
-import javax.sound.sampled.*;
 
 public class baseRunner {
 
@@ -17,15 +16,14 @@ public class baseRunner {
         mainWindow.repaint();
 
 
-        short[] newSamples = getStereoTone(60., 50., 22050 * 4*3);
+        audioFile.buildFile("testing/resc/space oddity OC");
 
-        AudioFileManager newFile = new AudioFileManager(newSamples);
-        newFile.buildFile("testing/resc/new.wav");
+        audioFile.ftransform();
+        audioFile.btransform();
 
-        System.out.println("reading clip");
-        Clip audioClip = newFile.getClip();
-        audioClip.start();
+        audioFile.buildFile("testing/resc/space oddity TRANSFORM.wav");
 
+        System.out.println("Done!");
     }
 
     public static short[] getStereoTone(double freqLeft, double freqRight, int numSamples){
@@ -39,17 +37,6 @@ public class baseRunner {
             tone[i+1] = rightSide;
         }
         return tone;
-    }
-
-    public static short[] concat(short[] arr1, short[] arr2){
-        short[] arrConcat = new short[arr1.length + arr2.length];
-        for(int i = 0; i < arr1.length; i++){
-            arrConcat[i] = arr1[i];
-        }
-        for(int i = 0; i < arr2.length; i++){
-            arrConcat[i+arr1.length] = arr2[i];
-        }
-        return arrConcat;
     }
 
 }
