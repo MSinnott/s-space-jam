@@ -12,7 +12,9 @@ public class baseRunner {
         samples = audioFile.getAudioData();
 
         //making and initializing window --m
-        makeWindow(1280, 1000);
+        AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
+        mainWindow.invalidate();
+        mainWindow.repaint();
 
 
         short[] newSamples = getStereoTone(60., 50., 22050 * 4*3);
@@ -23,6 +25,7 @@ public class baseRunner {
         System.out.println("reading clip");
         Clip audioClip = newFile.getClip();
         audioClip.start();
+
     }
 
     public static short[] getStereoTone(double freqLeft, double freqRight, int numSamples){
@@ -49,7 +52,4 @@ public class baseRunner {
         return arrConcat;
     }
 
-    public static void makeWindow(int windowWidth, int windowHeight){
-        AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", windowWidth, windowHeight);
-    }
 }

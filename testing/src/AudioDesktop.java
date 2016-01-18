@@ -23,6 +23,8 @@ public class AudioDesktop extends JFrame{
         this.setResizable(true);
         this.setBackground(bgColor);
         this.setForeground(txtColor);
+        this.setIconImage(new ImageIcon("testing/s-Space-Jam-Logo.jpg").getImage());
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         desktop.setBackground(fgColor);
         desktop.setForeground(txtColor);

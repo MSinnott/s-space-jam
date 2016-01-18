@@ -8,6 +8,7 @@ import java.io.*;
  */
 public class AudioFileManager {
 
+    private  ComplexDoubleFFT fft;
     private File audioFile  = null;
     private AudioInputStream audioIn = null;
     private DataInputStream dataIn  = null;
@@ -155,6 +156,30 @@ public class AudioFileManager {
             e.printStackTrace();
         }
         return clip;
+    }
+
+    public short[] scale(double scale){
+        short[] vals = getAudioData();
+        for(int i = 0; i < vals.length; i++){
+            vals[i] *= scale;
+        }
+        samples = getAudioBytes(vals);
+        return vals;
+    }
+
+    public short[] transform(){
+        short[] vals = getAudioData();
+        fft =  new ComplexDoubleFFT(vals.length / 2);
+        double[] toTransform = new double[vals.length];
+        for(int i = 0; i< toTransform.length; i++){
+            toTransform[i] = (double) vals[i];
+        }
+        fft.ft(toTransform);
+        short[] res = new short[toTransform.length];
+        for(int i = 0; i < toTransform.length; i++){
+            res[i] = (short) toTransform[i];
+        }
+        return res;
     }
 
 }
