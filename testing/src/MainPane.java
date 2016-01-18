@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class MainPane extends JPanel {
+public class MainPane extends JPanel implements Scrollable {
+
+    public void setNotes(short[] notes) {
+        this.notes = notes;
+    }
 
     short[] notes;
     int lX;
@@ -38,5 +42,30 @@ public class MainPane extends JPanel {
             nY = notes[i] / 4 + this.getHeight() / 2;
         }
 
+    }
+
+    @Override
+    public Dimension getPreferredScrollableViewportSize() {
+        return new Dimension(100,100);
+    }
+
+    @Override
+    public int getScrollableUnitIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return 10;
+    }
+
+    @Override
+    public int getScrollableBlockIncrement(Rectangle visibleRect, int orientation, int direction) {
+        return 10;
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportWidth() {
+        return true;
+    }
+
+    @Override
+    public boolean getScrollableTracksViewportHeight() {
+        return true;
     }
 }

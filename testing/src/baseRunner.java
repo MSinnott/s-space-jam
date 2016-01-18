@@ -1,9 +1,5 @@
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import javax.sound.sampled.*;
-import javax.swing.*;
 
 public class baseRunner {
 
@@ -54,92 +50,6 @@ public class baseRunner {
     }
 
     public static void makeWindow(int windowWidth, int windowHeight){
-        JFrame mainWindow = new JFrame("sSpace -- Music Creator!");
-
-        MainPane panel = new MainPane();
-        panel.notes = samples;
-        mainWindow.setIconImage(new ImageIcon("testing/s-Space-Jam-Logo.jpg").getImage());
-        mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainWindow.setVisible(true);
-        mainWindow.setResizable(false);
-
-        JMenuBar menu = new JMenuBar();
-        menu.setBackground(new Color(252, 53, 0));
-        menu.setForeground(new Color(255, 255, 255));
-        mainWindow.setJMenuBar(menu);
-
-            JMenu fileMenu = new JMenu("File");
-            fileMenu.setBackground(new Color(252, 53, 0));
-            fileMenu.setForeground(new Color(255, 255, 255));
-
-                JMenuItem newFile = new JMenuItem("New");
-                newFile.setBackground(new Color(252, 53, 0));
-                newFile.setForeground(new Color(255, 255, 255));
-                fileMenu.add(newFile);
-
-                JMenuItem open = new JMenuItem("Open");
-                open.setBackground(new Color(252, 53, 0));
-                open.setForeground(new Color(255, 255, 255));
-                fileMenu.add(open);
-
-                JMenuItem save = new JMenuItem("Save");
-                save.setBackground(new Color(252, 53, 0));
-                save.setForeground(new Color(255, 255, 255));
-                fileMenu.add(save);
-                save.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-
-                    }
-                });
-
-                JMenuItem exit = new JMenuItem("Exit");
-                exit.setBackground(new Color(252, 53, 0));
-                exit.setForeground(new Color(255, 255, 255));
-                fileMenu.add(exit);
-                exit.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        final JDialog exitDialog = new JDialog();
-                        exitDialog.setLayout(new GridBagLayout());
-                        exitDialog.setResizable(false);
-                        exitDialog.setVisible(true);
-                        exitDialog.setTitle("Exit?");
-                        JButton exitButton = new JButton("Exit?");
-                        exitButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                System.exit(0);
-                            }
-                        });
-                        exitButton.setBackground(new Color(252, 53, 0));
-                        exitButton.setForeground(new Color(255, 255, 255));
-                        JButton cancelButton = new JButton("Cancel!");
-                        cancelButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                exitDialog.dispose();
-                            }
-                        });
-                        cancelButton.setBackground(new Color(252, 53, 0));
-                        cancelButton.setForeground(new Color(255, 255, 255));
-                        exitDialog.add(exitButton);
-                        exitDialog.add(cancelButton);
-                        exitDialog.setSize(240, 240);
-                        exitDialog.pack();
-                        exitDialog.setLocation(480, 480);
-                        exitDialog.setBackground(new Color(252, 53, 0));
-                        exitDialog.setForeground(new Color(255, 255, 255));
-                    }
-                });
-
-
-
-        menu.add(fileMenu);
-
-        mainWindow.add(panel);
-        mainWindow.pack();
-        mainWindow.setSize(windowWidth, windowHeight);
-
+        AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", windowWidth, windowHeight);
     }
 }
