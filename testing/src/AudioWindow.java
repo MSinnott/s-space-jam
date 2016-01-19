@@ -25,8 +25,12 @@ public class AudioWindow extends JInternalFrame{
     private JMenuItem btransformButton;
     private JMenuItem scaleButton;
 
+    private String windowName;
+
     public AudioWindow(String name, int width, int height, AudioFileManager fman, JDesktopPane aDesk, ArrayList<AudioWindow> audioWindows){
         super(name);
+
+        windowName = name;
 
         desktop = aDesk;
         this.audioWindows = audioWindows;
@@ -35,7 +39,6 @@ public class AudioWindow extends JInternalFrame{
         this.setResizable(true);
 
         this.setLayout(new BorderLayout());
-
 
 
         pane = new MainPane();
@@ -53,6 +56,10 @@ public class AudioWindow extends JInternalFrame{
         buildMenus();
 
         this.setVisible(true);
+    }
+
+    public String getWindowName(){
+        return windowName;
     }
 
     public void loadFile(File f){
@@ -124,7 +131,7 @@ public class AudioWindow extends JInternalFrame{
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            AudioWindow clone = new AudioWindow(audioWindow.getName(), audioWindow.getWidth(), audioWindow.getHeight(), audioWindow.audioFile, desktop, audioWindows);
+            AudioWindow clone = new AudioWindow(audioWindow.getWindowName(), audioWindow.getWidth(), audioWindow.getHeight(), audioWindow.audioFile, desktop, audioWindows);
             desktop.add(clone);
             audioWindows.add(clone);
             clone.moveToFront();
@@ -165,6 +172,7 @@ public class AudioWindow extends JInternalFrame{
                         audioWindow.repaint();
                         numberDialog.dispose();
                     }
+
                 }
             });
             numberDialog.setVisible(true);

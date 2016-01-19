@@ -172,7 +172,9 @@ public class AudioFileManager {
 
     public short[] ftransform(){
         short[] vals = getAudioData();
+        System.out.println(4 * vals.length + 15);
         fft =  new ComplexDoubleFFT(vals.length);
+
         double[] toTransform = new double[vals.length * 2];
         for(int i = 0; i< toTransform.length; i+=2){
             toTransform[i] = (double) vals[i / 2];

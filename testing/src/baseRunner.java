@@ -5,7 +5,7 @@ public class baseRunner {
     static short[] samples;
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        AudioFileManager audioFile = new AudioFileManager("testing/resc/space oddity.wav");
+        AudioFileManager audioFile = new AudioFileManager("testing/music/space oddity.wav");
 
         //grabbing music audioFile --a
         samples = audioFile.getAudioData();
@@ -16,12 +16,12 @@ public class baseRunner {
         mainWindow.repaint();
 
 
-        audioFile.buildFile("testing/resc/space oddity OC");
+        audioFile.buildFile("testing/music/space oddity OC");
 
         //audioFile.ftransform();
         //audioFile.btransform();
 
-        audioFile.buildFile("testing/resc/space oddity TRANSFORM.wav");
+        audioFile.buildFile("testing/music/space oddity TRANSFORM.wav");
 
         System.out.println("Done!");
     }

@@ -25,6 +25,7 @@ public class AudioDesktop extends JFrame{
 
     private ArrayList<AudioWindow> audioWindows;
 
+    //Standard constructor -- builds window desktop, preps for user input
     public AudioDesktop(String name, int width, int height){
         super(name);
 
@@ -36,7 +37,7 @@ public class AudioDesktop extends JFrame{
         this.setSize(width, height);
 
         this.setResizable(true);
-        this.setIconImage(new ImageIcon("testing/s-Space-Jam-Logo.jpg").getImage());
+        this.setIconImage(new ImageIcon("testing/resc/s-Space-Jam-Logo.jpg").getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         menuBar = new JMenuBar();
@@ -68,26 +69,34 @@ public class AudioDesktop extends JFrame{
         this.setVisible(true);
         this.invalidate();
         this.repaint();
-
     }
 
+    //Allows for recoloring of the window + runtime changes
     public class ThemeSelectorAction extends AbstractAction {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             final JDialog colorDialog = new JDialog();
+            JTabbedPane tabbedPane = new JTabbedPane();
+            Container conPane = colorDialog.getContentPane();
+            conPane.setLayout(new BorderLayout());
+            conPane.add(tabbedPane, BorderLayout.CENTER);
             final JColorChooser bgColorChooser = new JColorChooser();
             final JColorChooser fgColorChooser = new JColorChooser();
             final JColorChooser accColorChooser = new JColorChooser();
             final JColorChooser lnColorChooser = new JColorChooser();
             final JColorChooser txtColorChooser = new JColorChooser();
-            colorDialog.setLayout(new GridLayout());
-            colorDialog.add(bgColorChooser);
-            colorDialog.add(fgColorChooser);
-            colorDialog.add(accColorChooser);
-            colorDialog.add(lnColorChooser);
-            colorDialog.add(txtColorChooser);
+            tabbedPane.addTab("Background", bgColorChooser);
+            tabbedPane.addTab("Foreground", fgColorChooser);
+            tabbedPane.addTab("Accent", accColorChooser);
+            tabbedPane.addTab("Line", lnColorChooser);
+            tabbedPane.addTab("Text", txtColorChooser);
             JButton exitButton = new JButton("Done?");
+            JButton cancelButton = new JButton("Cancel!");
+            exitButton.setBackground(AudioDesktop.bgColor);
+            exitButton.setForeground(AudioDesktop.txtColor);
+            cancelButton.setBackground(AudioDesktop.bgColor);
+            cancelButton.setForeground(AudioDesktop.txtColor);
             bgColorChooser.setColor(bgColor);
             fgColorChooser.setColor(fgColor);
             accColorChooser.setColor(accColor);
@@ -105,8 +114,18 @@ public class AudioDesktop extends JFrame{
                     colorDialog.dispose();
                 }
             });
-            colorDialog.add(exitButton);
-            colorDialog.setSize(480, 480);
+            cancelButton.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    colorDialog.dispose();
+                }
+            });
+            JPanel buttonPane = new JPanel();
+            conPane.add(buttonPane, BorderLayout.SOUTH);
+            buttonPane.setLayout(new BorderLayout());
+            buttonPane.add(exitButton, BorderLayout.WEST);
+            buttonPane.add(cancelButton, BorderLayout.EAST);
+            colorDialog.setSize(480, 320);
             colorDialog.setVisible(true);
         }
     }
@@ -148,8 +167,8 @@ public class AudioDesktop extends JFrame{
             int returnVal = fileChooser.showOpenDialog(desktop);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 File selection = fileChooser.getSelectedFile();
-                System.out.println(selection.getAbsolutePath());
-                AudioWindow newAW = new AudioWindow(fileChooser.getSelectedFile().getName(), 200, 100, new AudioFileManager(selection), desktop, audioWindows);
+                System.out.println(selection.getAbsolutePath() + " " +selection.length());
+                AudioWindow newAW = new AudioWindow(selection.getName(), 200, 100, new AudioFileManager(selection), desktop, audioWindows);
                 audioWindows.add(newAW);
                 desktop.add(newAW);
             }

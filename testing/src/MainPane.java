@@ -12,11 +12,18 @@ public class MainPane extends JPanel implements KeyListener {
     private int nX;
     private int nY;
     private double zoom = .03125;
-    private int Pan = 0;
+    private int pan = 0;
     int TopWindow;
 
-    public void setData(short[] notes) {
+    public void pan(int amountToPan){
+        pan += amountToPan;
+    }
 
+    public int getDataLength(){
+        return notes.length;
+    }
+
+    public void setData(short[] notes) {
         this.notes = notes;
         MinNote = findMin(notes, 0, notes.length);
         MaxNote = findMax( notes, 0, notes.length);
@@ -47,8 +54,8 @@ public class MainPane extends JPanel implements KeyListener {
         System.out.println("Printing data "+MinNote+" to "+MaxNote);
         if(zoom >= 1) {
             lX = 0;
-            lY = TopWindow - (TopWindow * ( notes[Pan] - MinNote )) / (2* ( MaxNote - MinNote ) );
-            for (int i = Pan+1; i < notes.length; i += 1) {
+            lY = TopWindow - (TopWindow * ( notes[pan] - MinNote )) / (2* ( MaxNote - MinNote ) );
+            for (int i = pan +1; i < notes.length; i += 1) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
                 nY = getY(notes[i]);
@@ -59,9 +66,9 @@ public class MainPane extends JPanel implements KeyListener {
         } else {
             int SampsPerPixel = (int) (1.0/zoom);
             lX = 0;
-            for (int i = Pan; i < notes.length; i += SampsPerPixel){
-                lY = getY(findMin( notes, Pan+i*SampsPerPixel, Pan+i*SampsPerPixel+SampsPerPixel));
-                nY = getY(findMax( notes, Pan+i*SampsPerPixel, Pan+i*SampsPerPixel+SampsPerPixel));
+            for (int i = pan; i < notes.length; i += SampsPerPixel){
+                lY = getY(findMin( notes, pan +i*SampsPerPixel, pan +i*SampsPerPixel+SampsPerPixel));
+                nY = getY(findMax( notes, pan +i*SampsPerPixel, pan +i*SampsPerPixel+SampsPerPixel));
                 g2.drawLine(lX, lY, lX, nY );
                 if( lX > this.getWidth() ) break;
                 lX += 1;
@@ -77,10 +84,10 @@ public class MainPane extends JPanel implements KeyListener {
     public short findMax(short[] arr, int stIndex, int endIndex){
         short max = Short.MIN_VALUE;
         if(stIndex < 0){
-            stIndex *= -1;
+            stIndex = 0;
         }
         if(endIndex < 0){
-            endIndex *= -1;
+            return 0;
         }
         if(endIndex > arr.length){
             endIndex = arr.length;
@@ -94,10 +101,10 @@ public class MainPane extends JPanel implements KeyListener {
     public short findMin(short[] arr, int stIndex, int endIndex){
         short min = Short.MAX_VALUE;
         if(stIndex < 0){
-            stIndex *= -1;
+            stIndex = 0;
         }
         if(endIndex < 0){
-            endIndex *= -1;
+            return 0;
         }
         if(endIndex > arr.length){
             endIndex = arr.length;
@@ -114,23 +121,30 @@ public class MainPane extends JPanel implements KeyListener {
             zoom /= 2;
             this.invalidate();
             this.repaint();
-            System.out.println("Z!");
         }
         if(e.getKeyChar() == 'z'){
             zoom *= 2;
             this.invalidate();
             this.repaint();
-            System.out.println("z");
         }
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        System.out.println("KeyPressed");
+        if(e.getKeyCode() == 37){
+            this.pan(this.getWidth() / 2);
+            this.invalidate();
+            this.repaint();
+        }
+        if(e.getKeyCode() == 39){
+            this.pan(-1*this.getWidth() / 2);
+            this.invalidate();
+            this.repaint();
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        System.out.println("Released " + e.getKeyCode());
+
     }
 }
