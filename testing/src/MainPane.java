@@ -50,12 +50,11 @@ public class MainPane extends JPanel implements KeyListener {
         lY = TopWindow - (TopWindow * ( 0 - MinNote )) / (2* ( MaxNote - MinNote ) );
         g2.drawLine(0, lY, this.getWidth(), lY);
         g2.setColor(AudioDesktop.lnColor);
-        int BottomWindow = MinNote;
         System.out.println("Printing data "+MinNote+" to "+MaxNote);
         if(zoom >= 1) {
             lX = 0;
-            lY = TopWindow - (TopWindow * ( notes[pan] - MinNote )) / (2* ( MaxNote - MinNote ) );
-            for (int i = pan +1; i < notes.length; i += 1) {
+            lY = getY(notes[pan]);
+            for (int i = 2 * ((pan +1) / 2); i < notes.length; i += 2) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
                 nY = getY(notes[i]);
@@ -66,7 +65,7 @@ public class MainPane extends JPanel implements KeyListener {
         } else {
             int SampsPerPixel = (int) (1.0/zoom);
             lX = 0;
-            for (int i = pan; i < notes.length; i += SampsPerPixel){
+            for (int i = 2 * (pan / 2); i < notes.length; i += 2 * SampsPerPixel){
                 lY = getY(findMin( notes, pan +i*SampsPerPixel, pan +i*SampsPerPixel+SampsPerPixel));
                 nY = getY(findMax( notes, pan +i*SampsPerPixel, pan +i*SampsPerPixel+SampsPerPixel));
                 g2.drawLine(lX, lY, lX, nY );
@@ -86,6 +85,9 @@ public class MainPane extends JPanel implements KeyListener {
         if(stIndex < 0){
             stIndex = 0;
         }
+        if(stIndex > arr.length){
+            return 0;
+        }
         if(endIndex < 0){
             return 0;
         }
@@ -102,6 +104,9 @@ public class MainPane extends JPanel implements KeyListener {
         short min = Short.MAX_VALUE;
         if(stIndex < 0){
             stIndex = 0;
+        }
+        if(stIndex > arr.length){
+            return 0;
         }
         if(endIndex < 0){
             return 0;
@@ -146,5 +151,21 @@ public class MainPane extends JPanel implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+    }
+
+    public void setPan(int pan) {
+        this.pan = pan;
+    }
+
+    public void setZoom(double zoom) {
+        this.zoom = zoom;
+    }
+
+    public int getPan() {
+        return pan;
+    }
+
+    public double getZoom() {
+        return zoom;
     }
 }

@@ -62,17 +62,17 @@ public class AudioFileManager {
     }
 
     public short[] getAudioData(){
-        short[] shortSamples = new short[samples.length / 2];
-        for(int i = 0; i < shortSamples.length; i+=1) {
-            shortSamples[i] = (short) (samples[2*i] + samples[2*i+1] * 256);
+        short[] shortSamples = new short[samples.length];
+        for(int i = 0; i < shortSamples.length; i+=2) {
+            shortSamples[i] = (short) (samples[i] + samples[i+1] * 256);
         }
         return shortSamples;
     }
 
     public static short[] getAudioData(byte[] bytes){
-        short[] shortSamples = new short[bytes.length / 2];
-        for(int i = 0; i < shortSamples.length; i+=1) {
-            shortSamples[i] = (short) (bytes[2*i] + bytes[2*i+1] * 256);
+        short[] shortSamples = new short[bytes.length];
+        for(int i = 0; i < shortSamples.length; i+=2) {
+            shortSamples[i] = (short) (bytes[i] + bytes[i+1] * 256);
         }
         return shortSamples;
     }
@@ -82,10 +82,10 @@ public class AudioFileManager {
     }
 
     public static byte[] getAudioBytes(short[] audioData){
-        byte[] audioBytes = new byte[2*audioData.length];
-        for(int i = 0; i < audioData.length; i+=1){
-            audioBytes[2*i+1] = (byte) (audioData[i] & 255);
-            audioBytes[2*i] = (byte) ((audioData[i] / 256) & 255);
+        byte[] audioBytes = new byte[audioData.length];
+        for(int i = 0; i < audioData.length; i+=2){
+            audioBytes[i+1] = (byte) (audioData[i] & 255);
+            audioBytes[i] = (byte) ((audioData[i] / 256) & 255);
         }
         return audioBytes;
     }
@@ -173,12 +173,11 @@ public class AudioFileManager {
     public short[] ftransform(){
         short[] vals = getAudioData();
         System.out.println(4 * vals.length + 15);
-        fft =  new ComplexDoubleFFT(vals.length);
+        fft =  new ComplexDoubleFFT(vals.length / 2);
 
-        double[] toTransform = new double[vals.length * 2];
-        for(int i = 0; i< toTransform.length; i+=2){
-            toTransform[i] = (double) vals[i / 2];
-            toTransform[i + 1] = 0;
+        double[] toTransform = new double[vals.length];
+        for(int i = 0; i< toTransform.length; i+=1){
+            toTransform[i] = (double) vals[i];
         }
         fft.ft(toTransform);
         short[] res = new short[toTransform.length / 2];
@@ -191,11 +190,10 @@ public class AudioFileManager {
 
     public short[] btransform(){
         short[] vals = getAudioData();
-        fft =  new ComplexDoubleFFT(vals.length);
-        double[] toTransform = new double[vals.length * 2];
-        for(int i = 0; i< toTransform.length; i+=2){
-            toTransform[i] = (double) vals[i / 2];
-            toTransform[i + 1] = 0;
+        fft =  new ComplexDoubleFFT(vals.length / 2);
+        double[] toTransform = new double[vals.length];
+        for(int i = 0; i< toTransform.length; i+=1){
+            toTransform[i] = (double) vals[i];
         }
         fft.bt(toTransform);
         short[] res = new short[toTransform.length / 2];

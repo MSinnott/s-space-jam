@@ -123,8 +123,13 @@ public class AudioWindow extends JInternalFrame{
         this.setForeground(AudioDesktop.txtColor);
     }
 
-    public class CloneAction extends AbstractAction {
+    public void setView(int pan, double zoom){
+        pane.setPan(pan);
+        pane.setZoom(zoom);
+    }
 
+    //Creates + adds a clone of this object to the desktop
+    public class CloneAction extends AbstractAction {
         private AudioWindow audioWindow;
         public CloneAction(AudioWindow window){
             audioWindow = window;
@@ -135,6 +140,8 @@ public class AudioWindow extends JInternalFrame{
             desktop.add(clone);
             audioWindows.add(clone);
             clone.moveToFront();
+            clone.setLocation(audioWindow.getX() + 32, audioWindow.getY() + 32);
+            clone.setView(pane.getPan(), pane.getZoom());
         }
     }
 
@@ -153,12 +160,10 @@ public class AudioWindow extends JInternalFrame{
             numField.addKeyListener(new KeyListener() {
                 @Override
                 public void keyTyped(KeyEvent e) {
-
                 }
 
                 @Override
                 public void keyReleased(KeyEvent e) {
-
                 }
 
                 @Override
