@@ -16,13 +16,14 @@ public class AudioWindow extends JInternalFrame{
     private ArrayList<AudioWindow> audioWindows;
     private AudioWindow audioWindow = this;
 
-    JMenuBar menuBar;
-    JMenu fileMenu;
-    JMenuItem cloneButton;
-    JMenuItem exitButton;
-    JMenu opMenu;
-    JMenuItem ftransformButton;
-    JMenuItem scaleButton;
+    private JMenuBar menuBar;
+    private JMenu fileMenu;
+    private JMenuItem cloneButton;
+    private JMenuItem exitButton;
+    private JMenu opMenu;
+    private JMenuItem ftransformButton;
+    private JMenuItem btransformButton;
+    private JMenuItem scaleButton;
 
     public AudioWindow(String name, int width, int height, AudioFileManager fman, JDesktopPane aDesk, ArrayList<AudioWindow> audioWindows){
         super(name);
@@ -32,20 +33,26 @@ public class AudioWindow extends JInternalFrame{
 
         this.setSize(width, height);
         this.setResizable(true);
-        this.setVisible(true);
+
         this.setLayout(new BorderLayout());
 
-        this.setBackground(AudioDesktop.accColor);
 
-        buildMenus();
 
         pane = new MainPane();
         audioFile = fman;
         data = audioFile.getAudioData();
         pane.setData(data);
 
-        this.add(pane);
-        this.addKeyListener(pane);
+        Container c = this.getContentPane();
+        c.setLayout(new BorderLayout());
+
+        c.add(pane, BorderLayout.CENTER);
+        c.addKeyListener(pane);
+        pane.addKeyListener(pane);
+
+        buildMenus();
+
+        this.setVisible(true);
     }
 
     public void loadFile(File f){
@@ -77,6 +84,10 @@ public class AudioWindow extends JInternalFrame{
         opMenu.add(ftransformButton);
         ftransformButton.addActionListener(new forwardFFtAction());
 
+        btransformButton = new JMenuItem("Backward FFT");
+        opMenu.add(btransformButton);
+        btransformButton.addActionListener(new backwardFFtAction());
+
         scaleButton = new JMenuItem("Scale Vertically");
         opMenu.add(scaleButton);
         scaleButton.addActionListener(new scaleAction());
@@ -97,8 +108,12 @@ public class AudioWindow extends JInternalFrame{
         opMenu.setForeground(AudioDesktop.txtColor);
         ftransformButton.setBackground(AudioDesktop.bgColor);
         ftransformButton.setForeground(AudioDesktop.txtColor);
+        btransformButton.setBackground(AudioDesktop.bgColor);
+        btransformButton.setForeground(AudioDesktop.txtColor);
         scaleButton.setBackground(AudioDesktop.bgColor);
         scaleButton.setForeground(AudioDesktop.txtColor);
+        this.setBackground(AudioDesktop.accColor);
+        this.setForeground(AudioDesktop.txtColor);
     }
 
     public class CloneAction extends AbstractAction {
@@ -166,4 +181,16 @@ public class AudioWindow extends JInternalFrame{
             audioWindow.repaint();
         }
     }
+
+    public class backwardFFtAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            pane.setData(audioFile.btransform());
+            pane.invalidate();
+            pane.repaint();
+            audioWindow.invalidate();
+            audioWindow.repaint();
+        }
+    }
+
 }

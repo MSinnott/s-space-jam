@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.util.ArrayList;
 
 public class AudioDesktop extends JFrame{
@@ -146,7 +147,9 @@ public class AudioDesktop extends JFrame{
             fileChooser.setFileFilter(filter);
             int returnVal = fileChooser.showOpenDialog(desktop);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
-                AudioWindow newAW = new AudioWindow(fileChooser.getSelectedFile().getName(), 200, 100, new AudioFileManager(fileChooser.getSelectedFile()), desktop, audioWindows);
+                File selection = fileChooser.getSelectedFile();
+                System.out.println(selection.getAbsolutePath());
+                AudioWindow newAW = new AudioWindow(fileChooser.getSelectedFile().getName(), 200, 100, new AudioFileManager(selection), desktop, audioWindows);
                 audioWindows.add(newAW);
                 desktop.add(newAW);
             }

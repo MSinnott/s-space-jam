@@ -18,8 +18,8 @@ public class baseRunner {
 
         audioFile.buildFile("testing/resc/space oddity OC");
 
-        audioFile.ftransform();
-        audioFile.btransform();
+        //audioFile.ftransform();
+        //audioFile.btransform();
 
         audioFile.buildFile("testing/resc/space oddity TRANSFORM.wav");
 
