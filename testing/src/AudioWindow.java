@@ -121,6 +121,12 @@ public class AudioWindow extends JInternalFrame{
         scaleButton.setForeground(AudioDesktop.txtColor);
         this.setBackground(AudioDesktop.accColor);
         this.setForeground(AudioDesktop.txtColor);
+
+        this.invalidate();
+        this.repaint();
+
+        pane.invalidate();
+        pane.repaint();
     }
 
     public void setView(int pan, double zoom){

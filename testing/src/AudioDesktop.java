@@ -2,8 +2,9 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Properties;
 
 public class AudioDesktop extends JFrame{
 
@@ -25,6 +26,11 @@ public class AudioDesktop extends JFrame{
 
     private ArrayList<AudioWindow> audioWindows;
 
+    private String propertiesPathname = "testing/resc/properties.txt";
+    private String iconPath = "testing/resc/s-Space-Jam-Logo.jpg";
+
+    private Properties properties;
+
     //Standard constructor -- builds window desktop, preps for user input
     public AudioDesktop(String name, int width, int height){
         super(name);
@@ -37,7 +43,7 @@ public class AudioDesktop extends JFrame{
         this.setSize(width, height);
 
         this.setResizable(true);
-        this.setIconImage(new ImageIcon("testing/resc/s-Space-Jam-Logo.jpg").getImage());
+        this.setIconImage(new ImageIcon(iconPath).getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         menuBar = new JMenuBar();
@@ -64,6 +70,14 @@ public class AudioDesktop extends JFrame{
         themeButton = new JMenuItem("Theme");
         optionMenu.add(themeButton);
         themeButton.addActionListener(new ThemeSelectorAction());
+
+        properties = new Properties();
+
+        try {
+            updateProperties();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         resetColors();
         this.setVisible(true);
@@ -110,6 +124,11 @@ public class AudioDesktop extends JFrame{
                     accColor = accColorChooser.getColor();
                     lnColor = lnColorChooser.getColor();
                     txtColor = txtColorChooser.getColor();
+                    try {
+                        saveProperties();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
                     resetColors();
                     colorDialog.dispose();
                 }
@@ -130,7 +149,47 @@ public class AudioDesktop extends JFrame{
         }
     }
 
+    public void saveProperties() throws IOException {
+        int i = 0;
+        properties.setProperty("" + i + ":R", String.valueOf(bgColor.getRed()));
+        properties.setProperty("" + i + ":G", String.valueOf(bgColor.getGreen()));
+        properties.setProperty("" + i++ + ":B", String.valueOf(bgColor.getBlue()));
+
+        properties.setProperty("" + i + ":R", String.valueOf(fgColor.getRed()));
+        properties.setProperty("" + i + ":G", String.valueOf(fgColor.getGreen()));
+        properties.setProperty("" + i++ + ":B", String.valueOf(fgColor.getBlue()));
+
+        properties.setProperty("" + i + ":R", String.valueOf(accColor.getRed()));
+        properties.setProperty("" + i + ":G", String.valueOf(accColor.getGreen()));
+        properties.setProperty("" + i++ + ":B", String.valueOf(accColor.getBlue()));
+
+        properties.setProperty("" + i + ":R", String.valueOf(lnColor.getRed()));
+        properties.setProperty("" + i + ":G", String.valueOf(lnColor.getGreen()));
+        properties.setProperty("" + i++ + ":B", String.valueOf(lnColor.getBlue()));
+
+        properties.setProperty("" + i + ":R", String.valueOf(txtColor.getRed()));
+        properties.setProperty("" + i + ":G", String.valueOf(txtColor.getGreen()));
+        properties.setProperty("" + i + ":B", String.valueOf(txtColor.getBlue()));
+
+        File propFile = new File(propertiesPathname);
+        BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
+        properties.store(propOut, "");
+    }
+
+    public void updateProperties() throws IOException {
+        File propFile = new File(propertiesPathname);
+        FileInputStream propReader = new FileInputStream(propFile);
+        properties.load(propReader);
+    }
+
     public void resetColors(){
+        int i = 0;
+        bgColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i++ + ":B")));
+        fgColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i++ + ":B")));
+        accColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i++ + ":B")));
+        lnColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i++ + ":B")));
+        txtColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i + ":B")));
+
         desktop.setBackground(fgColor);
         desktop.setForeground(txtColor);
         this.setBackground(bgColor);

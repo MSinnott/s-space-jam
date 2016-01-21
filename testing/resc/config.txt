@@ -1,6 +1,0 @@
-Colors:
-bgColor: 
-fgColor:
-accColor:
-lnColor:
-txtColor:

@@ -16,7 +16,7 @@ public class baseRunner {
         mainWindow.repaint();
 
 
-        audioFile.buildFile("testing/music/space oddity OC");
+        audioFile.buildFile("testing/music/space oddity processed.wav");
 
         //audioFile.ftransform();
         //audioFile.btransform();
