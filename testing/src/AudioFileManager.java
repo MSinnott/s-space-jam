@@ -22,13 +22,11 @@ public class AudioFileManager {
     public AudioFileManager(String filepath){
         audioFile = new File(filepath);
         try {
-            System.out.println(filepath);
             audioIn = AudioSystem.getAudioInputStream(audioFile);
             dataIn = new DataInputStream(audioIn);
             format = audioIn.getFormat();
             samples = new byte[(int)(audioIn.getFrameLength() * format.getFrameSize())];
             dataIn.readFully(samples);
-
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
         } catch (IOException e) {

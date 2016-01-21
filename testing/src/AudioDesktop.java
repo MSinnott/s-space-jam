@@ -149,31 +149,31 @@ public class AudioDesktop extends JFrame{
         }
     }
 
+    //prob should autogen these...
     public void saveProperties() throws IOException {
-        int i = 0;
-        properties.setProperty("" + i + ":R", String.valueOf(bgColor.getRed()));
-        properties.setProperty("" + i + ":G", String.valueOf(bgColor.getGreen()));
-        properties.setProperty("" + i++ + ":B", String.valueOf(bgColor.getBlue()));
+        properties.setProperty("bgColor:R", String.valueOf(bgColor.getRed()));
+        properties.setProperty("bgColor:G", String.valueOf(bgColor.getGreen()));
+        properties.setProperty("bgColor:B", String.valueOf(bgColor.getBlue()));
 
-        properties.setProperty("" + i + ":R", String.valueOf(fgColor.getRed()));
-        properties.setProperty("" + i + ":G", String.valueOf(fgColor.getGreen()));
-        properties.setProperty("" + i++ + ":B", String.valueOf(fgColor.getBlue()));
+        properties.setProperty("fgColor:R", String.valueOf(fgColor.getRed()));
+        properties.setProperty("fgColor:G", String.valueOf(fgColor.getGreen()));
+        properties.setProperty("fgColor:B", String.valueOf(fgColor.getBlue()));
 
-        properties.setProperty("" + i + ":R", String.valueOf(accColor.getRed()));
-        properties.setProperty("" + i + ":G", String.valueOf(accColor.getGreen()));
-        properties.setProperty("" + i++ + ":B", String.valueOf(accColor.getBlue()));
+        properties.setProperty("accColor:R", String.valueOf(accColor.getRed()));
+        properties.setProperty("accColor:G", String.valueOf(accColor.getGreen()));
+        properties.setProperty("accColor:B", String.valueOf(accColor.getBlue()));
 
-        properties.setProperty("" + i + ":R", String.valueOf(lnColor.getRed()));
-        properties.setProperty("" + i + ":G", String.valueOf(lnColor.getGreen()));
-        properties.setProperty("" + i++ + ":B", String.valueOf(lnColor.getBlue()));
+        properties.setProperty("lnColor:R", String.valueOf(lnColor.getRed()));
+        properties.setProperty("lnColor:G", String.valueOf(lnColor.getGreen()));
+        properties.setProperty("lnColor:B", String.valueOf(lnColor.getBlue()));
 
-        properties.setProperty("" + i + ":R", String.valueOf(txtColor.getRed()));
-        properties.setProperty("" + i + ":G", String.valueOf(txtColor.getGreen()));
-        properties.setProperty("" + i + ":B", String.valueOf(txtColor.getBlue()));
+        properties.setProperty("txtColor:R", String.valueOf(txtColor.getRed()));
+        properties.setProperty("txtColor:G", String.valueOf(txtColor.getGreen()));
+        properties.setProperty("txtColor:B", String.valueOf(txtColor.getBlue()));
 
         File propFile = new File(propertiesPathname);
         BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
-        properties.store(propOut, "");
+        properties.store(propOut, "Colors");
     }
 
     public void updateProperties() throws IOException {
@@ -183,12 +183,11 @@ public class AudioDesktop extends JFrame{
     }
 
     public void resetColors(){
-        int i = 0;
-        bgColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i++ + ":B")));
-        fgColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i++ + ":B")));
-        accColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i++ + ":B")));
-        lnColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i++ + ":B")));
-        txtColor = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i + ":B")));
+        bgColor = new Color(Integer.valueOf(properties.getProperty("bgColor:R")), Integer.valueOf(properties.getProperty("bgColor:G")), Integer.valueOf(properties.getProperty("bgColor:B")));
+        fgColor = new Color(Integer.valueOf(properties.getProperty("fgColor:R")), Integer.valueOf(properties.getProperty("fgColor:G")), Integer.valueOf(properties.getProperty("fgColor:B")));
+        accColor = new Color(Integer.valueOf(properties.getProperty("accColor:R")), Integer.valueOf(properties.getProperty("accColor:G")), Integer.valueOf(properties.getProperty("accColor:B")));
+        lnColor = new Color(Integer.valueOf(properties.getProperty("lnColor:R")), Integer.valueOf(properties.getProperty("lnColor:G")), Integer.valueOf(properties.getProperty("lnColor:B")));
+        txtColor = new Color(Integer.valueOf(properties.getProperty("txtColor:R")), Integer.valueOf(properties.getProperty("txtColor:G")), Integer.valueOf(properties.getProperty("txtColor:B")));
 
         desktop.setBackground(fgColor);
         desktop.setForeground(txtColor);

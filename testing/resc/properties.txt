@@ -1,17 +1,17 @@
-#
-#Wed Jan 20 22:22:27 EST 2016
-3\:B=255
-4\:G=255
-2\:R=0
-0\:G=51
-4\:B=255
-3\:R=51
-1\:G=153
-0\:B=0
-4\:R=255
-1\:B=0
-2\:G=0
-0\:R=255
-2\:B=255
-3\:G=204
-1\:R=255
+#Colors
+#Wed Jan 20 22:39:50 EST 2016
+bgColor\:R=232
+accColor\:R=255
+lnColor\:R=0
+fgColor\:G=128
+txtColor\:G=255
+fgColor\:B=2
+txtColor\:B=255
+accColor\:G=140
+bgColor\:G=70
+lnColor\:G=51
+fgColor\:R=255
+bgColor\:B=0
+accColor\:B=25
+lnColor\:B=255
+txtColor\:R=255
