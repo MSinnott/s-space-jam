@@ -8,13 +8,11 @@ import java.util.ArrayList;
 
 public class AudioWindow extends JInternalFrame{
 
-
     private MainPane pane;
-    private short[] data;
     private AudioFileManager audioFile;
     private JDesktopPane desktop;
-    private ArrayList<AudioWindow> audioWindows;
     private AudioWindow audioWindow = this;
+    private ArrayList<AudioWindow> audioWindows;
 
     private JMenuBar menuBar;
     private JMenu fileMenu;
@@ -26,6 +24,8 @@ public class AudioWindow extends JInternalFrame{
     private JMenuItem scaleButton;
 
     private String windowName;
+
+    private short[] data;
 
     public AudioWindow(String name, int width, int height, AudioFileManager fman, JDesktopPane aDesk, ArrayList<AudioWindow> audioWindows){
         super(name);
@@ -124,7 +124,6 @@ public class AudioWindow extends JInternalFrame{
 
         this.invalidate();
         this.repaint();
-
         pane.invalidate();
         pane.repaint();
     }
@@ -132,6 +131,10 @@ public class AudioWindow extends JInternalFrame{
     public void setView(int pan, double zoom){
         pane.setPan(pan);
         pane.setZoom(zoom);
+    }
+
+    public void removeFromDesktop(){
+        audioWindows.remove(this);
     }
 
     //Creates + adds a clone of this object to the desktop

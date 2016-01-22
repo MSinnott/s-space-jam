@@ -1,17 +1,17 @@
 #Colors
-#Wed Jan 20 22:39:50 EST 2016
-bgColor\:R=232
+#Thu Jan 21 21:04:11 EST 2016
+bgColor\:R=51
 accColor\:R=255
-lnColor\:R=0
-fgColor\:G=128
+lnColor\:R=29
+fgColor\:G=127
 txtColor\:G=255
-fgColor\:B=2
+fgColor\:B=3
 txtColor\:B=255
-accColor\:G=140
-bgColor\:G=70
-lnColor\:G=51
-fgColor\:R=255
-bgColor\:B=0
-accColor\:B=25
+lnColor\:G=46
+accColor\:G=201
+bgColor\:G=51
+fgColor\:R=252
+accColor\:B=8
 lnColor\:B=255
+bgColor\:B=255
 txtColor\:R=255

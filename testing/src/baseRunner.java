@@ -23,11 +23,17 @@ public class baseRunner {
 
         audioFile.buildFile("testing/music/space oddity TRANSFORM.wav");
 
+        AudioFileManager oneTone = new AudioFileManager(getStereoTone(500, 500, 8*44100));
+        System.out.println(oneTone.getAudioData().length);
+        mainWindow.buildWindow(oneTone);
+
+        oneTone.buildFile("testing/music/singleTone.wav");
+
         System.out.println("Done!");
     }
 
     public static short[] getStereoTone(double freqLeft, double freqRight, int numSamples){
-        short[] tone = new short[numSamples];
+        short[] tone = new short[numSamples*=2];
         short rightSide;
         short leftSide;
         for(int i = 0; i < numSamples; i+= 2){

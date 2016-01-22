@@ -67,6 +67,14 @@ public class AudioFileManager {
         return shortSamples;
     }
 
+    public String getName(){
+        if (audioFile != null) {
+            return audioFile.getName();
+        } else {
+            return "";
+        }
+    }
+
     public static short[] getAudioData(byte[] bytes){
         short[] shortSamples = new short[bytes.length];
         for(int i = 0; i < shortSamples.length; i+=2) {

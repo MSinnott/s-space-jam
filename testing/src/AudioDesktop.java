@@ -14,6 +14,12 @@ public class AudioDesktop extends JFrame{
     public static Color lnColor = new Color(29, 46, 255);
     public static Color txtColor = new Color(255, 255, 255);
 
+    public static Color defbgColor = new Color(252, 53, 0);
+    public static Color deffgColor = new Color(252, 127, 3);
+    public static Color defaccColor = new Color(255, 201, 8);
+    public static Color deflnColor = new Color(29, 46, 255);
+    public static Color deftxtColor = new Color(255, 255, 255);
+
     private JDesktopPane desktop;
 
     private JMenuBar menuBar;
@@ -87,7 +93,6 @@ public class AudioDesktop extends JFrame{
 
     //Allows for recoloring of the window + runtime changes
     public class ThemeSelectorAction extends AbstractAction {
-
         @Override
         public void actionPerformed(ActionEvent e) {
             final JDialog colorDialog = new JDialog();
@@ -95,27 +100,54 @@ public class AudioDesktop extends JFrame{
             Container conPane = colorDialog.getContentPane();
             conPane.setLayout(new BorderLayout());
             conPane.add(tabbedPane, BorderLayout.CENTER);
+
             final JColorChooser bgColorChooser = new JColorChooser();
             final JColorChooser fgColorChooser = new JColorChooser();
             final JColorChooser accColorChooser = new JColorChooser();
             final JColorChooser lnColorChooser = new JColorChooser();
             final JColorChooser txtColorChooser = new JColorChooser();
+
             tabbedPane.addTab("Background", bgColorChooser);
             tabbedPane.addTab("Foreground", fgColorChooser);
             tabbedPane.addTab("Accent", accColorChooser);
             tabbedPane.addTab("Line", lnColorChooser);
             tabbedPane.addTab("Text", txtColorChooser);
-            JButton exitButton = new JButton("Done?");
-            JButton cancelButton = new JButton("Cancel!");
-            exitButton.setBackground(AudioDesktop.bgColor);
-            exitButton.setForeground(AudioDesktop.txtColor);
-            cancelButton.setBackground(AudioDesktop.bgColor);
-            cancelButton.setForeground(AudioDesktop.txtColor);
+
             bgColorChooser.setColor(bgColor);
             fgColorChooser.setColor(fgColor);
             accColorChooser.setColor(accColor);
             lnColorChooser.setColor(lnColor);
             txtColorChooser.setColor(txtColor);
+
+            JButton exitButton = new JButton("Done?");
+            JButton cancelButton = new JButton("Cancel!");
+            JButton resetTheme = new JButton("Reset?");
+
+            exitButton.setBackground(AudioDesktop.bgColor);
+            exitButton.setForeground(AudioDesktop.txtColor);
+            cancelButton.setBackground(AudioDesktop.bgColor);
+            cancelButton.setForeground(AudioDesktop.txtColor);
+            resetTheme.setBackground(bgColor);
+            resetTheme.setForeground(txtColor);
+
+            resetTheme.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    bgColor = defbgColor;
+                    fgColor = deffgColor;
+                    accColor = defaccColor;
+                    lnColor = deflnColor;
+                    txtColor = deftxtColor;
+                    try {
+                        saveProperties();
+                        resetColors();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                    colorDialog.dispose();
+                }
+            });
+
             exitButton.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -126,30 +158,34 @@ public class AudioDesktop extends JFrame{
                     txtColor = txtColorChooser.getColor();
                     try {
                         saveProperties();
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
+                        resetColors();
+                    } catch (Throwable t) {
+                        t.printStackTrace();
                     }
-                    resetColors();
                     colorDialog.dispose();
                 }
             });
+
             cancelButton.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     colorDialog.dispose();
                 }
             });
+
             JPanel buttonPane = new JPanel();
             conPane.add(buttonPane, BorderLayout.SOUTH);
             buttonPane.setLayout(new BorderLayout());
             buttonPane.add(exitButton, BorderLayout.WEST);
             buttonPane.add(cancelButton, BorderLayout.EAST);
+            buttonPane.add(resetTheme, BorderLayout.CENTER);
+
             colorDialog.setSize(480, 320);
             colorDialog.setVisible(true);
         }
     }
 
-    //prob should autogen these...
+    //prob should autogen these... ah well!
     public void saveProperties() throws IOException {
         properties.setProperty("bgColor:R", String.valueOf(bgColor.getRed()));
         properties.setProperty("bgColor:G", String.valueOf(bgColor.getGreen()));
@@ -182,12 +218,50 @@ public class AudioDesktop extends JFrame{
         properties.load(propReader);
     }
 
-    public void resetColors(){
-        bgColor = new Color(Integer.valueOf(properties.getProperty("bgColor:R")), Integer.valueOf(properties.getProperty("bgColor:G")), Integer.valueOf(properties.getProperty("bgColor:B")));
-        fgColor = new Color(Integer.valueOf(properties.getProperty("fgColor:R")), Integer.valueOf(properties.getProperty("fgColor:G")), Integer.valueOf(properties.getProperty("fgColor:B")));
-        accColor = new Color(Integer.valueOf(properties.getProperty("accColor:R")), Integer.valueOf(properties.getProperty("accColor:G")), Integer.valueOf(properties.getProperty("accColor:B")));
-        lnColor = new Color(Integer.valueOf(properties.getProperty("lnColor:R")), Integer.valueOf(properties.getProperty("lnColor:G")), Integer.valueOf(properties.getProperty("lnColor:B")));
-        txtColor = new Color(Integer.valueOf(properties.getProperty("txtColor:R")), Integer.valueOf(properties.getProperty("txtColor:G")), Integer.valueOf(properties.getProperty("txtColor:B")));
+    public void resetColors() {
+        if(properties.isEmpty()) {
+            try {
+                saveProperties();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        boolean configOk = true;
+
+        if(properties.containsKey("bgColor:R") && properties.containsKey("bgColor:G") && properties.containsKey("bgColor:B")) {
+            bgColor = new Color(Integer.valueOf(properties.getProperty("bgColor:R")), Integer.valueOf(properties.getProperty("bgColor:G")), Integer.valueOf(properties.getProperty("bgColor:B")));
+        } else {
+            configOk = false;
+        }
+        if(properties.containsKey("fgColor:R") && properties.containsKey("fgColor:G") && properties.containsKey("fgColor:B")) {
+            fgColor = new Color(Integer.valueOf(properties.getProperty("fgColor:R")), Integer.valueOf(properties.getProperty("fgColor:G")), Integer.valueOf(properties.getProperty("fgColor:B")));
+        } else {
+            configOk = false;
+        }
+        if(properties.containsKey("accColor:R") && properties.containsKey("accColor:G") && properties.containsKey("accColor:B")) {
+            accColor = new Color(Integer.valueOf(properties.getProperty("accColor:R")), Integer.valueOf(properties.getProperty("accColor:G")), Integer.valueOf(properties.getProperty("accColor:B")));
+        } else {
+            configOk = false;
+        }
+        if(properties.containsKey("lnColor:R") && properties.containsKey("lnColor:G") && properties.containsKey("lnColor:B")) {
+            lnColor = new Color(Integer.valueOf(properties.getProperty("lnColor:R")), Integer.valueOf(properties.getProperty("lnColor:G")), Integer.valueOf(properties.getProperty("lnColor:B")));
+        } else {
+            configOk = false;
+        }
+        if(properties.containsKey("txtColor:R") && properties.containsKey("txtColor:G") && properties.containsKey("txtColor:B")) {
+            txtColor = new Color(Integer.valueOf(properties.getProperty("txtColor:R")), Integer.valueOf(properties.getProperty("txtColor:G")), Integer.valueOf(properties.getProperty("txtColor:B")));
+        } else {
+            configOk = false;
+        }
+
+        if(!configOk){
+            try {
+                saveProperties();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 
         desktop.setBackground(fgColor);
         desktop.setForeground(txtColor);
@@ -213,6 +287,20 @@ public class AudioDesktop extends JFrame{
         }
     }
 
+    public void removeWindow(AudioWindow aw){
+        audioWindows.remove(aw);
+    }
+
+    public void addWindow(AudioWindow aw){
+        audioWindows.remove(aw);
+        desktop.add(aw);
+    }
+
+    public void buildWindow(AudioFileManager fileManager){
+        AudioWindow newAW = new AudioWindow(fileManager.getName(), 200, 100, fileManager, desktop, audioWindows);
+        addWindow(newAW);
+    }
+
     public class OpenFile extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -226,9 +314,7 @@ public class AudioDesktop extends JFrame{
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 File selection = fileChooser.getSelectedFile();
                 System.out.println(selection.getAbsolutePath() + " " +selection.length());
-                AudioWindow newAW = new AudioWindow(selection.getName(), 200, 100, new AudioFileManager(selection), desktop, audioWindows);
-                audioWindows.add(newAW);
-                desktop.add(newAW);
+                buildWindow(new AudioFileManager(selection));
             }
         }
     }

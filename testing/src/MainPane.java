@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -5,30 +7,12 @@ import java.awt.event.KeyListener;
 
 public class MainPane extends JPanel implements KeyListener {
 
-    private short[] notes;
-    private short MinNote, MaxNote;
-    private int lX;
-    private int lY;
-    private int nX;
-    private int nY;
+    private int[] notes;
+    private int MinNote, MaxNote;
+    private int lX, lY, nX, nY;
     private double zoom = .03125;
     private int pan = 0;
-    int TopWindow;
-
-    public void pan(int amountToPan){
-        pan += amountToPan;
-    }
-
-    public int getDataLength(){
-        return notes.length;
-    }
-
-    public void setData(short[] notes) {
-        this.notes = notes;
-        MinNote = findMin(notes, 0, notes.length);
-        MaxNote = findMax( notes, 0, notes.length);
-        System.out.println("Got "+MinNote+" and "+MaxNote+" size "+notes.length);
-    }
+    int TopWindow = 0;
 
     public MainPane(){
         super();
@@ -38,8 +22,11 @@ public class MainPane extends JPanel implements KeyListener {
     /* pretty graphical window for the music --m */
     @Override
     public void paintComponent(Graphics g){
+        int SampsPerPixel = (int) (1.0/zoom);
+
         if( notes == null ) return;
         if( notes.length < 2 ) return;
+        if(pan < 0) pan = 0;
         TopWindow = this.getHeight();
         Graphics2D g2 = (Graphics2D) g;
         g2.setBackground(AudioDesktop.accColor);
@@ -47,14 +34,13 @@ public class MainPane extends JPanel implements KeyListener {
         g2.fillRect(0 , 0 , this.getWidth(), this.getHeight());
         g2.setStroke(new BasicStroke(4));
         g2.setColor( Color.red);
-        lY = TopWindow - (TopWindow * ( 0 - MinNote )) / (2* ( MaxNote - MinNote ) );
+        lY = getY(0);
         g2.drawLine(0, lY, this.getWidth(), lY);
         g2.setColor(AudioDesktop.lnColor);
-        System.out.println("Printing data "+MinNote+" to "+MaxNote);
         if(zoom >= 1) {
             lX = 0;
             lY = getY(notes[pan]);
-            for (int i = 2 * ((pan +1) / 2); i < notes.length; i += 2) {
+            for (int i = (2*pan); i < notes.length; i += 1) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
                 nY = getY(notes[i]);
@@ -63,7 +49,6 @@ public class MainPane extends JPanel implements KeyListener {
                 lX = nX;
             }
         } else {
-            int SampsPerPixel = (int) (1.0/zoom);
             lX = 0;
             for (int i = 2 * (pan / 2); i < notes.length; i += 2 * SampsPerPixel){
                 lY = getY(findMin( notes, pan +i*SampsPerPixel, pan +i*SampsPerPixel+SampsPerPixel));
@@ -76,12 +61,12 @@ public class MainPane extends JPanel implements KeyListener {
 
     }
 
-    private int getY(short val){
-        return TopWindow - (TopWindow * ( val - MinNote )) / (2* ( MaxNote - MinNote ) );
+    private int getY(int val){
+        return TopWindow - (TopWindow * ( val - MinNote )) / (( MaxNote - MinNote ));
     }
 
-    public short findMax(short[] arr, int stIndex, int endIndex){
-        short max = Short.MIN_VALUE;
+    public int findMax(int[] arr, int stIndex, int endIndex){
+        int max = Integer.MIN_VALUE;
         if(stIndex < 0){
             stIndex = 0;
         }
@@ -100,8 +85,8 @@ public class MainPane extends JPanel implements KeyListener {
         return max;
     }
 
-    public short findMin(short[] arr, int stIndex, int endIndex){
-        short min = Short.MAX_VALUE;
+    public int findMin(int[] arr, int stIndex, int endIndex){
+        int min = Integer.MAX_VALUE;
         if(stIndex < 0){
             stIndex = 0;
         }
@@ -118,6 +103,32 @@ public class MainPane extends JPanel implements KeyListener {
             if(arr[i] < min) min = arr[i];
         }
         return min;
+    }
+
+    public void pan(int amountToPan){
+        pan += amountToPan;
+    }
+
+    public int getDataLength(){
+        return notes.length;
+    }
+
+    public void setData(short[] notesIn) {
+        notes = new int[notesIn.length];
+        /*
+        for(int i = 0; i < notesIn.length; i++){
+            notes[i] = notesIn[i];
+        }
+        */
+        int numZero = 0;
+        for(int i = 0; i < notesIn.length; i+= 1) {
+            notes[i] = (int) (6000 * Math.sin(2 * Math.PI * i / 500));
+            if(notes[i] == 0){
+                numZero++;
+            }
+        }
+        MinNote = findMin(notes, 0, notes.length);
+        MaxNote = findMax( notes, 0, notes.length);
     }
 
     @Override
@@ -137,12 +148,12 @@ public class MainPane extends JPanel implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         if(e.getKeyCode() == 37){
-            this.pan(this.getWidth() / 2);
+            this.pan((int) (-10 / zoom) - 1);
             this.invalidate();
             this.repaint();
         }
         if(e.getKeyCode() == 39){
-            this.pan(-1*this.getWidth() / 2);
+            this.pan((int) (10 / zoom) + 1);
             this.invalidate();
             this.repaint();
         }
@@ -168,4 +179,5 @@ public class MainPane extends JPanel implements KeyListener {
     public double getZoom() {
         return zoom;
     }
+
 }
