@@ -7,9 +7,11 @@ public class baseRunner {
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
         AudioFileManager oneTone = new AudioFileManager(getStereoTone(500, 600, 8*44100));
-        mainWindow.buildWindow(oneTone);
-
         oneTone.buildFile("testing/music/singleTone.wav");
+        mainWindow.buildWindow(oneTone);
+        System.out.println(oneTone.getMergedData().length + " out of writer");
+
+        mainWindow.buildWindow(new AudioFileManager("testing/music/singleTone.wav"));
     }
 
     //just for testing
