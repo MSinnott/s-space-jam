@@ -10,62 +10,131 @@ import java.io.*;
  */
 public class AudioFileManager {
 
+    private boolean dataSet = false;
     private ComplexDoubleFFT fft;
     private File audioFile  = null;
     private AudioInputStream audioIn = null;
     private DataInputStream dataIn  = null;
     private AudioFormat format;
-    private byte[] samples = null;
+
+    //both complex
+    private short[] leftData;
+    private short[] rightData;
+
     private static final int DEFAULTSAMPLERATE = 44100;
     private static final String WAVHEADER = "RIFF____WAVEfmt ____________________data";
 
     public AudioFileManager(String filepath){
         audioFile = new File(filepath);
-        try {
-            audioIn = AudioSystem.getAudioInputStream(audioFile);
-            dataIn = new DataInputStream(audioIn);
-            format = audioIn.getFormat();
-            samples = new byte[(int)(audioIn.getFrameLength() * format.getFrameSize())];
-            dataIn.readFully(samples);
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        short[] data = byteArrToShortArr(readFile(audioFile));
+        leftData = complexify(getLeftChannel(data));
+        rightData = complexify(getRightChannel(data));
     }
 
     public AudioFileManager(File audioFileIn){
         audioFile = audioFileIn;
+        short[] data = byteArrToShortArr(readFile(audioFile));
+        leftData = complexify(getLeftChannel(data));
+        rightData = complexify(getRightChannel(data));
+    }
+
+    public byte[] readFile(File file){
+        byte[] data = null;
         try {
+            byte[] read = new byte[8];
+            FileInputStream in = new FileInputStream(file);
+            in.read(read);
+            int fileSize = 0;
+            for(int i = 4; i < 8; i++){
+                fileSize += read[i] * Math.pow(256, i - 4);
+            }
+            read = new byte[fileSize - 8];
+            in.read(read);
 
-            audioIn = AudioSystem.getAudioInputStream(audioFile);
-            dataIn = new DataInputStream(audioIn);
-            format = audioIn.getFormat();
-            System.out.println(format.getFrameSize() + " " + format.getFrameRate());
-            samples = new byte[(int)(audioIn.getFrameLength() * format.getFrameSize())];
-            dataIn.readFully(samples);
-
-        } catch (UnsupportedAudioFileException e) {
-            e.printStackTrace();
+            int dataStart = 40;
+            for(int i = 0; i < read.length; i++){
+                if(read[i] == 'd' && read[i+1] == 'a' &&read[i+2] == 't' &&read[i+3] == 'a'){
+                    dataStart = i + 4;
+                    break;
+                }
+            }
+            data = new byte[fileSize - dataStart];
+            for(int i = 0; i < read.length - dataStart; i++){
+                data[i] = read[i + dataStart];
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return data;
     }
 
-    public AudioFileManager(byte[] samplesIn){
-        samples = samplesIn;
+    public short[] complexify(short[] realData){
+        short[] ret = new short[realData.length * 2];
+        for(int i = 0; i < realData.length; i++){
+            ret[2*i] = realData[i];
+            ret[2*i+1] = 0;
+        }
+        return ret;
+    }
+
+    public short[] getLeftChannel(){
+        return leftData;
+    }
+
+    private short[] getLeftChannel(short[] totalData){
+        short[] ret = new short[totalData.length/2];
+        for(int i = 0; i < totalData.length; i+=2){
+            ret[i / 2] = totalData[i];
+        }
+        return ret;
+    }
+
+    public short[] getRightChannel(){
+        return rightData;
+    }
+
+    private short[] getRightChannel(short[] totalData){
+        short[] ret = new short[totalData.length / 2];
+        for(int i = 1; i < totalData.length; i+=2){
+            ret[(i+1)/ 2 - 1] = totalData[i];
+        }
+        return ret;
     }
 
     public AudioFileManager(short[] samplesIn){
-        samples = getAudioBytes(samplesIn);
+        rightData = new short[samplesIn.length / 2];
+        leftData = new short[samplesIn.length / 2];
+        for(int i = 0; i < samplesIn.length; i+=2){
+            rightData[i / 2] = samplesIn[i];
+            leftData[i / 2] = samplesIn[i+1];
+        }
     }
 
-    public short[] getAudioData(){
-        short[] shortSamples = new short[samples.length];
-        for(int i = 0; i < shortSamples.length; i+=2) {
-            shortSamples[i] = (short) (samples[i] + samples[i+1] * 256);
+    private byte[] shortArrToByteArr(short[] arr){
+        byte[] ret = new byte[arr.length*2];
+        for(int i = 0; i < arr.length; i++){
+            ret[2 * i] = (byte) ((arr[i] / 256) & 255);
+            ret[2 * i + 1] = (byte) (arr[i] & 255);
         }
-        return shortSamples;
+        return ret;
+    }
+
+    private short[] byteArrToShortArr(byte[] arr){
+        short[] ret = new short[arr.length / 2];
+        for(int i = 0; i < arr.length; i+=2){
+            ret[i / 2] = (short) (arr[i] + 256.0 * arr[i+1]);
+        }
+        return ret;
+    }
+
+    private short[] mergeData(short[] left, short[] right){
+        if(left.length != right.length) return new short[]{};
+        short[] ret = new short[left.length+right.length];
+        for(int i = 0; i < ret.length; i+=2){
+            ret[i] = left[i / 2];
+            ret[i + 1] = right[i / 2];
+        }
+        return ret;
     }
 
     public String getName(){
@@ -76,28 +145,9 @@ public class AudioFileManager {
         }
     }
 
-    public static short[] getAudioData(byte[] bytes){
-        short[] shortSamples = new short[bytes.length];
-        for(int i = 0; i < shortSamples.length; i+=2) {
-            shortSamples[i] = (short) (bytes[i] + bytes[i+1] * 256);
-        }
-        return shortSamples;
-    }
-
-    public byte[] getAudioBytes(){
-        return samples;
-    }
-
-    public static byte[] getAudioBytes(short[] audioData){
-        byte[] audioBytes = new byte[audioData.length];
-        for(int i = 0; i < audioData.length - 1; i+=2){
-            audioBytes[i+1] = (byte) (audioData[i] & 255);
-            audioBytes[i] = (byte) ((audioData[i] / 256) & 255);
-        }
-        return audioBytes;
-    }
-
+    //writes the file
     public void buildFile(String filepath) throws IOException {
+        byte[] samples = shortArrToByteArr(mergeData(leftData, rightData));
         int chunkSize = samples.length + 40;
         audioFile = new File(filepath);
         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(audioFile));
@@ -113,6 +163,7 @@ public class AudioFileManager {
         fileOut.close();
     }
 
+    //builds a standard WAV header for the file
     public static byte[] buildHeader(int chunkSize, int sampleRate){
         if(sampleRate == -1){
             sampleRate = DEFAULTSAMPLERATE;
@@ -168,76 +219,88 @@ public class AudioFileManager {
     }
 
     //put transformations on the audio data below
-    public short[] scale(double scale){
-        short[] vals = getAudioData();
-        for(int i = 0; i < vals.length; i++){
-            vals[i] *= scale;
+    public void scale(double scale){
+        for(int i = 0; i < leftData.length; i++){
+            leftData[i] *= scale;
         }
-        samples = getAudioBytes(vals);
-        return vals;
+        for(int i = 0; i < rightData.length; i++){
+            rightData[i] *= scale;
+        }
     }
 
-    public short[] ftransform(){
-        short[] vals = getAudioData();
-        System.out.println(4 * vals.length + 15);
-        fft =  new ComplexDoubleFFT(vals.length / 2);
+    public void ftransform(){
 
-        double[] toTransform = new double[vals.length];
+        fft =  new ComplexDoubleFFT(leftData.length / 2);
+
+        double[] toTransform = new double[leftData.length];
         for(int i = 0; i< toTransform.length; i+=1){
-            toTransform[i] = (double) vals[i];
+            toTransform[i] = (double) leftData[i];
         }
         fft.ft(toTransform);
         short[] res = new short[toTransform.length / 2];
         for(int i = 0; i < toTransform.length; i+=2){
             res[i / 2] = (short) toTransform[i];
         }
-        samples = getAudioBytes(res);
-        return res;
+        leftData = res;
+
+        fft =  new ComplexDoubleFFT(rightData.length / 2);
+
+        toTransform = new double[rightData.length];
+        for(int i = 0; i< toTransform.length; i+=1){
+            toTransform[i] = (double) rightData[i];
+        }
+        fft.ft(toTransform);
+        res = new short[toTransform.length / 2];
+        for(int i = 0; i < toTransform.length; i+=2){
+            res[i / 2] = (short) toTransform[i];
+        }
+        rightData = res;
     }
 
-    public short[] btransform(){
-        short[] vals = getAudioData();
-        fft =  new ComplexDoubleFFT(vals.length / 2);
-        double[] toTransform = new double[vals.length];
+    public void btransform(){
+        fft =  new ComplexDoubleFFT(leftData.length / 2);
+        double[] toTransform = new double[leftData.length];
         for(int i = 0; i< toTransform.length; i+=1){
-            toTransform[i] = (double) vals[i];
+            toTransform[i] = (double) leftData[i];
         }
         fft.bt(toTransform);
         short[] res = new short[toTransform.length / 2];
         for(int i = 0; i < toTransform.length; i+=2){
             res[i / 2] = (short) toTransform[i];
         }
-        samples = getAudioBytes(res);
-        return res;
+        leftData = res;
+
+        fft =  new ComplexDoubleFFT(rightData.length / 2);
+        toTransform = new double[rightData.length];
+        for(int i = 0; i< toTransform.length; i+=1){
+            toTransform[i] = (double) rightData[i];
+        }
+        fft.bt(toTransform);
+        res = new short[toTransform.length / 2];
+        for(int i = 0; i < toTransform.length; i+=2){
+            res[i / 2] = (short) toTransform[i];
+        }
+        rightData = res;
+
     }
 
-    public short[] pMult(short[] toMult){
+    public void pMult(short[] toMult){
         int end = toMult.length;
-        short[] vals = getAudioData();
-        if (vals.length < end) end = vals.length;
+        if (leftData.length < end) end = leftData.length;
         for(int i = 0; i < end; i++){
-            vals[i] *= toMult[i];
+            leftData[i] *= toMult[i];
+            rightData[i] *= toMult[i];
         }
-        samples = getAudioBytes(vals);
-        return vals;
     }
 
-    public short[] pAdd(short[] toAdd){
+    public void pAdd(short[] toAdd){
         int end = toAdd.length;
-        short[] vals = getAudioData();
-        if (vals.length < end) end = vals.length;
+        if (rightData.length < end) end = rightData.length;
         for(int i = 0; i < end; i++){
-            vals[i] += toAdd[i];
+            leftData[i] += toAdd[i];
+            rightData[i] += toAdd[i];
         }
-        samples = getAudioBytes(vals);
-        return vals;
-    }
 
-    public short[] clip(int startVal, int endVal){
-        for(int i = 0; i < samples.length; i++){
-            if(i > startVal && i < endVal) { samples[i] = 0; }
-        }
-        return getAudioData(samples);
     }
 
 }

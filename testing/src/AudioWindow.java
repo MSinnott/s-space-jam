@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.File;
 import java.util.ArrayList;
 
 public class AudioWindow extends JInternalFrame{
@@ -25,9 +24,9 @@ public class AudioWindow extends JInternalFrame{
 
     private String windowName;
 
-    private short[] data;
+    private short[] leftData;
 
-    public AudioWindow(String name, int width, int height, AudioFileManager fman, JDesktopPane aDesk, ArrayList<AudioWindow> audioWindows){
+    public AudioWindow(String name, int width, int height, AudioFileManager fileManager, JDesktopPane aDesk, ArrayList<AudioWindow> audioWindows){
         super(name);
 
         windowName = name;
@@ -42,9 +41,7 @@ public class AudioWindow extends JInternalFrame{
 
 
         pane = new MainPane();
-        audioFile = fman;
-        data = audioFile.getAudioData();
-        pane.setData(data);
+        loadFile(fileManager);
 
         Container c = this.getContentPane();
         c.setLayout(new BorderLayout());
@@ -62,10 +59,10 @@ public class AudioWindow extends JInternalFrame{
         return windowName;
     }
 
-    public void loadFile(File f){
-        audioFile = new AudioFileManager(f);
-        data = audioFile.getAudioData();
-        pane.setData(data);
+    public void loadFile(AudioFileManager fileManager){
+        audioFile = fileManager;
+        leftData = audioFile.getLeftChannel();
+        updatePane();
     }
 
     public void buildMenus(){
@@ -179,11 +176,8 @@ public class AudioWindow extends JInternalFrame{
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode() == 10 && Double.valueOf(numField.getText()) != Double.NaN){
                         scale[0] = Double.valueOf(numField.getText());
-                        pane.setData(audioFile.scale(scale[0]));
-                        pane.invalidate();
-                        pane.repaint();
-                        audioWindow.invalidate();
-                        audioWindow.repaint();
+                        audioFile.scale(scale[0]);
+                        updatePane();
                         numberDialog.dispose();
                     }
 
@@ -196,23 +190,26 @@ public class AudioWindow extends JInternalFrame{
     public class forwardFFtAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            pane.setData(audioFile.ftransform());
-            pane.invalidate();
-            pane.repaint();
-            audioWindow.invalidate();
-            audioWindow.repaint();
+            audioFile.ftransform();
+            updatePane();
         }
     }
 
     public class backwardFFtAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            pane.setData(audioFile.btransform());
-            pane.invalidate();
-            pane.repaint();
-            audioWindow.invalidate();
-            audioWindow.repaint();
+            audioFile.btransform();
+            updatePane();
         }
+    }
+
+    public void updatePane(){
+        pane.setLeftData(audioFile.getLeftChannel());
+        pane.setRightData(audioFile.getRightChannel());
+        pane.invalidate();
+        pane.repaint();
+        audioWindow.invalidate();
+        audioWindow.repaint();
     }
 
 }

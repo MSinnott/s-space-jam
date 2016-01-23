@@ -50,7 +50,7 @@ public class AudioDesktop extends JFrame{
 
         this.setResizable(true);
         this.setIconImage(new ImageIcon(iconPath).getImage());
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
@@ -84,7 +84,6 @@ public class AudioDesktop extends JFrame{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         resetColors();
         this.setVisible(true);
         this.invalidate();
@@ -313,7 +312,6 @@ public class AudioDesktop extends JFrame{
             int returnVal = fileChooser.showOpenDialog(desktop);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 File selection = fileChooser.getSelectedFile();
-                System.out.println(selection.getAbsolutePath() + " " +selection.length());
                 buildWindow(new AudioFileManager(selection));
             }
         }

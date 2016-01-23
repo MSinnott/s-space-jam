@@ -2,36 +2,17 @@ import java.io.*;
 
 public class baseRunner {
 
-    static short[] samples;
-
     public static void main(String[] args) throws IOException, InterruptedException {
-        AudioFileManager audioFile = new AudioFileManager("testing/music/space oddity.wav");
-
-        //grabbing music audioFile --a
-        samples = audioFile.getAudioData();
-
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
-        mainWindow.invalidate();
-        mainWindow.repaint();
 
-
-        audioFile.buildFile("testing/music/space oddity processed.wav");
-
-        //audioFile.ftransform();
-        //audioFile.btransform();
-
-        audioFile.buildFile("testing/music/space oddity TRANSFORM.wav");
-
-        AudioFileManager oneTone = new AudioFileManager(getStereoTone(500, 500, 8*44100));
-        System.out.println(oneTone.getAudioData().length);
+        AudioFileManager oneTone = new AudioFileManager(getStereoTone(500, 600, 8*44100));
         mainWindow.buildWindow(oneTone);
 
         oneTone.buildFile("testing/music/singleTone.wav");
-
-        System.out.println("Done!");
     }
 
+    //just for testing
     public static short[] getStereoTone(double freqLeft, double freqRight, int numSamples){
         short[] tone = new short[numSamples*=2];
         short rightSide;
