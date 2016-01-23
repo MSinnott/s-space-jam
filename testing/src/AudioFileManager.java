@@ -41,6 +41,7 @@ public class AudioFileManager {
             audioIn = AudioSystem.getAudioInputStream(audioFile);
             dataIn = new DataInputStream(audioIn);
             format = audioIn.getFormat();
+            System.out.println(format.getFrameSize() + " " + format.getFrameRate());
             samples = new byte[(int)(audioIn.getFrameLength() * format.getFrameSize())];
             dataIn.readFully(samples);
 
@@ -89,7 +90,7 @@ public class AudioFileManager {
 
     public static byte[] getAudioBytes(short[] audioData){
         byte[] audioBytes = new byte[audioData.length];
-        for(int i = 0; i < audioData.length; i+=2){
+        for(int i = 0; i < audioData.length - 1; i+=2){
             audioBytes[i+1] = (byte) (audioData[i] & 255);
             audioBytes[i] = (byte) ((audioData[i] / 256) & 255);
         }
