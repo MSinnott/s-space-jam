@@ -574,7 +574,13 @@
       <option name="project" value="LOCAL" />
       <updated>1453619063638</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="I found code that will allow you to select a .au file and input its data into a byte[]. Does not include header information nor its metadata.&#10;">
+      <created>1453619116769</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1453619116769</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="ToolWindowManager">
