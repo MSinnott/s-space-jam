@@ -6,22 +6,22 @@ public class baseRunner {
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
-        AudioFileManager oneTone = new AudioFileManager(getStereoTone(500, 600, 8*44100));
+        AudioFileManager oneTone = new AudioFileManager(getStereoTone(900, 500, 8*44100));
         oneTone.buildFile("testing/music/singleTone.wav");
         mainWindow.buildWindow(oneTone);
-        System.out.println(oneTone.getMergedData().length + " out of writer");
 
-        mainWindow.buildWindow(new AudioFileManager("testing/music/singleTone.wav"));
+        AudioFileManager twoTone = new AudioFileManager("testing/music/singleTone.wav");
+        mainWindow.buildWindow(twoTone);
     }
 
     //just for testing
-    public static short[] getStereoTone(double freqLeft, double freqRight, int numSamples){
-        short[] tone = new short[numSamples*=2];
-        short rightSide;
-        short leftSide;
+    public static float[] getStereoTone(double freqLeft, double freqRight, int numSamples){
+        float[] tone = new float[numSamples*=2];
+        float rightSide;
+        float leftSide;
         for(int i = 0; i < numSamples; i+= 2){
-            leftSide = (short) (6000 * Math.sin(2 * Math.PI * i / freqLeft));
-            rightSide = (short) (6000 * Math.sin(2 * Math.PI * i / freqRight));
+            leftSide = (float) (6000 * Math.sin(2 * Math.PI * i / freqLeft));
+            rightSide = (float) (6000 * Math.sin(2 * Math.PI * i / freqRight));
             tone[i] = leftSide;
             tone[i+1] = rightSide;
         }

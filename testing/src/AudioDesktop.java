@@ -11,13 +11,15 @@ public class AudioDesktop extends JFrame{
     public static Color bgColor = new Color(252, 53, 0);
     public static Color fgColor = new Color(252, 127, 3);
     public static Color accColor = new Color(255, 201, 8);
-    public static Color lnColor = new Color(29, 46, 255);
+    public static Color llnColor = new Color(55, 236, 255);
+    public static Color rlnColor = new Color(29, 46, 255);
     public static Color txtColor = new Color(255, 255, 255);
 
     public static Color defbgColor = new Color(252, 53, 0);
     public static Color deffgColor = new Color(252, 127, 3);
     public static Color defaccColor = new Color(255, 201, 8);
-    public static Color deflnColor = new Color(29, 46, 255);
+    public static Color defllnColor = new Color(55, 236, 255);
+    public static Color defrlnColor = new Color(29, 46, 255);
     public static Color deftxtColor = new Color(255, 255, 255);
 
     private JDesktopPane desktop;
@@ -103,19 +105,22 @@ public class AudioDesktop extends JFrame{
             final JColorChooser bgColorChooser = new JColorChooser();
             final JColorChooser fgColorChooser = new JColorChooser();
             final JColorChooser accColorChooser = new JColorChooser();
-            final JColorChooser lnColorChooser = new JColorChooser();
+            final JColorChooser leftlnColorChooser = new JColorChooser();
+            final JColorChooser rightlnColorChooser = new JColorChooser();
             final JColorChooser txtColorChooser = new JColorChooser();
 
             tabbedPane.addTab("Background", bgColorChooser);
             tabbedPane.addTab("Foreground", fgColorChooser);
             tabbedPane.addTab("Accent", accColorChooser);
-            tabbedPane.addTab("Line", lnColorChooser);
+            tabbedPane.addTab("Left Channel Line", leftlnColorChooser);
+            tabbedPane.addTab("Right Channel Line", rightlnColorChooser);
             tabbedPane.addTab("Text", txtColorChooser);
 
             bgColorChooser.setColor(bgColor);
             fgColorChooser.setColor(fgColor);
             accColorChooser.setColor(accColor);
-            lnColorChooser.setColor(lnColor);
+            leftlnColorChooser.setColor(llnColor);
+            rightlnColorChooser.setColor(rlnColor);
             txtColorChooser.setColor(txtColor);
 
             JButton exitButton = new JButton("Done?");
@@ -135,7 +140,8 @@ public class AudioDesktop extends JFrame{
                     bgColor = defbgColor;
                     fgColor = deffgColor;
                     accColor = defaccColor;
-                    lnColor = deflnColor;
+                    llnColor = defllnColor;
+                    rlnColor = defrlnColor;
                     txtColor = deftxtColor;
                     try {
                         saveProperties();
@@ -153,7 +159,8 @@ public class AudioDesktop extends JFrame{
                     bgColor = bgColorChooser.getColor();
                     fgColor = fgColorChooser.getColor();
                     accColor = accColorChooser.getColor();
-                    lnColor = lnColorChooser.getColor();
+                    llnColor = leftlnColorChooser.getColor();
+                    rlnColor = rightlnColorChooser.getColor();
                     txtColor = txtColorChooser.getColor();
                     try {
                         saveProperties();
@@ -198,9 +205,13 @@ public class AudioDesktop extends JFrame{
         properties.setProperty("accColor:G", String.valueOf(accColor.getGreen()));
         properties.setProperty("accColor:B", String.valueOf(accColor.getBlue()));
 
-        properties.setProperty("lnColor:R", String.valueOf(lnColor.getRed()));
-        properties.setProperty("lnColor:G", String.valueOf(lnColor.getGreen()));
-        properties.setProperty("lnColor:B", String.valueOf(lnColor.getBlue()));
+        properties.setProperty("llnColor:R", String.valueOf(llnColor.getRed()));
+        properties.setProperty("llnColor:G", String.valueOf(llnColor.getGreen()));
+        properties.setProperty("llnColor:B", String.valueOf(llnColor.getBlue()));
+
+        properties.setProperty("rlnColor:R", String.valueOf(rlnColor.getRed()));
+        properties.setProperty("rlnColor:G", String.valueOf(rlnColor.getGreen()));
+        properties.setProperty("rlnColor:B", String.valueOf(rlnColor.getBlue()));
 
         properties.setProperty("txtColor:R", String.valueOf(txtColor.getRed()));
         properties.setProperty("txtColor:G", String.valueOf(txtColor.getGreen()));
@@ -243,8 +254,13 @@ public class AudioDesktop extends JFrame{
         } else {
             configOk = false;
         }
-        if(properties.containsKey("lnColor:R") && properties.containsKey("lnColor:G") && properties.containsKey("lnColor:B")) {
-            lnColor = new Color(Integer.valueOf(properties.getProperty("lnColor:R")), Integer.valueOf(properties.getProperty("lnColor:G")), Integer.valueOf(properties.getProperty("lnColor:B")));
+        if(properties.containsKey("llnColor:R") && properties.containsKey("llnColor:G") && properties.containsKey("llnColor:B")) {
+            llnColor = new Color(Integer.valueOf(properties.getProperty("llnColor:R")), Integer.valueOf(properties.getProperty("llnColor:G")), Integer.valueOf(properties.getProperty("llnColor:B")));
+        } else {
+            configOk = false;
+        }
+        if(properties.containsKey("rlnColor:R") && properties.containsKey("rlnColor:G") && properties.containsKey("rlnColor:B")) {
+            rlnColor = new Color(Integer.valueOf(properties.getProperty("rlnColor:R")), Integer.valueOf(properties.getProperty("rlnColor:G")), Integer.valueOf(properties.getProperty("rlnColor:B")));
         } else {
             configOk = false;
         }

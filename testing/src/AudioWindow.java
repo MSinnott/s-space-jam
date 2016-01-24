@@ -24,8 +24,6 @@ public class AudioWindow extends JInternalFrame{
 
     private String windowName;
 
-    private short[] leftData;
-
     public AudioWindow(String name, int width, int height, AudioFileManager fileManager, JDesktopPane aDesk, ArrayList<AudioWindow> audioWindows){
         super(name);
 
@@ -61,7 +59,6 @@ public class AudioWindow extends JInternalFrame{
 
     public void loadFile(AudioFileManager fileManager){
         audioFile = fileManager;
-        leftData = audioFile.getLeftChannel();
         updatePane();
     }
 

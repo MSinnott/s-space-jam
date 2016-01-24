@@ -2,11 +2,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.geom.Arc2D;
 
 public class MainPane extends JPanel implements KeyListener {
 
-    private int[] leftNotes;
-    private int[] rightNotes;
+    private float[] leftNotes;
+    private float[] rightNotes;
     private int MinNote, MaxNote;
     private int lX, lY, nX, nY;
     private double zoom = 1;
@@ -33,11 +34,12 @@ public class MainPane extends JPanel implements KeyListener {
         g2.setColor(AudioDesktop.bgColor);
         lY = getY(0);
         g2.drawLine(0, lY, this.getWidth(), lY);
-        g2.setColor(AudioDesktop.lnColor);
+        g2.setColor(AudioDesktop.llnColor);
         if(zoom >= 1) {
             lX = 0;
-            lY = getY(leftNotes[pan]);
-            for (int i = 0; i < leftNotes.length; i += 2) {
+            lY = getY((int) leftNotes[pan]);
+            //the 2* (pan/2) is to ensure i is always even
+            for (int i = 2 * (pan / 2); i < leftNotes.length; i += 2) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
                 nY = getY(leftNotes[i]);
@@ -48,7 +50,8 @@ public class MainPane extends JPanel implements KeyListener {
         } else {
             int sampsPerPixel = (int) (1.0/zoom);
             lX = 0;
-            for (int i = pan; i < leftNotes.length; i += 2 * sampsPerPixel){
+            //the 2* (pan/2) is to ensure i is always even
+            for (int i = 2*(pan / 2); i < leftNotes.length; i += 2 * sampsPerPixel){
                 lY = getY(findMin(leftNotes, i, i + 2*sampsPerPixel + 1));
                 nY = getY(findMax(leftNotes, i, i + 2*sampsPerPixel + 1));
                 g2.drawLine(lX, lY, lX, nY );
@@ -59,11 +62,12 @@ public class MainPane extends JPanel implements KeyListener {
 
         if( rightNotes == null ) return;
         if( rightNotes.length < 2 ) return;
-        g2.setColor(Color.red);
+        g2.setColor(AudioDesktop.rlnColor);
         if(zoom >= 1) {
             lX = 0;
-            lY = getY(rightNotes[pan]);
-            for (int i = 0; i < rightNotes.length; i += 2) {
+            lY = getY((int) rightNotes[pan]);
+            //the 2* (pan/2) is to ensure i is always even
+            for (int i = 2*(pan/2); i < rightNotes.length; i += 2) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
                 nY = getY(rightNotes[i]);
@@ -74,7 +78,8 @@ public class MainPane extends JPanel implements KeyListener {
         } else {
             int sampsPerPixel = (int) (1.0/zoom);
             lX = 0;
-            for (int i = pan; i < rightNotes.length; i += 2 * sampsPerPixel){
+            //the 2* (pan/2) is to ensure i is always even
+            for (int i = 2*(pan/2); i < rightNotes.length; i += 2 * sampsPerPixel){
                 lY = getY(findMin(rightNotes, i, i + 2*sampsPerPixel + 1));
                 nY = getY(findMax(rightNotes, i, i + 2*sampsPerPixel + 1));
                 g2.drawLine(lX, lY, lX, nY );
@@ -84,13 +89,13 @@ public class MainPane extends JPanel implements KeyListener {
         }
     }
 
-    private int getY(int val){
-        if(MaxNote == MinNote || val == 0) return TopWindow / 2;
-        return TopWindow - (TopWindow * ( val - MinNote )) / (( MaxNote - MinNote ));
+    private int getY(float val){
+        if(val == 0) return TopWindow / 2;
+        return (int) (TopWindow - (TopWindow * ( val - MinNote )) / (( MaxNote - MinNote )));
     }
 
-    public int findMax(int[] arr, int stIndex, int endIndex){
-        int max = Integer.MIN_VALUE;
+    public float findMax(float[] arr, int stIndex, int endIndex){
+        float max = Float.MIN_VALUE;
         if(stIndex < 0){
             stIndex = 0;
         }
@@ -109,8 +114,8 @@ public class MainPane extends JPanel implements KeyListener {
         return max;
     }
 
-    public int findMin(int[] arr, int stIndex, int endIndex){
-        int min = Integer.MAX_VALUE;
+    public float findMin(float[] arr, int stIndex, int endIndex){
+        float min = Float.MAX_VALUE;
         if(stIndex < 0){
             stIndex = 0;
         }
@@ -131,32 +136,35 @@ public class MainPane extends JPanel implements KeyListener {
 
     public void pan(int panDirection) {
         if(zoom < 1){
-            pan += panDirection * Math.ceil(1.0/zoom);
+            pan += panDirection * Math.ceil(10.0/zoom);
         } else {
-            pan += panDirection * zoom;
+            pan += panDirection * 5 * zoom;
         }
     }
 
-    public void setLeftData(short[] notesIn) {
-        leftNotes = new int[notesIn.length];
+    public void setLeftData(float[] notesIn) {
+        leftNotes = new float[notesIn.length];
 
         for(int i = 0; i < notesIn.length; i++){
             leftNotes[i] = notesIn[i];
         }
 
-        MinNote = findMin(leftNotes, 0, leftNotes.length);
-        MaxNote = findMax(leftNotes, 0, leftNotes.length);
+        int rmin = (int) findMin(leftNotes, 0, leftNotes.length);
+        int rmax = (int) findMax(leftNotes, 0, leftNotes.length);
+        if(MinNote > rmin) MinNote = rmin;
+        if(MaxNote < rmax) MaxNote = rmax;
     }
 
-    public void setRightData(short[] notesIn) {
-        rightNotes = new int[notesIn.length];
+    public void setRightData(float[] notesIn) {
+        rightNotes = new float[notesIn.length];
 
         for(int i = 0; i < notesIn.length; i++){
             rightNotes[i] = notesIn[i];
         }
-
-        MinNote = findMin(rightNotes, 0, rightNotes.length);
-        MaxNote = findMax(rightNotes, 0, rightNotes.length);
+        int lmin = (int) findMin(rightNotes, 0, rightNotes.length);
+        int lmax = (int) findMax(rightNotes, 0, rightNotes.length);
+        if(MinNote > lmin) MinNote = lmin;
+        if(MaxNote < lmax) MaxNote = lmax;
     }
 
     @Override
