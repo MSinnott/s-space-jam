@@ -22,11 +22,14 @@ public class MainPane extends JPanel implements KeyListener {
     /* pretty graphical window for the music --m */
     @Override
     public void paintComponent(Graphics g){
-        if( leftNotes == null ) return;
-        if( leftNotes.length < 2 ) return;
+        if( leftNotes == null || rightNotes == null) return;
+        if( leftNotes.length < 2 || rightNotes.length < 2) return;
         if(pan < 0) pan = 0;
         if(pan + getNumPixelsOnscreen() > leftNotes.length) pan = leftNotes.length - getNumPixelsOnscreen();
         if(getNumPixelsOnscreen() > leftNotes.length) pan = 0;
+
+        setMaxMinNotes();
+
         TopWindow = this.getHeight();
 
         Graphics2D g2 = (Graphics2D) g;
@@ -35,10 +38,6 @@ public class MainPane extends JPanel implements KeyListener {
         g2.fillRect(0 , 0 , this.getWidth(), this.getHeight());
 
         g2.setStroke(new BasicStroke(4));
-        g2.setColor(AudioDesktop.bgColor);
-        lY = getY(0);
-        g2.drawLine(0, lY, this.getWidth(), lY);
-
         g2.setColor(AudioDesktop.llnColor);
         if(zoom >= 1) {
             lX = 0;
@@ -88,6 +87,16 @@ public class MainPane extends JPanel implements KeyListener {
                 lX += 1;
             }
         }
+
+        g2.setColor(AudioDesktop.bgColor);
+        g2.setStroke(new BasicStroke(2));
+        lY = getY(0);
+        g2.drawLine(0, lY, this.getWidth(), lY);
+        g2.drawLine(0, 3*TopWindow/4, this.getWidth(), 3*TopWindow/4);
+        g2.drawLine(0, TopWindow/4, this.getWidth(), TopWindow/4);
+        g2.drawString("" + (MaxNote - MinNote) / 4, 16, 3*TopWindow/4 + 16);
+        g2.drawString("" + (MinNote - MaxNote) / 4, 16, TopWindow/4 + 16);
+        g2.drawString("" + 0, 16, TopWindow / 2 + 16);
     }
 
     private int getNumPixelsOnscreen(){
@@ -151,27 +160,32 @@ public class MainPane extends JPanel implements KeyListener {
 
     public void setLeftData(float[] notesIn) {
         leftNotes = new float[notesIn.length];
-
         for(int i = 0; i < notesIn.length; i++){
             leftNotes[i] = notesIn[i];
         }
+        setMaxMinNotes();
+    }
 
-        int rmin = (int) findMin(leftNotes, 0, leftNotes.length);
-        int rmax = (int) findMax(leftNotes, 0, leftNotes.length);
+    private void setMaxMinNotes(){
+        MaxNote = Integer.MIN_VALUE;
+        MinNote = Integer.MAX_VALUE;
+        if(leftNotes == null || rightNotes == null) return;
+        int lmin = (int) findMin(leftNotes, 0, leftNotes.length);
+        int lmax = (int) findMax(leftNotes, 0, leftNotes.length);
+        if(MinNote > lmin) MinNote = lmin;
+        if(MaxNote < lmax) MaxNote = lmax;
+        int rmin = (int) findMin(rightNotes, 0, rightNotes.length);
+        int rmax = (int) findMax(rightNotes, 0, rightNotes.length);
         if(MinNote > rmin) MinNote = rmin;
         if(MaxNote < rmax) MaxNote = rmax;
     }
 
     public void setRightData(float[] notesIn) {
         rightNotes = new float[notesIn.length];
-
         for(int i = 0; i < notesIn.length; i++){
             rightNotes[i] = notesIn[i];
         }
-        int lmin = (int) findMin(rightNotes, 0, rightNotes.length);
-        int lmax = (int) findMax(rightNotes, 0, rightNotes.length);
-        if(MinNote > lmin) MinNote = lmin;
-        if(MaxNote < lmax) MaxNote = lmax;
+        setMaxMinNotes();
     }
 
     @Override

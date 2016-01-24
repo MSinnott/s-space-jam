@@ -1,4 +1,3 @@
-import javax.sound.sampled.*;
 import java.io.*;
 
 /*
@@ -22,14 +21,14 @@ public class AudioFileManager {
 
     public AudioFileManager(String filepath){
         audioFile = new File(filepath);
-        float[] data = byteArrToShortArr(readFile(audioFile));
+        float[] data = byteArrToFloatArr(readFile(audioFile));
         leftData = complexify(getLeftChannel(data));
         rightData = complexify(getRightChannel(data));
     }
 
     public AudioFileManager(File audioFileIn){
         audioFile = audioFileIn;
-        float[] data = byteArrToShortArr(readFile(audioFile));
+        float[] data = byteArrToFloatArr(readFile(audioFile));
         leftData = complexify(getLeftChannel(data));
         rightData = complexify(getRightChannel(data));
     }
@@ -125,7 +124,7 @@ public class AudioFileManager {
     }
 
     //array converter
-    private byte[] shortArrToByteArr(float[] arr){
+    private byte[] floatArrToByteArr(float[] arr){
         byte[] ret = new byte[arr.length*2];
         for(int i = 0; i < arr.length; i++){
             ret[2 * i] = (byte) ((int) arr[i] & 255);
@@ -135,7 +134,7 @@ public class AudioFileManager {
     }
 
     //array converter
-    private float[] byteArrToShortArr(byte[] arr){
+    private float[] byteArrToFloatArr(byte[] arr){
         float[] ret = new float[arr.length / 2];
         for(int i = 0; i < ret.length; i+=1){
             ret[i] = (float) ((arr[2 * i] & 255) | arr[2*i+1] << 8);
@@ -187,7 +186,7 @@ public class AudioFileManager {
     public void buildFile(String filepath) throws IOException {
         byte[] samples = new byte[0];
         try {
-            samples = shortArrToByteArr(mergeData(decomplexify(leftData), decomplexify(rightData)));
+            samples = floatArrToByteArr(mergeData(decomplexify(leftData), decomplexify(rightData)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -208,7 +207,7 @@ public class AudioFileManager {
 
     //builds a standard WAV header for the file
     public static byte[] buildHeader(int chunkSize, int sampleRate){
-        if(sampleRate == -1){
+        if(sampleRate < 0){
             sampleRate = DEFAULTSAMPLERATE;
         }
         byte[] header = new byte[40];

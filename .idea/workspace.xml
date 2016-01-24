@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/testing/src/MainPane.java" line="56" />
+    <bookmark url="file://$PROJECT_DIR$/testing/src/MainPane.java" line="55" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="933177a3-c705-41de-881d-4941e94a1377" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/music/singleTone.wav" afterPath="$PROJECT_DIR$/testing/music/singleTone.wav" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/resc/properties.txt" afterPath="$PROJECT_DIR$/testing/resc/properties.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioDesktop.java" afterPath="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioFileManager.java" afterPath="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioWindow.java" afterPath="$PROJECT_DIR$/testing/src/AudioWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/CloseAction.java" afterPath="$PROJECT_DIR$/testing/src/CloseAction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MainPane.java" afterPath="$PROJECT_DIR$/testing/src/MainPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/baseRunner.java" afterPath="$PROJECT_DIR$/testing/src/baseRunner.java" />
     </list>
     <ignored path="sSpaceJam.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,9 +44,8 @@
         <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="284" column="28" selection-start-line="284" selection-start-column="28" selection-end-line="284" selection-end-column="28" />
+              <caret line="278" column="27" selection-start-line="278" selection-start-column="27" selection-end-line="278" selection-end-column="27" />
               <folding>
-                <element signature="imports" expanded="true" />
                 <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
@@ -62,14 +56,13 @@
                 <element signature="method#getRightChannel#1;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#getMergedData#0;class#AudioFileManager#0" expanded="false" />
-                <element signature="method#shortArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
-                <element signature="method#byteArrToShortArr#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#scale#0;class#AudioFileManager#0" expanded="false" />
-                <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
                 <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
@@ -112,11 +105,16 @@
         <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3895#3896#0" expanded="true" />
                 <element signature="e#3942#3943#0" expanded="true" />
+                <element signature="class#scaleAction#0;class#AudioWindow#0" expanded="false" />
+                <element signature="e#6015#6461#0" expanded="true" />
+                <element signature="e#6460#6461#0" expanded="true" />
+                <element signature="e#6508#6693#0" expanded="true" />
+                <element signature="e#6692#6693#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -125,14 +123,12 @@
       <file leaf-file-name="MainPane.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.3374778">
-              <caret line="59" column="45" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.44760212">
+              <caret line="168" column="34" selection-start-line="168" selection-start-column="34" selection-end-line="168" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
                 <element signature="method#pan#0;class#MainPane#0" expanded="false" />
-                <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
-                <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
                 <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
                 <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
                 <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
@@ -170,11 +166,11 @@
         <option value="$PROJECT_DIR$/testing/src/AudioFileMenuBar.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioFileTransformer.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
-        <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
         <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
-        <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
         <option value="$PROJECT_DIR$/testing/src/CloseAction.java" />
+        <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioWindow.java" />
+        <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
       </list>
     </option>
   </component>
@@ -656,9 +652,9 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31755197" sideWeight="0.49423522" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.02907916" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290993" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.0" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
@@ -715,7 +711,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="21" />
+      <option name="time" value="24" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -737,7 +733,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
@@ -748,14 +743,13 @@
             <element signature="method#getRightChannel#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getMergedData#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#shortArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#byteArrToShortArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#scale#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
@@ -781,6 +775,11 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3895#3896#0" expanded="true" />
             <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="class#scaleAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#6015#6461#0" expanded="true" />
+            <element signature="e#6460#6461#0" expanded="true" />
+            <element signature="e#6508#6693#0" expanded="true" />
+            <element signature="e#6692#6693#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -793,8 +792,6 @@
             <element signature="imports" expanded="true" />
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
@@ -815,7 +812,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="199" column="28" selection-start-line="199" selection-start-column="28" selection-end-line="199" selection-end-column="28" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
@@ -826,14 +822,13 @@
             <element signature="method#getRightChannel#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getMergedData#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#shortArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#byteArrToShortArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#scale#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
@@ -859,6 +854,11 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3895#3896#0" expanded="true" />
             <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="class#scaleAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#6015#6461#0" expanded="true" />
+            <element signature="e#6460#6461#0" expanded="true" />
+            <element signature="e#6508#6693#0" expanded="true" />
+            <element signature="e#6692#6693#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -871,8 +871,6 @@
             <element signature="imports" expanded="true" />
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
@@ -893,7 +891,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
@@ -904,14 +901,13 @@
             <element signature="method#getRightChannel#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getMergedData#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#shortArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#byteArrToShortArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#scale#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
@@ -937,6 +933,11 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3895#3896#0" expanded="true" />
             <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="class#scaleAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#6015#6461#0" expanded="true" />
+            <element signature="e#6460#6461#0" expanded="true" />
+            <element signature="e#6508#6693#0" expanded="true" />
+            <element signature="e#6692#6693#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -949,8 +950,6 @@
             <element signature="imports" expanded="true" />
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
@@ -971,7 +970,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="220" column="21" selection-start-line="220" selection-start-column="21" selection-end-line="220" selection-end-column="21" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
@@ -982,14 +980,13 @@
             <element signature="method#getRightChannel#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getMergedData#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#shortArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#byteArrToShortArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#scale#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
@@ -1015,6 +1012,11 @@
             <element signature="imports" expanded="true" />
             <element signature="e#3895#3896#0" expanded="true" />
             <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="class#scaleAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#6015#6461#0" expanded="true" />
+            <element signature="e#6460#6461#0" expanded="true" />
+            <element signature="e#6508#6693#0" expanded="true" />
+            <element signature="e#6692#6693#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1027,8 +1029,6 @@
             <element signature="imports" expanded="true" />
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
@@ -1049,7 +1049,6 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="39" />
           <folding>
-            <element signature="imports" expanded="true" />
             <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
@@ -1060,14 +1059,13 @@
             <element signature="method#getRightChannel#1;class#AudioFileManager#0" expanded="false" />
             <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getMergedData#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#shortArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#byteArrToShortArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#scale#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
             <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
@@ -1083,8 +1081,6 @@
             <element signature="imports" expanded="true" />
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
@@ -1174,45 +1170,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="284" column="28" selection-start-line="284" selection-start-column="28" selection-end-line="284" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#AudioFileManager#3;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#complexify#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#decomplexify#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#getLeftChannel#1;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#getRightChannel#1;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#getMergedData#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#shortArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#byteArrToShortArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#scale#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="73" selection-start-line="8" selection-start-column="73" selection-end-line="8" selection-end-column="73" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/CloseAction.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1239,28 +1196,68 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="73" selection-start-line="8" selection-start-column="73" selection-end-line="8" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="278" column="27" selection-start-line="278" selection-start-column="27" selection-end-line="278" selection-end-column="27" />
+          <folding>
+            <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#AudioFileManager#3;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#complexify#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#decomplexify#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#getLeftChannel#1;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#getRightChannel#1;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#getMergedData#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#scale#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <caret line="150" column="0" selection-start-line="150" selection-start-column="0" selection-end-line="150" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3895#3896#0" expanded="true" />
             <element signature="e#3942#3943#0" expanded="true" />
+            <element signature="class#scaleAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#6015#6461#0" expanded="true" />
+            <element signature="e#6460#6461#0" expanded="true" />
+            <element signature="e#6508#6693#0" expanded="true" />
+            <element signature="e#6692#6693#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3374778">
-          <caret line="59" column="45" selection-start-line="59" selection-start-column="45" selection-end-line="59" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.44760212">
+          <caret line="168" column="34" selection-start-line="168" selection-start-column="34" selection-end-line="168" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />

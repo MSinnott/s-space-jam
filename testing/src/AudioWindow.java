@@ -155,29 +155,45 @@ public class AudioWindow extends JInternalFrame{
             numberDialog.setTitle("Scale By:");
             numberDialog.setLayout(new BorderLayout());
             numberDialog.setLocation(480, 480);
-            numberDialog.setSize(200, 64);
+            numberDialog.setSize(200, 90);
             numberDialog.setResizable(false);
             final JTextField numField = new JTextField();
             numberDialog.add(numField, BorderLayout.CENTER);
             final double[] scale = {1};
-            numField.addKeyListener(new KeyListener() {
-                @Override
-                public void keyTyped(KeyEvent e) {
-                }
 
-                @Override
-                public void keyReleased(KeyEvent e) {
-                }
+            BorderLayout buttonLayout = new BorderLayout();
+            JPanel panel = new JPanel();
+            panel.setLayout(buttonLayout);
+            numberDialog.add(panel, BorderLayout.SOUTH);
 
+            JButton goButton = new JButton("Apply!");
+            goButton.setBackground(AudioDesktop.bgColor);
+            goButton.setForeground(AudioDesktop.txtColor);
+
+            JButton cancelButton = new JButton("Cancel!");
+            cancelButton.setBackground(AudioDesktop.bgColor);
+            cancelButton.setForeground(AudioDesktop.txtColor);
+
+            panel.add(goButton, BorderLayout.WEST);
+            panel.add(cancelButton, BorderLayout.EAST);
+
+            goButton.addActionListener(new AbstractAction() {
                 @Override
-                public void keyPressed(KeyEvent e) {
-                    if(e.getKeyCode() == 10 && Double.valueOf(numField.getText()) != Double.NaN){
+                public void actionPerformed(ActionEvent e) {
+                    if(Double.valueOf(numField.getText()) != Double.NaN){
                         scale[0] = Double.valueOf(numField.getText());
                         audioFile.scale(scale[0]);
                         updatePane();
                         numberDialog.dispose();
                     }
 
+                }
+            });
+
+            cancelButton.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    numberDialog.dispose();
                 }
             });
             numberDialog.setVisible(true);
