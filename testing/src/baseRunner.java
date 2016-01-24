@@ -6,7 +6,7 @@ public class baseRunner {
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
-        AudioFileManager oneTone = new AudioFileManager(getStereoTone(900, 500, 8*44100));
+        AudioFileManager oneTone = new AudioFileManager(getStereoTone(20000, 500, 8*44100));
         oneTone.buildFile("testing/music/singleTone.wav");
         mainWindow.buildWindow(oneTone);
 

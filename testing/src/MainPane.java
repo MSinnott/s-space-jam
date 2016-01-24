@@ -25,21 +25,25 @@ public class MainPane extends JPanel implements KeyListener {
         if( leftNotes == null ) return;
         if( leftNotes.length < 2 ) return;
         if(pan < 0) pan = 0;
+        if(pan + getNumPixelsOnscreen() > leftNotes.length) pan = leftNotes.length - getNumPixelsOnscreen();
+        if(getNumPixelsOnscreen() > leftNotes.length) pan = 0;
         TopWindow = this.getHeight();
+
         Graphics2D g2 = (Graphics2D) g;
         g2.setBackground(AudioDesktop.accColor);
         g2.setColor(AudioDesktop.accColor);
         g2.fillRect(0 , 0 , this.getWidth(), this.getHeight());
+
         g2.setStroke(new BasicStroke(4));
         g2.setColor(AudioDesktop.bgColor);
         lY = getY(0);
         g2.drawLine(0, lY, this.getWidth(), lY);
+
         g2.setColor(AudioDesktop.llnColor);
         if(zoom >= 1) {
             lX = 0;
             lY = getY((int) leftNotes[pan]);
-            //the 2* (pan/2) is to ensure i is always even
-            for (int i = 2 * (pan / 2); i < leftNotes.length; i += 2) {
+            for (int i = pan - pan % 2; i < leftNotes.length; i += 2) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
                 nY = getY(leftNotes[i]);
@@ -50,10 +54,9 @@ public class MainPane extends JPanel implements KeyListener {
         } else {
             int sampsPerPixel = (int) (1.0/zoom);
             lX = 0;
-            //the 2* (pan/2) is to ensure i is always even
-            for (int i = 2*(pan / 2); i < leftNotes.length; i += 2 * sampsPerPixel){
-                lY = getY(findMin(leftNotes, i, i + 2*sampsPerPixel + 1));
-                nY = getY(findMax(leftNotes, i, i + 2*sampsPerPixel + 1));
+            for (int i = pan - pan % 2; i < leftNotes.length; i += 2 * sampsPerPixel){
+                lY = getY(findMin(leftNotes, i, i + 2*sampsPerPixel + 2));
+                nY = getY(findMax(leftNotes, i, i + 2*sampsPerPixel + 2));
                 g2.drawLine(lX, lY, lX, nY );
                 if( lX > this.getWidth() ) break;
                 lX += 1;
@@ -66,8 +69,7 @@ public class MainPane extends JPanel implements KeyListener {
         if(zoom >= 1) {
             lX = 0;
             lY = getY((int) rightNotes[pan]);
-            //the 2* (pan/2) is to ensure i is always even
-            for (int i = 2*(pan/2); i < rightNotes.length; i += 2) {
+            for (int i = pan - pan % 2; i < rightNotes.length; i += 2) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
                 nY = getY(rightNotes[i]);
@@ -78,10 +80,9 @@ public class MainPane extends JPanel implements KeyListener {
         } else {
             int sampsPerPixel = (int) (1.0/zoom);
             lX = 0;
-            //the 2* (pan/2) is to ensure i is always even
-            for (int i = 2*(pan/2); i < rightNotes.length; i += 2 * sampsPerPixel){
-                lY = getY(findMin(rightNotes, i, i + 2*sampsPerPixel + 1));
-                nY = getY(findMax(rightNotes, i, i + 2*sampsPerPixel + 1));
+            for (int i = pan - pan % 2; i < rightNotes.length; i += 2 * sampsPerPixel){
+                lY = getY(findMin(rightNotes, i, i + 2*sampsPerPixel + 2));
+                nY = getY(findMax(rightNotes, i, i + 2*sampsPerPixel + 2));
                 g2.drawLine(lX, lY, lX, nY );
                 if( lX > this.getWidth() ) break;
                 lX += 1;
@@ -89,13 +90,19 @@ public class MainPane extends JPanel implements KeyListener {
         }
     }
 
+    private int getNumPixelsOnscreen(){
+        return (int) (2 * this.getWidth() / zoom);
+    }
+
     private int getY(float val){
-        if(val == 0) return TopWindow / 2;
-        return (int) (TopWindow - (TopWindow * ( val - MinNote )) / (( MaxNote - MinNote )));
+        if(val == 0) {
+            return TopWindow / 2;
+        }
+        return (int) (TopWindow - (TopWindow * (val - MinNote)) / (( MaxNote - MinNote )));
     }
 
     public float findMax(float[] arr, int stIndex, int endIndex){
-        float max = Float.MIN_VALUE;
+        float max = -1 * Float.MAX_VALUE;
         if(stIndex < 0){
             stIndex = 0;
         }
@@ -108,7 +115,7 @@ public class MainPane extends JPanel implements KeyListener {
         if(endIndex > arr.length){
             endIndex = arr.length;
         }
-        for(int i = stIndex; i < endIndex; i++){
+        for(int i = stIndex; i < endIndex; i+=2){
             if(arr[i] > max) max = arr[i];
         }
         return max;
@@ -128,7 +135,7 @@ public class MainPane extends JPanel implements KeyListener {
         if(endIndex > arr.length){
             endIndex = arr.length;
         }
-        for(int i = stIndex; i < endIndex; i++){
+        for(int i = stIndex; i < endIndex; i+=2){
             if(arr[i] < min) min = arr[i];
         }
         return min;
