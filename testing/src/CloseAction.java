@@ -7,13 +7,15 @@ public class CloseAction extends AbstractAction {
 
     private Window windowToClose;
     private AudioWindow frameToClose;
+    private AudioDesktop audioDesktop;
 
     public CloseAction(Window w){
         windowToClose = w;
     }
 
-    public CloseAction(AudioWindow f){
+    public CloseAction(AudioWindow f, AudioDesktop audioDesktop){
         frameToClose = f;
+        this.audioDesktop = audioDesktop;
     }
 
     @Override
@@ -51,7 +53,6 @@ public class CloseAction extends AbstractAction {
         }
         if(frameToClose != null){
             closeDialog.setLocation(frameToClose.getX() + 240, frameToClose.getY() + 240);
-            frameToClose.removeFromDesktop();
         }
 
         closeDialog.setSize(200, 64);
@@ -61,7 +62,7 @@ public class CloseAction extends AbstractAction {
 
     private void closeItem(){
         if(windowToClose != null) windowToClose.dispose();
-        if(frameToClose != null) frameToClose.dispose();
+        if(frameToClose != null) audioDesktop.removeWindow(frameToClose);
     }
 
 }

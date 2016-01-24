@@ -3,15 +3,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.util.ArrayList;
 
 public class AudioWindow extends JInternalFrame{
 
     private MainPane pane;
     private AudioFileManager audioFile;
-    private JDesktopPane desktop;
-    private AudioWindow audioWindow = this;
-    private ArrayList<AudioWindow> audioWindows;
+    private AudioDesktop audioDesktop;
 
     private JMenuBar menuBar;
     private JMenu fileMenu;
@@ -24,13 +21,12 @@ public class AudioWindow extends JInternalFrame{
 
     private String windowName;
 
-    public AudioWindow(String name, int width, int height, AudioFileManager fileManager, JDesktopPane aDesk, ArrayList<AudioWindow> audioWindows){
+    public AudioWindow(String name, int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
         super(name);
 
         windowName = name;
 
-        desktop = aDesk;
-        this.audioWindows = audioWindows;
+        audioDesktop = aDesk;
 
         this.setSize(width, height);
         this.setResizable(true);
@@ -50,6 +46,10 @@ public class AudioWindow extends JInternalFrame{
 
         buildMenus();
 
+        setClosable(true);
+        setIconifiable(true);
+        setMaximizable(true);
+        setResizable(true);
         this.setVisible(true);
     }
 
@@ -76,7 +76,7 @@ public class AudioWindow extends JInternalFrame{
 
         exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
-        exitButton.addActionListener(new CloseAction(this));
+        exitButton.addActionListener(new CloseAction(this, audioDesktop));
 
         opMenu = new JMenu("Operations");
         menuBar.add(opMenu);
@@ -128,7 +128,7 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public void removeFromDesktop(){
-        audioWindows.remove(this);
+        audioDesktop.removeWindow(this);
     }
 
     //Creates + adds a clone of this object to the desktop
@@ -139,9 +139,9 @@ public class AudioWindow extends JInternalFrame{
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            AudioWindow clone = new AudioWindow(audioWindow.getWindowName(), audioWindow.getWidth(), audioWindow.getHeight(), audioWindow.audioFile, desktop, audioWindows);
-            desktop.add(clone);
-            audioWindows.add(clone);
+            AudioFileManager newAudioFile = new AudioFileManager(audioFile);
+            AudioWindow clone = new AudioWindow(audioWindow.getWindowName(), audioWindow.getWidth(), audioWindow.getHeight(), newAudioFile, audioDesktop);
+            audioDesktop.addWindow(clone);
             clone.moveToFront();
             clone.setLocation(audioWindow.getX() + 32, audioWindow.getY() + 32);
             clone.setView(pane.getPan(), pane.getZoom());
@@ -205,8 +205,8 @@ public class AudioWindow extends JInternalFrame{
         pane.setRightData(audioFile.getRightChannel());
         pane.invalidate();
         pane.repaint();
-        audioWindow.invalidate();
-        audioWindow.repaint();
+        this.invalidate();
+        this.repaint();
     }
 
 }

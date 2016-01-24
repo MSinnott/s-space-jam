@@ -45,6 +45,17 @@ public class AudioFileManager {
         leftData = complexify(leftData);
     }
 
+    public AudioFileManager(AudioFileManager fileManager){
+        float[] leftIn = fileManager.getLeftChannel();
+        float[] rightIn = fileManager.getRightChannel();
+        leftData = new float[leftIn.length];
+        rightData = new float[rightIn.length];
+        for(int i = 0; i < leftIn.length; i++){
+            leftData[i] = leftIn[i];
+            rightData[i] = rightIn[i];
+        }
+    }
+
     //adds imaginary components
     public float[] complexify(float[] realData){
         float[] ret = new float[realData.length * 2];
@@ -240,8 +251,6 @@ public class AudioFileManager {
     public void scale(double scale){
         for(int i = 0; i < leftData.length; i++){
             leftData[i] *= scale;
-        }
-        for(int i = 0; i < rightData.length; i++){
             rightData[i] *= scale;
         }
     }
@@ -293,7 +302,7 @@ public class AudioFileManager {
 
         for(int i = 0; i < toTransformLeft.length; i+=1){
             resLeft[i] = (float) toTransformLeft[i];
-            resLeft[i] = (float) toTransformRight[i];
+            resRight[i] = (float) toTransformRight[i];
         }
 
         leftData = resLeft;

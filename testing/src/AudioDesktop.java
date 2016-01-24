@@ -304,6 +304,7 @@ public class AudioDesktop extends JFrame{
 
     public void removeWindow(AudioWindow aw){
         audioWindows.remove(aw);
+        aw.dispose();
     }
 
     public void addWindow(AudioWindow aw){
@@ -312,7 +313,7 @@ public class AudioDesktop extends JFrame{
     }
 
     public void buildWindow(AudioFileManager fileManager){
-        AudioWindow newAW = new AudioWindow(fileManager.getName(), 200, 100, fileManager, desktop, audioWindows);
+        AudioWindow newAW = new AudioWindow(fileManager.getName(), 200, 100, fileManager, this);
         addWindow(newAW);
     }
 
