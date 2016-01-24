@@ -142,7 +142,7 @@ public class AudioFileManager {
     }
 
     //reads in the file
-    public byte[] readFile(File file){
+    public byte[] readFile(File file){ //ok so is this some hacked together solution that happens to work for .wav files?
         byte[] data = null;
         try {
             byte[] read = new byte[8];
