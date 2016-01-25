@@ -50,6 +50,7 @@ public class AudioWindow extends JInternalFrame{
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        this.setSize(480, 360);
         this.setVisible(true);
     }
 

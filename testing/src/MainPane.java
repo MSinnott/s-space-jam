@@ -2,17 +2,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.geom.Arc2D;
 
 public class MainPane extends JPanel implements KeyListener {
 
     private float[] leftNotes;
     private float[] rightNotes;
-    private int MinNote, MaxNote;
+    private float MinNote, MaxNote;
     private int lX, lY, nX, nY;
     private double zoom = 1;
     private int pan = 0;
-    int TopWindow = 0;
+    int windowHeight = 0;
 
     public MainPane(){
         super();
@@ -30,7 +29,7 @@ public class MainPane extends JPanel implements KeyListener {
 
         setMaxMinNotes();
 
-        TopWindow = this.getHeight();
+        windowHeight = this.getHeight();
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setBackground(AudioDesktop.accColor);
@@ -41,11 +40,11 @@ public class MainPane extends JPanel implements KeyListener {
         g2.setColor(AudioDesktop.llnColor);
         if(zoom >= 1) {
             lX = 0;
-            lY = getY((int) leftNotes[pan]);
+            lY = getYfromVal((int) leftNotes[pan]);
             for (int i = pan - pan % 2; i < leftNotes.length; i += 2) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
-                nY = getY(leftNotes[i]);
+                nY = getYfromVal(leftNotes[i]);
                 g2.drawLine(lX, lY, nX, nY);
                 lY = nY;
                 lX = nX;
@@ -54,8 +53,8 @@ public class MainPane extends JPanel implements KeyListener {
             int sampsPerPixel = (int) (1.0/zoom);
             lX = 0;
             for (int i = pan - pan % 2; i < leftNotes.length; i += 2 * sampsPerPixel){
-                lY = getY(findMin(leftNotes, i, i + 2*sampsPerPixel + 2));
-                nY = getY(findMax(leftNotes, i, i + 2*sampsPerPixel + 2));
+                lY = getYfromVal(findMin(leftNotes, i, i + 2*sampsPerPixel + 2));
+                nY = getYfromVal(findMax(leftNotes, i, i + 2*sampsPerPixel + 2));
                 g2.drawLine(lX, lY, lX, nY );
                 if( lX > this.getWidth() ) break;
                 lX += 1;
@@ -67,11 +66,11 @@ public class MainPane extends JPanel implements KeyListener {
         g2.setColor(AudioDesktop.rlnColor);
         if(zoom >= 1) {
             lX = 0;
-            lY = getY((int) rightNotes[pan]);
+            lY = getYfromVal((int) rightNotes[pan]);
             for (int i = pan - pan % 2; i < rightNotes.length; i += 2) {
                 nX = lX + (int) zoom;
                 if( nX > this.getWidth() ) break;
-                nY = getY(rightNotes[i]);
+                nY = getYfromVal(rightNotes[i]);
                 g2.drawLine(lX, lY, nX, nY);
                 lY = nY;
                 lX = nX;
@@ -80,8 +79,8 @@ public class MainPane extends JPanel implements KeyListener {
             int sampsPerPixel = (int) (1.0/zoom);
             lX = 0;
             for (int i = pan - pan % 2; i < rightNotes.length; i += 2 * sampsPerPixel){
-                lY = getY(findMin(rightNotes, i, i + 2*sampsPerPixel + 2));
-                nY = getY(findMax(rightNotes, i, i + 2*sampsPerPixel + 2));
+                lY = getYfromVal(findMin(rightNotes, i, i + 2*sampsPerPixel + 2));
+                nY = getYfromVal(findMax(rightNotes, i, i + 2*sampsPerPixel + 2));
                 g2.drawLine(lX, lY, lX, nY );
                 if( lX > this.getWidth() ) break;
                 lX += 1;
@@ -90,24 +89,30 @@ public class MainPane extends JPanel implements KeyListener {
 
         g2.setColor(AudioDesktop.bgColor);
         g2.setStroke(new BasicStroke(2));
-        lY = getY(0);
-        g2.drawLine(0, lY, this.getWidth(), lY);
-        g2.drawLine(0, 3*TopWindow/4, this.getWidth(), 3*TopWindow/4);
-        g2.drawLine(0, TopWindow/4, this.getWidth(), TopWindow/4);
-        g2.drawString("" + (MaxNote - MinNote) / 4, 16, 3*TopWindow/4 + 16);
-        g2.drawString("" + (MinNote - MaxNote) / 4, 16, TopWindow/4 + 16);
-        g2.drawString("" + 0, 16, TopWindow / 2 + 16);
+        g2.drawLine(0, getYfromVal(0), this.getWidth(), getYfromVal(0));
+        g2.drawString("" + 0, 16, getYfromVal(0) + 16);
+
+        int order = (int) Math.pow(10 , (int) (Math.log10(MaxNote - MinNote)));
+        int prefix = (int) ((MaxNote - MinNote) / order);
+        int numSteps = 5;
+        for(int i = 0; i < numSteps; i++){
+            float nextVal = MinNote + (MaxNote - MinNote) / (numSteps) * i;
+            int nextY = getYfromVal(nextVal);
+            if(Math.abs(nextY - getYfromVal(0)) > 50) {
+                g2.drawLine(0, (nextY), this.getWidth(), (nextY));
+                g2.drawString("" + (nextVal), 16, (nextY) + 16);
+            }
+        }
     }
+
+
 
     private int getNumPixelsOnscreen(){
         return (int) (2 * this.getWidth() / zoom);
     }
 
-    private int getY(float val){
-        if(val == 0) {
-            return TopWindow / 2;
-        }
-        return (int) (TopWindow - (TopWindow * (val - MinNote)) / (( MaxNote - MinNote )));
+    private int getYfromVal(float val){
+        return (int) (windowHeight - (windowHeight * (val - MinNote)) / (MaxNote - MinNote ));
     }
 
     public float findMax(float[] arr, int stIndex, int endIndex){
@@ -170,12 +175,12 @@ public class MainPane extends JPanel implements KeyListener {
         MaxNote = Integer.MIN_VALUE;
         MinNote = Integer.MAX_VALUE;
         if(leftNotes == null || rightNotes == null) return;
-        int lmin = (int) findMin(leftNotes, 0, leftNotes.length);
-        int lmax = (int) findMax(leftNotes, 0, leftNotes.length);
+        float lmin = findMin(leftNotes, 0, leftNotes.length);
+        float lmax =  findMax(leftNotes, 0, leftNotes.length);
         if(MinNote > lmin) MinNote = lmin;
         if(MaxNote < lmax) MaxNote = lmax;
-        int rmin = (int) findMin(rightNotes, 0, rightNotes.length);
-        int rmax = (int) findMax(rightNotes, 0, rightNotes.length);
+        float rmin = findMin(rightNotes, 0, rightNotes.length);
+        float rmax = findMax(rightNotes, 0, rightNotes.length);
         if(MinNote > rmin) MinNote = rmin;
         if(MaxNote < rmax) MaxNote = rmax;
     }

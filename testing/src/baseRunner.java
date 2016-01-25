@@ -20,8 +20,8 @@ public class baseRunner {
         float rightSide;
         float leftSide;
         for(int i = 0; i < numSamples; i+= 2){
-            leftSide = (float) (6000 * Math.sin(2 * Math.PI * i / freqLeft));
-            rightSide = (float) (6000 * Math.sin(2 * Math.PI * i / freqRight));
+            leftSide = 1000 + (float) (6000 * Math.sin(2 * Math.PI * i / freqLeft));
+            rightSide = 1000 +(float) (6000 * Math.sin(2 * Math.PI * i / freqRight));
             tone[i] = leftSide;
             tone[i+1] = rightSide;
         }

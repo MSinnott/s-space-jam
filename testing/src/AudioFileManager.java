@@ -271,9 +271,11 @@ public class AudioFileManager {
         float[] resLeft = new float[toTransformLeft.length];
         float[] resRight = new float[toTransformLeft.length];
 
+        double normalizer = 1 / Math.sqrt(toTransformLeft.length / 2);
+
         for(int i = 0; i < toTransformLeft.length; i+=1){
-            resLeft[i] = (float) toTransformLeft[i];
-            resRight[i] = (float) toTransformRight[i];
+            resLeft[i] = (float) (toTransformLeft[i] * normalizer);
+            resRight[i] = (float) (toTransformRight[i] * normalizer);
         }
 
         leftData = resLeft;
@@ -299,9 +301,11 @@ public class AudioFileManager {
         float[] resLeft = new float[toTransformLeft.length];
         float[] resRight = new float[toTransformLeft.length];
 
+        double normalizer = 1 / Math.sqrt(toTransformLeft.length / 2);
+
         for(int i = 0; i < toTransformLeft.length; i+=1){
-            resLeft[i] = (float) toTransformLeft[i];
-            resRight[i] = (float) toTransformRight[i];
+            resLeft[i] = (float) (toTransformLeft[i] * normalizer);
+            resRight[i] = (float) (toTransformRight[i] * normalizer);
         }
 
         leftData = resLeft;
