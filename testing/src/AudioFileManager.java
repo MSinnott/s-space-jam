@@ -3,14 +3,18 @@ import java.io.*;
 /*
     Class that handles audio I/O --reading, writing, etc
 
-    when writing to the audio file, its a byte array. otherwise, its a short array
+    when writing to the audio file, its a byte array. otherwise, its a float array
 
     when the audio file is transformed, this data changes as well
+
+    it handles data as two channels  - left & right
  */
+
 public class AudioFileManager {
 
     private ComplexDoubleFFT fft;
     private File audioFile  = null;
+    private String defaultName = "";
 
     //both complex
     private float[] leftData;
@@ -19,11 +23,14 @@ public class AudioFileManager {
     private static final int DEFAULTSAMPLERATE = 44100;
     private static final String WAVHEADER = "RIFF____WAVEfmt ____________________data";
 
+    private String filePath = null;
+
     public AudioFileManager(String filepath){
         audioFile = new File(filepath);
         float[] data = byteArrToFloatArr(readFile(audioFile));
         leftData = complexify(getLeftChannel(data));
         rightData = complexify(getRightChannel(data));
+        this.filePath = filepath;
     }
 
     public AudioFileManager(File audioFileIn){
@@ -31,6 +38,7 @@ public class AudioFileManager {
         float[] data = byteArrToFloatArr(readFile(audioFile));
         leftData = complexify(getLeftChannel(data));
         rightData = complexify(getRightChannel(data));
+        filePath = audioFileIn.getAbsolutePath();
     }
 
     public AudioFileManager(float[] samplesIn){
@@ -142,13 +150,21 @@ public class AudioFileManager {
         return ret;
     }
 
+    public String getPath(){
+        return filePath;
+    }
+
     //returns file name
     public String getName(){
         if (audioFile != null) {
             return audioFile.getName();
         } else {
-            return "";
+            return defaultName;
         }
+    }
+
+    public void setDefaultName(String name){
+        defaultName = name;
     }
 
     //reads in the file
@@ -184,6 +200,8 @@ public class AudioFileManager {
 
     //writes the file
     public void buildFile(String filepath) throws IOException {
+        if(!filepath.contains(".wav")) filepath += ".wav";
+        this.filePath = filepath;
         byte[] samples = new byte[0];
         try {
             samples = floatArrToByteArr(mergeData(decomplexify(leftData), decomplexify(rightData)));
@@ -255,16 +273,20 @@ public class AudioFileManager {
     }
 
     public void ftransform(){
-        fft =  new ComplexDoubleFFT(leftData.length / 2);
-
-        double[] toTransformLeft = new double[leftData.length];
-        double[] toTransformRight = new double[rightData.length];
-
-        for(int i = 0; i< toTransformLeft.length; i+=1){
-            toTransformLeft[i] = (double) leftData[i];
-            toTransformRight[i] = (double) rightData[i];
+        double powOfTwo = 1;
+        while (leftData.length / powOfTwo > 1) {
+            powOfTwo*=2;
         }
 
+        double[] toTransformLeft = new double[(int) powOfTwo];
+        double[] toTransformRight = new double[(int) powOfTwo];
+
+        for(int i = 0; i < powOfTwo; i ++){
+            if(i < leftData.length) toTransformLeft[i] = leftData[i]; else toTransformLeft[i] = 0;
+            if(i < rightData.length) toTransformRight[i] = rightData[i]; else toTransformRight[i] = 0;
+        }
+
+        fft =  new ComplexDoubleFFT(toTransformRight.length / 2);
         fft.ft(toTransformLeft);
         fft.ft(toTransformRight);
 
@@ -285,16 +307,20 @@ public class AudioFileManager {
 
     public void btransform(){
 
-        fft =  new ComplexDoubleFFT(leftData.length / 2);
-
-        double[] toTransformLeft = new double[leftData.length];
-        double[] toTransformRight = new double[rightData.length];
-
-        for(int i = 0; i< toTransformLeft.length; i+=1){
-            toTransformLeft[i] = (double) leftData[i];
-            toTransformRight[i] = (double) rightData[i];
+        double powOfTwo = 1;
+        while (leftData.length / powOfTwo > 1) {
+            powOfTwo*=2;
         }
 
+        double[] toTransformLeft = new double[(int) powOfTwo];
+        double[] toTransformRight = new double[(int) powOfTwo];
+
+        for(int i = 0; i < powOfTwo; i ++){
+            if(i < leftData.length) toTransformLeft[i] = leftData[i]; else toTransformLeft[i] = 0;
+            if(i < rightData.length) toTransformRight[i] = rightData[i]; else toTransformRight[i] = 0;
+        }
+
+        fft =  new ComplexDoubleFFT(toTransformRight.length / 2);
         fft.bt(toTransformLeft);
         fft.bt(toTransformRight);
 

@@ -313,11 +313,12 @@ public class AudioDesktop extends JFrame{
     }
 
     public void buildWindow(AudioFileManager fileManager){
-        AudioWindow newAW = new AudioWindow(fileManager.getName(), 200, 100, fileManager, this);
+        AudioWindow newAW = new AudioWindow(200, 100, fileManager, this);
         addWindow(newAW);
     }
 
     public class OpenFile extends AbstractAction {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
@@ -333,6 +334,5 @@ public class AudioDesktop extends JFrame{
             }
         }
     }
-
 
 }

@@ -105,8 +105,6 @@ public class MainPane extends JPanel implements KeyListener {
         }
     }
 
-
-
     private int getNumPixelsOnscreen(){
         return (int) (2 * this.getWidth() / zoom);
     }

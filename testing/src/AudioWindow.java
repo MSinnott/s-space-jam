@@ -1,30 +1,31 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class AudioWindow extends JInternalFrame{
 
     private MainPane pane;
     private AudioFileManager audioFile;
     private AudioDesktop audioDesktop;
+    private AudioWindow audioWindow = this;
 
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem cloneButton;
+    private JMenuItem saveButton;
+    private JMenuItem saveAsButton;
     private JMenuItem exitButton;
     private JMenu opMenu;
     private JMenuItem ftransformButton;
     private JMenuItem btransformButton;
     private JMenuItem scaleButton;
 
-    private String windowName;
+    private boolean saved = false;
+    private String savePath = null;
 
-    public AudioWindow(String name, int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
-        super(name);
-
-        windowName = name;
+    public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
+        super(fileManager.getName());
 
         audioDesktop = aDesk;
 
@@ -33,9 +34,10 @@ public class AudioWindow extends JInternalFrame{
 
         this.setLayout(new BorderLayout());
 
-
         pane = new MainPane();
         loadFile(fileManager);
+        savePath = fileManager.getPath();
+        if(savePath != null) saved = true;
 
         Container c = this.getContentPane();
         c.setLayout(new BorderLayout());
@@ -54,10 +56,6 @@ public class AudioWindow extends JInternalFrame{
         this.setVisible(true);
     }
 
-    public String getWindowName(){
-        return windowName;
-    }
-
     public void loadFile(AudioFileManager fileManager){
         audioFile = fileManager;
         updatePane();
@@ -74,6 +72,14 @@ public class AudioWindow extends JInternalFrame{
         cloneButton = new JMenuItem("Clone");
         fileMenu.add(cloneButton);
         cloneButton.addActionListener(new CloneAction(this));
+
+        saveButton = new JMenuItem("Save");
+        fileMenu.add(saveButton);
+        saveButton.addActionListener(new SaveAction("Save"));
+
+        saveAsButton = new JMenuItem("Save As ...");
+        fileMenu.add(saveAsButton);
+        saveAsButton.addActionListener(new SaveAction("SaveAs"));
 
         exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
@@ -102,6 +108,10 @@ public class AudioWindow extends JInternalFrame{
         menuBar.setForeground(AudioDesktop.txtColor);
         fileMenu.setBackground(AudioDesktop.bgColor);
         fileMenu.setForeground(AudioDesktop.txtColor);
+        saveButton.setBackground(AudioDesktop.bgColor);
+        saveButton.setForeground(AudioDesktop.txtColor);
+        saveAsButton.setBackground(AudioDesktop.bgColor);
+        saveAsButton.setForeground(AudioDesktop.txtColor);
         cloneButton.setBackground(AudioDesktop.bgColor);
         cloneButton.setForeground(AudioDesktop.txtColor);
         exitButton.setBackground(AudioDesktop.bgColor);
@@ -128,8 +138,37 @@ public class AudioWindow extends JInternalFrame{
         pane.setZoom(zoom);
     }
 
-    public void removeFromDesktop(){
-        audioDesktop.removeWindow(this);
+    //Saves the file
+    public class SaveAction extends AbstractAction{
+        private String type;
+
+        public SaveAction(String type){
+            this.type = type;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!saved || "SaveAs".equals(type)){
+                JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showSaveDialog(audioWindow) == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        savePath = fileChooser.getSelectedFile().getAbsolutePath();
+                        audioFile.buildFile(savePath);
+                        saved = true;
+                        String name = audioFile.getName();
+                        audioWindow.setTitle(name);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            } else {
+                try {
+                    audioFile.buildFile(savePath);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
     }
 
     //Creates + adds a clone of this object to the desktop
@@ -141,7 +180,8 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             AudioFileManager newAudioFile = new AudioFileManager(audioFile);
-            AudioWindow clone = new AudioWindow(audioWindow.getWindowName(), audioWindow.getWidth(), audioWindow.getHeight(), newAudioFile, audioDesktop);
+            newAudioFile.setDefaultName("Clone of - " + audioFile.getName());
+            AudioWindow clone = new AudioWindow(audioWindow.getWidth(), audioWindow.getHeight(), newAudioFile, audioDesktop);
             audioDesktop.addWindow(clone);
             clone.moveToFront();
             clone.setLocation(audioWindow.getX() + 32, audioWindow.getY() + 32);
