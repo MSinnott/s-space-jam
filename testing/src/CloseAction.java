@@ -25,8 +25,8 @@ public class CloseAction extends AbstractAction {
         closeDialog.setLayout(new BorderLayout());
 
         final JButton closeButton = new JButton("Exit?");
-        closeButton.setBackground(AudioDesktop.bgColor);
-        closeButton.setForeground(AudioDesktop.txtColor);
+        closeButton.setBackground(AudioDesktop.theme[0]);
+        closeButton.setForeground(AudioDesktop.theme[5]);
         closeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -36,8 +36,8 @@ public class CloseAction extends AbstractAction {
         });
 
         final JButton cancelButton = new JButton("Cancel!");
-        cancelButton.setBackground(AudioDesktop.bgColor);
-        cancelButton.setForeground(AudioDesktop.txtColor);
+        cancelButton.setBackground(AudioDesktop.theme[0]);
+        cancelButton.setForeground(AudioDesktop.theme[5]);
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

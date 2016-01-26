@@ -104,28 +104,28 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public void resetColors(){
-        menuBar.setBackground(AudioDesktop.bgColor);
-        menuBar.setForeground(AudioDesktop.txtColor);
-        fileMenu.setBackground(AudioDesktop.bgColor);
-        fileMenu.setForeground(AudioDesktop.txtColor);
-        saveButton.setBackground(AudioDesktop.bgColor);
-        saveButton.setForeground(AudioDesktop.txtColor);
-        saveAsButton.setBackground(AudioDesktop.bgColor);
-        saveAsButton.setForeground(AudioDesktop.txtColor);
-        cloneButton.setBackground(AudioDesktop.bgColor);
-        cloneButton.setForeground(AudioDesktop.txtColor);
-        exitButton.setBackground(AudioDesktop.bgColor);
-        exitButton.setForeground(AudioDesktop.txtColor);
-        opMenu.setBackground(AudioDesktop.bgColor);
-        opMenu.setForeground(AudioDesktop.txtColor);
-        ftransformButton.setBackground(AudioDesktop.bgColor);
-        ftransformButton.setForeground(AudioDesktop.txtColor);
-        btransformButton.setBackground(AudioDesktop.bgColor);
-        btransformButton.setForeground(AudioDesktop.txtColor);
-        scaleButton.setBackground(AudioDesktop.bgColor);
-        scaleButton.setForeground(AudioDesktop.txtColor);
-        this.setBackground(AudioDesktop.accColor);
-        this.setForeground(AudioDesktop.txtColor);
+        menuBar.setBackground(AudioDesktop.theme[0]);
+        menuBar.setForeground(AudioDesktop.theme[5]);
+        fileMenu.setBackground(AudioDesktop.theme[0]);
+        fileMenu.setForeground(AudioDesktop.theme[5]);
+        saveButton.setBackground(AudioDesktop.theme[0]);
+        saveButton.setForeground(AudioDesktop.theme[5]);
+        saveAsButton.setBackground(AudioDesktop.theme[0]);
+        saveAsButton.setForeground(AudioDesktop.theme[5]);
+        cloneButton.setBackground(AudioDesktop.theme[0]);
+        cloneButton.setForeground(AudioDesktop.theme[5]);
+        exitButton.setBackground(AudioDesktop.theme[0]);
+        exitButton.setForeground(AudioDesktop.theme[5]);
+        opMenu.setBackground(AudioDesktop.theme[0]);
+        opMenu.setForeground(AudioDesktop.theme[5]);
+        ftransformButton.setBackground(AudioDesktop.theme[0]);
+        ftransformButton.setForeground(AudioDesktop.theme[5]);
+        btransformButton.setBackground(AudioDesktop.theme[0]);
+        btransformButton.setForeground(AudioDesktop.theme[5]);
+        scaleButton.setBackground(AudioDesktop.theme[0]);
+        scaleButton.setForeground(AudioDesktop.theme[5]);
+        this.setBackground(AudioDesktop.theme[2]);
+        this.setForeground(AudioDesktop.theme[5]);
 
         this.invalidate();
         this.repaint();
@@ -208,12 +208,12 @@ public class AudioWindow extends JInternalFrame{
             numberDialog.add(panel, BorderLayout.SOUTH);
 
             JButton goButton = new JButton("Apply!");
-            goButton.setBackground(AudioDesktop.bgColor);
-            goButton.setForeground(AudioDesktop.txtColor);
+            goButton.setBackground(AudioDesktop.theme[0]);
+            goButton.setForeground(AudioDesktop.theme[5]);
 
             JButton cancelButton = new JButton("Cancel!");
-            cancelButton.setBackground(AudioDesktop.bgColor);
-            cancelButton.setForeground(AudioDesktop.txtColor);
+            cancelButton.setBackground(AudioDesktop.theme[0]);
+            cancelButton.setForeground(AudioDesktop.theme[5]);
 
             panel.add(goButton, BorderLayout.WEST);
             panel.add(cancelButton, BorderLayout.EAST);

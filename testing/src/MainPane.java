@@ -32,12 +32,12 @@ public class MainPane extends JPanel implements KeyListener {
         windowHeight = this.getHeight();
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setBackground(AudioDesktop.accColor);
-        g2.setColor(AudioDesktop.accColor);
+        g2.setBackground(AudioDesktop.theme[2]);
+        g2.setColor(AudioDesktop.theme[2]);
         g2.fillRect(0 , 0 , this.getWidth(), this.getHeight());
 
         g2.setStroke(new BasicStroke(4));
-        g2.setColor(AudioDesktop.llnColor);
+        g2.setColor(AudioDesktop.theme[3]);
         if(zoom >= 1) {
             lX = 0;
             lY = getYfromVal((int) leftNotes[pan]);
@@ -63,7 +63,7 @@ public class MainPane extends JPanel implements KeyListener {
 
         if( rightNotes == null ) return;
         if( rightNotes.length < 2 ) return;
-        g2.setColor(AudioDesktop.rlnColor);
+        g2.setColor(AudioDesktop.theme[4]);
         if(zoom >= 1) {
             lX = 0;
             lY = getYfromVal((int) rightNotes[pan]);
@@ -87,7 +87,7 @@ public class MainPane extends JPanel implements KeyListener {
             }
         }
 
-        g2.setColor(AudioDesktop.bgColor);
+        g2.setColor(AudioDesktop.theme[0]);
         g2.setStroke(new BasicStroke(2));
         g2.drawLine(0, getYfromVal(0), this.getWidth(), getYfromVal(0));
         g2.drawString("" + 0, 16, getYfromVal(0) + 16);
