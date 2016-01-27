@@ -9,9 +9,6 @@ public class baseRunner {
         AudioFileManager oneTone = new AudioFileManager(getStereoTone(20000, 500, 8*44100));
         oneTone.buildFile("testing/music/singleTone.wav");
         mainWindow.buildWindow(oneTone);
-
-        AudioFileManager twoTone = new AudioFileManager("testing/music/singleTone.wav");
-        mainWindow.buildWindow(twoTone);
     }
 
     //just for testing

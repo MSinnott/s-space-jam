@@ -1,30 +1,31 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.io.IOException;
 
 public class AudioWindow extends JInternalFrame{
 
     private MainPane pane;
     private AudioFileManager audioFile;
     private AudioDesktop audioDesktop;
+    private AudioWindow audioWindow = this;
 
     private JMenuBar menuBar;
     private JMenu fileMenu;
     private JMenuItem cloneButton;
+    private JMenuItem saveButton;
+    private JMenuItem saveAsButton;
     private JMenuItem exitButton;
     private JMenu opMenu;
     private JMenuItem ftransformButton;
     private JMenuItem btransformButton;
     private JMenuItem scaleButton;
 
-    private String windowName;
+    private boolean saved = false;
+    private String savePath = null;
 
-    public AudioWindow(String name, int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
-        super(name);
-
-        windowName = name;
+    public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
+        super(fileManager.getName());
 
         audioDesktop = aDesk;
 
@@ -33,9 +34,10 @@ public class AudioWindow extends JInternalFrame{
 
         this.setLayout(new BorderLayout());
 
-
         pane = new MainPane();
         loadFile(fileManager);
+        savePath = fileManager.getPath();
+        if(savePath != null) saved = true;
 
         Container c = this.getContentPane();
         c.setLayout(new BorderLayout());
@@ -50,11 +52,8 @@ public class AudioWindow extends JInternalFrame{
         setIconifiable(true);
         setMaximizable(true);
         setResizable(true);
+        this.setSize(480, 360);
         this.setVisible(true);
-    }
-
-    public String getWindowName(){
-        return windowName;
     }
 
     public void loadFile(AudioFileManager fileManager){
@@ -74,9 +73,29 @@ public class AudioWindow extends JInternalFrame{
         fileMenu.add(cloneButton);
         cloneButton.addActionListener(new CloneAction(this));
 
+        saveButton = new JMenuItem("Save");
+        fileMenu.add(saveButton);
+        saveButton.addActionListener(new SaveAction("Save"));
+
+        saveAsButton = new JMenuItem("Save As ...");
+        fileMenu.add(saveAsButton);
+        saveAsButton.addActionListener(new SaveAction("SaveAs"));
+
         exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
-        exitButton.addActionListener(new CloseAction(this, audioDesktop));
+        exitButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AdaptiveDialog exitDialog = new AdaptiveDialog("Exit?");
+                exitDialog.addDoneBinding(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dispose();
+                    }
+                });
+                exitDialog.buildDialog(audioWindow);
+            }
+        });
 
         opMenu = new JMenu("Operations");
         menuBar.add(opMenu);
@@ -97,24 +116,28 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public void resetColors(){
-        menuBar.setBackground(AudioDesktop.bgColor);
-        menuBar.setForeground(AudioDesktop.txtColor);
-        fileMenu.setBackground(AudioDesktop.bgColor);
-        fileMenu.setForeground(AudioDesktop.txtColor);
-        cloneButton.setBackground(AudioDesktop.bgColor);
-        cloneButton.setForeground(AudioDesktop.txtColor);
-        exitButton.setBackground(AudioDesktop.bgColor);
-        exitButton.setForeground(AudioDesktop.txtColor);
-        opMenu.setBackground(AudioDesktop.bgColor);
-        opMenu.setForeground(AudioDesktop.txtColor);
-        ftransformButton.setBackground(AudioDesktop.bgColor);
-        ftransformButton.setForeground(AudioDesktop.txtColor);
-        btransformButton.setBackground(AudioDesktop.bgColor);
-        btransformButton.setForeground(AudioDesktop.txtColor);
-        scaleButton.setBackground(AudioDesktop.bgColor);
-        scaleButton.setForeground(AudioDesktop.txtColor);
-        this.setBackground(AudioDesktop.accColor);
-        this.setForeground(AudioDesktop.txtColor);
+        menuBar.setBackground(AudioDesktop.theme[0]);
+        menuBar.setForeground(AudioDesktop.theme[5]);
+        fileMenu.setBackground(AudioDesktop.theme[0]);
+        fileMenu.setForeground(AudioDesktop.theme[5]);
+        saveButton.setBackground(AudioDesktop.theme[0]);
+        saveButton.setForeground(AudioDesktop.theme[5]);
+        saveAsButton.setBackground(AudioDesktop.theme[0]);
+        saveAsButton.setForeground(AudioDesktop.theme[5]);
+        cloneButton.setBackground(AudioDesktop.theme[0]);
+        cloneButton.setForeground(AudioDesktop.theme[5]);
+        exitButton.setBackground(AudioDesktop.theme[0]);
+        exitButton.setForeground(AudioDesktop.theme[5]);
+        opMenu.setBackground(AudioDesktop.theme[0]);
+        opMenu.setForeground(AudioDesktop.theme[5]);
+        ftransformButton.setBackground(AudioDesktop.theme[0]);
+        ftransformButton.setForeground(AudioDesktop.theme[5]);
+        btransformButton.setBackground(AudioDesktop.theme[0]);
+        btransformButton.setForeground(AudioDesktop.theme[5]);
+        scaleButton.setBackground(AudioDesktop.theme[0]);
+        scaleButton.setForeground(AudioDesktop.theme[5]);
+        this.setBackground(AudioDesktop.theme[2]);
+        this.setForeground(AudioDesktop.theme[5]);
 
         this.invalidate();
         this.repaint();
@@ -127,8 +150,37 @@ public class AudioWindow extends JInternalFrame{
         pane.setZoom(zoom);
     }
 
-    public void removeFromDesktop(){
-        audioDesktop.removeWindow(this);
+    //Saves the file
+    public class SaveAction extends AbstractAction{
+        private String type;
+
+        public SaveAction(String type){
+            this.type = type;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(!saved || "SaveAs".equals(type)){
+                JFileChooser fileChooser = new JFileChooser();
+                if (fileChooser.showSaveDialog(audioWindow) == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        savePath = fileChooser.getSelectedFile().getAbsolutePath();
+                        audioFile.buildFile(savePath);
+                        saved = true;
+                        String name = audioFile.getName();
+                        audioWindow.setTitle(name);
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+            } else {
+                try {
+                    audioFile.buildFile(savePath);
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
     }
 
     //Creates + adds a clone of this object to the desktop
@@ -140,7 +192,8 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             AudioFileManager newAudioFile = new AudioFileManager(audioFile);
-            AudioWindow clone = new AudioWindow(audioWindow.getWindowName(), audioWindow.getWidth(), audioWindow.getHeight(), newAudioFile, audioDesktop);
+            newAudioFile.setDefaultName("Clone of - " + audioFile.getName());
+            AudioWindow clone = new AudioWindow(audioWindow.getWidth(), audioWindow.getHeight(), newAudioFile, audioDesktop);
             audioDesktop.addWindow(clone);
             clone.moveToFront();
             clone.setLocation(audioWindow.getX() + 32, audioWindow.getY() + 32);
@@ -151,36 +204,17 @@ public class AudioWindow extends JInternalFrame{
     public class scaleAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            final JDialog numberDialog = new JDialog();
-            numberDialog.setTitle("Scale By:");
-            numberDialog.setLayout(new BorderLayout());
-            numberDialog.setLocation(480, 480);
-            numberDialog.setSize(200, 64);
-            numberDialog.setResizable(false);
-            final JTextField numField = new JTextField();
-            numberDialog.add(numField, BorderLayout.CENTER);
-            final double[] scale = {1};
-            numField.addKeyListener(new KeyListener() {
+            final AdaptiveDialog scaleDialog = new AdaptiveDialog("Scale Action");
+            final JTextField textField = new JTextField();
+            scaleDialog.addItem(textField, 0, 5, false);
+            scaleDialog.addDoneBinding(new AbstractAction() {
                 @Override
-                public void keyTyped(KeyEvent e) {
-                }
-
-                @Override
-                public void keyReleased(KeyEvent e) {
-                }
-
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if(e.getKeyCode() == 10 && Double.valueOf(numField.getText()) != Double.NaN){
-                        scale[0] = Double.valueOf(numField.getText());
-                        audioFile.scale(scale[0]);
-                        updatePane();
-                        numberDialog.dispose();
-                    }
-
+                public void actionPerformed(ActionEvent e) {
+                    audioFile.scale(Double.valueOf(textField.getText()));
+                    updatePane();
                 }
             });
-            numberDialog.setVisible(true);
+            scaleDialog.buildDialog(audioWindow);
         }
     }
 
