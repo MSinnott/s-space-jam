@@ -23,6 +23,7 @@ public class MainPane extends JPanel implements KeyListener {
     public void paintComponent(Graphics g){
         if( leftNotes == null || rightNotes == null) return;
         if( leftNotes.length < 2 || rightNotes.length < 2) return;
+
         if(pan < 0) pan = 0;
         if(pan + getNumPixelsOnscreen() > leftNotes.length) pan = leftNotes.length - getNumPixelsOnscreen();
         if(getNumPixelsOnscreen() > leftNotes.length) pan = 0;
@@ -61,8 +62,6 @@ public class MainPane extends JPanel implements KeyListener {
             }
         }
 
-        if( rightNotes == null ) return;
-        if( rightNotes.length < 2 ) return;
         g2.setColor(AudioDesktop.theme[4]);
         if(zoom >= 1) {
             lX = 0;
@@ -92,8 +91,6 @@ public class MainPane extends JPanel implements KeyListener {
         g2.drawLine(0, getYfromVal(0), this.getWidth(), getYfromVal(0));
         g2.drawString("" + 0, 16, getYfromVal(0) + 16);
 
-        int order = (int) Math.pow(10 , (int) (Math.log10(MaxNote - MinNote)));
-        int prefix = (int) ((MaxNote - MinNote) / order);
         int numSteps = 5;
         for(int i = 0; i < numSteps; i++){
             float nextVal = MinNote + (MaxNote - MinNote) / (numSteps) * i;

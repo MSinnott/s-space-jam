@@ -83,7 +83,19 @@ public class AudioWindow extends JInternalFrame{
 
         exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
-        exitButton.addActionListener(new CloseAction(this, audioDesktop));
+        exitButton.addActionListener(new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                AdaptiveDialog exitDialog = new AdaptiveDialog("Exit?");
+                exitDialog.addDoneBinding(new AbstractAction() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        dispose();
+                    }
+                });
+                exitDialog.buildDialog(audioWindow);
+            }
+        });
 
         opMenu = new JMenu("Operations");
         menuBar.add(opMenu);
@@ -192,52 +204,17 @@ public class AudioWindow extends JInternalFrame{
     public class scaleAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            final JDialog numberDialog = new JDialog();
-            numberDialog.setTitle("Scale By:");
-            numberDialog.setLayout(new BorderLayout());
-            numberDialog.setLocation(480, 480);
-            numberDialog.setSize(200, 90);
-            numberDialog.setResizable(false);
-            final JTextField numField = new JTextField();
-            numberDialog.add(numField, BorderLayout.CENTER);
-            final double[] scale = {1};
-
-            BorderLayout buttonLayout = new BorderLayout();
-            JPanel panel = new JPanel();
-            panel.setLayout(buttonLayout);
-            numberDialog.add(panel, BorderLayout.SOUTH);
-
-            JButton goButton = new JButton("Apply!");
-            goButton.setBackground(AudioDesktop.theme[0]);
-            goButton.setForeground(AudioDesktop.theme[5]);
-
-            JButton cancelButton = new JButton("Cancel!");
-            cancelButton.setBackground(AudioDesktop.theme[0]);
-            cancelButton.setForeground(AudioDesktop.theme[5]);
-
-            panel.add(goButton, BorderLayout.WEST);
-            panel.add(cancelButton, BorderLayout.EAST);
-
-            goButton.addActionListener(new AbstractAction() {
+            final AdaptiveDialog scaleDialog = new AdaptiveDialog("Scale Action");
+            final JTextField textField = new JTextField();
+            scaleDialog.addItem(textField, 0, 5, false);
+            scaleDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    if(Double.valueOf(numField.getText()) != Double.NaN){
-                        scale[0] = Double.valueOf(numField.getText());
-                        audioFile.scale(scale[0]);
-                        updatePane();
-                        numberDialog.dispose();
-                    }
-
+                    audioFile.scale(Double.valueOf(textField.getText()));
+                    updatePane();
                 }
             });
-
-            cancelButton.addActionListener(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    numberDialog.dispose();
-                }
-            });
-            numberDialog.setVisible(true);
+            scaleDialog.buildDialog(audioWindow);
         }
     }
 

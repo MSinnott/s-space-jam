@@ -41,12 +41,12 @@ public class AdaptiveDialog extends JDialog {
         numArrays++;
     }
 
-    public void buildDialog(int width, int height){
-        buildDialog();
+    public void buildDialog(int width, int height, Component parent){
+        buildDialog(parent);
         setSize(width, height);
     }
 
-    public void buildDialog(){
+    public void buildDialog(Component parent){
         JPanel contentPane = new JPanel();
         contentPane.setLayout(new GridLayout(numArrays, 1, 0, 1));
         setLayout(new BorderLayout());
@@ -89,6 +89,7 @@ public class AdaptiveDialog extends JDialog {
         nextPane.add(cancelButton);
 
         pack();
+        setLocation(parent.getX() + 64, parent.getY() + 64);
         setVisible(true);
     }
 
@@ -109,4 +110,5 @@ public class AdaptiveDialog extends JDialog {
     public void addDoneBinding(AbstractAction action){
         doneButton.addActionListener(action);
     }
+
 }

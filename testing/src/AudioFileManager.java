@@ -52,6 +52,15 @@ public class AudioFileManager {
         leftData = complexify(leftData);
     }
 
+    public AudioFileManager(float[] leftSamples, float[] rightSamples){
+        leftData = new float[leftSamples.length];
+        rightData = new float[rightSamples.length];
+        System.arraycopy(leftSamples, 0, leftData, 0, leftSamples.length);
+        System.arraycopy(rightSamples, 0, rightData, 0, rightSamples.length);
+        rightData = complexify(rightData);
+        leftData = complexify(leftData);
+    }
+
     public AudioFileManager(AudioFileManager fileManager){
         float[] leftIn = fileManager.getLeftChannel();
         float[] rightIn = fileManager.getRightChannel();
