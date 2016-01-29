@@ -24,7 +24,7 @@ public class AudioFileManager {
     private static final String WAVHEADER = "RIFF____WAVEfmt ____________________data";
 
     private String filePath = null;
-
+    //5 constructors that override each other
     public AudioFileManager(String filepath){
         audioFile = new File(filepath);
         float[] data = byteArrToFloatArr(readFile(audioFile));
@@ -33,7 +33,7 @@ public class AudioFileManager {
         this.filePath = filepath;
     }
 
-    public AudioFileManager(File audioFileIn){
+    public AudioFileManager(File audioFileIn){ //the one that I want -A
         audioFile = audioFileIn;
         float[] data = byteArrToFloatArr(readFile(audioFile));
         leftData = complexify(getLeftChannel(data));
@@ -52,15 +52,6 @@ public class AudioFileManager {
         leftData = complexify(leftData);
     }
 
-    public AudioFileManager(float[] leftSamples, float[] rightSamples){
-        leftData = new float[leftSamples.length];
-        rightData = new float[rightSamples.length];
-        System.arraycopy(leftSamples, 0, leftData, 0, leftSamples.length);
-        System.arraycopy(rightSamples, 0, rightData, 0, rightSamples.length);
-        rightData = complexify(rightData);
-        leftData = complexify(leftData);
-    }
-
     public AudioFileManager(AudioFileManager fileManager){
         float[] leftIn = fileManager.getLeftChannel();
         float[] rightIn = fileManager.getRightChannel();
@@ -70,6 +61,15 @@ public class AudioFileManager {
             leftData[i] = leftIn[i];
             rightData[i] = rightIn[i];
         }
+    }
+
+    public AudioFileManager(float[] leftSamples, float[] rightSamples){
+        leftData = new float[leftSamples.length];
+        rightData = new float[rightSamples.length];
+        System.arraycopy(leftSamples, 0, leftData, 0, leftSamples.length);
+        System.arraycopy(rightSamples, 0, rightData, 0, rightSamples.length);
+        rightData = complexify(rightData);
+        leftData = complexify(leftData);
     }
 
     //adds imaginary components
