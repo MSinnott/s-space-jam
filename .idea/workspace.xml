@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="933177a3-c705-41de-881d-4941e94a1377" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/resc/properties.txt" afterPath="$PROJECT_DIR$/testing/resc/properties.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" afterPath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
     </list>
     <ignored path="sSpaceJam.iws" />
@@ -104,15 +103,17 @@
       <file leaf-file-name="AdaptiveTextField.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.8062756">
-              <caret line="154" column="28" selection-start-line="154" selection-start-column="28" selection-end-line="154" selection-end-column="28" />
+            <state vertical-scroll-proportion="0.2946794">
+              <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#183#191#0" expanded="true" />
                 <element signature="e#454#455#0" expanded="true" />
                 <element signature="e#481#482#0" expanded="true" />
                 <element signature="e#906#914#0" expanded="true" />
-                <element signature="e#4960#4968#0" expanded="true" />
+                <element signature="e#4987#4995#0" expanded="true" />
+                <element signature="e#6405#6406#0" expanded="true" />
+                <element signature="e#6451#6452#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1467,15 +1468,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.8062756">
-          <caret line="154" column="28" selection-start-line="154" selection-start-column="28" selection-end-line="154" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.2946794">
+          <caret line="133" column="36" selection-start-line="133" selection-start-column="36" selection-end-line="133" selection-end-column="36" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#183#191#0" expanded="true" />
             <element signature="e#454#455#0" expanded="true" />
             <element signature="e#481#482#0" expanded="true" />
             <element signature="e#906#914#0" expanded="true" />
-            <element signature="e#4960#4968#0" expanded="true" />
+            <element signature="e#4987#4995#0" expanded="true" />
+            <element signature="e#6405#6406#0" expanded="true" />
+            <element signature="e#6451#6452#0" expanded="true" />
           </folding>
         </state>
       </provider>

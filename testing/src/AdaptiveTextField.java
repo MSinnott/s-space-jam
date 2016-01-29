@@ -5,8 +5,8 @@ import java.util.ArrayList;
 public class AdaptiveTextField extends JTextField{
 
     private ArrayList<String> tokens = new ArrayList<String>();
-    private String[] numbers = new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."};
-    private String[] possibleTokens = new String[]{"+", "-", "*", "/", "^", "(", ")", "sin(", "cos(", "tan(", "t" };
+    private String[] numbers = new String[]{"-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."};
+    private String[] possibleTokens = new String[]{"+", "*", "/", "^", "(", ")", "sin(", "cos(", "tan(", "t" };
 
     public AdaptiveTextField(String text){
         super(text);
@@ -45,7 +45,6 @@ public class AdaptiveTextField extends JTextField{
                 localTokens.remove(i);
 
                 localTokens.add(i, String.valueOf(Math.sin(firstArg)));
-                System.out.println("fArg = " + firstArg + " yields sin(fArg) = " + Math.sin(firstArg));
             } else if (localTokens.get(i).equals("cos(")) {
 
                 float firstArg = Float.parseFloat(localTokens.get(i+1));
@@ -128,6 +127,13 @@ public class AdaptiveTextField extends JTextField{
         return Float.valueOf(localTokens.get(0));
     }
 
+    /*
+        Test cases:
+        -1*(-3+-5)-7    pass
+        4*sin(-3-5)     pass
+        --add more test cases here--
+     */
+
     //this is actually a pretty dece parser --m
     private ArrayList<String> parse(String text){
         ArrayList<String> parsedTokens = new ArrayList<String>();
@@ -135,8 +141,16 @@ public class AdaptiveTextField extends JTextField{
         int loc = 0;
         while (loc < text.length()){
             String num = "";
-            while(text.length() > loc && contains(numbers, text.substring(loc, loc+1))){
-                num  = num.concat(text.substring(loc, loc+1));
+            while(text.length() > loc && contains(numbers, text.substring(loc, loc+1))) {
+                if(text.substring(loc, loc+1).equals("-")){
+                    if (!contains(numbers, text.substring(loc+1, loc+2))) break;
+                    if (loc > 0 && ( text.substring(loc-1, loc).equals(")") || contains(numbers, text.substring(loc-1, loc)))) {
+                        if(num.length() > 0) parsedTokens.add(num);
+                        parsedTokens.add("+");
+                        num = "";
+                    }
+                }
+                num = num.concat(text.substring(loc, loc + 1));
                 loc++;
             }
             if (num.length() > 0){
@@ -155,12 +169,15 @@ public class AdaptiveTextField extends JTextField{
         return parsedTokens;
     }
 
-    //yeah. so I can do .contains. WHAT NOW? --m
-    private boolean contains(String[] arr, String str){
-        for(String s: arr){
-            if(str.equals(s)) return true;
+    private int indexOf(String[] arr, String str){
+        for(int i = 0; i < arr.length; i++){
+            if(str.equals(arr[i])) return i;
         }
-        return false;
+        return -1;
+    }
+
+    private boolean contains(String[] arr, String str){
+        return indexOf(arr, str) != -1;
     }
 
 }
