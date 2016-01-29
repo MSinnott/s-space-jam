@@ -5,16 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="933177a3-c705-41de-881d-4941e94a1377" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testing/src/CloseAction.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/resc/properties.txt" afterPath="$PROJECT_DIR$/testing/resc/properties.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AdaptiveDialog.java" afterPath="$PROJECT_DIR$/testing/src/AdaptiveDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioDesktop.java" afterPath="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioFileManager.java" afterPath="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioWindow.java" afterPath="$PROJECT_DIR$/testing/src/AudioWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MainPane.java" afterPath="$PROJECT_DIR$/testing/src/MainPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/baseRunner.java" afterPath="$PROJECT_DIR$/testing/src/baseRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" afterPath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
     </list>
     <ignored path="sSpaceJam.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,10 +29,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="baseRunner.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="baseRunner.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2549575">
+            <state vertical-scroll-proportion="0.0">
               <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
               <folding>
                 <element signature="method#main#0;class#baseRunner#0" expanded="false" />
@@ -108,16 +101,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdaptiveTextField.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AdaptiveTextField.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+            <state vertical-scroll-proportion="3.8062756">
+              <caret line="154" column="28" selection-start-line="154" selection-start-column="28" selection-end-line="154" selection-end-column="28" />
               <folding>
-                <element signature="e#116#117#0" expanded="true" />
-                <element signature="e#143#144#0" expanded="true" />
-                <element signature="e#477#478#0" expanded="true" />
-                <element signature="e#543#544#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#183#191#0" expanded="true" />
+                <element signature="e#454#455#0" expanded="true" />
+                <element signature="e#481#482#0" expanded="true" />
+                <element signature="e#906#914#0" expanded="true" />
+                <element signature="e#4960#4968#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,10 +166,9 @@
         <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
+              <caret line="96" column="45" selection-start-line="96" selection-start-column="45" selection-end-line="96" selection-end-column="45" />
               <folding>
                 <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
-                <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
                 <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
                 <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
                 <element signature="method#pan#0;class#MainPane#0" expanded="false" />
@@ -223,9 +217,9 @@
         <option value="$PROJECT_DIR$/testing/src/AdaptiveDialog.java" />
         <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioWindow.java" />
-        <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
+        <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
         <option value="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
       </list>
     </option>
@@ -238,9 +232,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="27" />
     <option name="width" value="1280" />
-    <option name="height" value="997" />
+    <option name="height" value="1024" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -330,39 +323,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="s-space-jam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="s-space-jam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="fftLib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="s-space-jam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="s-space-jam" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="fftLib" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -695,7 +656,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1280" height="997" extended-state="6" />
+    <frame x="0" y="0" width="1280" height="1024" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -705,7 +666,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3432836" sideWeight="0.5057648" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15242495" sideWeight="0.49423522" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14781635" sideWeight="0.49423522" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23101777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -871,7 +832,6 @@
           <caret line="67" column="38" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="38" />
           <folding>
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
-            <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
@@ -980,7 +940,6 @@
           <caret line="139" column="24" selection-start-line="139" selection-start-column="24" selection-end-line="139" selection-end-column="24" />
           <folding>
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
-            <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
@@ -1089,7 +1048,6 @@
           <caret line="121" column="27" selection-start-line="121" selection-start-column="27" selection-end-line="121" selection-end-column="27" />
           <folding>
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
-            <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
@@ -1198,7 +1156,6 @@
           <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
           <folding>
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
-            <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
@@ -1259,7 +1216,6 @@
           <caret line="26" column="98" selection-start-line="26" selection-start-column="98" selection-end-line="26" selection-end-column="98" />
           <folding>
             <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
-            <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
@@ -1372,34 +1328,14 @@
         <state vertical-scroll-proportion="1.2492918">
           <caret line="49" column="20" selection-start-line="49" selection-start-column="20" selection-end-line="49" selection-end-column="20" />
           <folding>
-            <element signature="e#157#158#0" expanded="true" />
-            <element signature="e#181#182#0" expanded="true" />
-            <element signature="e#218#219#0" expanded="true" />
-            <element signature="e#244#245#0" expanded="true" />
-            <element signature="e#275#276#0" expanded="true" />
-            <element signature="e#305#306#0" expanded="true" />
-            <element signature="e#516#517#0" expanded="true" />
-            <element signature="e#546#547#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="13" selection-start-line="85" selection-start-column="13" selection-end-line="85" selection-end-column="13" />
-          <folding>
-            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
-            <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
-            <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
-            <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
-            <element signature="method#pan#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
-            <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
-            <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
-            <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
-            <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
+            <element signature="e#157#158#0" expanded="false" />
+            <element signature="e#181#182#0" expanded="false" />
+            <element signature="e#218#219#0" expanded="false" />
+            <element signature="e#244#245#0" expanded="false" />
+            <element signature="e#275#276#0" expanded="false" />
+            <element signature="e#305#306#0" expanded="false" />
+            <element signature="e#516#517#0" expanded="false" />
+            <element signature="e#546#547#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1440,6 +1376,17 @@
             <element signature="method#buildDialog#0;class#AdaptiveDialog#0" expanded="false" />
             <element signature="method#buildDialog#1;class#AdaptiveDialog#0" expanded="false" />
             <element signature="method#resetColors#0;class#AdaptiveDialog#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+          <folding>
+            <element signature="method#main#0;class#baseRunner#0" expanded="false" />
+            <element signature="method#getStereoTone#0;class#baseRunner#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1499,26 +1446,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="23" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="23" />
+          <caret line="96" column="45" selection-start-line="96" selection-start-column="45" selection-end-line="96" selection-end-column="45" />
           <folding>
-            <element signature="e#116#117#0" expanded="true" />
-            <element signature="e#143#144#0" expanded="true" />
-            <element signature="e#477#478#0" expanded="true" />
-            <element signature="e#543#544#0" expanded="true" />
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+            <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
+            <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
+            <element signature="method#pan#0;class#MainPane#0" expanded="false" />
+            <element signature="method#setLeftData#0;class#MainPane#0" expanded="false" />
+            <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
+            <element signature="method#setRightData#0;class#MainPane#0" expanded="false" />
+            <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
+            <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
+            <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2549575">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state vertical-scroll-proportion="3.8062756">
+          <caret line="154" column="28" selection-start-line="154" selection-start-column="28" selection-end-line="154" selection-end-column="28" />
           <folding>
-            <element signature="method#main#0;class#baseRunner#0" expanded="false" />
-            <element signature="method#getStereoTone#0;class#baseRunner#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#183#191#0" expanded="true" />
+            <element signature="e#454#455#0" expanded="true" />
+            <element signature="e#481#482#0" expanded="true" />
+            <element signature="e#906#914#0" expanded="true" />
+            <element signature="e#4960#4968#0" expanded="true" />
           </folding>
         </state>
       </provider>
