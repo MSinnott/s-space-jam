@@ -252,7 +252,9 @@ public class AudioDesktop extends JFrame{
             fileChooser.setBackground(theme[0]);
             fileChooser.setForeground(theme[5]);
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "WAV Files", "wav");
+                    "WAV Files", "wav", "mp3 Files", "mp3");
+            //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
+            //looks like .au and .aiff files are already supported.
             fileChooser.setFileFilter(filter);
             int returnVal = fileChooser.showOpenDialog(desktop);
             if(returnVal == JFileChooser.APPROVE_OPTION) {

@@ -6,7 +6,7 @@
       <sourceFolder url="file://$MODULE_DIR$/testing/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/testing/resc" type="java-resource" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="JTransforms-3.1-with-dependencies" level="project" />
     <orderEntry type="library" name="JTransforms-3.1-sources" level="project" />

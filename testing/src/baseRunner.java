@@ -5,9 +5,10 @@ public class baseRunner {
     public static void main(String[] args) throws IOException, InterruptedException {
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
-
         AudioFileManager oneTone = new AudioFileManager(getStereoTone(20000, 500, 8*44100));
         oneTone.buildFile("testing/music/singleTone.wav");
+        /*AudioFileManager oneToneMP3 = new AudioFileManager(getStereoTone(20000, 500, 8*44100));
+        oneToneMP3.buildFile("testing/music/singleTone.mp3");*/
         mainWindow.buildWindow(oneTone);
     }
 
