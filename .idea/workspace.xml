@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a5f3e50-0391-4e11-9379-fbbbeae7d869" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testing/src/Token.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testing/src/EqnHandler.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/testing/src/Token.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" afterPath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/baseRunner.java" afterPath="$PROJECT_DIR$/testing/src/baseRunner.java" />
     </list>
     <ignored path="s-space-jam.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,64 +33,58 @@
         <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AdaptiveTextField.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3254973">
-              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+              <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#189#190#0" expanded="true" />
-                <element signature="e#216#217#0" expanded="true" />
-                <element signature="e#823#830#0" expanded="true" />
-                <element signature="e#2206#2213#0" expanded="true" />
-                <element signature="e#2279#2286#0" expanded="true" />
-                <element signature="e#2338#2345#0" expanded="true" />
-                <element signature="e#3767#3768#0" expanded="true" />
-                <element signature="e#3813#3814#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Token.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testing/src/Token.java">
+      <file leaf-file-name="AdaptiveTextField.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="119" selection-start-line="5" selection-start-column="119" selection-end-line="5" selection-end-column="119" />
+              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
               <folding>
-                <element signature="e#634#635#0" expanded="true" />
-                <element signature="e#664#665#0" expanded="true" />
-                <element signature="e#696#697#0" expanded="true" />
-                <element signature="e#747#748#0" expanded="true" />
-                <element signature="e#781#782#0" expanded="true" />
-                <element signature="e#834#835#0" expanded="true" />
-                <element signature="e#869#870#0" expanded="true" />
-                <element signature="e#923#924#0" expanded="true" />
-                <element signature="e#970#971#0" expanded="true" />
-                <element signature="e#1013#1014#0" expanded="true" />
-                <element signature="e#1062#1063#0" expanded="true" />
-                <element signature="e#1107#1108#0" expanded="true" />
-                <element signature="e#1157#1158#0" expanded="true" />
-                <element signature="e#1203#1204#0" expanded="true" />
-                <element signature="e#1249#1250#0" expanded="true" />
-                <element signature="e#1300#1301#0" expanded="true" />
-                <element signature="e#1348#1349#0" expanded="true" />
-                <element signature="e#1401#1402#0" expanded="true" />
-                <element signature="e#1450#1451#0" expanded="true" />
-                <element signature="e#1504#1505#0" expanded="true" />
-                <element signature="e#1532#1533#0" expanded="true" />
-                <element signature="e#1564#1565#0" expanded="true" />
-                <element signature="e#1605#1606#0" expanded="true" />
-                <element signature="e#1658#1659#0" expanded="true" />
-                <element signature="e#2352#2353#0" expanded="true" />
-                <element signature="e#2396#2397#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#136#137#0" expanded="true" />
+                <element signature="e#163#164#0" expanded="true" />
+                <element signature="e#269#277#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EqnHandler.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/testing/src/EqnHandler.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.3320683">
+              <caret line="175" column="4" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="4" />
+              <folding>
+                <element signature="class#OFMap#0;class#EqnHandler#0" expanded="false" />
+                <element signature="e#274#275#0" expanded="true" />
+                <element signature="e#312#313#0" expanded="true" />
+                <element signature="e#526#534#0" expanded="true" />
+                <element signature="e#674#682#0" expanded="true" />
+                <element signature="initializer##0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#evalSample#0;class#EqnHandler#0" expanded="false" />
+                <element signature="e#2344#2351#0" expanded="true" />
+                <element signature="method#evalOp#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#evalFunc#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#isNumber#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#parse#0;class#EqnHandler#0" expanded="false" />
+                <element signature="e#4635#4643#0" expanded="true" />
+                <element signature="method#getToken#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#convertToRPN#0;class#EqnHandler#0" expanded="false" />
+                <element signature="e#6378#6386#0" expanded="true" />
+                <element signature="e#6441#6449#0" expanded="true" />
+                <element signature="e#6506#6514#0" expanded="true" />
+                <element signature="method#isAt#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#charAt#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#contains#0;class#EqnHandler#0" expanded="false" />
+                <element signature="e#9582#9583#0" expanded="true" />
+                <element signature="e#9636#9637#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -115,6 +112,8 @@
       <list>
         <option value="$PROJECT_DIR$/testing/src/Token.java" />
         <option value="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
+        <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
+        <option value="$PROJECT_DIR$/testing/src/EqnHandler.java" />
       </list>
     </option>
   </component>
@@ -495,20 +494,20 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3290993" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3591224" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23424879" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24555735" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290993" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.12035541" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3060046" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -524,63 +523,57 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="10" column="60" selection-start-line="10" selection-start-column="60" selection-end-line="10" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/Token.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="119" selection-start-line="5" selection-start-column="119" selection-end-line="5" selection-end-column="119" />
+          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
           <folding>
-            <element signature="e#634#635#0" expanded="true" />
-            <element signature="e#664#665#0" expanded="true" />
-            <element signature="e#696#697#0" expanded="true" />
-            <element signature="e#747#748#0" expanded="true" />
-            <element signature="e#781#782#0" expanded="true" />
-            <element signature="e#834#835#0" expanded="true" />
-            <element signature="e#869#870#0" expanded="true" />
-            <element signature="e#923#924#0" expanded="true" />
-            <element signature="e#970#971#0" expanded="true" />
-            <element signature="e#1013#1014#0" expanded="true" />
-            <element signature="e#1062#1063#0" expanded="true" />
-            <element signature="e#1107#1108#0" expanded="true" />
-            <element signature="e#1157#1158#0" expanded="true" />
-            <element signature="e#1203#1204#0" expanded="true" />
-            <element signature="e#1249#1250#0" expanded="true" />
-            <element signature="e#1300#1301#0" expanded="true" />
-            <element signature="e#1348#1349#0" expanded="true" />
-            <element signature="e#1401#1402#0" expanded="true" />
-            <element signature="e#1450#1451#0" expanded="true" />
-            <element signature="e#1504#1505#0" expanded="true" />
-            <element signature="e#1532#1533#0" expanded="true" />
-            <element signature="e#1564#1565#0" expanded="true" />
-            <element signature="e#1605#1606#0" expanded="true" />
-            <element signature="e#1658#1659#0" expanded="true" />
-            <element signature="e#2352#2353#0" expanded="true" />
-            <element signature="e#2396#2397#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#136#137#0" expanded="true" />
+            <element signature="e#163#164#0" expanded="true" />
+            <element signature="e#269#277#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3254973">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#189#190#0" expanded="true" />
-            <element signature="e#216#217#0" expanded="true" />
-            <element signature="e#823#830#0" expanded="true" />
-            <element signature="e#2206#2213#0" expanded="true" />
-            <element signature="e#2279#2286#0" expanded="true" />
-            <element signature="e#2338#2345#0" expanded="true" />
-            <element signature="e#3767#3768#0" expanded="true" />
-            <element signature="e#3813#3814#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/EqnHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.3320683">
+          <caret line="175" column="4" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="4" />
+          <folding>
+            <element signature="class#OFMap#0;class#EqnHandler#0" expanded="false" />
+            <element signature="e#274#275#0" expanded="true" />
+            <element signature="e#312#313#0" expanded="true" />
+            <element signature="e#526#534#0" expanded="true" />
+            <element signature="e#674#682#0" expanded="true" />
+            <element signature="initializer##0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#evalSample#0;class#EqnHandler#0" expanded="false" />
+            <element signature="e#2344#2351#0" expanded="true" />
+            <element signature="method#evalOp#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#evalFunc#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#isNumber#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#parse#0;class#EqnHandler#0" expanded="false" />
+            <element signature="e#4635#4643#0" expanded="true" />
+            <element signature="method#getToken#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#convertToRPN#0;class#EqnHandler#0" expanded="false" />
+            <element signature="e#6378#6386#0" expanded="true" />
+            <element signature="e#6441#6449#0" expanded="true" />
+            <element signature="e#6506#6514#0" expanded="true" />
+            <element signature="method#isAt#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#charAt#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#contains#0;class#EqnHandler#0" expanded="false" />
+            <element signature="e#9582#9583#0" expanded="true" />
+            <element signature="e#9636#9637#0" expanded="true" />
           </folding>
         </state>
       </provider>
