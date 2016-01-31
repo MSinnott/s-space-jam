@@ -2,12 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a5f3e50-0391-4e11-9379-fbbbeae7d869" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/testing/src/EqnHandler.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/testing/src/Token.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" afterPath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/baseRunner.java" afterPath="$PROJECT_DIR$/testing/src/baseRunner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/EqnHandler.java" afterPath="$PROJECT_DIR$/testing/src/EqnHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MainPane.java" afterPath="$PROJECT_DIR$/testing/src/MainPane.java" />
     </list>
     <ignored path="s-space-jam.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -29,10 +26,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="baseRunner.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="baseRunner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
+            <state vertical-scroll-proportion="0.2637571">
               <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -56,36 +53,44 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EqnHandler.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EqnHandler.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/src/EqnHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.3320683">
-              <caret line="175" column="4" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="57" />
               <folding>
                 <element signature="class#OFMap#0;class#EqnHandler#0" expanded="false" />
                 <element signature="e#274#275#0" expanded="true" />
                 <element signature="e#312#313#0" expanded="true" />
                 <element signature="e#526#534#0" expanded="true" />
                 <element signature="e#674#682#0" expanded="true" />
-                <element signature="initializer##0;class#EqnHandler#0" expanded="false" />
                 <element signature="method#evalSample#0;class#EqnHandler#0" expanded="false" />
-                <element signature="e#2344#2351#0" expanded="true" />
+                <element signature="e#2477#2484#0" expanded="true" />
                 <element signature="method#evalOp#0;class#EqnHandler#0" expanded="false" />
-                <element signature="method#evalFunc#0;class#EqnHandler#0" expanded="false" />
                 <element signature="method#isNumber#0;class#EqnHandler#0" expanded="false" />
                 <element signature="method#parse#0;class#EqnHandler#0" expanded="false" />
-                <element signature="e#4635#4643#0" expanded="true" />
+                <element signature="e#4927#4935#0" expanded="true" />
                 <element signature="method#getToken#0;class#EqnHandler#0" expanded="false" />
                 <element signature="method#convertToRPN#0;class#EqnHandler#0" expanded="false" />
-                <element signature="e#6378#6386#0" expanded="true" />
-                <element signature="e#6441#6449#0" expanded="true" />
-                <element signature="e#6506#6514#0" expanded="true" />
+                <element signature="e#6666#6674#0" expanded="true" />
+                <element signature="e#6729#6737#0" expanded="true" />
+                <element signature="e#6794#6802#0" expanded="true" />
                 <element signature="method#isAt#0;class#EqnHandler#0" expanded="false" />
                 <element signature="method#charAt#0;class#EqnHandler#0" expanded="false" />
                 <element signature="method#contains#0;class#EqnHandler#0" expanded="false" />
-                <element signature="e#9582#9583#0" expanded="true" />
-                <element signature="e#9636#9637#0" expanded="true" />
+                <element signature="e#9772#9773#0" expanded="true" />
+                <element signature="e#9826#9827#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainPane.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="127" column="64" selection-start-line="127" selection-start-column="64" selection-end-line="127" selection-end-column="64" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -112,8 +117,9 @@
       <list>
         <option value="$PROJECT_DIR$/testing/src/Token.java" />
         <option value="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
-        <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
         <option value="$PROJECT_DIR$/testing/src/EqnHandler.java" />
+        <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
+        <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
       </list>
     </option>
   </component>
@@ -536,44 +542,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="127" column="64" selection-start-line="127" selection-start-column="64" selection-end-line="127" selection-end-column="64" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/EqnHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.3320683">
-          <caret line="175" column="4" selection-start-line="175" selection-start-column="4" selection-end-line="175" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="57" />
           <folding>
             <element signature="class#OFMap#0;class#EqnHandler#0" expanded="false" />
             <element signature="e#274#275#0" expanded="true" />
             <element signature="e#312#313#0" expanded="true" />
             <element signature="e#526#534#0" expanded="true" />
             <element signature="e#674#682#0" expanded="true" />
-            <element signature="initializer##0;class#EqnHandler#0" expanded="false" />
             <element signature="method#evalSample#0;class#EqnHandler#0" expanded="false" />
-            <element signature="e#2344#2351#0" expanded="true" />
+            <element signature="e#2477#2484#0" expanded="true" />
             <element signature="method#evalOp#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#evalFunc#0;class#EqnHandler#0" expanded="false" />
             <element signature="method#isNumber#0;class#EqnHandler#0" expanded="false" />
             <element signature="method#parse#0;class#EqnHandler#0" expanded="false" />
-            <element signature="e#4635#4643#0" expanded="true" />
+            <element signature="e#4927#4935#0" expanded="true" />
             <element signature="method#getToken#0;class#EqnHandler#0" expanded="false" />
             <element signature="method#convertToRPN#0;class#EqnHandler#0" expanded="false" />
-            <element signature="e#6378#6386#0" expanded="true" />
-            <element signature="e#6441#6449#0" expanded="true" />
-            <element signature="e#6506#6514#0" expanded="true" />
+            <element signature="e#6666#6674#0" expanded="true" />
+            <element signature="e#6729#6737#0" expanded="true" />
+            <element signature="e#6794#6802#0" expanded="true" />
             <element signature="method#isAt#0;class#EqnHandler#0" expanded="false" />
             <element signature="method#charAt#0;class#EqnHandler#0" expanded="false" />
             <element signature="method#contains#0;class#EqnHandler#0" expanded="false" />
-            <element signature="e#9582#9583#0" expanded="true" />
-            <element signature="e#9636#9637#0" expanded="true" />
+            <element signature="e#9772#9773#0" expanded="true" />
+            <element signature="e#9826#9827#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.2637571">
+          <caret line="12" column="42" selection-start-line="12" selection-start-column="42" selection-end-line="12" selection-end-column="42" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

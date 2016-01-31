@@ -125,7 +125,7 @@ public class MainPane extends JPanel implements KeyListener {
             endIndex = arr.length;
         }
         for(int i = stIndex; i < endIndex; i+=2){
-            if(arr[i] > max) max = arr[i];
+            if(arr[i] > max && arr[i] != Float.POSITIVE_INFINITY) max = arr[i];
         }
         return max;
     }
@@ -145,7 +145,7 @@ public class MainPane extends JPanel implements KeyListener {
             endIndex = arr.length;
         }
         for(int i = stIndex; i < endIndex; i+=2){
-            if(arr[i] < min) min = arr[i];
+            if(arr[i] < min && arr[i] != Float.NEGATIVE_INFINITY) min = arr[i];
         }
         return min;
     }

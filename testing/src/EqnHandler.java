@@ -43,8 +43,9 @@ public class EqnHandler {
         functors.put("sin(", new int[] {1});
         functors.put("cos(", new int[] {1});
         functors.put("tan(", new int[] {1});
+        functors.put("log(", new int[] {2});
 
-        totalTokens = new String[functions.size() + operations.size() + variables.length + 2];
+        totalTokens = new String[functions.size() + operations.size() + variables.length + 3];
         for(int i = 0 ; i < functions.size(); i++){
             totalTokens[i] = functions.get(i);
         }
@@ -56,6 +57,7 @@ public class EqnHandler {
         }
         totalTokens[functions.size() + operations.size() + variables.length] = "(";
         totalTokens[functions.size() + operations.size() + variables.length + 1] = ")";
+        totalTokens[functions.size() + operations.size() + variables.length + 2] = ",";
     }
 
     //eval sample requires a RPN fixed array of tokens
@@ -111,6 +113,9 @@ public class EqnHandler {
                 return (float) Math.cos(args[0]);
             case "tan(":
                 return (float) Math.tan(args[0]);
+            case "log(":
+                if(args[1] == 0) return Float.valueOf(0);
+                return (float) (Math.log10(args[1]) / Math.log10(args[0]));
             default:
                 return Float.NaN;
         }
@@ -173,7 +178,7 @@ public class EqnHandler {
             return num;
         }
     }
-    
+
     //Google "shunting-yard algorithm"
     public static ArrayList<String> convertToRPN(ArrayList<String> parsedTokens) {
         ArrayList<String> rpnTokens = new ArrayList<String>();
@@ -189,11 +194,9 @@ public class EqnHandler {
             }else if(functions.contains(currentToken) || currentToken.equals("(")) {
                 opStack.push(currentToken);
             }else if(currentToken.equals(",")){
-                String TopToken = "";
-                while (!functions.contains(TopToken)){
-                    TopToken = opStack.pop();
-                    rpnTokens.add(TopToken);
-                    if(opStack.size() == 0) return new ArrayList<String>();
+                while (!functions.contains(opStack.peek())){
+                    rpnTokens.add(opStack.pop());
+                    if(opStack.size() == 0) break;
                 }
             } else if (operations.contains(currentToken)){
                 String topOp;
