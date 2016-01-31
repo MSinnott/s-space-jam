@@ -1,14 +1,12 @@
 import javax.swing.*;
 import java.awt.geom.Arc2D;
 import java.util.ArrayList;
-import java.util.Properties;
 
 public class AdaptiveTextField extends JTextField{
 
-    private ArrayList<Token> tokens = new ArrayList<Token>();
+    private ArrayList<String> tokens = new ArrayList<String>();
     private String[] numbers = new String[]{"-", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "."};
     private String[] possibleTokens = new String[]{"+", "*", "/", "^", "(", ")", "sin(", "cos(", "tan(", "t" };
-    private int[] numValues = new int[] {2, 2, 2, 2, 0, 0, 1, 1, 1, 0};
 
     public AdaptiveTextField(String text){
         super(text);
@@ -19,14 +17,115 @@ public class AdaptiveTextField extends JTextField{
 
         float[] samples = new float[numSamples];
 
-        for(int i = 0; i < samples.length; i++) {
-            samples[i] = 0; // evalSample(i);
+        for(int i = 0; i < samples.length; i++){
+            samples[i] = evalSample(i);
         }
 
         return samples;
     }
 
-    //need to write eval sample
+
+    //NEEDS TO BE WRITTEN BETTER!! THIS IS __AWFUL__ ;( --m
+    public float evalSample(int time){
+        ArrayList<String> localTokens = new ArrayList<String>(tokens);
+        for(int i = 0; i < localTokens.size(); i++){
+            if(localTokens.get(i).equals("t")){
+                localTokens.remove(i);
+                localTokens.add(i, String.valueOf(time));
+            }
+        }
+
+
+        for(int i = 0; i < localTokens.size(); i++) {
+            if (localTokens.get(i).equals("sin(")) {
+
+                float firstArg = Float.parseFloat(localTokens.get(i+1));
+
+                localTokens.remove(i + 1);
+                localTokens.remove(i);
+
+                localTokens.add(i, String.valueOf(Math.sin(firstArg)));
+            } else if (localTokens.get(i).equals("cos(")) {
+
+                float firstArg = Float.parseFloat(localTokens.get(i+1));
+
+                localTokens.remove(i + 1);
+                localTokens.remove(i);
+
+                localTokens.add(i, String.valueOf(Math.cos(firstArg)));
+            } else if (localTokens.get(i).equals("tan(")) {
+
+                float firstArg = Float.parseFloat(localTokens.get(i+1));
+
+                localTokens.remove(i + 1);
+                localTokens.remove(i);
+
+                localTokens.add(i, String.valueOf(Math.tan(firstArg)));
+            }
+        }
+
+
+        for(int i = 0; i < localTokens.size(); i++){
+            if(localTokens.get(i).equals("^")){
+                float firstArg = Float.parseFloat(localTokens.get(i-1));
+                float secondArg = Float.parseFloat(localTokens.get(i+1));
+                localTokens.remove(i+1);
+                localTokens.remove(i);
+                localTokens.remove(i-1);
+
+                localTokens.add(i - 1, String.valueOf(Math.pow(firstArg, secondArg)));
+            }
+        }
+
+        for(int i = 0; i < localTokens.size(); i++){
+            if(localTokens.get(i).equals("*")){
+                float firstArg = Float.parseFloat(localTokens.get(i-1));
+                float secondArg = Float.parseFloat(localTokens.get(i+1));
+                localTokens.remove(i+1);
+                localTokens.remove(i);
+                localTokens.remove(i-1);
+
+                localTokens.add(i - 1, String.valueOf(firstArg * secondArg));
+            } else if(localTokens.get(i).equals("/")){
+                float firstArg = Float.parseFloat(localTokens.get(i-1));
+                float secondArg = Float.parseFloat(localTokens.get(i+1));
+                localTokens.remove(i+1);
+                localTokens.remove(i);
+                localTokens.remove(i-1);
+
+                localTokens.add(i - 1, String.valueOf(firstArg / secondArg));
+            }
+        }
+
+        for(int i = 0; i < localTokens.size(); i++){
+            if(localTokens.get(i).equals("+")){
+                float firstArg = Float.parseFloat(localTokens.get(i-1));
+                float secondArg = Float.parseFloat(localTokens.get(i+1));
+                localTokens.remove(i+1);
+                localTokens.remove(i);
+                localTokens.remove(i-1);
+
+                localTokens.add(i - 1, String.valueOf(firstArg + secondArg));
+            } else if(localTokens.get(i).equals("-")){
+                if(i == 0){
+                    System.out.println(localTokens.get(i));
+                    localTokens.remove(i);
+                    localTokens.remove(i+1);
+
+                    localTokens.add(i + 1, String.valueOf(-1 * Float.parseFloat(tokens.get(i+1))));
+                    continue;
+                }
+                float firstArg = Float.parseFloat(localTokens.get(i-1));
+                float secondArg = Float.parseFloat(localTokens.get(i+1));
+                localTokens.remove(i+1);
+                localTokens.remove(i);
+                localTokens.remove(i-1);
+
+                localTokens.add(i - 1, String.valueOf(firstArg - secondArg));
+            }
+        }
+        return Float.valueOf(localTokens.get(0));
+    }
 
     /*
         Test cases:
@@ -37,18 +136,18 @@ public class AdaptiveTextField extends JTextField{
      */
 
     //this is actually a pretty dece parser --m
-    private ArrayList<Token> parse(String text){
-        ArrayList<Token> parsedTokens = new ArrayList<Token>();
+    private ArrayList<String> parse(String text){
+        ArrayList<String> parsedTokens = new ArrayList<String>();
 
         int loc = 0;
         while (loc < text.length()){
             String num = "";
-            while(text.length() > loc && Token.isNumber(text.substring(loc, loc+1))) {
+            while(text.length() > loc && contains(numbers, text.substring(loc, loc+1))) {
                 if(text.substring(loc, loc+1).equals("-")){
-                    if (!Token.isNumber(text.substring(loc+1, loc+2))) break;
-                    if (loc > 0 && ( text.substring(loc-1, loc).equals(")") || Token.isNumber(text.substring(loc-1, loc)))) {
-                        if(num.length() > 0) parsedTokens.add(new Token(num));
-                        parsedTokens.add(new Token("+"));
+                    if (!contains(numbers, text.substring(loc+1, loc+2))) break;
+                    if (loc > 0 && ( text.substring(loc-1, loc).equals(")") || contains(numbers, text.substring(loc-1, loc)))) {
+                        if(num.length() > 0) parsedTokens.add(num);
+                        parsedTokens.add("+");
                         num = "";
                     }
                 }
@@ -56,11 +155,11 @@ public class AdaptiveTextField extends JTextField{
                 loc++;
             }
             if (num.length() > 0){
-                parsedTokens.add(new Token(num));
+                parsedTokens.add(num);
             }
-            for (String possibleToken : Token.getPossibleTokens()) {
+            for (String possibleToken : possibleTokens) {
                 if (text.indexOf(possibleToken) == loc) {
-                    parsedTokens.add(new Token(possibleToken));
+                    parsedTokens.add(possibleToken);
                     loc += possibleToken.length() - 1;
                     break;
                 }
@@ -71,50 +170,15 @@ public class AdaptiveTextField extends JTextField{
         return parsedTokens;
     }
 
-    //See "shunting-yard algorithm"
-    private String[] convertToRPN(ArrayList<Token> parsedTokens){
-        ArrayList<Token> infTokens = new ArrayList<Token>(parsedTokens);
-        ArrayList<Token> rpnTokens = new ArrayList<Token>();
-        ArrayList<Token> opStack = new ArrayList<Token>();
-
-        int loc = 0;
-        Token currentToken;
-        while(infTokens.size() > 0){
-            currentToken = infTokens.get(loc);
-            if(currentToken.isNumber()){
-                rpnTokens.add(currentToken);
-            } else if(currentToken.isFunction()){
-                opStack.add(currentToken);
-            } else if(currentToken.isOperation()){
-                while(opStack.size() > 0){
-                    Token lastOp = opStack.get(opStack.size() - 1);
-                    if(Token.isFunction(lastOp)){
-                        rpnTokens.add(lastOp);
-                        opStack.remove(opStack.size() - 1);
-                    } else {
-                        if( ( currentToken.isLeftAssociative() && currentToken.getPrecedence() <= lastOp.getPrecedence() ) || ( !currentToken.isLeftAssociative() && currentToken.getPrecedence() < lastOp.getPrecedence() )){
-                            rpnTokens.add(lastOp);
-                            opStack.remove(opStack.size() - 1);
-                        }
-                    }
-                }
-                opStack.add(currentToken);
-            }
-        }
-
-
-        return (String[]) rpnTokens.toArray();
-    }
-
-    private int indexOf(Object[] arr, Object obj){
+    private int indexOf(String[] arr, String str){
         for(int i = 0; i < arr.length; i++){
-            if(obj.equals(arr[i])) return i;
+            if(str.equals(arr[i])) return i;
         }
         return -1;
     }
 
-    private boolean contains(Object[] arr, Object obj){
-        return indexOf(arr, obj) != -1;
+    private boolean contains(String[] arr, String str){
+        return indexOf(arr, str) != -1;
     }
 
 }
