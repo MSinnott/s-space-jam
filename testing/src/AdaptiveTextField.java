@@ -32,6 +32,7 @@ public class AdaptiveTextField extends JTextField{
         Test cases:
         -1*(-3+-5)-7    pass
         4*sin(-3-5)     pass
+        -(3+5)+-(8*7)
         --add more test cases here--
      */
 

@@ -12,7 +12,7 @@ public class baseRunner {
         mainWindow.buildWindow(oneTone);
     }
 
-    //just for testing
+    //just for testing -- freq in hz
     public static float[] getStereoTone(double freqLeft, double freqRight, int numSamples){
         float[] tone = new float[numSamples*=2];
         float rightSide;
