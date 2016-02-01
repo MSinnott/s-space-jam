@@ -3,6 +3,7 @@ import java.io.*;
 public class baseRunner {
 
     public static void main(String[] args) throws IOException, InterruptedException {
+        System.out.println(Runtime.getRuntime().freeMemory() + " of " + Runtime.getRuntime().maxMemory());
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
         AudioFileManager oneTone = new AudioFileManager(getStereoTone(20000, 500, 8*44100));

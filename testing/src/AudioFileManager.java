@@ -319,21 +319,25 @@ public class AudioFileManager {
     public void hscale(float scale){
         scale = Math.abs(scale);
         scale += scale % 2;
-        float[] nlData;
-        float[] nrData;
+        float[] dcLD = decomplexify(leftData);
+        float[] dcRD = decomplexify(rightData);
+        float[] nlData = new float[(int) (dcLD.length * scale)];
+        float[] nrData = new float[(int) (dcRD.length * scale)];
         if(scale > 1) {
-            nlData = new float[(int) (leftData.length * scale)];
-            nrData = new float[(int) (rightData.length * scale)];
-            for (int i = 0; i < nlData.length; i++) {
-                nlData[i] = leftData[(int) (i / scale)];
-                nrData[i] = rightData[(int) (i / scale)];
+            for (int i = 0; i < nlData.length - scale; i+=2 * scale) {
+                for(int j = 0; j < scale; j++) {
+                    nlData[i+2*j] = dcLD[(int) (i / scale)];
+                    nlData[i+2*j+1] = dcLD[(int) (i / scale+1)];
+                    nrData[i+2*j] = dcRD[(int) (i / scale)];
+                    nrData[i+2*j+1] = dcRD[(int) (i / scale+1)];
+                }
             }
         } else {
-            nlData = new float[(int) (leftData.length * scale)];
-            nrData = new float[(int) (rightData.length * scale)];
-            for (int i = 0; i < nlData.length; i++) {
-                nlData[i] = leftData[(int) (i / scale)];
-                nrData[i] = rightData[(int) (i / scale)];
+            for (int i = 0; i < nlData.length; i+=2) {
+                nlData[i] = dcLD[(int) (i / scale)];
+                nlData[i+1] = dcLD[(int) (i / scale)+1];
+                nrData[i] = dcRD[(int) (i / scale)];
+                nrData[i+1] = dcRD[(int) (i / scale)+1];
             }
         }
         leftData = complexify(nlData);
@@ -404,6 +408,39 @@ public class AudioFileManager {
 
         leftData = resLeft;
         rightData = resRight;
+
+    }
+
+    //untested!!!! --m
+    public void stepFFT(int stepSize){
+        double[][] leftPieces = new double[(leftData.length - leftData.length % stepSize + stepSize) / stepSize][stepSize];
+        double[][] rightPieces = new double[(rightData.length - rightData.length % stepSize + stepSize) / stepSize][stepSize];
+
+        for(int i = 0; i < leftPieces.length; i++){
+            for(int j = 0; j < stepSize; j++){
+                if(i * stepSize + j < leftPieces.length) leftPieces[i][j] = leftData[i * stepSize + j];
+                if(i * stepSize + j < rightPieces.length)rightPieces[i][j] = rightData[i * stepSize + j];
+            }
+        }
+
+        fft = new ComplexDoubleFFT(stepSize / 2);
+
+        for (double[] leftPiece : leftPieces) {
+            fft.ft(leftPiece);
+        }
+
+        for (double[] rightPiece : rightPieces) {
+            fft.ft(rightPiece);
+        }
+
+        double normalizer = 1 / Math.sqrt(stepSize / 2);
+
+        for(int i = 0; i < leftPieces.length; i++){
+            for(int j = 0; j < stepSize; j++){
+                leftData[i+j] = (float) (leftPieces[i][j] * normalizer);
+                rightData[i+j] = (float) (rightPieces[i][j] * normalizer);
+            }
+        }
 
     }
 

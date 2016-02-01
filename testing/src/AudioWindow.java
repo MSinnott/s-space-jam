@@ -106,6 +106,11 @@ public class AudioWindow extends JInternalFrame{
         ftransformButton.addActionListener(new forwardFFtAction());
         components.add(ftransformButton);
 
+        JMenuItem fsteptransformButton = new JMenuItem("Step Forward FFT");
+        opMenu.add(fsteptransformButton);
+        fsteptransformButton.addActionListener(new stepforwardFFtAction());
+        components.add(fsteptransformButton);
+
         JMenuItem btransformButton = new JMenuItem("Backward FFT");
         opMenu.add(btransformButton);
         btransformButton.addActionListener(new backwardFFtAction());
@@ -328,6 +333,23 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e) {
             audioFile.ftransform();
             updatePane();
+        }
+    }
+
+    public class stepforwardFFtAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final AdaptiveDialog stepDialog = new AdaptiveDialog("Step FFT");
+            final JTextField textField = new JTextField();
+            stepDialog.addItem(textField, 0, 5, false);
+            stepDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    audioFile.stepFFT(Integer.valueOf(textField.getText()));
+                    updatePane();
+                }
+            });
+            stepDialog.buildDialog(audioWindow);
         }
     }
 

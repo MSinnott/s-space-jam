@@ -8,20 +8,17 @@ import java.util.Properties;
 
 public class AudioDesktop extends JFrame{
 
-    public static Color[] theme = new Color[]
-            { new Color(252, 53, 0), new Color(252, 127, 3), new Color(255, 201, 8),
-              new Color(55, 236, 255), new Color(29, 46, 255), new Color(255, 255, 255),
-              new Color(0, 0, 0)};
+    public static Color[] theme = new Color[] { new Color(252, 53, 0), new Color(252, 127, 3), new Color(255, 201, 8),
+                                                new Color(55, 236, 255), new Color(29, 46, 255), new Color(255, 255, 255),
+                                                new Color(0, 0, 0)  };
 
-    /*
-    public static Color bgColor = new Color(252, 53, 0);
-    public static Color fgColor = new Color(252, 127, 3);
-    public static Color accColor = new Color(255, 201, 8);
-    public static Color llnColor = new Color(55, 236, 255);
-    public static Color rlnColor = new Color(29, 46, 255);
-    public static Color txtColor = new Color(255, 255, 255);
-    public static Color black = new Color(0, 0, 0);
-    */
+    //bgColor = new Color(252, 53, 0);
+    //fgColor = new Color(252, 127, 3);
+    //accColor = new Color(255, 201, 8);
+    //llnColor = new Color(55, 236, 255);
+    //rlnColor = new Color(29, 46, 255);
+    //txtColor = new Color(255, 255, 255);
+    //black = new Color(0, 0, 0);
 
     private AdaptiveDialog themeDialog;
     private AudioDesktop audioDesktop = this;
@@ -37,6 +34,7 @@ public class AudioDesktop extends JFrame{
     private JMenuItem themeButton;
 
     private ArrayList<AudioWindow> audioWindows;
+    private ArrayList<Component> components = new ArrayList<Component>();
 
     private String propertiesPathname = "testing/resc/properties.txt";
     private String iconPath = "testing/resc/s-Space-Jam-Logo.jpg";
@@ -47,6 +45,7 @@ public class AudioDesktop extends JFrame{
     public AudioDesktop(String name, int width, int height){
         super(name);
 
+        components.add(this);
         audioWindows = new ArrayList<AudioWindow>();
 
         desktop = new JDesktopPane();
@@ -60,17 +59,21 @@ public class AudioDesktop extends JFrame{
 
         menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
+        components.add(menuBar);
 
         fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
+        components.add(fileMenu);
 
         newButton = new JMenuItem("New");
         fileMenu.add(newButton);
         newButton.addActionListener(new GenerateAction());
+        components.add(newButton);
 
         openButton = new JMenuItem("Open");
         fileMenu.add(openButton);
         openButton.addActionListener(new OpenFileAction());
+        components.add(openButton);
 
         exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
@@ -87,13 +90,16 @@ public class AudioDesktop extends JFrame{
                 exitDialog.buildDialog(audioDesktop);
             }
         });
+        components.add(exitButton);
 
         optionMenu = new JMenu("Options");
         menuBar.add(optionMenu);
+        components.add(optionMenu);
 
         themeButton = new JMenuItem("Theme");
         optionMenu.add(themeButton);
         themeButton.addActionListener(new ThemeSelectorAction());
+        components.add(themeButton);
 
         properties = new Properties();
 
@@ -156,22 +162,10 @@ public class AudioDesktop extends JFrame{
 
         desktop.setBackground(theme[1]);
         desktop.setForeground(theme[5]);
-        this.setBackground(theme[0]);
-        this.setForeground(theme[5]);
-        menuBar.setBackground(theme[0]);
-        menuBar.setForeground(theme[5]);
-        fileMenu.setBackground(theme[0]);
-        fileMenu.setForeground(theme[5]);
-        newButton.setBackground(theme[0]);
-        newButton.setForeground(theme[5]);
-        openButton.setBackground(theme[0]);
-        openButton.setForeground(theme[5]);
-        exitButton.setBackground(theme[0]);
-        exitButton.setForeground(theme[5]);
-        optionMenu.setBackground(theme[0]);
-        optionMenu.setForeground(theme[5]);
-        themeButton.setBackground(theme[0]);
-        themeButton.setForeground(theme[5]);
+        for(Component c: components){
+            c.setForeground(AudioDesktop.theme[5]);
+            c.setBackground(AudioDesktop.theme[0]);
+        }
 
         if(themeDialog != null) themeDialog.resetColors();
 
@@ -202,7 +196,7 @@ public class AudioDesktop extends JFrame{
 
             JTextField lEqnLabel = new JTextField("Left Eqn:   ");
             lEqnLabel.setEditable(false);
-            final AdaptiveTextField lExprField = new AdaptiveTextField(""); //This will become a special class
+            final AdaptiveTextField lExprField = new AdaptiveTextField("");
             JPanel lEqnPane = new JPanel();
             lEqnPane.setLayout(new BorderLayout());
             lEqnPane.add(lEqnLabel, BorderLayout.WEST);
@@ -211,7 +205,7 @@ public class AudioDesktop extends JFrame{
 
             JTextField rEqnLabel = new JTextField("Right Eqn: ");
             rEqnLabel.setEditable(false);
-            final AdaptiveTextField rExprField = new AdaptiveTextField(""); //This will become a special class
+            final AdaptiveTextField rExprField = new AdaptiveTextField("");
             JPanel rEqnPane = new JPanel();
             rEqnPane.setLayout(new BorderLayout());
             rEqnPane.add(rEqnLabel, BorderLayout.WEST);
