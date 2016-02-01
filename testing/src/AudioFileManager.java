@@ -274,11 +274,70 @@ public class AudioFileManager {
 
     //put transformations on the audio data below \/
 
-    public void scale(double scale){
+    public void vshift(float amt){
+        for(int i = 0 ; i < leftData.length; i++){
+            leftData[i] += amt;
+            rightData[i] += amt;
+        }
+    }
+
+    public void hshift(int amt){
+        amt += amt % 2;
+        float[] nlData;
+        float[] nrData;
+        if(amt > 0) {
+            nlData = new float[leftData.length + amt];
+            nrData = new float[rightData.length + amt];
+            for (int i = amt; i < nlData.length; i++) {
+                nlData[i] = leftData[i - amt];
+                nrData[i] = rightData[i - amt];
+            }
+        } else {
+            nlData = new float[leftData.length + amt];
+            nrData = new float[rightData.length + amt];
+            for (int i = 0; i < nlData.length; i++) {
+                nlData[i] = leftData[i - amt];
+                nrData[i] = rightData[i - amt];
+            }
+        }
+        for(int i = 0; i < 100; i++){
+            System.out.println(leftData[i] + " --> " + nlData[i]);
+            System.out.println(rightData[i] + " --> " + nrData[i]);
+            System.out.println();
+        }
+        leftData = nlData;
+        rightData = nrData;
+    }
+
+    public void vscale(float scale){
         for(int i = 0; i < leftData.length; i++){
             leftData[i] *= scale;
             rightData[i] *= scale;
         }
+    }
+
+    public void hscale(float scale){
+        scale = Math.abs(scale);
+        scale += scale % 2;
+        float[] nlData;
+        float[] nrData;
+        if(scale > 1) {
+            nlData = new float[(int) (leftData.length * scale)];
+            nrData = new float[(int) (rightData.length * scale)];
+            for (int i = 0; i < nlData.length; i++) {
+                nlData[i] = leftData[(int) (i / scale)];
+                nrData[i] = rightData[(int) (i / scale)];
+            }
+        } else {
+            nlData = new float[(int) (leftData.length * scale)];
+            nrData = new float[(int) (rightData.length * scale)];
+            for (int i = 0; i < nlData.length; i++) {
+                nlData[i] = leftData[(int) (i / scale)];
+                nrData[i] = rightData[(int) (i / scale)];
+            }
+        }
+        leftData = complexify(nlData);
+        rightData = complexify(nrData);
     }
 
     public void ftransform(){
@@ -348,23 +407,34 @@ public class AudioFileManager {
 
     }
 
-    public void pMult(float[] toMult){
-        int end = toMult.length;
-        if (leftData.length < end) end = leftData.length;
+    public void pMult(float[] toMultLeft, float[] toMultRight){
+        int end = toMultLeft.length;
+        if (leftData.length > end) end = leftData.length;
+        float[] nlData = new float[end];
+        float[] nrData = new float[end];
         for(int i = 0; i < end; i++){
-            leftData[i] *= toMult[i];
-            rightData[i] *= toMult[i];
+            if(i < leftData.length) nlData[i] = leftData[i];
+            if(i < toMultLeft.length) nlData[i] *= toMultLeft[i];
+            if(i < rightData.length) nrData[i] = rightData[i];
+            if(i < toMultRight.length) nrData[i] *= toMultRight[i];
         }
+        leftData = nlData;
+        rightData = nrData;
     }
 
-    public void pAdd(float[] toAdd){
-        int end = toAdd.length;
-        if (rightData.length < end) end = rightData.length;
+    public void pAdd(float[] toAddLeft, float[] toAddRight){
+        int end = toAddLeft.length;
+        if (leftData.length > end) end = leftData.length;
+        float[] nlData = new float[end];
+        float[] nrData = new float[end];
         for(int i = 0; i < end; i++){
-            leftData[i] += toAdd[i];
-            rightData[i] += toAdd[i];
+            if(i < leftData.length) nlData[i] += leftData[i];
+            if(i < toAddLeft.length) nlData[i] += toAddLeft[i];
+            if(i < rightData.length) nrData[i] += rightData[i];
+            if(i < toAddRight.length) nrData[i] += toAddRight[i];
         }
-
+        leftData = nlData;
+        rightData = nrData;
     }
 
 }

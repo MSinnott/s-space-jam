@@ -1,25 +1,20 @@
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.geom.Arc2D;
+import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class AudioWindow extends JInternalFrame{
+
+    private ArrayList<Component> components = new ArrayList<Component>();
 
     private MainPane pane;
     private AudioFileManager audioFile;
     private AudioDesktop audioDesktop;
     private AudioWindow audioWindow = this;
-
-    private JMenuBar menuBar;
-    private JMenu fileMenu;
-    private JMenuItem cloneButton;
-    private JMenuItem saveButton;
-    private JMenuItem saveAsButton;
-    private JMenuItem exitButton;
-    private JMenu opMenu;
-    private JMenuItem ftransformButton;
-    private JMenuItem btransformButton;
-    private JMenuItem scaleButton;
 
     private boolean saved = false;
     private String savePath = null;
@@ -62,26 +57,30 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public void buildMenus(){
-        menuBar = new JMenuBar();
-
+        JMenuBar menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
+        components.add(menuBar);
 
-        fileMenu = new JMenu("File");
+        JMenu fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
+        components.add(fileMenu);
 
-        cloneButton = new JMenuItem("Clone");
+        JMenuItem cloneButton = new JMenuItem("Clone");
         fileMenu.add(cloneButton);
         cloneButton.addActionListener(new CloneAction(this));
+        components.add(cloneButton);
 
-        saveButton = new JMenuItem("Save");
+        JMenuItem saveButton = new JMenuItem("Save");
         fileMenu.add(saveButton);
         saveButton.addActionListener(new SaveAction("Save"));
+        components.add(saveButton);
 
-        saveAsButton = new JMenuItem("Save As ...");
+        JMenuItem saveAsButton = new JMenuItem("Save As ...");
         fileMenu.add(saveAsButton);
         saveAsButton.addActionListener(new SaveAction("SaveAs"));
+        components.add(saveAsButton);
 
-        exitButton = new JMenuItem("Exit");
+        JMenuItem exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
         exitButton.addActionListener(new AbstractAction() {
             @Override
@@ -96,46 +95,61 @@ public class AudioWindow extends JInternalFrame{
                 exitDialog.buildDialog(audioWindow);
             }
         });
+        components.add(exitButton);
 
-        opMenu = new JMenu("Operations");
+        JMenu opMenu = new JMenu("Operations");
         menuBar.add(opMenu);
+        components.add(opMenu);
 
-        ftransformButton = new JMenuItem("Forward FFT");
+        JMenuItem ftransformButton = new JMenuItem("Forward FFT");
         opMenu.add(ftransformButton);
         ftransformButton.addActionListener(new forwardFFtAction());
+        components.add(ftransformButton);
 
-        btransformButton = new JMenuItem("Backward FFT");
+        JMenuItem btransformButton = new JMenuItem("Backward FFT");
         opMenu.add(btransformButton);
         btransformButton.addActionListener(new backwardFFtAction());
+        components.add(btransformButton);
 
-        scaleButton = new JMenuItem("Scale Vertically");
-        opMenu.add(scaleButton);
-        scaleButton.addActionListener(new scaleAction());
+        JMenuItem vscaleButton = new JMenuItem("Scale Vertically");
+        opMenu.add(vscaleButton);
+        vscaleButton.addActionListener(new vscaleAction());
+        components.add(vscaleButton);
+
+        JMenuItem vshiftButton = new JMenuItem("Shift Vertically");
+        opMenu.add(vshiftButton);
+        vshiftButton.addActionListener(new vshiftAction());
+        components.add(vshiftButton);
+
+        JMenuItem hscaleButton = new JMenuItem("Scale Horizontally");
+        opMenu.add(hscaleButton);
+        hscaleButton.addActionListener(new hscaleAction());
+        components.add(hscaleButton);
+
+        JMenuItem hshiftButton = new JMenuItem("Shift Horizontally");
+        opMenu.add(hshiftButton);
+        hshiftButton.addActionListener(new hshiftAction());
+        components.add(hshiftButton);
+
+        JMenuItem pbpAdd = new JMenuItem("Point-by-Point Add");
+        opMenu.add(pbpAdd);
+        pbpAdd.addActionListener(new pbpAddAction());
+        components.add(pbpAdd);
+
+        JMenuItem pbpMult = new JMenuItem("Point-by-Point Multiply");
+        opMenu.add(pbpMult);
+        pbpMult.addActionListener(new pbpMultAction());
+        components.add(pbpMult);
 
         resetColors();
     }
 
     public void resetColors(){
-        menuBar.setBackground(AudioDesktop.theme[0]);
-        menuBar.setForeground(AudioDesktop.theme[5]);
-        fileMenu.setBackground(AudioDesktop.theme[0]);
-        fileMenu.setForeground(AudioDesktop.theme[5]);
-        saveButton.setBackground(AudioDesktop.theme[0]);
-        saveButton.setForeground(AudioDesktop.theme[5]);
-        saveAsButton.setBackground(AudioDesktop.theme[0]);
-        saveAsButton.setForeground(AudioDesktop.theme[5]);
-        cloneButton.setBackground(AudioDesktop.theme[0]);
-        cloneButton.setForeground(AudioDesktop.theme[5]);
-        exitButton.setBackground(AudioDesktop.theme[0]);
-        exitButton.setForeground(AudioDesktop.theme[5]);
-        opMenu.setBackground(AudioDesktop.theme[0]);
-        opMenu.setForeground(AudioDesktop.theme[5]);
-        ftransformButton.setBackground(AudioDesktop.theme[0]);
-        ftransformButton.setForeground(AudioDesktop.theme[5]);
-        btransformButton.setBackground(AudioDesktop.theme[0]);
-        btransformButton.setForeground(AudioDesktop.theme[5]);
-        scaleButton.setBackground(AudioDesktop.theme[0]);
-        scaleButton.setForeground(AudioDesktop.theme[5]);
+        for(Component c: components) {
+            c.setForeground(AudioDesktop.theme[5]);
+            c.setBackground(AudioDesktop.theme[0]);
+        }
+
         this.setBackground(AudioDesktop.theme[2]);
         this.setForeground(AudioDesktop.theme[5]);
 
@@ -201,20 +215,111 @@ public class AudioWindow extends JInternalFrame{
         }
     }
 
-    public class scaleAction extends AbstractAction {
+    public class vscaleAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            final AdaptiveDialog scaleDialog = new AdaptiveDialog("Scale Action");
+            final AdaptiveDialog scaleDialog = new AdaptiveDialog("Scale Vertically");
             final JTextField textField = new JTextField();
             scaleDialog.addItem(textField, 0, 5, false);
             scaleDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    audioFile.scale(Double.valueOf(textField.getText()));
+                    audioFile.vscale(Float.valueOf(textField.getText()));
                     updatePane();
                 }
             });
             scaleDialog.buildDialog(audioWindow);
+        }
+    }
+
+    public class vshiftAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final AdaptiveDialog shiftDialog = new AdaptiveDialog("Shift Vertically");
+            final JTextField textField = new JTextField();
+            shiftDialog.addItem(textField, 0, 5, false);
+            shiftDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    audioFile.vshift(Float.valueOf(textField.getText()));
+                    updatePane();
+                }
+            });
+            shiftDialog.buildDialog(audioWindow);
+        }
+    }
+
+    public class hscaleAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final AdaptiveDialog shiftDialog = new AdaptiveDialog("Scale Horizontally");
+            final JTextField textField = new JTextField();
+            shiftDialog.addItem(textField, 0, 5, false);
+            shiftDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    audioFile.hscale(Float.valueOf(textField.getText()));
+                    updatePane();
+                }
+            });
+            shiftDialog.buildDialog(audioWindow);
+        }
+    }
+
+    public class hshiftAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final AdaptiveDialog shiftDialog = new AdaptiveDialog("Shift Horizontally");
+            final JTextField textField = new JTextField();
+            shiftDialog.addItem(textField, 0, 5, false);
+            shiftDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    audioFile.hshift(Integer.valueOf(textField.getText()));
+                    updatePane();
+                }
+            });
+            shiftDialog.buildDialog(audioWindow);
+        }
+    }
+
+    public class pbpAddAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setBackground(AudioDesktop.theme[0]);
+            fileChooser.setForeground(AudioDesktop.theme[5]);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "WAV Files", "wav", "mp3 Files", "mp3");
+            //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
+            //looks like .au and .aiff files are already supported.
+            fileChooser.setFileFilter(filter);
+            int returnVal = fileChooser.showOpenDialog(audioWindow);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                AudioFileManager selection = new AudioFileManager(fileChooser.getSelectedFile());
+                audioFile.pAdd(selection.getLeftChannel(), selection.getRightChannel());
+                updatePane();
+            }
+        }
+    }
+
+    public class pbpMultAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setBackground(AudioDesktop.theme[0]);
+            fileChooser.setForeground(AudioDesktop.theme[5]);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "WAV Files", "wav", "mp3 Files", "mp3");
+            //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
+            //looks like .au and .aiff files are already supported.
+            fileChooser.setFileFilter(filter);
+            int returnVal = fileChooser.showOpenDialog(audioWindow);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                AudioFileManager selection = new AudioFileManager(fileChooser.getSelectedFile());
+                audioFile.pMult(selection.getLeftChannel(), selection.getRightChannel());
+                updatePane();
+            }
         }
     }
 

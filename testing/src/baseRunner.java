@@ -1,5 +1,4 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class baseRunner {
 
@@ -10,7 +9,7 @@ public class baseRunner {
         oneTone.buildFile("testing/music/singleTone.wav");
         //AudioFileManager oneToneMP3 = new AudioFileManager(getStereoTone(20000, 500, 8*44100));
         //oneToneMP3.buildFile("testing/music/singleTone.mp3");
-        //mainWindow.buildWindow(oneTone);
+        mainWindow.buildWindow(oneTone);
     }
 
     //just for testing -- freq in hz

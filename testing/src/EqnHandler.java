@@ -114,7 +114,6 @@ public class EqnHandler {
             case "tan(":
                 return (float) Math.tan(args[0]);
             case "log(":
-                if(args[1] == 0) return Float.valueOf(0);
                 return (float) (Math.log10(args[1]) / Math.log10(args[0]));
             default:
                 return Float.NaN;
