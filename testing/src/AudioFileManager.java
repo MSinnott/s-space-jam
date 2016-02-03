@@ -411,7 +411,7 @@ public class AudioFileManager {
 
     }
 
-    //untested!!!! --m
+    //untested!!!! --m (read: known bad)
     public void stepFFT(int stepSize){
         double[][] leftPieces = new double[(leftData.length - leftData.length % stepSize + stepSize) / stepSize][stepSize];
         double[][] rightPieces = new double[(rightData.length - rightData.length % stepSize + stepSize) / stepSize][stepSize];
