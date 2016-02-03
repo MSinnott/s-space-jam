@@ -192,7 +192,7 @@ public class AudioDesktop extends JFrame{
     public class GenerateAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            AdaptiveDialog generateDialog = new AdaptiveDialog("Generate Sound File");
+            final AdaptiveDialog generateDialog = new AdaptiveDialog("Generate Sound File");
 
             JTextField lEqnLabel = new JTextField("Left Eqn:   ");
             lEqnLabel.setEditable(false);
@@ -220,6 +220,30 @@ public class AudioDesktop extends JFrame{
             sizePane.add(sizeLabel, BorderLayout.WEST);
             sizePane.add(sizeField, BorderLayout.CENTER);
             generateDialog.addItem(sizePane, 5, 0, false);
+
+            final JButton randButton = new JButton("Generate Random Song!");
+            generateDialog.addItem(randButton, 0, 5, false);
+            randButton.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    MusicGenerator generator = new MusicGenerator();
+
+                    float[] song0 = generator.generateSong(10);
+                    AudioFileManager rSong0 = new AudioFileManager(song0, song0);
+
+                    float[] song1 = generator.generateSong(10);
+                    AudioFileManager rSong1 = new AudioFileManager(song1, song1);
+
+                    float[] song2 = generator.generateSong(10);
+                    AudioFileManager rSong2 = new AudioFileManager(song2, song2);
+
+                    rSong0.pAdd(rSong1);
+                    rSong0.pAdd(rSong2);
+
+                    buildWindow(rSong0);
+                    generateDialog.dispose();
+                }
+            });
 
             generateDialog.addDoneBinding(new AbstractAction() {
                 @Override

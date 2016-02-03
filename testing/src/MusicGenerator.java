@@ -7,14 +7,17 @@ import java.util.Random;
 public class MusicGenerator {
 
     private Random random = new Random();
-    float[] key = new float[5];
-    float[] music;
+    private float[] key = new float[10];
+    private float[] music;
+    private ArrayList<Integer> theme;
 
     public MusicGenerator(){
         for(int i = 0; i < key.length; i++){
-            key[i] = random.nextInt(440);
+            key[i] = random.nextInt(340)+100;
         }
-        ArrayList<Integer> theme = getSong(3, 0);
+
+        theme = getSong(4, 0);
+
         float[] themeNotes = new float[theme.size()];
 
         int[] noteLengths = new int[theme.size()];
@@ -24,7 +27,7 @@ public class MusicGenerator {
         }
         int totalLength = 0;
         for(int i = 1 ; i < theme.size(); i++){
-            noteLengths[i] = (int) ((themeNotes[i] / 20 * random.nextInt((int) (themeNotes[i]))+5000));
+            noteLengths[i] = (int) ((themeNotes[i] / 20 * random.nextInt((int) (themeNotes[i]) + 1)+5000));
             totalLength += noteLengths[i];
         }
 
@@ -32,16 +35,20 @@ public class MusicGenerator {
         music = new float[totalLength];
         int loc = 0;
         for(int i = 0; i < theme.size(); i++) {
-            int volume = random.nextInt(6000) + 2000;
+            int volume = random.nextInt(6000) + 20000;
             float noteFreq = themeNotes[i];
             for(int j = 0; j < noteLengths[i]; j++, loc++) {
                 music[loc] = (float) (volume * Math.cos(2 * Math.PI * j / noteFreq));
             }
         }
 
+
     }
 
     public float[] generateSong(int numThemeRepeats){
+
+
+
         float[] samples  = new float[numThemeRepeats * music.length];
 
         for(int i = 0; i < samples.length; i++){
@@ -69,28 +76,32 @@ public class MusicGenerator {
         ArrayList<Integer> notes  = new ArrayList<Integer>();
         notes.add(seed);
 
+        int[] randMaps = new int[10];
+        for (int i = 0; i < randMaps.length; i++) {
+            randMaps[i] = random.nextInt(5);
+        }
+
         for (int i = 0; i < numIterations; i++) {
             int loc = 0;
             while (loc < notes.size()){
                 if(notes.get(loc) == 0){
-                    notes.add(loc + 1, 2);
-                    notes.add(loc + 1, 3);
+                    notes.add(loc + 1, randMaps[0]);
+                    notes.add(loc + 1, randMaps[1]);
                 } else if(notes.get(loc) == 1){
-                    notes.add(loc + 1, 4);
-                    notes.add(loc + 1, 1);
+                    notes.add(loc + 1, randMaps[2]);
+                    notes.add(loc + 1, randMaps[3]);
                 } else if(notes.get(loc) == 2){
-                    notes.add(loc + 1, 0);
-                    notes.add(loc + 1, 0);
+                    notes.add(loc + 1, randMaps[4]);
+                    notes.add(loc + 1, randMaps[5]);
                 } else if(notes.get(loc) == 3){
-                    notes.add(loc + 1, 4);
-                    notes.add(loc + 1, 1);
+                    notes.add(loc + 1, randMaps[6]);
+                    notes.add(loc + 1, randMaps[7]);
                 } else if(notes.get(loc) == 4){
-                    notes.add(loc + 1, 2);
-                    notes.add(loc + 1, 1);
+                    notes.add(loc + 1, randMaps[8]);
+                    notes.add(loc + 1, randMaps[9]);
                 }
                 loc+=3;
             }
-            System.out.println(i);
         }
 
         return notes;

@@ -474,4 +474,8 @@ public class AudioFileManager {
         rightData = nrData;
     }
 
+    public void pAdd(AudioFileManager fileManager){
+        pAdd(fileManager.getLeftChannel(), fileManager.getRightChannel());
+    }
+
 }
