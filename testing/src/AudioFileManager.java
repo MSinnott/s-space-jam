@@ -35,10 +35,12 @@ public class AudioFileManager {
 
     public AudioFileManager(File audioFileIn){ //the one that I want -A
         audioFile = audioFileIn;
+        filePath = audioFileIn.getAbsolutePath();
+
         float[] data = byteArrToFloatArr(readFile(audioFile));
         leftData = complexify(getLeftChannel(data));
         rightData = complexify(getRightChannel(data));
-        filePath = audioFileIn.getAbsolutePath();
+
     }
 
     public AudioFileManager(float[] samplesIn){
@@ -177,7 +179,7 @@ public class AudioFileManager {
     }
 
     //reads in the file
-    public byte[] readFile(File file){ //ok so is this some hacked together solution that happens to work for .wav files?
+    public byte[] readFile(File file){
         byte[] data = null;
         try {
             byte[] read = new byte[8];
@@ -209,7 +211,7 @@ public class AudioFileManager {
 
     //writes the file
     public void buildFile(String filepath) throws IOException {
-        if(!filepath.contains(".wav")) filepath += ".wav";
+        if(!filepath.contains(".wav") && !filepath.contains("mp3") ) filepath += ".wav";
         this.filePath = filepath;
         byte[] samples = new byte[0];
         try {
