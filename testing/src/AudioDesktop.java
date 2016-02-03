@@ -30,6 +30,8 @@ public class AudioDesktop extends JFrame{
     private JMenuItem newButton;
     private JMenuItem openButton;
     private JMenuItem exitButton;
+    private JMenu toolsMenu;
+    private JMenuItem convertButton;
     private JMenu optionMenu;
     private JMenuItem themeButton;
 
@@ -75,6 +77,11 @@ public class AudioDesktop extends JFrame{
         openButton.addActionListener(new OpenFileAction());
         components.add(openButton);
 
+        convertButton = new JMenuItem("File Convert");
+        fileMenu.add(convertButton);
+        //themeButton.addActionListener(new converterOpenAction());
+        fileMenu.add(convertButton);
+
         exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
         exitButton.addActionListener(new AbstractAction() {
@@ -100,6 +107,7 @@ public class AudioDesktop extends JFrame{
         optionMenu.add(themeButton);
         themeButton.addActionListener(new ThemeSelectorAction());
         components.add(themeButton);
+
 
         properties = new Properties();
 
