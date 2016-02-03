@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
 import java.util.Random;
 
 //Makes the musics
@@ -5,42 +8,51 @@ public class MusicGenerator {
 
     private Random random = new Random();
     float[] key = new float[5];
-    float[] theme;
+    float[] music;
 
-    public MusicGenerator(int themeLength){
+    public MusicGenerator(){
         for(int i = 0; i < key.length; i++){
-            key[i] = random.nextInt(220)+220;
+            key[i] = random.nextInt(440);
         }
-        int[] noteLengths = new int[themeLength];
+        ArrayList<Integer> theme = getSong(3, 0);
+        float[] themeNotes = new float[theme.size()];
+
+        int[] noteLengths = new int[theme.size()];
+
+        for (int i = 0; i < theme.size(); i++) {
+            themeNotes[i] = key[theme.get(i)];
+        }
         int totalLength = 0;
-        for(int i = 0 ; i < themeLength; i++){
-            noteLengths[i] = random.nextInt(20000) + 10000;
-            totalLength+= noteLengths[i];
+        for(int i = 1 ; i < theme.size(); i++){
+            noteLengths[i] = (int) ((themeNotes[i] / 20 * random.nextInt((int) (themeNotes[i]))+5000));
+            totalLength += noteLengths[i];
         }
-        theme = new float[totalLength];
+
+
+        music = new float[totalLength];
         int loc = 0;
-        for(int i = 0; i < themeLength; i++) {
+        for(int i = 0; i < theme.size(); i++) {
             int volume = random.nextInt(6000) + 2000;
-            float noteFreq = key[random.nextInt(key.length)];
+            float noteFreq = themeNotes[i];
             for(int j = 0; j < noteLengths[i]; j++, loc++) {
-                theme[loc] = (float) (volume * Math.sin(2 * Math.PI * j / noteFreq));
+                music[loc] = (float) (volume * Math.cos(2 * Math.PI * j / noteFreq));
             }
         }
 
     }
 
     public float[] generateSong(int numThemeRepeats){
-        float[] samples  = new float[numThemeRepeats * theme.length];
+        float[] samples  = new float[numThemeRepeats * music.length];
 
         for(int i = 0; i < samples.length; i++){
-            samples[i] = theme[i % theme.length];
+            samples[i] = music[i % music.length];
         }
 
         return samples;
     }
 
     //just for reference -- freq in hz
-    public static float[] getStereoTone(double freqLeft, double freqRight, int numSamples){
+    public float[] getStereoTone(double freqLeft, double freqRight, int numSamples){
         float[] tone = new float[numSamples*=2];
         float rightSide;
         float leftSide;
@@ -51,5 +63,36 @@ public class MusicGenerator {
             tone[i+1] = rightSide;
         }
         return tone;
+    }
+
+    public ArrayList<Integer> getSong(int numIterations, int seed){
+        ArrayList<Integer> notes  = new ArrayList<Integer>();
+        notes.add(seed);
+
+        for (int i = 0; i < numIterations; i++) {
+            int loc = 0;
+            while (loc < notes.size()){
+                if(notes.get(loc) == 0){
+                    notes.add(loc + 1, 2);
+                    notes.add(loc + 1, 3);
+                } else if(notes.get(loc) == 1){
+                    notes.add(loc + 1, 4);
+                    notes.add(loc + 1, 1);
+                } else if(notes.get(loc) == 2){
+                    notes.add(loc + 1, 0);
+                    notes.add(loc + 1, 0);
+                } else if(notes.get(loc) == 3){
+                    notes.add(loc + 1, 4);
+                    notes.add(loc + 1, 1);
+                } else if(notes.get(loc) == 4){
+                    notes.add(loc + 1, 2);
+                    notes.add(loc + 1, 1);
+                }
+                loc+=3;
+            }
+            System.out.println(i);
+        }
+
+        return notes;
     }
 }
