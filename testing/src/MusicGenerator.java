@@ -1,3 +1,4 @@
+import java.awt.geom.Arc2D;
 import java.util.ArrayList;
 import java.util.IdentityHashMap;
 import java.util.Iterator;
@@ -7,18 +8,21 @@ import java.util.Random;
 public class MusicGenerator {
 
     private Random random = new Random();
-    private float[] key = new float[10];
+    private int[] key = new int[7];
     private float[] music;
     private ArrayList<Integer> theme;
 
     public MusicGenerator(){
         for(int i = 0; i < key.length; i++){
-            key[i] = random.nextInt(340)+100;
+            key[i] = random.nextInt(440)+100;
         }
 
+    }
+
+    public float[] generateSong(int numThemeRepeats){
         theme = getSong(4, 0);
 
-        float[] themeNotes = new float[theme.size()];
+        int[] themeNotes = new int[theme.size()];
 
         int[] noteLengths = new int[theme.size()];
 
@@ -27,27 +31,22 @@ public class MusicGenerator {
         }
         int totalLength = 0;
         for(int i = 1 ; i < theme.size(); i++){
-            noteLengths[i] = (int) ((themeNotes[i] / 20 * random.nextInt((int) (themeNotes[i]) + 1)+5000));
+            noteLengths[i] = (themeNotes[i-1] / 5 * themeNotes[i] / 7 * random.nextInt((themeNotes[i]) + 1)+5000);
             totalLength += noteLengths[i];
         }
 
 
         music = new float[totalLength];
         int loc = 0;
+        int lastLoc = 0;
         for(int i = 0; i < theme.size(); i++) {
-            int volume = random.nextInt(6000) + 20000;
+            int volume = random.nextInt(6000) + 2000;
             float noteFreq = themeNotes[i];
-            for(int j = 0; j < noteLengths[i]; j++, loc++) {
+            for(int j = lastLoc; j < noteLengths[i] + lastLoc; j++, loc++) {
                 music[loc] = (float) (volume * Math.cos(2 * Math.PI * j / noteFreq));
             }
+            lastLoc = loc;
         }
-
-
-    }
-
-    public float[] generateSong(int numThemeRepeats){
-
-
 
         float[] samples  = new float[numThemeRepeats * music.length];
 

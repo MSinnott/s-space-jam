@@ -123,7 +123,19 @@ public class AudioFileManager {
 
     //merges the left + right channels
     private float[] mergeData(float[] left, float[] right) throws Exception {
-        if(left.length != right.length) throw new Exception("UnmatchedArrayException");
+        if(left.length > right.length){
+            float[] nRight = new float[left.length];
+            for (int i = 0; i < right.length; i++) {
+                nRight[i] = right[i];
+            }
+            right = nRight;
+        } else if(right.length > left.length){
+            float[] nLeft = new float[right.length];
+            for (int i = 0; i < left.length; i++) {
+                nLeft[i] = left[i];
+            }
+            left = nLeft;
+        }
         float[] ret = new float[left.length+right.length];
         for(int i = 0; i < ret.length; i+=2){
             ret[i] = left[i / 2];
