@@ -1,7 +1,5 @@
-import java.awt.geom.Arc2D;
+
 import java.util.ArrayList;
-import java.util.IdentityHashMap;
-import java.util.Iterator;
 import java.util.Random;
 
 //Makes the musics
