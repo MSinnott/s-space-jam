@@ -31,7 +31,35 @@ public class MusicGenerator {
         return beat;
     }
 
-    public float[] generateSongV1(int numThemeRepeats){
+    public float[] generateSongV2(int numThemeRepeats, float volumeMultiplier){
+        int numNotes = random.nextInt(20) + 10;
+        float[] noteLen = new float[numNotes];
+        float[] notes = new float[numNotes];
+
+        int themeLength = 0;
+        for (int i = 0; i < numNotes; i++) {
+            noteLen[i] = (float) (1.0 / (1 << random.nextInt(3)));
+            System.out.println(noteLen[i]);
+            notes[i] = key[random.nextInt(key.length)];
+            themeLength += noteLen[i];
+        }
+
+        float[] theme = new float[themeLength * numThemeRepeats * sampleRate];
+
+        int loc = 0;
+        for (int i = 0; i < numThemeRepeats; i++) {
+            for (int j = 0; j < noteLen.length; j++) {
+                for (int k = 0; k < noteLen[j] * sampleRate; k++, loc++) {
+                    if(loc == theme.length) break;
+                    theme[loc] = volumeMultiplier * getTone(notes[j], loc);
+                }
+            }
+        }
+
+        return theme;
+    }
+
+    public float[] generateSongV1(int numThemeRepeats, float volumeMultiplier){
         theme = getSongV1(3, 0);
 
         int[] themeNotes = new int[theme.size()];
@@ -63,7 +91,7 @@ public class MusicGenerator {
         float[] samples  = new float[numThemeRepeats * music.length];
 
         for(int i = 0; i < samples.length; i++){
-            samples[i] = music[i % music.length];
+            samples[i] = volumeMultiplier * music[i % music.length];
         }
 
         return samples;
@@ -134,7 +162,6 @@ public class MusicGenerator {
         }
         int[] toReturn = new int[ret.size()];
         for(int i = 0; i < toReturn.length; i++){
-            System.out.println(ret.get(i));
             toReturn[i] = ret.get(i);
         }
         return toReturn;
