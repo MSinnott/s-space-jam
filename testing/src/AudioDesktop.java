@@ -234,15 +234,15 @@ public class AudioDesktop extends JFrame{
             randButton.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    MusicGenerator generator = new MusicGenerator();
+                    MusicGenerator generator = new MusicGenerator(AudioFileManager.DEFAULT_SAMPLE_RATE);
 
-                    float[] song0 = generator.generateSong(10);
+                    float[] song0 = generator.generateSongV1(10);
                     AudioFileManager rSong0 = new AudioFileManager(song0, song0);
 
-                    float[] song1 = generator.generateSong(10);
+                    float[] song1 = generator.generateSongV1(10);
                     AudioFileManager rSong1 = new AudioFileManager(song1, song1);
 
-                    float[] song2 = generator.generateSong(10);
+                    float[] song2 = generator.generateSongV1(10);
                     AudioFileManager rSong2 = new AudioFileManager(song2, song2);
 
                     rSong0.pAdd(rSong1);

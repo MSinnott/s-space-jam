@@ -20,7 +20,8 @@ public class AudioFileManager {
     private float[] leftData;
     private float[] rightData;
 
-    private static final int DEFAULTSAMPLERATE = 44100;
+    private int sampleRate = DEFAULT_SAMPLE_RATE;
+    public static final int DEFAULT_SAMPLE_RATE = 44100;
     private static final String WAVHEADER = "RIFF____WAVEfmt ____________________data";
 
     private String filePath = null;
@@ -186,6 +187,11 @@ public class AudioFileManager {
         }
     }
 
+    public float getLength(){
+        return leftData.length / (float) sampleRate;
+    }
+
+
     public void setDefaultName(String name){
         defaultName = name;
     }
@@ -235,7 +241,7 @@ public class AudioFileManager {
         audioFile = new File(filepath);
         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(audioFile));
         byte[] writeOut = new byte[chunkSize];
-        byte[] header = buildHeader(chunkSize, DEFAULTSAMPLERATE);
+        byte[] header = buildHeader(chunkSize, DEFAULT_SAMPLE_RATE);
         for(int i = 0; i < header.length; i++){
             writeOut[i] = header[i];
         }
@@ -249,7 +255,7 @@ public class AudioFileManager {
     //builds a standard WAV header for the file
     public static byte[] buildHeader(int chunkSize, int sampleRate){
         if(sampleRate < 0){
-            sampleRate = DEFAULTSAMPLERATE;
+            sampleRate = DEFAULT_SAMPLE_RATE;
         }
         byte[] header = new byte[40];
         byte[] headerSkeleton = WAVHEADER.getBytes();
@@ -474,22 +480,27 @@ public class AudioFileManager {
     }
 
     public void pAdd(float[] toAddLeft, float[] toAddRight){
+        pAdd(toAddLeft, toAddRight, 0);
+    }
+
+    public void pAdd(float[] toAddLeft, float[] toAddRight, int offset){
         int end = toAddLeft.length;
         if (leftData.length > end) end = leftData.length;
-        float[] nlData = new float[end];
-        float[] nrData = new float[end];
+        float[] nlData = new float[end + offset];
+        float[] nrData = new float[end + offset];
         for(int i = 0; i < end; i++){
             if(i < leftData.length) nlData[i] += leftData[i];
-            if(i < toAddLeft.length) nlData[i] += toAddLeft[i];
+            if(i - offset > 0 && i - offset < toAddLeft.length) nlData[i] += toAddLeft[i - offset];
             if(i < rightData.length) nrData[i] += rightData[i];
-            if(i < toAddRight.length) nrData[i] += toAddRight[i];
+            if(i - offset > 0 && i - offset< toAddRight.length) nrData[i] += toAddRight[i - offset];
         }
         leftData = nlData;
         rightData = nrData;
     }
 
+
     public void pAdd(AudioFileManager fileManager){
-        pAdd(fileManager.getLeftChannel(), fileManager.getRightChannel());
+        pAdd(fileManager.getLeftChannel(), fileManager.getRightChannel(), 0);
     }
 
 }

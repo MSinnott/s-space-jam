@@ -9,16 +9,30 @@ public class MusicGenerator {
     private int[] key = new int[7];
     private float[] music;
     private ArrayList<Integer> theme;
+    private int sampleRate;
 
-    public MusicGenerator(){
+    public MusicGenerator(int samplesPerSec){
         for(int i = 0; i < key.length; i++){
             key[i] = random.nextInt(440)+100;
         }
-
+        key = sortAscending(key);
+        sampleRate = samplesPerSec;
     }
 
-    public float[] generateSong(int numThemeRepeats){
-        theme = getSong(4, 0);
+    public float[] getBeat(float beatsPerSecond, float numSeconds, float volumeMultiplier){
+        float[] beat = new float[(int) (numSeconds * sampleRate)];
+        if(beatsPerSecond == 0) return beat;
+        float volume = 0;
+        float samplesPerBeat = sampleRate / beatsPerSecond;
+        for(int phase = 0; phase < beat.length; phase++){
+            volume = (float) (volumeMultiplier * Math.pow(samplesPerBeat - phase % samplesPerBeat, 2) / (2 * samplesPerBeat));
+            beat[phase] = volume * getTone(key[0], phase);
+        }
+        return beat;
+    }
+
+    public float[] generateSongV1(int numThemeRepeats){
+        theme = getSongV1(3, 0);
 
         int[] themeNotes = new int[theme.size()];
 
@@ -29,7 +43,7 @@ public class MusicGenerator {
         }
         int totalLength = 0;
         for(int i = 1 ; i < theme.size(); i++){
-            noteLengths[i] = (themeNotes[i-1] / 5 * themeNotes[i] / 7 * random.nextInt((themeNotes[i]) + 1)+5000);
+            noteLengths[i] = (themeNotes[i-1] * themeNotes[i] * random.nextInt(themeNotes[i] + 1) / 50 +5000);
             totalLength += noteLengths[i];
         }
 
@@ -55,27 +69,13 @@ public class MusicGenerator {
         return samples;
     }
 
-    //just for reference -- freq in hz
-    public float[] getStereoTone(double freqLeft, double freqRight, int numSamples){
-        float[] tone = new float[numSamples*=2];
-        float rightSide;
-        float leftSide;
-        for(int i = 0; i < numSamples; i+= 2){
-            leftSide = (float) (6000 * Math.sin(2 * Math.PI * i / freqLeft));
-            rightSide = (float) (6000 * Math.sin(2 * Math.PI * i / freqRight));
-            tone[i] = leftSide;
-            tone[i+1] = rightSide;
-        }
-        return tone;
-    }
-
-    public ArrayList<Integer> getSong(int numIterations, int seed){
+    public ArrayList<Integer> getSongV1(int numIterations, int seed){
         ArrayList<Integer> notes  = new ArrayList<Integer>();
         notes.add(seed);
 
         int[] randMaps = new int[10];
         for (int i = 0; i < randMaps.length; i++) {
-            randMaps[i] = random.nextInt(5);
+            randMaps[i] = random.nextInt(key.length);
         }
 
         for (int i = 0; i < numIterations; i++) {
@@ -103,4 +103,45 @@ public class MusicGenerator {
 
         return notes;
     }
+
+    //Usefule methods -- not really going to be used
+    public float[] generateScale(int noteTimes){
+        float[] scale = new float[noteTimes * key.length];
+        int loc = 0;
+        for(int tone: key){
+            for(int i = 0; i < noteTimes; i++, loc++) {
+                scale[loc] = (float) (6000 * Math.sin(2 * Math.PI * loc / tone));
+            }
+        }
+        return scale;
+    }
+
+    public int[] sortAscending(int[] toSort){
+        ArrayList<Integer> ret = new ArrayList<Integer>();
+
+        for(Integer intg: toSort){
+            if(ret.size() == 0 || ret.get(0) > intg){
+                ret.add(0, intg);
+            } else {
+                for (int i = 0; i < ret.size() - 1; i++) {
+                    if (ret.size() > 1 && ret.get(i) < intg && ret.get(i + 1) > intg) {
+                        ret.add(i, intg);
+                        break;
+                    }
+                }
+            }
+            if(ret.size() > 1 && intg > ret.get(ret.size() - 1)) ret.add(intg);
+        }
+        int[] toReturn = new int[ret.size()];
+        for(int i = 0; i < toReturn.length; i++){
+            System.out.println(ret.get(i));
+            toReturn[i] = ret.get(i);
+        }
+        return toReturn;
+    }
+
+    public float getTone(double freq, int phase){
+       return (float) Math.sin(2 * Math.PI * phase / freq);
+    }
+
 }
