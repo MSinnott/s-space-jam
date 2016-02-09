@@ -32,6 +32,12 @@ public class baseRunner {
 
         beatMan0.buildFile("testing/music/bman.wav");
         mainWindow.buildWindow(beatMan0);
+
+        float[] ramp = generator.toneRamp(10, 12000);
+        System.out.println("ramp");
+        AudioFileManager rampMan = new AudioFileManager(ramp, ramp);
+        rampMan.buildFile("testing/music/rman.wav");
+        mainWindow.buildWindow(rampMan);
     }
 
 }

@@ -19,6 +19,18 @@ public class MusicGenerator {
         sampleRate = samplesPerSec;
     }
 
+    public float[] toneRamp(float numSeconds, float volumeMultiplier){
+        float[] tune = new float[(int) (numSeconds * sampleRate)];
+
+        float tone = key[key.length -1];
+        float toneChng = (-100f / sampleRate);
+        for (int i = 0; i < tune.length; i++, tone+=toneChng) {
+            tune[i] = volumeMultiplier * getTone(tone, i);
+        }
+        return tune;
+    }
+
+
     public float[] getBeat(float beatsPerSecond, float numSeconds, float volumeMultiplier){
         float[] beat = new float[(int) (numSeconds * sampleRate)];
         if(beatsPerSecond == 0) return beat;
