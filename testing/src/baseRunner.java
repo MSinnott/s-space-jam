@@ -16,28 +16,26 @@ public class baseRunner {
         FileOutputStream fileOut = new FileOutputStream(nBeepNums);
         fileOut.write(++songNum);
 
-        float[] song0 = generator.generateSongV2(32, 12800);
-        System.out.println("s");
-        AudioFileManager rSong = new AudioFileManager(song0, song0);
-        rSong.buildFile("testing/music/rsong.wav");
-        mainWindow.buildWindow(rSong);
+        float[] ramp = generator.toneRamp(Float.NaN, 4, 2 << 8, -128);
+        AudioFileManager rampMan = new AudioFileManager(ramp, ramp);
+        //mainWindow.buildWindow(rampMan);
 
-        float[] beat0 = generator.getBeat(8, rSong.getLength() / 4, .5f);
+        float[] song0 = generator.generateSongV2(32, 2 << 8);
+        AudioFileManager rSong = new AudioFileManager(song0, song0);
+        //rSong.buildFile("testing/music/rsong.wav");
+        //mainWindow.buildWindow(rSong);
+
+        float[] beat0 = generator.getBeat(440, rSong.getSoundTime(), 2 << 8, 8, 32);
         AudioFileManager beatMan0 = new AudioFileManager(beat0, beat0);
-        float[] beat1 = generator.getBeat(1, rSong.getLength() / 4, .25f);
+        float[] beat1 = generator.getBeat(220, rSong.getSoundTime(), 2 << 9, 1, 32);
+
 
         beatMan0.pAdd(beat1, beat1, AudioFileManager.DEFAULT_SAMPLE_RATE * 2);
-
         beatMan0.pAdd(song0, song0, AudioFileManager.DEFAULT_SAMPLE_RATE * 4);
+        beatMan0.pAdd(ramp, ramp, 0);
 
-        beatMan0.buildFile("testing/music/bman.wav");
+        beatMan0.buildFile("testing/music/sng.wav");
         mainWindow.buildWindow(beatMan0);
-
-        float[] ramp = generator.toneRamp(10, 12000);
-        System.out.println("ramp");
-        AudioFileManager rampMan = new AudioFileManager(ramp, ramp);
-        rampMan.buildFile("testing/music/rman.wav");
-        mainWindow.buildWindow(rampMan);
     }
 
 }

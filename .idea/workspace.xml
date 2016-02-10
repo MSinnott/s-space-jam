@@ -3,8 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="933177a3-c705-41de-881d-4941e94a1377" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/music/bman.wav" afterPath="$PROJECT_DIR$/testing/music/bman.wav" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/music/rman.wav" afterPath="$PROJECT_DIR$/testing/music/rman.wav" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/music/rsong.wav" afterPath="$PROJECT_DIR$/testing/music/rsong.wav" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/music/BeepMusic/bm.txt" afterPath="$PROJECT_DIR$/testing/music/BeepMusic/bm.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioFileManager.java" afterPath="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MusicGenerator.java" afterPath="$PROJECT_DIR$/testing/src/MusicGenerator.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/baseRunner.java" afterPath="$PROJECT_DIR$/testing/src/baseRunner.java" />
     </list>
@@ -28,25 +30,29 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="baseRunner.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="baseRunner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
+            <state vertical-scroll-proportion="0.27896994">
+              <caret line="18" column="62" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MusicGenerator.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MusicGenerator.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/src/MusicGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33476394">
-              <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="148" column="114" selection-start-line="148" selection-start-column="114" selection-end-line="148" selection-end-column="114" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#3819#3828#0" expanded="true" />
-                <element signature="e#5480#5489#0" expanded="true" />
+                <element signature="method#generateSongV2#0;class#MusicGenerator#0" expanded="false" />
+                <element signature="method#generateSongV1#0;class#MusicGenerator#0" expanded="false" />
+                <element signature="method#getSongV1#0;class#MusicGenerator#0" expanded="false" />
+                <element signature="e#2875#2884#0" expanded="true" />
+                <element signature="method#sortAscending#0;class#MusicGenerator#0" expanded="false" />
+                <element signature="e#5436#5445#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -56,7 +62,7 @@
         <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="190" column="32" selection-start-line="190" selection-start-column="32" selection-end-line="190" selection-end-column="32" />
+              <caret line="190" column="49" selection-start-line="190" selection-start-column="49" selection-end-line="190" selection-end-column="49" />
               <folding>
                 <element signature="e#3261#3262#0" expanded="true" />
                 <element signature="e#3292#3293#0" expanded="true" />
@@ -64,12 +70,12 @@
                 <element signature="e#3661#3662#0" expanded="true" />
                 <element signature="e#5598#5599#0" expanded="true" />
                 <element signature="e#5629#5630#0" expanded="true" />
-                <element signature="e#5852#5853#0" expanded="true" />
-                <element signature="e#5911#5912#0" expanded="true" />
-                <element signature="e#5958#5959#0" expanded="true" />
-                <element signature="e#5992#5993#0" expanded="true" />
-                <element signature="e#16003#16004#0" expanded="true" />
-                <element signature="e#16049#16050#0" expanded="true" />
+                <element signature="e#5855#5856#0" expanded="true" />
+                <element signature="e#5912#5913#0" expanded="true" />
+                <element signature="e#5959#5960#0" expanded="true" />
+                <element signature="e#5993#5994#0" expanded="true" />
+                <element signature="e#16004#16005#0" expanded="true" />
+                <element signature="e#16050#16051#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -168,10 +174,10 @@
         <option value="$PROJECT_DIR$/testing/src/CloseAction.java" />
         <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioWindow.java" />
-        <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
-        <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
+        <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
         <option value="$PROJECT_DIR$/testing/src/MusicGenerator.java" />
+        <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
       </list>
     </option>
   </component>
@@ -592,12 +598,12 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.16050808" sideWeight="0.49423522" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23344104" sideWeight="0.89821184" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.89821184" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290993" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23344104" sideWeight="0.10178817" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.0" sideWeight="0.10178817" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39895698" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -651,7 +657,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="7" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -671,12 +677,12 @@
             <element signature="e#3661#3662#0" expanded="true" />
             <element signature="e#5598#5599#0" expanded="true" />
             <element signature="e#5629#5630#0" expanded="true" />
-            <element signature="e#5852#5853#0" expanded="true" />
-            <element signature="e#5911#5912#0" expanded="true" />
-            <element signature="e#5958#5959#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#16003#16004#0" expanded="true" />
-            <element signature="e#16049#16050#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+            <element signature="e#5959#5960#0" expanded="true" />
+            <element signature="e#5993#5994#0" expanded="true" />
+            <element signature="e#16004#16005#0" expanded="true" />
+            <element signature="e#16050#16051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -754,12 +760,12 @@
             <element signature="e#3661#3662#0" expanded="true" />
             <element signature="e#5598#5599#0" expanded="true" />
             <element signature="e#5629#5630#0" expanded="true" />
-            <element signature="e#5852#5853#0" expanded="true" />
-            <element signature="e#5911#5912#0" expanded="true" />
-            <element signature="e#5958#5959#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#16003#16004#0" expanded="true" />
-            <element signature="e#16049#16050#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+            <element signature="e#5959#5960#0" expanded="true" />
+            <element signature="e#5993#5994#0" expanded="true" />
+            <element signature="e#16004#16005#0" expanded="true" />
+            <element signature="e#16050#16051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -829,12 +835,12 @@
             <element signature="e#3661#3662#0" expanded="true" />
             <element signature="e#5598#5599#0" expanded="true" />
             <element signature="e#5629#5630#0" expanded="true" />
-            <element signature="e#5852#5853#0" expanded="true" />
-            <element signature="e#5911#5912#0" expanded="true" />
-            <element signature="e#5958#5959#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#16003#16004#0" expanded="true" />
-            <element signature="e#16049#16050#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+            <element signature="e#5959#5960#0" expanded="true" />
+            <element signature="e#5993#5994#0" expanded="true" />
+            <element signature="e#16004#16005#0" expanded="true" />
+            <element signature="e#16050#16051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -904,12 +910,12 @@
             <element signature="e#3661#3662#0" expanded="true" />
             <element signature="e#5598#5599#0" expanded="true" />
             <element signature="e#5629#5630#0" expanded="true" />
-            <element signature="e#5852#5853#0" expanded="true" />
-            <element signature="e#5911#5912#0" expanded="true" />
-            <element signature="e#5958#5959#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#16003#16004#0" expanded="true" />
-            <element signature="e#16049#16050#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+            <element signature="e#5959#5960#0" expanded="true" />
+            <element signature="e#5993#5994#0" expanded="true" />
+            <element signature="e#16004#16005#0" expanded="true" />
+            <element signature="e#16050#16051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -979,12 +985,12 @@
             <element signature="e#3661#3662#0" expanded="true" />
             <element signature="e#5598#5599#0" expanded="true" />
             <element signature="e#5629#5630#0" expanded="true" />
-            <element signature="e#5852#5853#0" expanded="true" />
-            <element signature="e#5911#5912#0" expanded="true" />
-            <element signature="e#5958#5959#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#16003#16004#0" expanded="true" />
-            <element signature="e#16049#16050#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+            <element signature="e#5959#5960#0" expanded="true" />
+            <element signature="e#5993#5994#0" expanded="true" />
+            <element signature="e#16004#16005#0" expanded="true" />
+            <element signature="e#16050#16051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1054,12 +1060,12 @@
             <element signature="e#3661#3662#0" expanded="true" />
             <element signature="e#5598#5599#0" expanded="true" />
             <element signature="e#5629#5630#0" expanded="true" />
-            <element signature="e#5852#5853#0" expanded="true" />
-            <element signature="e#5911#5912#0" expanded="true" />
-            <element signature="e#5958#5959#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#16003#16004#0" expanded="true" />
-            <element signature="e#16049#16050#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+            <element signature="e#5959#5960#0" expanded="true" />
+            <element signature="e#5993#5994#0" expanded="true" />
+            <element signature="e#16004#16005#0" expanded="true" />
+            <element signature="e#16050#16051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1129,12 +1135,12 @@
             <element signature="e#3661#3662#0" expanded="true" />
             <element signature="e#5598#5599#0" expanded="true" />
             <element signature="e#5629#5630#0" expanded="true" />
-            <element signature="e#5852#5853#0" expanded="true" />
-            <element signature="e#5911#5912#0" expanded="true" />
-            <element signature="e#5958#5959#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#16003#16004#0" expanded="true" />
-            <element signature="e#16049#16050#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+            <element signature="e#5959#5960#0" expanded="true" />
+            <element signature="e#5993#5994#0" expanded="true" />
+            <element signature="e#16004#16005#0" expanded="true" />
+            <element signature="e#16050#16051#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1278,27 +1284,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="190" column="32" selection-start-line="190" selection-start-column="32" selection-end-line="190" selection-end-column="32" />
-          <folding>
-            <element signature="e#3261#3262#0" expanded="true" />
-            <element signature="e#3292#3293#0" expanded="true" />
-            <element signature="e#3629#3630#0" expanded="true" />
-            <element signature="e#3661#3662#0" expanded="true" />
-            <element signature="e#5598#5599#0" expanded="true" />
-            <element signature="e#5629#5630#0" expanded="true" />
-            <element signature="e#5852#5853#0" expanded="true" />
-            <element signature="e#5911#5912#0" expanded="true" />
-            <element signature="e#5958#5959#0" expanded="true" />
-            <element signature="e#5992#5993#0" expanded="true" />
-            <element signature="e#16003#16004#0" expanded="true" />
-            <element signature="e#16049#16050#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/AudioDesktop.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1309,23 +1294,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="51" selection-start-line="35" selection-start-column="51" selection-end-line="35" selection-end-column="51" />
-          <folding />
+          <caret line="190" column="49" selection-start-line="190" selection-start-column="49" selection-end-line="190" selection-end-column="49" />
+          <folding>
+            <element signature="e#3261#3262#0" expanded="true" />
+            <element signature="e#3292#3293#0" expanded="true" />
+            <element signature="e#3629#3630#0" expanded="true" />
+            <element signature="e#3661#3662#0" expanded="true" />
+            <element signature="e#5598#5599#0" expanded="true" />
+            <element signature="e#5629#5630#0" expanded="true" />
+            <element signature="e#5855#5856#0" expanded="true" />
+            <element signature="e#5912#5913#0" expanded="true" />
+            <element signature="e#5959#5960#0" expanded="true" />
+            <element signature="e#5993#5994#0" expanded="true" />
+            <element signature="e#16004#16005#0" expanded="true" />
+            <element signature="e#16050#16051#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/MusicGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33476394">
-          <caret line="25" column="27" selection-start-line="25" selection-start-column="27" selection-end-line="25" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="148" column="114" selection-start-line="148" selection-start-column="114" selection-end-line="148" selection-end-column="114" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#3819#3828#0" expanded="true" />
-            <element signature="e#5480#5489#0" expanded="true" />
+            <element signature="method#generateSongV2#0;class#MusicGenerator#0" expanded="false" />
+            <element signature="method#generateSongV1#0;class#MusicGenerator#0" expanded="false" />
+            <element signature="method#getSongV1#0;class#MusicGenerator#0" expanded="false" />
+            <element signature="e#2875#2884#0" expanded="true" />
+            <element signature="method#sortAscending#0;class#MusicGenerator#0" expanded="false" />
+            <element signature="e#5436#5445#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27896994">
+          <caret line="18" column="62" selection-start-line="18" selection-start-column="62" selection-end-line="18" selection-end-column="62" />
+          <folding />
         </state>
       </provider>
     </entry>

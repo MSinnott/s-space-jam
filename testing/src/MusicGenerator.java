@@ -19,29 +19,9 @@ public class MusicGenerator {
         sampleRate = samplesPerSec;
     }
 
-    public float[] toneRamp(float numSeconds, float volumeMultiplier){
-        float[] tune = new float[(int) (numSeconds * sampleRate)];
-
-        float tone = key[key.length -1];
-        float toneChng = (-100f / sampleRate);
-        for (int i = 0; i < tune.length; i++, tone+=toneChng) {
-            tune[i] = volumeMultiplier * getTone(tone, i);
-        }
-        return tune;
-    }
-
-
-    public float[] getBeat(float beatsPerSecond, float numSeconds, float volumeMultiplier){
-        float[] beat = new float[(int) (numSeconds * sampleRate)];
-        if(beatsPerSecond == 0) return beat;
-        float volume = 0;
-        float samplesPerBeat = sampleRate / beatsPerSecond;
-        for(int phase = 0; phase < beat.length; phase++){
-            volume = (float) (volumeMultiplier * Math.pow(samplesPerBeat - phase % samplesPerBeat, 2) / (2 * samplesPerBeat));
-            beat[phase] = volume * getTone(key[0], phase);
-        }
-        return beat;
-    }
+    /*
+        High level functions to build a song
+     */
 
     public float[] generateSongV2(int numThemeRepeats, float volumeMultiplier){
         int numNotes = random.nextInt(20) + 10;
@@ -51,7 +31,6 @@ public class MusicGenerator {
         int themeLength = 0;
         for (int i = 0; i < numNotes; i++) {
             noteLen[i] = (float) (1.0 / (1 << random.nextInt(3)));
-            System.out.println(noteLen[i]);
             notes[i] = key[random.nextInt(key.length)];
             themeLength += noteLen[i];
         }
@@ -144,17 +123,36 @@ public class MusicGenerator {
         return notes;
     }
 
-    //Usefule methods -- not really going to be used
-    public float[] generateScale(int noteTimes){
-        float[] scale = new float[noteTimes * key.length];
-        int loc = 0;
-        for(int tone: key){
-            for(int i = 0; i < noteTimes; i++, loc++) {
-                scale[loc] = (float) (6000 * Math.sin(2 * Math.PI * loc / tone));
-            }
+    /*
+        Digital synthesizers to build song components
+        Standard header format --
+            (float tone, float numSeconds, float volumeMultiplier, ...)
+     */
+
+    public float[] toneRamp(float tone, float numSeconds, float volumeMultiplier, float chngBy){
+        if(Float.valueOf(tone).isNaN()) tone = key[0];
+        float[] tune = new float[(int) (numSeconds * sampleRate)];
+        float toneChng = (chngBy / (tune.length));
+        for (int i = 0; i < tune.length; i++, tone+=toneChng) {
+            tune[i] = volumeMultiplier * getTone(tone, i);
         }
-        return scale;
+        return tune;
     }
+
+    public float[] getBeat(float tone, float numSeconds, float volumeMultiplier, float beatsPerSecond, float peakedness){
+        if(Float.valueOf(tone).isNaN()) tone = key[0];
+        float[] beat = new float[(int) (numSeconds * sampleRate)];
+        if(beatsPerSecond <= 0) return beat;
+        float volume = 0;
+        float scale = (float) (2 * Math.PI * beatsPerSecond / sampleRate );
+        for(int phase = 0; phase < beat.length; phase++){
+            volume = (float) (volumeMultiplier *  Math.pow(Math.cos(phase * scale) + 1, peakedness) / Math.pow(2, peakedness));
+            beat[phase] = volume * getTone(tone, phase);
+        }
+        return beat;
+    }
+
+    //Useful methods
 
     public int[] sortAscending(int[] toSort){
         ArrayList<Integer> ret = new ArrayList<Integer>();
@@ -179,7 +177,7 @@ public class MusicGenerator {
         return toReturn;
     }
 
-    public float getTone(double freq, int phase){
+    public float getTone(double freq, float phase){
        return (float) Math.sin(2 * Math.PI * phase / freq);
     }
 

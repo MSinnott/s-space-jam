@@ -187,8 +187,8 @@ public class AudioFileManager {
         }
     }
 
-    public float getLength(){
-        return leftData.length / (float) sampleRate;
+    public float getSoundTime(){
+        return leftData.length / (2 * sampleRate);
     }
 
 
