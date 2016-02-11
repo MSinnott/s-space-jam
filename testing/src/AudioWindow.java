@@ -20,7 +20,7 @@ public class AudioWindow extends JInternalFrame{
     private String savePath = null;
 
     public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
-        super(fileManager.getName());
+        super(fileManager.getName() + " - " + 2* fileManager.getMergedData().length + " bytes");
 
         audioDesktop = aDesk;
 

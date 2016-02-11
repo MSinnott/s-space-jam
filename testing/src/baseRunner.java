@@ -27,7 +27,7 @@ public class baseRunner {
 
         float[] beat0 = generator.getBeat(440, rSong.getSoundTime(), 2 << 8, 8, 32);
         AudioFileManager beatMan0 = new AudioFileManager(beat0, beat0);
-        float[] beat1 = generator.getBeat(220, rSong.getSoundTime(), 2 << 9, 1, 32);
+        float[] beat1 = generator.windowFunc(generator.getTone(440, 0, 44100 * 4), "sin(t)+1");
 
 
         beatMan0.pAdd(beat1, beat1, AudioFileManager.DEFAULT_SAMPLE_RATE * 2);

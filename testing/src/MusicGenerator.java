@@ -139,6 +139,15 @@ public class MusicGenerator {
         return tune;
     }
 
+    public float[] windowFunc(float[] tuneToWindow, String windowingFunction){
+        float[] newTone = new float[tuneToWindow.length];
+        ArrayList<String> func = EqnHandler.convertToRPN(EqnHandler.parse(windowingFunction));
+        for(int i = 0; i < newTone.length; i++){
+            newTone[i] = tuneToWindow[i] * EqnHandler.evalSample(i, func);
+        }
+        return newTone;
+    }
+
     public float[] getBeat(float tone, float numSeconds, float volumeMultiplier, float beatsPerSecond, float peakedness){
         if(Float.valueOf(tone).isNaN()) tone = key[0];
         float[] beat = new float[(int) (numSeconds * sampleRate)];
@@ -179,6 +188,14 @@ public class MusicGenerator {
 
     public float getTone(double freq, float phase){
        return (float) Math.sin(2 * Math.PI * phase / freq);
+    }
+
+    public float[] getTone(double freq, float startPhase, int length){
+        float[] ret = new float[length];
+        for (int phase = 0; phase < length; phase++) {
+            ret[phase] = getTone(freq, phase + startPhase);
+        }
+        return ret;
     }
 
 }

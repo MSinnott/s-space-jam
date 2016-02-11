@@ -88,7 +88,7 @@ public class EqnHandler {
         return numStack.pop();
     }
 
-    public static Float evalOp(String opName, float[] args){
+    private static Float evalOp(String opName, float[] args){
         switch (opName){
             case "+":
                 return args[0] + args[1];
@@ -105,7 +105,7 @@ public class EqnHandler {
         }
     }
 
-    public static Float evalFunc(String funcName, float[] args){
+    private static Float evalFunc(String funcName, float[] args){
         switch (funcName){
             case "sin(":
                 return (float) Math.sin(args[0]);
@@ -120,7 +120,7 @@ public class EqnHandler {
         }
     }
 
-    public static boolean isNumber(String s){
+    private static boolean isNumber(String s){
         for(int i = 0; i < s.length(); i++){
             if(!contains(numbers ,charAt(s, i)) && !charAt(s, i).equals("-")) return false;
         }
