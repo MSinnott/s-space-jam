@@ -79,8 +79,8 @@ public class AudioDesktop extends JFrame{
 
         convertButton = new JMenuItem("File Convert");
         fileMenu.add(convertButton);
-        //themeButton.addActionListener(new converterOpenAction());
-        fileMenu.add(convertButton);
+        convertButton.addActionListener(new ConverterOpenAction());
+        components.add(convertButton);
 
         exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
@@ -286,6 +286,25 @@ public class AudioDesktop extends JFrame{
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 File selection = fileChooser.getSelectedFile();
                 buildWindow(new AudioFileManager(selection));
+            }
+        }
+    }
+
+    public class ConverterOpenAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setBackground(theme[0]);
+            fileChooser.setForeground(theme[5]);
+            FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                    "mp3 Files", "mp3");
+            //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
+            //looks like .au and .aiff files are already supported.
+            fileChooser.setFileFilter(filter);
+            int returnVal = fileChooser.showOpenDialog(desktop);
+            if(returnVal == JFileChooser.APPROVE_OPTION) {
+                File selection = fileChooser.getSelectedFile();
+                //code for conversion goes here
             }
         }
     }
