@@ -191,6 +191,10 @@ public class AudioFileManager {
         return leftData.length / (2 * sampleRate);
     }
 
+    public long getNumBytes(){
+        return leftData.length + rightData.length;
+    }
+
 
     public void setDefaultName(String name){
         defaultName = name;
@@ -501,6 +505,13 @@ public class AudioFileManager {
 
     public void pAdd(AudioFileManager fileManager){
         pAdd(fileManager.getLeftChannel(), fileManager.getRightChannel(), 0);
+    }
+
+    public void roughData(float roughFactor){
+        for (int i = 1; i < leftData.length -1; i++) {
+            leftData[i] = leftData[i] + (leftData[i+1] + leftData[i-1]) / roughFactor;
+            rightData[i] = rightData[i] + (rightData[i+1] + rightData[i-1]) / roughFactor;
+        }
     }
 
 }

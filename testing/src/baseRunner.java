@@ -7,35 +7,28 @@ public class baseRunner {
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
-        File beepNums = new File("testing/music/BeepMusic/bm.txt");
-        FileInputStream fileIn = new FileInputStream(beepNums);
-        int songNum = fileIn.read();
-        beepNums.delete();
-        File nBeepNums = new File("testing/music/BeepMusic/bm.txt");
-        nBeepNums.createNewFile();
-        FileOutputStream fileOut = new FileOutputStream(nBeepNums);
-        fileOut.write(++songNum);
-
-        float[] ramp = generator.toneRamp(Float.NaN, 4, 2 << 8, -128);
-        AudioFileManager rampMan = new AudioFileManager(ramp, ramp);
-        //mainWindow.buildWindow(rampMan);
-
         float[] song0 = generator.generateSongV2(32, 2 << 8);
-        AudioFileManager rSong = new AudioFileManager(song0, song0);
-        //rSong.buildFile("testing/music/rsong.wav");
-        //mainWindow.buildWindow(rSong);
+        float[] ramp = generator.toneRamp(Float.NaN, 4, 2 << 8, -128);
+        AudioFileManager rSong = new AudioFileManager(ramp, ramp);
 
-        float[] beat0 = generator.getBeat(440, rSong.getSoundTime(), 2 << 8, 8, 32);
-        AudioFileManager beatMan0 = new AudioFileManager(beat0, beat0);
-        float[] beat1 = generator.windowFunc(generator.getTone(440, 0, 44100 * 4), "sin(t)+1");
+        float[] beat0 = generator.getBeat(440, song0.length / AudioFileManager.DEFAULT_SAMPLE_RATE, 2 << 7, 2, 32);
+        float[] beat1 = generator.getBeat(880, song0.length / AudioFileManager.DEFAULT_SAMPLE_RATE, 2 << 8, 4, 32);
+        float[] beat2 = generator.getBeat(220, song0.length / AudioFileManager.DEFAULT_SAMPLE_RATE, 2 << 9, 1, 32);
+
+        rSong.pAdd(beat0, beat0, AudioFileManager.DEFAULT_SAMPLE_RATE * 6);
+        rSong.pAdd(beat1, beat1, AudioFileManager.DEFAULT_SAMPLE_RATE * 6);
+        rSong.pAdd(beat2, beat2, AudioFileManager.DEFAULT_SAMPLE_RATE * 6);
+        rSong.pAdd(song0, song0, AudioFileManager.DEFAULT_SAMPLE_RATE * 4);
+
+        rSong.buildFile("testing/music/sng.wav");
 
 
-        beatMan0.pAdd(beat1, beat1, AudioFileManager.DEFAULT_SAMPLE_RATE * 2);
-        beatMan0.pAdd(song0, song0, AudioFileManager.DEFAULT_SAMPLE_RATE * 4);
-        beatMan0.pAdd(ramp, ramp, 0);
+        rSong.ftransform();
+        rSong.roughData(500);
+        rSong.btransform();
+        rSong.buildFile("testing/music/sngR.wav");
 
-        beatMan0.buildFile("testing/music/sng.wav");
-        mainWindow.buildWindow(beatMan0);
+        mainWindow.buildWindow(rSong);
     }
 
 }
