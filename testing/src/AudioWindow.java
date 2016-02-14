@@ -263,7 +263,7 @@ public class AudioWindow extends JInternalFrame{
             shiftDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    audioFile.hscale(Float.valueOf(textField.getText()));
+                    //audioFile.hscale(Float.valueOf(textField.getText()));
                     updatePane();
                 }
             });
@@ -280,7 +280,7 @@ public class AudioWindow extends JInternalFrame{
             shiftDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    audioFile.hshift(Integer.valueOf(textField.getText()));
+                    //audioFile.hshift(Integer.valueOf(textField.getText()));
                     updatePane();
                 }
             });
@@ -302,7 +302,7 @@ public class AudioWindow extends JInternalFrame{
             int returnVal = fileChooser.showOpenDialog(audioWindow);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 AudioFileManager selection = new AudioFileManager(fileChooser.getSelectedFile());
-                audioFile.pAdd(selection.getLeftChannel(), selection.getRightChannel());
+                audioFile.pAdd(selection.getChannels(), 0);
                 updatePane();
             }
         }
@@ -322,7 +322,7 @@ public class AudioWindow extends JInternalFrame{
             int returnVal = fileChooser.showOpenDialog(audioWindow);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 AudioFileManager selection = new AudioFileManager(fileChooser.getSelectedFile());
-                audioFile.pMult(selection.getLeftChannel(), selection.getRightChannel());
+                audioFile.pMult(selection.getChannels());
                 updatePane();
             }
         }
@@ -345,7 +345,7 @@ public class AudioWindow extends JInternalFrame{
             stepDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    audioFile.stepFFT(Integer.valueOf(textField.getText()));
+                    //audioFile.stepFFT(Integer.valueOf(textField.getText()));
                     updatePane();
                 }
             });
@@ -362,8 +362,7 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public void updatePane(){
-        pane.setLeftData(audioFile.getLeftChannel());
-        pane.setRightData(audioFile.getRightChannel());
+        pane.setAudioFile(audioFile);
         pane.invalidate();
         pane.repaint();
         this.invalidate();

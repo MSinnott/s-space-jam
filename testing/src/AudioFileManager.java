@@ -17,8 +17,10 @@ public class AudioFileManager {
     private String defaultName = "";
 
     //both complex
-    private float[] leftData;
-    private float[] rightData;
+ //   private float[] leftData;
+ //   private float[] rightData;
+
+    private float[][] channels;
 
     private int sampleRate = DEFAULT_SAMPLE_RATE;
     public static final int DEFAULT_SAMPLE_RATE = 44100;
@@ -26,77 +28,77 @@ public class AudioFileManager {
 
     private String filePath = null;
     //5 constructors that override each other
+
     public AudioFileManager(String filepath){
         audioFile = new File(filepath);
         float[] data = byteArrToFloatArr(readFile(audioFile));
-        leftData = complexify(getLeftChannel(data));
-        rightData = complexify(getRightChannel(data));
+        channels = complexify(split(data, 2));
         this.filePath = filepath;
     }
 
-    public AudioFileManager(File audioFileIn){ //the one that I want -A
+    public AudioFileManager(File audioFileIn) { //the one that I want -A
         audioFile = audioFileIn;
         filePath = audioFileIn.getAbsolutePath();
 
         float[] data = byteArrToFloatArr(readFile(audioFile));
-        leftData = complexify(getLeftChannel(data));
-        rightData = complexify(getRightChannel(data));
-
-    }
-
-    public AudioFileManager(float[] samplesIn){
-        rightData = new float[samplesIn.length / 2];
-        leftData = new float[samplesIn.length / 2];
-        for(int i = 0; i < samplesIn.length; i+=2){
-            rightData[i / 2] = samplesIn[i];
-            leftData[i / 2] = samplesIn[i+1];
-        }
-        rightData = complexify(rightData);
-        leftData = complexify(leftData);
+        channels = complexify(split(data, 2));
     }
 
     public AudioFileManager(AudioFileManager fileManager){
-        float[] leftIn = fileManager.getLeftChannel();
-        float[] rightIn = fileManager.getRightChannel();
-        leftData = new float[leftIn.length];
-        rightData = new float[rightIn.length];
-        for(int i = 0; i < leftIn.length; i++){
-            leftData[i] = leftIn[i];
-            rightData[i] = rightIn[i];
-        }
+        float[][] toCopy = fileManager.getChannels();
+        System.arraycopy(toCopy, 0, channels, 0 , toCopy.length);
     }
 
     public AudioFileManager(float[] leftSamples, float[] rightSamples){
-        leftData = new float[leftSamples.length];
-        rightData = new float[rightSamples.length];
-        System.arraycopy(leftSamples, 0, leftData, 0, leftSamples.length);
-        System.arraycopy(rightSamples, 0, rightData, 0, rightSamples.length);
-        rightData = complexify(rightData);
-        leftData = complexify(leftData);
+        channels = new float[2][leftSamples.length];
+        channels[0] = new float[leftSamples.length];
+        channels[1] = new float[rightSamples.length];
+        System.arraycopy(leftSamples, 0, channels[0], 0, leftSamples.length);
+        System.arraycopy(rightSamples, 0, channels[1], 0, rightSamples.length);
+        channels = complexify(channels);
+    }
+
+    public float[][] getChannels(){
+        return channels;
+    }
+
+    public float[][] split(float[] toSplit, int numSplits){
+        float[][] ret = new float[numSplits][toSplit.length / numSplits];
+        int loc = 0;
+        for (int i = 0; i < ret.length; i++, loc++) {
+            for (int j = 0; j < ret[i].length; j++, loc++) {
+                ret[i][j] = toSplit[loc];
+            }
+        }
+        return ret;
     }
 
     //adds imaginary components
-    public float[] complexify(float[] realData){
-        float[] ret = new float[realData.length * 2];
-        for(int i = 0; i < realData.length; i++){
-            ret[2*i] = realData[i];
-            ret[2*i+1] = 0;
+    public float[][] complexify(float[][] channelsIn){
+        float[][] ret = new float[channelsIn.length][channelsIn[0].length * 2];
+        for (int i = 0; i < channelsIn.length; i++) {
+            for (int j = 0; j < channelsIn[i].length; j++) {
+                ret[i][2 * j] = channelsIn[i][j];
+                ret[i][2 * j + 1] = 0;
+            }
         }
         return ret;
     }
 
     //removes imaginary components
-    public float[] decomplexify(float[] complexData){
-        float[] ret = new float[complexData.length / 2];
-        for(int i = 0; i < ret.length; i++){
-            ret[i] = complexData[2 * i];
+    public float[][] decomplexify(float[][] channelsIn){
+        float[][] ret = new float[channelsIn.length][channelsIn[0].length/ 2];
+        for (int i = 0; i < channelsIn.length; i++) {
+            for (int j = 0; j < channelsIn[i].length; j+=2) {
+                ret[i][j / 2] = channelsIn[i][j];
+            }
         }
         return ret;
     }
 
     //returns the left channel
-    public float[] getLeftChannel(){
-        return leftData;
+    public float[] getChannel(int channelNum){
+        return channels[channelNum];
     }
 
     //builds the left channel
@@ -106,11 +108,6 @@ public class AudioFileManager {
             ret[i / 2] = totalData[i];
         }
         return ret;
-    }
-
-    //returns the right channel
-    public float[] getRightChannel(){
-        return rightData;
     }
 
     //builds the right channel
@@ -123,24 +120,12 @@ public class AudioFileManager {
     }
 
     //merges the left + right channels
-    private float[] mergeData(float[] left, float[] right) throws Exception {
-        if(left.length > right.length){
-            float[] nRight = new float[left.length];
-            for (int i = 0; i < right.length; i++) {
-                nRight[i] = right[i];
+    private float[] mergeData(float[][] channelGroup) {
+        float[] ret = new float[channelGroup.length * channelGroup[0].length];
+        for(int i = 0; i < channelGroup[0].length; i++){
+            for (int j = 0; j < channelGroup.length; j++) {
+                ret[i + j] = channelGroup[j][i];
             }
-            right = nRight;
-        } else if(right.length > left.length){
-            float[] nLeft = new float[right.length];
-            for (int i = 0; i < left.length; i++) {
-                nLeft[i] = left[i];
-            }
-            left = nLeft;
-        }
-        float[] ret = new float[left.length+right.length];
-        for(int i = 0; i < ret.length; i+=2){
-            ret[i] = left[i / 2];
-            ret[i + 1] = right[i / 2];
         }
         return ret;
     }
@@ -148,7 +133,7 @@ public class AudioFileManager {
     //gets total audio data
     public float[] getMergedData(){
         try {
-            return mergeData(leftData, rightData);
+            return mergeData(channels);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -156,7 +141,7 @@ public class AudioFileManager {
     }
 
     //array converter
-    private byte[] floatArrToByteArr(float[] arr){
+    public byte[] floatArrToByteArr(float[] arr){
         byte[] ret = new byte[arr.length*2];
         for(int i = 0; i < arr.length; i++){
             ret[2 * i] = (byte) ((int) arr[i] & 255);
@@ -166,7 +151,7 @@ public class AudioFileManager {
     }
 
     //array converter
-    private float[] byteArrToFloatArr(byte[] arr){
+    public float[] byteArrToFloatArr(byte[] arr){
         float[] ret = new float[arr.length / 2];
         for(int i = 0; i < ret.length; i+=1){
             ret[i] = (float) ((arr[2 * i] & 255) | arr[2*i+1] << 8);
@@ -188,13 +173,12 @@ public class AudioFileManager {
     }
 
     public float getSoundTime(){
-        return leftData.length / (2 * sampleRate);
+        return channels[0].length / (2 * sampleRate);
     }
 
     public long getNumBytes(){
-        return leftData.length + rightData.length;
+        return channels[0].length * channels.length;
     }
-
 
     public void setDefaultName(String name){
         defaultName = name;
@@ -237,7 +221,7 @@ public class AudioFileManager {
         this.filePath = filepath;
         byte[] samples = new byte[0];
         try {
-            samples = floatArrToByteArr(mergeData(decomplexify(leftData), decomplexify(rightData)));
+            samples = floatArrToByteArr(mergeData(decomplexify(channels)));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -257,7 +241,7 @@ public class AudioFileManager {
     }
 
     //builds a standard WAV header for the file
-    public static byte[] buildHeader(int chunkSize, int sampleRate){
+    public byte[] buildHeader(int chunkSize, int sampleRate){
         if(sampleRate < 0){
             sampleRate = DEFAULT_SAMPLE_RATE;
         }
@@ -276,8 +260,11 @@ public class AudioFileManager {
         header[19] = (byte) (0);
         header[20] = (byte) (1);
         header[21] = (byte) (0);
-        header[22] = (byte) (2);
-        header[23] = (byte) (0);
+        int numChannels = channels.length;
+        for(int i = 22; i < 24; i++) {
+            header[i] = (byte) (numChannels & 255);
+            numChannels /= 256;
+        }
         int writeVal = sampleRate;
         for(int i = 24; i < 28; i++) {
             header[i] = (byte) (writeVal & 255);
@@ -297,221 +284,120 @@ public class AudioFileManager {
     }
 
     //put transformations on the audio data below \/
-
     public void vshift(float amt){
-        for(int i = 0 ; i < leftData.length; i++){
-            leftData[i] += amt;
-            rightData[i] += amt;
-        }
-    }
-
-    public void hshift(int amt){
-        amt += amt % 2;
-        float[] nlData;
-        float[] nrData;
-        if(amt > 0) {
-            nlData = new float[leftData.length + amt];
-            nrData = new float[rightData.length + amt];
-            for (int i = amt; i < nlData.length; i++) {
-                nlData[i] = leftData[i - amt];
-                nrData[i] = rightData[i - amt];
-            }
-        } else {
-            nlData = new float[leftData.length + amt];
-            nrData = new float[rightData.length + amt];
-            for (int i = 0; i < nlData.length; i++) {
-                nlData[i] = leftData[i - amt];
-                nrData[i] = rightData[i - amt];
+        for(float[] toShift: channels) {
+            for (int i = 0; i < toShift.length; i++) {
+                toShift[i] += amt;
             }
         }
-        for(int i = 0; i < 100; i++){
-            System.out.println(leftData[i] + " --> " + nlData[i]);
-            System.out.println(rightData[i] + " --> " + nrData[i]);
-            System.out.println();
-        }
-        leftData = nlData;
-        rightData = nrData;
     }
 
     public void vscale(float scale){
-        for(int i = 0; i < leftData.length; i++){
-            leftData[i] *= scale;
-            rightData[i] *= scale;
-        }
-    }
-
-    public void hscale(float scale){
-        scale = Math.abs(scale);
-        scale += scale % 2;
-        float[] dcLD = decomplexify(leftData);
-        float[] dcRD = decomplexify(rightData);
-        float[] nlData = new float[(int) (dcLD.length * scale)];
-        float[] nrData = new float[(int) (dcRD.length * scale)];
-        if(scale > 1) {
-            for (int i = 0; i < nlData.length - scale; i+=2 * scale) {
-                for(int j = 0; j < scale; j++) {
-                    nlData[i+2*j] = dcLD[(int) (i / scale)];
-                    nlData[i+2*j+1] = dcLD[(int) (i / scale+1)];
-                    nrData[i+2*j] = dcRD[(int) (i / scale)];
-                    nrData[i+2*j+1] = dcRD[(int) (i / scale+1)];
-                }
-            }
-        } else {
-            for (int i = 0; i < nlData.length; i+=2) {
-                nlData[i] = dcLD[(int) (i / scale)];
-                nlData[i+1] = dcLD[(int) (i / scale)+1];
-                nrData[i] = dcRD[(int) (i / scale)];
-                nrData[i+1] = dcRD[(int) (i / scale)+1];
+        for(float[] toShift: channels) {
+            for (int i = 0; i < toShift.length; i++) {
+                toShift[i] *= scale;
             }
         }
-        leftData = complexify(nlData);
-        rightData = complexify(nrData);
     }
 
     public void ftransform(){
         double powOfTwo = 1;
-        while (leftData.length / powOfTwo > 1) {
-            powOfTwo*=2;
+        while (channels[0].length / powOfTwo > 1) {
+            powOfTwo *= 2;
         }
 
-        double[] toTransformLeft = new double[(int) powOfTwo];
-        double[] toTransformRight = new double[(int) powOfTwo];
+        double[] toTransform = new double[(int) powOfTwo];
+        fft = new ComplexDoubleFFT(toTransform.length / 2);
 
-        for(int i = 0; i < powOfTwo; i ++){
-            if(i < leftData.length) toTransformLeft[i] = leftData[i]; else toTransformLeft[i] = 0;
-            if(i < rightData.length) toTransformRight[i] = rightData[i]; else toTransformRight[i] = 0;
+        for (int i = 0; i < channels.length; i++) {
+            float[] toShift = channels[i];
+
+            for (int j = 0; j < powOfTwo; j++) {
+                if (j < toShift.length) toTransform[j] = toShift[j];
+                else toTransform[j] = 0;
+
+            }
+
+            fft.ft(toTransform);
+
+            float[] res = new float[toTransform.length];
+
+            double normalizer = 1 / Math.sqrt(toTransform.length / 2);
+
+            for (int j = 0; j < toTransform.length; j += 1) {
+                res[j] = (float) (toTransform[j] * normalizer);
+            }
+
+            channels[i] = res;
         }
-
-        fft =  new ComplexDoubleFFT(toTransformRight.length / 2);
-        fft.ft(toTransformLeft);
-        fft.ft(toTransformRight);
-
-        float[] resLeft = new float[toTransformLeft.length];
-        float[] resRight = new float[toTransformLeft.length];
-
-        double normalizer = 1 / Math.sqrt(toTransformLeft.length / 2);
-
-        for(int i = 0; i < toTransformLeft.length; i+=1){
-            resLeft[i] = (float) (toTransformLeft[i] * normalizer);
-            resRight[i] = (float) (toTransformRight[i] * normalizer);
-        }
-
-        leftData = resLeft;
-        rightData = resRight;
-
     }
 
     public void btransform(){
-
         double powOfTwo = 1;
-        while (leftData.length / powOfTwo > 1) {
-            powOfTwo*=2;
+        while (channels[0].length / powOfTwo > 1) {
+            powOfTwo *= 2;
         }
 
-        double[] toTransformLeft = new double[(int) powOfTwo];
-        double[] toTransformRight = new double[(int) powOfTwo];
+        double[] toTransform = new double[(int) powOfTwo];
+        fft = new ComplexDoubleFFT(toTransform.length / 2);
 
-        for(int i = 0; i < powOfTwo; i ++){
-            if(i < leftData.length) toTransformLeft[i] = leftData[i]; else toTransformLeft[i] = 0;
-            if(i < rightData.length) toTransformRight[i] = rightData[i]; else toTransformRight[i] = 0;
+        for (int i = 0; i < channels.length; i++) {
+            float[] toShift = channels[i];
+
+            for (int j = 0; j < powOfTwo; j++) {
+                if (j < toShift.length) toTransform[j] = toShift[j];
+                else toTransform[j] = 0;
+
+            }
+
+            fft.bt(toTransform);
+
+            float[] res = new float[toTransform.length];
+
+            double normalizer = 1 / Math.sqrt(toTransform.length / 2);
+
+            for (int j = 0; j < toTransform.length; j += 1) {
+                res[j] = (float) (toTransform[j] * normalizer);
+            }
+
+            channels[i] = res;
         }
-
-        fft =  new ComplexDoubleFFT(toTransformRight.length / 2);
-        fft.bt(toTransformLeft);
-        fft.bt(toTransformRight);
-
-        float[] resLeft = new float[toTransformLeft.length];
-        float[] resRight = new float[toTransformLeft.length];
-
-        double normalizer = 1 / Math.sqrt(toTransformLeft.length / 2);
-
-        for(int i = 0; i < toTransformLeft.length; i+=1){
-            resLeft[i] = (float) (toTransformLeft[i] * normalizer);
-            resRight[i] = (float) (toTransformRight[i] * normalizer);
-        }
-
-        leftData = resLeft;
-        rightData = resRight;
-
     }
 
-    //untested!!!! --m (read: known bad)
-    public void stepFFT(int stepSize){
-        double[][] leftPieces = new double[(leftData.length - leftData.length % stepSize + stepSize) / stepSize][stepSize];
-        double[][] rightPieces = new double[(rightData.length - rightData.length % stepSize + stepSize) / stepSize][stepSize];
+    public void pMult(float[][] channels0){
+        int numArr = (channels0.length > channels.length) ? channels.length : channels0.length;
 
-        for(int i = 0; i < leftPieces.length; i++){
-            for(int j = 0; j < stepSize; j++){
-                if(i * stepSize + j < leftPieces.length) leftPieces[i][j] = leftData[i * stepSize + j];
-                if(i * stepSize + j < rightPieces.length)rightPieces[i][j] = rightData[i * stepSize + j];
+        for (int i = 0; i < numArr; i++) {
+            int arrInd = (channels0[i].length > channels[i].length) ? channels[i].length : channels0[i].length;
+            for (int j = 0; j < arrInd; j++) {
+                channels[i][j] *= channels0[i][j];
             }
         }
+    }
 
-        fft = new ComplexDoubleFFT(stepSize / 2);
+    public void pMult(AudioFileManager audioFileManager){
+        pMult(audioFileManager.getChannels());
+    }
 
-        for (double[] leftPiece : leftPieces) {
-            fft.ft(leftPiece);
-        }
-
-        for (double[] rightPiece : rightPieces) {
-            fft.ft(rightPiece);
-        }
-
-        double normalizer = 1 / Math.sqrt(stepSize / 2);
-
-        for(int i = 0; i < leftPieces.length; i++){
-            for(int j = 0; j < stepSize; j++){
-                leftData[i+j] = (float) (leftPieces[i][j] * normalizer);
-                rightData[i+j] = (float) (rightPieces[i][j] * normalizer);
+    public void pAdd(float[][] channelsIn, int offset){
+        int numArr = (channelsIn.length < channels.length) ? channels.length : channelsIn.length;
+        int arrInd = (channelsIn[0].length + offset < channels[0].length) ? channels[0].length : channelsIn[0].length + offset;
+        float[][] result = new float[numArr][arrInd];
+        for (int i = 0; i < numArr; i++) {
+            for (int j = 0; j < arrInd; j++) {
+                if(channels.length > i && channels[i].length > j) {
+                    result[i][j] += channels[i][j];
+                }
+                if(j >= offset && channelsIn.length > i && channelsIn[i].length > j - offset) {
+                    result[i][j] += channelsIn[i][j - offset];
+                }
             }
         }
-
+        channels = result;
     }
 
-    public void pMult(float[] toMultLeft, float[] toMultRight){
-        int end = toMultLeft.length;
-        if (leftData.length > end) end = leftData.length;
-        float[] nlData = new float[end];
-        float[] nrData = new float[end];
-        for(int i = 0; i < end; i++){
-            if(i < leftData.length) nlData[i] = leftData[i];
-            if(i < toMultLeft.length) nlData[i] *= toMultLeft[i];
-            if(i < rightData.length) nrData[i] = rightData[i];
-            if(i < toMultRight.length) nrData[i] *= toMultRight[i];
-        }
-        leftData = nlData;
-        rightData = nrData;
-    }
-
-    public void pAdd(float[] toAddLeft, float[] toAddRight){
-        pAdd(toAddLeft, toAddRight, 0);
-    }
-
-    public void pAdd(float[] toAddLeft, float[] toAddRight, int offset){
-        int end = toAddLeft.length;
-        if (leftData.length > end) end = leftData.length;
-        float[] nlData = new float[end + offset];
-        float[] nrData = new float[end + offset];
-        for(int i = 0; i < end; i++){
-            if(i < leftData.length) nlData[i] += leftData[i];
-            if(i - offset > 0 && i - offset < toAddLeft.length) nlData[i] += toAddLeft[i - offset];
-            if(i < rightData.length) nrData[i] += rightData[i];
-            if(i - offset > 0 && i - offset< toAddRight.length) nrData[i] += toAddRight[i - offset];
-        }
-        leftData = nlData;
-        rightData = nrData;
-    }
-
-
-    public void pAdd(AudioFileManager fileManager){
-        pAdd(fileManager.getLeftChannel(), fileManager.getRightChannel(), 0);
-    }
-
-    public void roughData(float roughFactor){
-        for (int i = 1; i < leftData.length -1; i++) {
-            leftData[i] = leftData[i] + (leftData[i+1] + leftData[i-1]) / roughFactor;
-            rightData[i] = rightData[i] + (rightData[i+1] + rightData[i-1]) / roughFactor;
-        }
+    public void pAdd(AudioFileManager audioFileManager, int offset){
+        pAdd(audioFileManager.getChannels(), offset);
     }
 
 }

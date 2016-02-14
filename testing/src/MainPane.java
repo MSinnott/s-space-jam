@@ -5,13 +5,14 @@ import java.awt.event.KeyListener;
 
 public class MainPane extends JPanel implements KeyListener {
 
-    private float[] leftNotes;
-    private float[] rightNotes;
+    private AudioFileManager audioFile;
     private float MinNote, MaxNote;
     private int lX, lY, nX, nY;
     private double zoom = 1;
     private int pan = 0;
-    int windowHeight = 0;
+    private int windowHeight = 0;
+    private int windowWidth = 0;
+    private float samplesPerPixel;
 
     public MainPane(){
         super();
@@ -21,16 +22,16 @@ public class MainPane extends JPanel implements KeyListener {
     /* pretty graphical window for the music --m */
     @Override
     public void paintComponent(Graphics g){
-        if( leftNotes == null || rightNotes == null) return;
-        if( leftNotes.length < 2 || rightNotes.length < 2) return;
+        for(float[] channel: audioFile.getChannels()){
+            if (channel == null || channel.length < 2) return;
+        }
 
         if(pan < 0) pan = 0;
-        if(pan + getNumPixelsOnscreen() > leftNotes.length) pan = leftNotes.length - getNumPixelsOnscreen();
-        if(getNumPixelsOnscreen() > leftNotes.length) pan = 0;
 
         setMaxMinNotes();
 
         windowHeight = this.getHeight();
+        windowWidth = this.getWidth();
 
         Graphics2D g2 = (Graphics2D) g;
         g2.setBackground(AudioDesktop.theme[2]);
@@ -38,7 +39,25 @@ public class MainPane extends JPanel implements KeyListener {
         g2.fillRect(0 , 0 , this.getWidth(), this.getHeight());
 
         g2.setStroke(new BasicStroke(4));
-        g2.setColor(AudioDesktop.theme[3]);
+
+        samplesPerPixel = (float) (1 / zoom);
+        int colorNum = 3;
+        for (float[] channel : audioFile.getChannels()) {
+            g2.setColor(AudioDesktop.theme[colorNum++]);
+            lX = 0;
+            lY = getYfromVal((int) channel[pan]);
+            int lastI = 0;
+            for (int i = pan - pan % 2; i < channel.length; i += (samplesPerPixel < 1) ? 2 : 2 * samplesPerPixel) {
+                nX = lX + ((zoom > 1) ? (int) zoom : 1);
+                lY = getYfromVal(findMin(channel, lastI, i));
+                nY = getYfromVal(findMax(channel, i, i + (int) ((samplesPerPixel < 1) ? 2 : 2 * samplesPerPixel)));
+                g2.drawLine(lX, lY, nX, nY);
+                lX = nX;
+                lastI = i;
+                if (lX > windowWidth || nX > windowWidth) break;
+            }
+        }
+        /*
         if(zoom >= 1) {
             lX = 0;
             lY = getYfromVal((int) leftNotes[pan]);
@@ -61,30 +80,7 @@ public class MainPane extends JPanel implements KeyListener {
                 lX += 1;
             }
         }
-
-        g2.setColor(AudioDesktop.theme[4]);
-        if(zoom >= 1) {
-            lX = 0;
-            lY = getYfromVal((int) rightNotes[pan]);
-            for (int i = pan - pan % 2; i < rightNotes.length; i += 2) {
-                nX = lX + (int) zoom;
-                if( nX > this.getWidth() ) break;
-                nY = getYfromVal(rightNotes[i]);
-                g2.drawLine(lX, lY, nX, nY);
-                lY = nY;
-                lX = nX;
-            }
-        } else {
-            int sampsPerPixel = (int) (1.0/zoom);
-            lX = 0;
-            for (int i = pan - pan % 2; i < rightNotes.length; i += 2 * sampsPerPixel){
-                lY = getYfromVal(findMin(rightNotes, i, i + 2*sampsPerPixel + 2));
-                nY = getYfromVal(findMax(rightNotes, i, i + 2*sampsPerPixel + 2));
-                g2.drawLine(lX, lY, lX, nY );
-                if( lX > this.getWidth() ) break;
-                lX += 1;
-            }
-        }
+        */
 
         g2.setColor(AudioDesktop.theme[0]);
         g2.setStroke(new BasicStroke(2));
@@ -158,34 +154,20 @@ public class MainPane extends JPanel implements KeyListener {
         }
     }
 
-    public void setLeftData(float[] notesIn) {
-        leftNotes = new float[notesIn.length];
-        for(int i = 0; i < notesIn.length; i++){
-            leftNotes[i] = notesIn[i];
-        }
-        setMaxMinNotes();
+    public void setAudioFile(AudioFileManager fileManager){
+        audioFile = fileManager;
     }
 
     private void setMaxMinNotes(){
         MaxNote = Integer.MIN_VALUE;
         MinNote = Integer.MAX_VALUE;
-        if(leftNotes == null || rightNotes == null) return;
-        float lmin = findMin(leftNotes, 0, leftNotes.length);
-        float lmax =  findMax(leftNotes, 0, leftNotes.length);
-        if(MinNote > lmin) MinNote = lmin;
-        if(MaxNote < lmax) MaxNote = lmax;
-        float rmin = findMin(rightNotes, 0, rightNotes.length);
-        float rmax = findMax(rightNotes, 0, rightNotes.length);
-        if(MinNote > rmin) MinNote = rmin;
-        if(MaxNote < rmax) MaxNote = rmax;
-    }
-
-    public void setRightData(float[] notesIn) {
-        rightNotes = new float[notesIn.length];
-        for(int i = 0; i < notesIn.length; i++){
-            rightNotes[i] = notesIn[i];
+        for (float[] channel : audioFile.getChannels()) {
+            if (channel == null) return;
+            float lmin = findMin(channel, 0, channel.length);
+            float lmax = findMax(channel, 0, channel.length);
+            if (MinNote > lmin) MinNote = lmin;
+            if (MaxNote < lmax) MaxNote = lmax;
         }
-        setMaxMinNotes();
     }
 
     @Override
