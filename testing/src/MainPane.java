@@ -2,8 +2,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
-public class MainPane extends JPanel implements KeyListener {
+public class MainPane extends JPanel implements KeyListener, MouseListener {
 
     private AudioFileManager audioFile;
     private float MinNote, MaxNote;
@@ -16,7 +18,8 @@ public class MainPane extends JPanel implements KeyListener {
 
     public MainPane(){
         super();
-        addKeyListener( this);
+        addKeyListener(this);
+        addMouseListener(this);
     }
 
     /* pretty graphical window for the music --m */
@@ -38,6 +41,9 @@ public class MainPane extends JPanel implements KeyListener {
         g2.setColor(AudioDesktop.theme[2]);
         g2.fillRect(0 , 0 , this.getWidth(), this.getHeight());
 
+        g2.setColor(AudioDesktop.theme[2].darker());
+        g2.fillRect((int) getXfromIndex(selection[0]), 0, (int)(getXfromIndex(selection[1]) - getXfromIndex(selection[0])), windowHeight);
+
         g2.setStroke(new BasicStroke(4));
 
         samplesPerPixel = (float) (1 / zoom);
@@ -47,40 +53,16 @@ public class MainPane extends JPanel implements KeyListener {
             lX = 0;
             lY = getYfromVal((int) channel[pan]);
             int lastI = 0;
-            for (int i = pan - pan % 2; i < channel.length; i += (samplesPerPixel < 1) ? 2 : 2 * samplesPerPixel) {
+            for (int i = pan - pan % 2; i < channel.length; i += (samplesPerPixel <= 1) ? 2 : 2 * samplesPerPixel) {
                 nX = lX + ((zoom > 1) ? (int) zoom : 1);
                 lY = getYfromVal(findMin(channel, lastI, i));
-                nY = getYfromVal(findMax(channel, i, i + (int) ((samplesPerPixel < 1) ? 2 : 2 * samplesPerPixel)));
+                nY = getYfromVal(findMax(channel, lastI, i));
                 g2.drawLine(lX, lY, nX, nY);
-                lX = nX;
                 lastI = i;
+                lX = nX;
                 if (lX > windowWidth || nX > windowWidth) break;
             }
         }
-        /*
-        if(zoom >= 1) {
-            lX = 0;
-            lY = getYfromVal((int) leftNotes[pan]);
-            for (int i = pan - pan % 2; i < leftNotes.length; i += 2) {
-                nX = lX + (int) zoom;
-                if( nX > this.getWidth() ) break;
-                nY = getYfromVal(leftNotes[i]);
-                g2.drawLine(lX, lY, nX, nY);
-                lY = nY;
-                lX = nX;
-            }
-        } else {
-            int sampsPerPixel = (int) (1.0/zoom);
-            lX = 0;
-            for (int i = pan - pan % 2; i < leftNotes.length; i += 2 * sampsPerPixel){
-                lY = getYfromVal(findMin(leftNotes, i, i + 2*sampsPerPixel + 2));
-                nY = getYfromVal(findMax(leftNotes, i, i + 2*sampsPerPixel + 2));
-                g2.drawLine(lX, lY, lX, nY );
-                if( lX > this.getWidth() ) break;
-                lX += 1;
-            }
-        }
-        */
 
         g2.setColor(AudioDesktop.theme[0]);
         g2.setStroke(new BasicStroke(2));
@@ -98,12 +80,20 @@ public class MainPane extends JPanel implements KeyListener {
         }
     }
 
-    private int getNumPixelsOnscreen(){
-        return (int) (2 * this.getWidth() / zoom);
-    }
-
     private int getYfromVal(float val){
         return (int) (windowHeight - (windowHeight * (val - MinNote)) / (MaxNote - MinNote ));
+    }
+
+    private float getValfromY(int y){
+        return (y + windowHeight) * (MaxNote - MinNote) / windowHeight + MinNote;
+    }
+
+    private float getXfromIndex(float val){
+        return (float) (zoom * val / 2 - pan);
+    }
+
+    private float getIndexFromX(float x){
+        return (float) (2 * (x + pan) / zoom);
     }
 
     public float findMax(float[] arr, int stIndex, int endIndex){
@@ -219,4 +209,42 @@ public class MainPane extends JPanel implements KeyListener {
         return zoom;
     }
 
+    private Point mouseClick = new Point();
+    private float[] selection = new float[2];
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        mouseClick = e.getPoint();
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        if(mouseClick.x < e.getPoint().x) {
+            selection[0] = getIndexFromX(mouseClick.x);
+            selection[1] = getIndexFromX(e.getPoint().x);
+        } else {
+            selection[0] = getIndexFromX(e.getPoint().x);
+            selection[1] = getIndexFromX(mouseClick.x);
+        }
+        System.out.println(selection[0]);
+        System.out.println(selection[1]);
+        System.out.println();
+        mouseClick = new Point();
+        invalidate();
+        repaint();
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
 }

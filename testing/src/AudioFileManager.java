@@ -96,30 +96,11 @@ public class AudioFileManager {
         return ret;
     }
 
-    //returns the left channel
     public float[] getChannel(int channelNum){
         return channels[channelNum];
     }
 
-    //builds the left channel
-    private float[] getLeftChannel(float[] totalData){
-        float[] ret = new float[totalData.length/2];
-        for(int i = 0; i < totalData.length; i+=2){
-            ret[i / 2] = totalData[i];
-        }
-        return ret;
-    }
-
-    //builds the right channel
-    private float[] getRightChannel(float[] totalData){
-        float[] ret = new float[totalData.length / 2];
-        for(int i = 1; i < totalData.length; i+=2){
-            ret[(i+1)/ 2 - 1] = totalData[i];
-        }
-        return ret;
-    }
-
-    //merges the left + right channels
+    //merges channels
     private float[] mergeData(float[][] channelGroup) {
         float[] ret = new float[channelGroup.length * channelGroup[0].length];
         for(int i = 0; i < channelGroup[0].length; i++){
@@ -128,16 +109,6 @@ public class AudioFileManager {
             }
         }
         return ret;
-    }
-
-    //gets total audio data
-    public float[] getMergedData(){
-        try {
-            return mergeData(channels);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return new float[]{};
     }
 
     //array converter
@@ -298,6 +269,37 @@ public class AudioFileManager {
                 toShift[i] *= scale;
             }
         }
+    }
+
+    public void smallFFT(int fftSize){
+        double[][][] toTransform = new double[channels.length]
+                [channels.length / fftSize + ((channels.length % fftSize != 0) ? 1 : 0)][fftSize];
+        fft = new ComplexDoubleFFT(fftSize / 2);
+
+        for (int i = 0; i < channels.length; i++) {
+            for (int j = 0; j < toTransform[0].length; j++) {
+                for (int k = 0; k < fftSize; k++) {
+                    toTransform[i][j][k] = channels[i][k + fftSize * j];
+                }
+            }
+        }
+
+        for(double[][] channel: toTransform){
+            for(double[] smallData: channel){
+                fft.ft(smallData);
+            }
+        }
+
+        double normalizer = 1 / Math.sqrt(fftSize / 2);
+
+        for (int i = 0; i < channels.length; i++) {
+            for (int j = 0; j < toTransform[0].length; j++) {
+                for (int k = 0; k < fftSize; k++) {
+                    channels[i][j * fftSize + k] = (float) (normalizer * toTransform[i][j][k]);
+                }
+            }
+        }
+        System.out.println("DONE!");
     }
 
     public void ftransform(){

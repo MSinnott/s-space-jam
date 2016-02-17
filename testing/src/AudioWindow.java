@@ -39,6 +39,7 @@ public class AudioWindow extends JInternalFrame{
 
         c.add(pane, BorderLayout.CENTER);
         c.addKeyListener(pane);
+        c.addMouseListener(pane);
         pane.addKeyListener(pane);
 
         buildMenus();
@@ -125,16 +126,6 @@ public class AudioWindow extends JInternalFrame{
         opMenu.add(vshiftButton);
         vshiftButton.addActionListener(new vshiftAction());
         components.add(vshiftButton);
-
-        JMenuItem hscaleButton = new JMenuItem("Scale Horizontally");
-        opMenu.add(hscaleButton);
-        hscaleButton.addActionListener(new hscaleAction());
-        components.add(hscaleButton);
-
-        JMenuItem hshiftButton = new JMenuItem("Shift Horizontally");
-        opMenu.add(hshiftButton);
-        hshiftButton.addActionListener(new hshiftAction());
-        components.add(hshiftButton);
 
         JMenuItem pbpAdd = new JMenuItem("Point-by-Point Add");
         opMenu.add(pbpAdd);
@@ -250,40 +241,7 @@ public class AudioWindow extends JInternalFrame{
                     updatePane();
                 }
             });
-            shiftDialog.buildDialog(audioWindow);
-        }
-    }
-
-    public class hscaleAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            final AdaptiveDialog shiftDialog = new AdaptiveDialog("Scale Horizontally");
-            final JTextField textField = new JTextField();
-            shiftDialog.addItem(textField, 0, 5, false);
-            shiftDialog.addDoneBinding(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //audioFile.hscale(Float.valueOf(textField.getText()));
-                    updatePane();
-                }
-            });
-            shiftDialog.buildDialog(audioWindow);
-        }
-    }
-
-    public class hshiftAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            final AdaptiveDialog shiftDialog = new AdaptiveDialog("Shift Horizontally");
-            final JTextField textField = new JTextField();
-            shiftDialog.addItem(textField, 0, 5, false);
-            shiftDialog.addDoneBinding(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    //audioFile.hshift(Integer.valueOf(textField.getText()));
-                    updatePane();
-                }
-            });
+            shiftDialog.addItem(new JPanel(), 0, 5, false);
             shiftDialog.buildDialog(audioWindow);
         }
     }
@@ -345,11 +303,13 @@ public class AudioWindow extends JInternalFrame{
             stepDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    //audioFile.stepFFT(Integer.valueOf(textField.getText()));
+                    System.out.println("!");
+                    audioFile.smallFFT(Integer.valueOf(textField.getText()));
                     updatePane();
                 }
             });
             stepDialog.buildDialog(audioWindow);
+            System.out.println("????");
         }
     }
 

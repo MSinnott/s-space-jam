@@ -3,12 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-/*
-
-    Builds a super slick dialog for a user to interact with
-
-    AutoAdds done and cancel buttons at the bottom
-
+/**
+ *  Builds a super slick dialog -- super easy to use!
  */
 
 public class AdaptiveDialog extends JDialog {
