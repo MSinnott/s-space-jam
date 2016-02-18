@@ -134,7 +134,7 @@ public class MusicGenerator {
         float[] tune = new float[(int) (numSeconds * sampleRate)];
         float toneChng = (chngBy / (tune.length));
         for (int i = 0; i < tune.length; i++, tone+=toneChng) {
-            tune[i] = volumeMultiplier * getTone(tone, i);
+            tune[i] = (volumeMultiplier * ((float) i / tune.length) * getTone(tone, i));
         }
         return tune;
     }

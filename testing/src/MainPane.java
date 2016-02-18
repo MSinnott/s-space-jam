@@ -58,7 +58,8 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
                 lY = getYfromVal(findMin(channel, lastI, i));
                 nY = getYfromVal(findMax(channel, lastI, i));
                 g2.drawLine(lX, lY, nX, nY);
-                System.out.println("deltaX: " + (nX - lX) + ", deltaI: " + (i - lastI) + ", Z: " + zoom);
+                System.out.println("index: " + i + ", x: " + lX + " " + nX + ", zoom: " + zoom + ", pan: " + pan);
+
                 lastI = i;
                 lX = nX;
                 if (lX > windowWidth || nX > windowWidth) break;
@@ -89,12 +90,12 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
         return (y + windowHeight) * (MaxNote - MinNote) / windowHeight + MinNote;
     }
 
-    private float getXfromIndex(float val){
-        return (float) (2 * zoom * (val));
+    private float getXfromIndex(float index){
+        return (float) (2 * zoom * (index)  - pan * zoom / (2));
     }
 
     private float getIndexFromX(float x){
-        return (float) (x / (2 * zoom));
+        return (float) (x / (2 * zoom) + pan );
     }
 
     public float findMax(float[] arr, int stIndex, int endIndex){
@@ -211,7 +212,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
     }
 
     private Point mouseClick = new Point();
-    private float[] selection = new float[2];
+    private float[] selection = new float[] { 100, 200};
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -231,9 +232,6 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
             selection[0] = getIndexFromX(e.getPoint().x);
             selection[1] = getIndexFromX(mouseClick.x);
         }
-        System.out.println(selection[0]);
-        System.out.println(selection[1]);
-        System.out.println();
         mouseClick = new Point();
         invalidate();
         repaint();
