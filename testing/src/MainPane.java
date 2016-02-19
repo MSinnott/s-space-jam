@@ -58,8 +58,6 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
                 lY = getYfromVal(findMin(channel, lastI, i));
                 nY = getYfromVal(findMax(channel, lastI, i));
                 g2.drawLine(lX, lY, nX, nY);
-                System.out.println("index: " + i + ", x: " + lX + " " + nX + ", zoom: " + zoom + ", pan: " + pan);
-
                 lastI = i;
                 lX = nX;
                 if (lX > windowWidth || nX > windowWidth) break;
@@ -91,11 +89,11 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
     }
 
     private float getXfromIndex(float index){
-        return (float) (2 * zoom * (index)  - pan * zoom / (2));
+        return (float) (zoom * (index - pan) / 2);
     }
 
     private float getIndexFromX(float x){
-        return (float) (x / (2 * zoom) + pan );
+        return (float) (2 * x / zoom + pan);
     }
 
     public float findMax(float[] arr, int stIndex, int endIndex){
@@ -220,19 +218,31 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        mouseClick = e.getPoint();
+        if(e.getButton() == MouseEvent.BUTTON1){
+            mouseClick = e.getPoint();
+        } else if(e.getButton() == MouseEvent.BUTTON3){
+            selection[0] = 0;
+            selection[1] = 0;
+        }
+        invalidate();
+        repaint();
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(mouseClick.x < e.getPoint().x) {
-            selection[0] = getIndexFromX(mouseClick.x);
-            selection[1] = getIndexFromX(e.getPoint().x);
-        } else {
-            selection[0] = getIndexFromX(e.getPoint().x);
-            selection[1] = getIndexFromX(mouseClick.x);
+        if(e.getButton() == MouseEvent.BUTTON1) {
+            if (mouseClick.x < e.getPoint().x) {
+                selection[0] = getIndexFromX(mouseClick.x);
+                selection[1] = getIndexFromX(e.getPoint().x);
+            } else {
+                selection[0] = getIndexFromX(e.getPoint().x);
+                selection[1] = getIndexFromX(mouseClick.x);
+            }
+            mouseClick = new Point();
+        } else if(e.getButton() == MouseEvent.BUTTON3){
+            selection[0] = 0;
+            selection[1] = 0;
         }
-        mouseClick = new Point();
         invalidate();
         repaint();
     }
@@ -245,5 +255,9 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
+    }
+
+    public float[] getSelection(){
+        return selection;
     }
 }

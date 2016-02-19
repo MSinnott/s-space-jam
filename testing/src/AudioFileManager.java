@@ -63,9 +63,9 @@ public class AudioFileManager {
     }
 
     public float[][] split(float[] toSplit, int numSplits){
-        float[][] ret = new float[numSplits][toSplit.length / numSplits];
+        float[][] ret = new float[numSplits][toSplit.length / numSplits + ((toSplit.length % numSplits == 0) ? 0 : 1)];
         int loc = 0;
-        for (int i = 0; i < ret.length; i++, loc++) {
+        for (int i = 0; i < ret.length; i++) {
             for (int j = 0; j < ret[i].length; j++, loc++) {
                 ret[i][j] = toSplit[loc];
             }
@@ -396,6 +396,14 @@ public class AudioFileManager {
             }
         }
         channels = result;
+    }
+
+    public void zeroFrom(int start, int end){
+        for(float[] channel: channels) {
+            for (int i = start; i < end && i < channel.length; i++) {
+                channel[i] = 0;
+            }
+        }
     }
 
     public void pAdd(AudioFileManager audioFileManager, int offset){

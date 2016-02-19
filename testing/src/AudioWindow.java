@@ -137,6 +137,16 @@ public class AudioWindow extends JInternalFrame{
         pbpMult.addActionListener(new pbpMultAction());
         components.add(pbpMult);
 
+        JMenuItem zeroSelect = new JMenuItem("Zero Selected");
+        opMenu.add(zeroSelect);
+        zeroSelect.addActionListener(new ZeroSelectedAction());
+        components.add(zeroSelect);
+
+        JMenuItem zeroDeSelect = new JMenuItem("Zero Non-Selected");
+        opMenu.add(zeroDeSelect);
+        zeroDeSelect.addActionListener(new ZeroNonSelectedAction());
+        components.add(zeroDeSelect);
+
         resetColors();
     }
 
@@ -317,6 +327,25 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             audioFile.btransform();
+            updatePane();
+        }
+    }
+
+    public class ZeroSelectedAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            float[] selection = pane.getSelection();
+            audioFile.zeroFrom((int) selection[0], (int) selection[1]);
+            updatePane();
+        }
+    }
+
+    public class ZeroNonSelectedAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            float[] selection = pane.getSelection();
+            audioFile.zeroFrom(0, (int) selection[0]);
+            audioFile.zeroFrom((int) selection[1], Integer.MAX_VALUE);
             updatePane();
         }
     }
