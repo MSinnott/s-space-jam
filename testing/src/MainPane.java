@@ -210,7 +210,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
     }
 
     private Point mouseClick = new Point();
-    private float[] selection = new float[] { 100, 200};
+    private float[] selection = new float[] { 0, 0};
     @Override
     public void mouseClicked(MouseEvent e) {
 

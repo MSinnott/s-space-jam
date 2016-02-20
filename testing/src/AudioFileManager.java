@@ -299,7 +299,6 @@ public class AudioFileManager {
                 }
             }
         }
-        System.out.println("DONE!");
     }
 
     public void ftransform(){

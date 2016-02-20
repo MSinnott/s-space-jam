@@ -137,13 +137,17 @@ public class AudioWindow extends JInternalFrame{
         pbpMult.addActionListener(new pbpMultAction());
         components.add(pbpMult);
 
+        JMenu selectionMenu = new JMenu("Edit Selection");
+        menuBar.add(selectionMenu);
+        components.add(selectionMenu);
+
         JMenuItem zeroSelect = new JMenuItem("Zero Selected");
-        opMenu.add(zeroSelect);
+        selectionMenu.add(zeroSelect);
         zeroSelect.addActionListener(new ZeroSelectedAction());
         components.add(zeroSelect);
 
         JMenuItem zeroDeSelect = new JMenuItem("Zero Non-Selected");
-        opMenu.add(zeroDeSelect);
+        selectionMenu.add(zeroDeSelect);
         zeroDeSelect.addActionListener(new ZeroNonSelectedAction());
         components.add(zeroDeSelect);
 
