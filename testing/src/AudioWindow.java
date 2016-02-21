@@ -20,7 +20,7 @@ public class AudioWindow extends JInternalFrame{
     private JMenu selectionMenu;
 
     public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
-        super(fileManager.getName() + " - " + HumanReadable.memNumToReadable(fileManager.getNumBytes()));
+        super(fileManager.getName());
 
         audioDesktop = aDesk;
 
@@ -142,6 +142,11 @@ public class AudioWindow extends JInternalFrame{
         trimButton.addActionListener(new TrimAction());
         components.add(trimButton);
 
+        JMenuItem boxcarFilterButton = new JMenuItem("Boxcar Filter");
+        opMenu.add(boxcarFilterButton);
+        boxcarFilterButton.addActionListener(new BoxcarFilterAction(false));
+        components.add(boxcarFilterButton);
+
         selectionMenu = new JMenu("Edit Selection");
         menuBar.add(selectionMenu);
         components.add(selectionMenu);
@@ -170,6 +175,11 @@ public class AudioWindow extends JInternalFrame{
         selectionMenu.add(zoomToSelection);
         zoomToSelection.addActionListener(new ZoomToSelectionAction());
         components.add(zoomToSelection);
+
+        JMenuItem boxcarSelectionFilterButton = new JMenuItem("Boxcar Filter");
+        selectionMenu.add(boxcarSelectionFilterButton);
+        boxcarSelectionFilterButton.addActionListener(new BoxcarFilterAction(true));
+        components.add(boxcarSelectionFilterButton);
 
         resetColors();
     }
@@ -220,6 +230,8 @@ public class AudioWindow extends JInternalFrame{
             } else {
                 try {
                     audioFile.buildFile(savePath);
+                    String name = audioFile.getName();
+                    audioWindow.setTitle(name);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -291,7 +303,6 @@ public class AudioWindow extends JInternalFrame{
                     updatePane();
                 }
             });
-            shiftDialog.addItem(new JPanel(), 0, 5, false);
             shiftDialog.buildDialog(audioWindow);
         }
     }
@@ -376,6 +387,31 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e) {
             audioFile.trim();
             updatePane();
+        }
+    }
+
+    public class BoxcarFilterAction extends AbstractAction {
+        private boolean toSelection = false;
+        public BoxcarFilterAction(boolean toSelection){
+            this.toSelection = toSelection;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final AdaptiveDialog filterDialog = new AdaptiveDialog("Boxcar Filter");
+            final JTextField textField = new JTextField();
+            filterDialog.addItem(textField, 0, 5, false);
+            filterDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(toSelection) {
+                        audioFile.boxcarFilter(Integer.valueOf(textField.getText()), (int) pane.getSelection()[0], (int) pane.getSelection()[1]);
+                    } else {
+                        audioFile.boxcarFilter(Integer.valueOf(textField.getText()));
+                    }
+                    updatePane();
+                }
+            });
+            filterDialog.buildDialog(audioWindow);
         }
     }
 

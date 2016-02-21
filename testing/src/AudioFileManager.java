@@ -136,11 +136,7 @@ public class AudioFileManager {
 
     //returns file name
     public String getName(){
-        if (audioFile != null) {
-            return audioFile.getName();
-        } else {
-            return defaultName;
-        }
+        return (defaultName.equals("")) ? HumanReadable.memNumToReadable(channels[0].length) : defaultName;
     }
 
     public float getSoundTime(){
@@ -197,7 +193,6 @@ public class AudioFileManager {
             e.printStackTrace();
         }
         int chunkSize = samples.length / 2 + 40;
-        System.out.println("CS" + chunkSize + " CL " + channels[0].length);
         audioFile = new File(filepath);
         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(audioFile));
         byte[] writeOut = new byte[chunkSize];
@@ -210,6 +205,7 @@ public class AudioFileManager {
         }
         fileOut.write(writeOut);
         fileOut.close();
+        defaultName = audioFile.getName() + " - " + HumanReadable.memNumToReadable(chunkSize);
     }
 
     //builds a standard WAV header for the file
@@ -404,6 +400,23 @@ public class AudioFileManager {
             }
         }
         channels = result;
+    }
+
+    public void boxcarFilter(int boxWidth){
+        boxcarFilter(boxWidth, 0, channels[0].length);
+    }
+
+    public void boxcarFilter(int boxWidth, int startIndex, int endIndex){
+        float[][] filtered = new float[channels.length][channels[0].length];
+        float box = 0;
+        for (int i = 0; i < channels.length; i++) {
+            for (int j = startIndex; j < channels[0].length && j < endIndex; j++) {
+                box += channels[i][j];
+                if(j > boxWidth) box -= channels[i][j - boxWidth];
+                if(j > boxWidth / 2) filtered[i][j - boxWidth / 2] = box / boxWidth;
+            }
+        }
+        channels = filtered;
     }
 
     public void zeroFrom(int start, int end){
