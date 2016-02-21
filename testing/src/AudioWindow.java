@@ -2,8 +2,6 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.geom.Arc2D;
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,7 +20,7 @@ public class AudioWindow extends JInternalFrame{
     private JMenu selectionMenu;
 
     public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
-        super(fileManager.getName() + " - " + HumanReadable.numToReadable(fileManager.getNumBytes()));
+        super(fileManager.getName() + " - " + HumanReadable.memNumToReadable(fileManager.getNumBytes()));
 
         audioDesktop = aDesk;
 
@@ -121,12 +119,12 @@ public class AudioWindow extends JInternalFrame{
 
         JMenuItem vscaleButton = new JMenuItem("Scale Vertically");
         opMenu.add(vscaleButton);
-        vscaleButton.addActionListener(new vscaleAction());
+        vscaleButton.addActionListener(new vscaleAction(false));
         components.add(vscaleButton);
 
         JMenuItem vshiftButton = new JMenuItem("Shift Vertically");
         opMenu.add(vshiftButton);
-        vshiftButton.addActionListener(new vshiftAction());
+        vshiftButton.addActionListener(new vshiftAction(false));
         components.add(vshiftButton);
 
         JMenuItem pbpAdd = new JMenuItem("Point-by-Point Add");
@@ -152,6 +150,16 @@ public class AudioWindow extends JInternalFrame{
         selectionMenu.add(zeroDeSelect);
         zeroDeSelect.addActionListener(new ZeroNonSelectedAction());
         components.add(zeroDeSelect);
+
+        JMenuItem vscaleSelectButton = new JMenuItem("Scale Selection Vertically");
+        selectionMenu.add(vscaleSelectButton);
+        vscaleSelectButton.addActionListener(new vscaleAction(true));
+        components.add(vscaleSelectButton);
+
+        JMenuItem vshiftSelectButton = new JMenuItem("Shift Selection Vertically");
+        selectionMenu.add(vshiftSelectButton);
+        vshiftSelectButton.addActionListener(new vshiftAction(true));
+        components.add(vshiftSelectButton);
 
         JMenuItem zoomToSelection = new JMenuItem("Zoom to Selection");
         selectionMenu.add(zoomToSelection);
@@ -233,6 +241,10 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public class vscaleAction extends AbstractAction {
+        private boolean toSelection = false;
+        public vscaleAction(boolean toSelection){
+            this.toSelection = toSelection;
+        }
         @Override
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog scaleDialog = new AdaptiveDialog("Scale Vertically");
@@ -241,7 +253,11 @@ public class AudioWindow extends JInternalFrame{
             scaleDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    audioFile.vscale(Float.valueOf(textField.getText()));
+                    if(toSelection) {
+                        audioFile.vscale(Float.valueOf(textField.getText()), (int) pane.getSelection()[0], (int) pane.getSelection()[1]);
+                    } else {
+                        audioFile.vscale(Float.valueOf(textField.getText()));
+                    }
                     updatePane();
                 }
             });
@@ -250,6 +266,10 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public class vshiftAction extends AbstractAction {
+        private boolean toSelection = false;
+        public vshiftAction(boolean toSelection){
+            this.toSelection = toSelection;
+        }
         @Override
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog shiftDialog = new AdaptiveDialog("Shift Vertically");
@@ -258,7 +278,11 @@ public class AudioWindow extends JInternalFrame{
             shiftDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    audioFile.vshift(Float.valueOf(textField.getText()));
+                    if(toSelection) {
+                        audioFile.vshift(Float.valueOf(textField.getText()), (int) pane.getSelection()[0], (int) pane.getSelection()[1]);
+                    } else {
+                        audioFile.vshift(Float.valueOf(textField.getText()));
+                    }
                     updatePane();
                 }
             });

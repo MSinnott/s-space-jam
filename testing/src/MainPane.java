@@ -71,7 +71,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
         g2.drawLine(0, getYfromVal(0), this.getWidth(), getYfromVal(0));
         g2.drawString("" + 0, 16, getYfromVal(0) + 16);
 
-        int numSteps = 5;
+        int numSteps = 8;
         for(int i = 0; i < numSteps; i++){
             float nextVal = MinNote + (MaxNote - MinNote) / (numSteps) * i;
             int nextY = getYfromVal(nextVal);
@@ -80,6 +80,21 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
                 g2.drawString("" + (nextVal), 16, (nextY) + 16);
             }
         }
+
+        float nextI = pan, lastI = pan;
+        for (int i = 0; i < numSteps; i++) {
+            nextI += getScreenIndexRange() / numSteps;
+            if(Math.abs(getXfromIndex(nextI) - getXfromIndex(lastI)) > 50) {
+                g2.drawLine((int) getXfromIndex(nextI), windowHeight / 2 + 8, (int) getXfromIndex(nextI), windowHeight / 2 - 8);
+                g2.drawString("" + HumanReadable.neatenFloat(nextI), (int) getXfromIndex(nextI), (windowHeight / 2) + 16);
+            }
+            lastI = nextI;
+        }
+
+        g2.setColor(AudioDesktop.theme[0]);
+        g2.fillRect(0, windowHeight - 20, windowWidth, 20);
+        g2.setColor(AudioDesktop.theme[5]);
+        g2.drawString("Zoom: " + HumanReadable.neatenFloat((float) zoom) + " Selection: " + HumanReadable.neatenFloat(selection[0]) + " to " + HumanReadable.neatenFloat(selection[1]), 0, windowHeight);
     }
 
     private int getYfromVal(float val){
@@ -96,6 +111,10 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
 
     private float getIndexFromX(float x){
         return (float) (2 * x / zoom + pan);
+    }
+
+    private float getScreenIndexRange(){
+        return (getIndexFromX(windowWidth) - getIndexFromX(0));
     }
 
     public void rescale(int startIndex, int endIndex){

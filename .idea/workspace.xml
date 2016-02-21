@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="933177a3-c705-41de-881d-4941e94a1377" name="Default" comment="">
+    <list default="true" id="933177a3-c705-41de-881d-4941e94a1377" name="Default" comment="I found code that will allow you to select a .au file and input its data into a byte[]. Does not include header information nor its metadata.&#10;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/music/sngR.wav" afterPath="$PROJECT_DIR$/testing/music/sngR.wav" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioFileManager.java" afterPath="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioWindow.java" afterPath="$PROJECT_DIR$/testing/src/AudioWindow.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/HumanReadable.java" afterPath="$PROJECT_DIR$/testing/src/HumanReadable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MainPane.java" afterPath="$PROJECT_DIR$/testing/src/MainPane.java" />
     </list>
     <ignored path="sSpaceJam.iws" />
@@ -41,11 +43,15 @@
         <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="137" column="26" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
+              <caret line="277" column="13" selection-start-line="277" selection-start-column="13" selection-end-line="277" selection-end-column="13" />
               <folding>
                 <element signature="e#4388#4389#0" expanded="true" />
                 <element signature="e#4421#4422#0" expanded="true" />
                 <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="e#8598#8599#0" expanded="true" />
+                <element signature="e#8648#8649#0" expanded="true" />
+                <element signature="e#8934#8935#0" expanded="true" />
+                <element signature="e#8984#8985#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -67,10 +73,16 @@
         <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="375" column="23" selection-start-line="375" selection-start-column="23" selection-end-line="375" selection-end-column="23" />
+              <caret line="265" column="5" selection-start-line="265" selection-start-column="5" selection-end-line="265" selection-end-column="5" />
               <folding>
                 <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
                 <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+                <element signature="e#8616#8617#0" expanded="true" />
+                <element signature="e#8670#8671#0" expanded="true" />
+                <element signature="e#9683#9684#0" expanded="true" />
+                <element signature="e#9737#9738#0" expanded="true" />
+                <element signature="e#10052#10532#0" expanded="true" />
+                <element signature="e#10531#10532#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -91,22 +103,34 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainPane.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainPane.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4857143">
-              <caret line="220" column="92" selection-start-line="220" selection-start-column="92" selection-end-line="220" selection-end-column="92" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="96" column="168" selection-start-line="96" selection-start-column="168" selection-end-line="96" selection-end-column="168" />
               <folding>
-                <element signature="e#3387#3388#0" expanded="true" />
-                <element signature="e#3438#3439#0" expanded="true" />
+                <element signature="e#4259#4260#0" expanded="true" />
+                <element signature="e#4310#4311#0" expanded="true" />
+                <element signature="e#4352#4353#0" expanded="true" />
+                <element signature="e#4422#4423#0" expanded="true" />
                 <element signature="method#pan#0;class#MainPane#0" expanded="false" />
                 <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
                 <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
                 <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
                 <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-                <element signature="e#7981#7982#0" expanded="true" />
-                <element signature="e#8013#8014#0" expanded="true" />
+                <element signature="e#8965#8966#0" expanded="true" />
+                <element signature="e#8997#8998#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HumanReadable.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/testing/src/HumanReadable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.36">
+              <caret line="13" column="59" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -141,14 +165,14 @@
         <option value="$PROJECT_DIR$/testing/src/AudioFileTransformer.java" />
         <option value="$PROJECT_DIR$/testing/src/CloseAction.java" />
         <option value="$PROJECT_DIR$/testing/src/EqnHandler.java" />
-        <option value="$PROJECT_DIR$/testing/src/HumanReadable.java" />
         <option value="$PROJECT_DIR$/testing/src/AdaptiveDialog.java" />
         <option value="$PROJECT_DIR$/testing/src/MusicGenerator.java" />
         <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
-        <option value="$PROJECT_DIR$/testing/src/AudioWindow.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
+        <option value="$PROJECT_DIR$/testing/src/AudioWindow.java" />
         <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
+        <option value="$PROJECT_DIR$/testing/src/HumanReadable.java" />
       </list>
     </option>
   </component>
@@ -649,15 +673,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -679,6 +705,12 @@
           <folding>
             <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#9683#9684#0" expanded="true" />
+            <element signature="e#9737#9738#0" expanded="true" />
+            <element signature="e#10052#10532#0" expanded="true" />
+            <element signature="e#10531#10532#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -707,6 +739,12 @@
           <folding>
             <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#9683#9684#0" expanded="true" />
+            <element signature="e#9737#9738#0" expanded="true" />
+            <element signature="e#10052#10532#0" expanded="true" />
+            <element signature="e#10531#10532#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -716,15 +754,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="8" selection-end-column="19" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -745,6 +785,10 @@
             <element signature="e#4388#4389#0" expanded="true" />
             <element signature="e#4421#4422#0" expanded="true" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="e#8598#8599#0" expanded="true" />
+            <element signature="e#8648#8649#0" expanded="true" />
+            <element signature="e#8934#8935#0" expanded="true" />
+            <element signature="e#8984#8985#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -766,6 +810,12 @@
           <folding>
             <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#9683#9684#0" expanded="true" />
+            <element signature="e#9737#9738#0" expanded="true" />
+            <element signature="e#10052#10532#0" expanded="true" />
+            <element signature="e#10531#10532#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -775,15 +825,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -804,6 +856,10 @@
             <element signature="e#4388#4389#0" expanded="true" />
             <element signature="e#4421#4422#0" expanded="true" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="e#8598#8599#0" expanded="true" />
+            <element signature="e#8648#8649#0" expanded="true" />
+            <element signature="e#8934#8935#0" expanded="true" />
+            <element signature="e#8984#8985#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -825,6 +881,12 @@
           <folding>
             <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#9683#9684#0" expanded="true" />
+            <element signature="e#9737#9738#0" expanded="true" />
+            <element signature="e#10052#10532#0" expanded="true" />
+            <element signature="e#10531#10532#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -834,15 +896,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="67" column="38" selection-start-line="67" selection-start-column="38" selection-end-line="67" selection-end-column="38" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -863,6 +927,10 @@
             <element signature="e#4388#4389#0" expanded="true" />
             <element signature="e#4421#4422#0" expanded="true" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="e#8598#8599#0" expanded="true" />
+            <element signature="e#8648#8649#0" expanded="true" />
+            <element signature="e#8934#8935#0" expanded="true" />
+            <element signature="e#8984#8985#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -884,6 +952,12 @@
           <folding>
             <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#9683#9684#0" expanded="true" />
+            <element signature="e#9737#9738#0" expanded="true" />
+            <element signature="e#10052#10532#0" expanded="true" />
+            <element signature="e#10531#10532#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -893,15 +967,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="139" column="24" selection-start-line="139" selection-start-column="24" selection-end-line="139" selection-end-column="24" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -922,6 +998,10 @@
             <element signature="e#4388#4389#0" expanded="true" />
             <element signature="e#4421#4422#0" expanded="true" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="e#8598#8599#0" expanded="true" />
+            <element signature="e#8648#8649#0" expanded="true" />
+            <element signature="e#8934#8935#0" expanded="true" />
+            <element signature="e#8984#8985#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -943,6 +1023,12 @@
           <folding>
             <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#9683#9684#0" expanded="true" />
+            <element signature="e#9737#9738#0" expanded="true" />
+            <element signature="e#10052#10532#0" expanded="true" />
+            <element signature="e#10531#10532#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -952,15 +1038,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="121" column="27" selection-start-line="121" selection-start-column="27" selection-end-line="121" selection-end-column="27" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -981,6 +1069,10 @@
             <element signature="e#4388#4389#0" expanded="true" />
             <element signature="e#4421#4422#0" expanded="true" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="e#8598#8599#0" expanded="true" />
+            <element signature="e#8648#8649#0" expanded="true" />
+            <element signature="e#8934#8935#0" expanded="true" />
+            <element signature="e#8984#8985#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1002,6 +1094,12 @@
           <folding>
             <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#9683#9684#0" expanded="true" />
+            <element signature="e#9737#9738#0" expanded="true" />
+            <element signature="e#10052#10532#0" expanded="true" />
+            <element signature="e#10531#10532#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1011,15 +1109,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="27" selection-start-line="12" selection-start-column="27" selection-end-line="12" selection-end-column="27" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1040,6 +1140,10 @@
             <element signature="e#4388#4389#0" expanded="true" />
             <element signature="e#4421#4422#0" expanded="true" />
             <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="e#8598#8599#0" expanded="true" />
+            <element signature="e#8648#8649#0" expanded="true" />
+            <element signature="e#8934#8935#0" expanded="true" />
+            <element signature="e#8984#8985#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1049,15 +1153,17 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="98" selection-start-line="26" selection-start-column="98" selection-end-line="26" selection-end-column="98" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1123,14 +1229,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/HumanReadable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveDialog.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.1655844">
@@ -1157,6 +1255,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="277" column="13" selection-start-line="277" selection-start-column="13" selection-end-line="277" selection-end-column="13" />
+          <folding>
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4421#4422#0" expanded="true" />
+            <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="e#8598#8599#0" expanded="true" />
+            <element signature="e#8648#8649#0" expanded="true" />
+            <element signature="e#8934#8935#0" expanded="true" />
+            <element signature="e#8984#8985#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/MusicGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1173,41 +1287,45 @@
     <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="375" column="23" selection-start-line="375" selection-start-column="23" selection-end-line="375" selection-end-column="23" />
+          <caret line="265" column="5" selection-start-line="265" selection-start-column="5" selection-end-line="265" selection-end-column="5" />
           <folding>
             <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="137" column="26" selection-start-line="137" selection-start-column="26" selection-end-line="137" selection-end-column="26" />
-          <folding>
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4421#4422#0" expanded="true" />
-            <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="e#8616#8617#0" expanded="true" />
+            <element signature="e#8670#8671#0" expanded="true" />
+            <element signature="e#9683#9684#0" expanded="true" />
+            <element signature="e#9737#9738#0" expanded="true" />
+            <element signature="e#10052#10532#0" expanded="true" />
+            <element signature="e#10531#10532#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4857143">
-          <caret line="220" column="92" selection-start-line="220" selection-start-column="92" selection-end-line="220" selection-end-column="92" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="96" column="168" selection-start-line="96" selection-start-column="168" selection-end-line="96" selection-end-column="168" />
           <folding>
-            <element signature="e#3387#3388#0" expanded="true" />
-            <element signature="e#3438#3439#0" expanded="true" />
+            <element signature="e#4259#4260#0" expanded="true" />
+            <element signature="e#4310#4311#0" expanded="true" />
+            <element signature="e#4352#4353#0" expanded="true" />
+            <element signature="e#4422#4423#0" expanded="true" />
             <element signature="method#pan#0;class#MainPane#0" expanded="false" />
             <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
             <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
-            <element signature="e#7981#7982#0" expanded="true" />
-            <element signature="e#8013#8014#0" expanded="true" />
+            <element signature="e#8965#8966#0" expanded="true" />
+            <element signature="e#8997#8998#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/HumanReadable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.36">
+          <caret line="13" column="59" selection-start-line="13" selection-start-column="59" selection-end-line="13" selection-end-column="59" />
+          <folding />
         </state>
       </provider>
     </entry>

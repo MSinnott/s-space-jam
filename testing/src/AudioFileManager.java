@@ -259,20 +259,28 @@ public class AudioFileManager {
     }
 
     //put transformations on the audio data below \/
-    public void vshift(float amt){
+    public void vshift(float amt, int stIndex, int endIndex){
         for(float[] toShift: channels) {
-            for (int i = 0; i < toShift.length; i++) {
+            for (int i = stIndex; i < toShift.length && i < endIndex; i++) {
                 toShift[i] += amt;
             }
         }
     }
 
-    public void vscale(float scale){
+    public void vshift(float amt){
+        vshift(amt, 0, channels[0].length);
+    }
+
+    public void vscale(float scale, int stIndex, int endIndex){
         for(float[] toShift: channels) {
-            for (int i = 0; i < toShift.length; i++) {
+            for (int i = stIndex; i < toShift.length && i < endIndex; i++) {
                 toShift[i] *= scale;
             }
         }
+    }
+
+    public void vscale(float amt){
+        vscale(amt, 0, channels[0].length);
     }
 
     public void smallFFT(int fftSize){
