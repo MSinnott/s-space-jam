@@ -19,6 +19,8 @@ public class AudioWindow extends JInternalFrame{
     private boolean saved = false;
     private String savePath = null;
 
+    private JMenu selectionMenu;
+
     public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
         super(fileManager.getName() + " - " + HumanReadable.numToReadable(fileManager.getNumBytes()));
 
@@ -29,7 +31,7 @@ public class AudioWindow extends JInternalFrame{
 
         this.setLayout(new BorderLayout());
 
-        pane = new MainPane();
+        pane = new MainPane(this);
         loadFile(fileManager);
         savePath = fileManager.getPath();
         if(savePath != null) saved = true;
@@ -137,7 +139,7 @@ public class AudioWindow extends JInternalFrame{
         pbpMult.addActionListener(new pbpMultAction());
         components.add(pbpMult);
 
-        JMenu selectionMenu = new JMenu("Edit Selection");
+        selectionMenu = new JMenu("Edit Selection");
         menuBar.add(selectionMenu);
         components.add(selectionMenu);
 
@@ -150,6 +152,11 @@ public class AudioWindow extends JInternalFrame{
         selectionMenu.add(zeroDeSelect);
         zeroDeSelect.addActionListener(new ZeroNonSelectedAction());
         components.add(zeroDeSelect);
+
+        JMenuItem zoomToSelection = new JMenuItem("Zoom to Selection");
+        selectionMenu.add(zoomToSelection);
+        zoomToSelection.addActionListener(new ZoomToSelectionAction());
+        components.add(zoomToSelection);
 
         resetColors();
     }
@@ -354,12 +361,30 @@ public class AudioWindow extends JInternalFrame{
         }
     }
 
+    public class ZoomToSelectionAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            float[] selection = pane.getSelection();
+            pane.rescale((int) selection[0], (int) selection[1]);
+            updatePane();
+        }
+    }
+
     public void updatePane(){
         pane.setAudioFile(audioFile);
         pane.invalidate();
         pane.repaint();
         this.invalidate();
         this.repaint();
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        if(pane.getSelection()[0] ==  pane.getSelection()[1]){
+            selectionMenu.setVisible(false);
+        } else {
+            selectionMenu.setVisible(true);
+        }
     }
 
 }

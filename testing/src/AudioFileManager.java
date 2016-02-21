@@ -134,6 +134,10 @@ public class AudioFileManager {
         return filePath;
     }
 
+    public int getSampleRate(){
+        return sampleRate;
+    }
+
     //returns file name
     public String getName(){
         if (audioFile != null) {

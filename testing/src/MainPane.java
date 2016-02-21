@@ -1,12 +1,11 @@
 import javax.swing.*;
+import javax.swing.event.MouseInputListener;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 
-public class MainPane extends JPanel implements KeyListener, MouseListener {
+public class MainPane extends JPanel implements KeyListener, MouseListener, MouseMotionListener, MouseWheelListener {
 
+    private Component parent;
     private AudioFileManager audioFile;
     private float MinNote, MaxNote;
     private int lX, lY, nX, nY;
@@ -16,10 +15,13 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
     private int windowWidth = 0;
     private float samplesPerPixel;
 
-    public MainPane(){
+    public MainPane(Component parent){
         super();
         addKeyListener(this);
         addMouseListener(this);
+        addMouseMotionListener(this);
+        addMouseWheelListener(this);
+        this.parent = parent;
     }
 
     /* pretty graphical window for the music --m */
@@ -51,7 +53,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
         for (float[] channel : audioFile.getChannels()) {
             g2.setColor(AudioDesktop.theme[colorNum++]);
             lX = 0;
-            lY = getYfromVal((int) channel[pan]);
+            lY = getYfromVal(findMin(channel, pan - 1, pan));
             int lastI = 0;
             for (int i = pan - pan % 2; i < channel.length; i += (samplesPerPixel <= 1) ? 2 : 2 * samplesPerPixel) {
                 nX = lX + ((zoom > 1) ? (int) zoom : 1);
@@ -96,6 +98,11 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
         return (float) (2 * x / zoom + pan);
     }
 
+    public void rescale(int startIndex, int endIndex){
+        pan = startIndex;
+        zoom = 2f * getWidth() / (endIndex - startIndex);
+    }
+
     public float findMax(float[] arr, int stIndex, int endIndex){
         float max = -1 * Float.MAX_VALUE;
         if(stIndex < 0){
@@ -110,7 +117,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
         if(endIndex > arr.length){
             endIndex = arr.length;
         }
-        for(int i = stIndex; i < endIndex; i+=2){
+        for(int i = stIndex - stIndex % 2; i < endIndex; i+=2){
             if(arr[i] > max && arr[i] != Float.POSITIVE_INFINITY) max = arr[i];
         }
         return max;
@@ -130,7 +137,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
         if(endIndex > arr.length){
             endIndex = arr.length;
         }
-        for(int i = stIndex; i < endIndex; i+=2){
+        for(int i = stIndex - stIndex % 2; i < endIndex; i+=2){
             if(arr[i] < min && arr[i] != Float.NEGATIVE_INFINITY) min = arr[i];
         }
         return min;
@@ -210,7 +217,9 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
     }
 
     private Point mouseClick = new Point();
-    private float[] selection = new float[] { 0, 0};
+    private float[] selection = new float[] {0, 0};
+    private boolean[] mouseButtonState = new boolean[4]; //Allows access by MouseEvent value
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -218,6 +227,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        mouseButtonState[e.getButton()] = true;
         if(e.getButton() == MouseEvent.BUTTON1){
             mouseClick = e.getPoint();
         } else if(e.getButton() == MouseEvent.BUTTON3){
@@ -230,7 +240,8 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1) {
+        if(mouseButtonState[MouseEvent.BUTTON1] &&
+                !(mouseButtonState[MouseEvent.BUTTON2] || mouseButtonState[MouseEvent.BUTTON3])) {
             if (mouseClick.x < e.getPoint().x) {
                 selection[0] = getIndexFromX(mouseClick.x);
                 selection[1] = getIndexFromX(e.getPoint().x);
@@ -239,12 +250,15 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
                 selection[1] = getIndexFromX(mouseClick.x);
             }
             mouseClick = new Point();
-        } else if(e.getButton() == MouseEvent.BUTTON3){
+        } else {
             selection[0] = 0;
             selection[1] = 0;
         }
+        mouseButtonState[e.getButton()] = false;
         invalidate();
         repaint();
+        parent.invalidate();
+        parent.repaint();
     }
 
     @Override
@@ -259,5 +273,44 @@ public class MainPane extends JPanel implements KeyListener, MouseListener {
 
     public float[] getSelection(){
         return selection;
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
+        if(mouseButtonState[MouseEvent.BUTTON1] &&
+                !(mouseButtonState[MouseEvent.BUTTON2] || mouseButtonState[MouseEvent.BUTTON3])) {
+            if (mouseClick.x < e.getPoint().x) {
+                selection[0] = getIndexFromX(mouseClick.x);
+                selection[1] = getIndexFromX(e.getPoint().x);
+            } else {
+                selection[0] = getIndexFromX(e.getPoint().x);
+                selection[1] = getIndexFromX(mouseClick.x);
+            }
+            invalidate();
+            repaint();
+            parent.invalidate();
+            parent.repaint();
+        }
+    }
+
+    @Override
+    public void mouseMoved(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        double rot = e.getPreciseWheelRotation();
+        if(!e.isShiftDown()) {
+            pan += 32 * rot / zoom;
+        } else {
+            if (rot > 0) {
+                zoom /= (rot * 2);
+            } else {
+                zoom *= -(rot * 2);
+            }
+        }
+        invalidate();
+        repaint();
     }
 }
