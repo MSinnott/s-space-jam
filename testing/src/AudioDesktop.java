@@ -8,8 +8,7 @@ import java.util.Properties;
 
 public class AudioDesktop extends JFrame{
 
-    public static Color[] theme = new Color[] { new Color(252, 53, 0), new Color(252, 127, 3), new Color(255, 201, 8),
-                                                new Color(55, 236, 255), new Color(29, 46, 255), new Color(255, 255, 255),
+    public static Color[] theme = new Color[] { new Color(252, 53, 0), new Color(252, 127, 3), new Color(255, 201, 8), new Color(55, 236, 255), new Color(29, 46, 255), new Color(255, 255, 255),
                                                 new Color(0, 0, 0)  };
 
     //bgColor = new Color(252, 53, 0);

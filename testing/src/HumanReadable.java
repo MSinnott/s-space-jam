@@ -9,7 +9,6 @@ public class HumanReadable {
 
     public static String neatenFloat(float f){
         String flt  = Float.toString(f);
-        System.out.println(flt);
         String ret = "";
         if(Math.abs(f) < 2 * Float.MIN_VALUE) return "0.0";
         if(flt.contains("e")){
@@ -24,7 +23,6 @@ public class HumanReadable {
             }
             ret += "e" + (int) Math.log10(f);
         }
-        System.out.println("into " + ret);
         return ret;
     }
 

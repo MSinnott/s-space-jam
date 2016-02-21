@@ -16,10 +16,6 @@ public class AudioFileManager {
     private File audioFile  = null;
     private String defaultName = "";
 
-    //both complex
- //   private float[] leftData;
- //   private float[] rightData;
-
     private float[][] channels;
 
     private int sampleRate = DEFAULT_SAMPLE_RATE;

@@ -87,8 +87,8 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
             if(Math.abs(getXfromIndex(nextI) - getXfromIndex(lastI)) > 50) {
                 g2.drawLine((int) getXfromIndex(nextI), windowHeight / 2 + 8, (int) getXfromIndex(nextI), windowHeight / 2 - 8);
                 g2.drawString("" + HumanReadable.neatenFloat(nextI), (int) getXfromIndex(nextI), (windowHeight / 2) + 16);
+                lastI = nextI;
             }
-            lastI = nextI;
         }
 
         g2.setColor(AudioDesktop.theme[0]);
