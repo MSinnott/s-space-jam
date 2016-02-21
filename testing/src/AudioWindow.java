@@ -137,6 +137,11 @@ public class AudioWindow extends JInternalFrame{
         pbpMult.addActionListener(new pbpMultAction());
         components.add(pbpMult);
 
+        JMenuItem trimButton = new JMenuItem("Trim");
+        opMenu.add(trimButton);
+        trimButton.addActionListener(new TrimAction());
+        components.add(trimButton);
+
         selectionMenu = new JMenu("Edit Selection");
         menuBar.add(selectionMenu);
         components.add(selectionMenu);
@@ -362,6 +367,14 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             audioFile.btransform();
+            updatePane();
+        }
+    }
+
+    public class TrimAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            audioFile.trim();
             updatePane();
         }
     }

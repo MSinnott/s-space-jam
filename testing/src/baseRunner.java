@@ -7,7 +7,7 @@ public class baseRunner {
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
-        float[] song0 = generator.generateSongV2(2, 2 << 8);
+        float[] song0 = generator.generateSongV2(16, 2 << 8);
         AudioFileManager song = new AudioFileManager(song0, song0);
         float[] ramp0 = generator.toneRamp(Float.NaN, 4, 2 << 10, -128);
         AudioFileManager ramp = new AudioFileManager(ramp0, ramp0);

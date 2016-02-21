@@ -196,7 +196,8 @@ public class AudioFileManager {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        int chunkSize = samples.length + 40;
+        int chunkSize = samples.length / 2 + 40;
+        System.out.println("CS" + chunkSize + " CL " + channels[0].length);
         audioFile = new File(filepath);
         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(audioFile));
         byte[] writeOut = new byte[chunkSize];
@@ -415,6 +416,26 @@ public class AudioFileManager {
 
     public void pAdd(AudioFileManager audioFileManager, int offset){
         pAdd(audioFileManager.getChannels(), offset);
+    }
+
+    public void trim(){
+        int stZeroF = 0, endZeroF = channels[0].length;
+        for (float[] channel : channels){
+            int i = stZeroF;
+            while (channel[i] == 0){ i++; }
+            if(endZeroF > i) endZeroF = i;
+        }
+        int stZeroE = 0, endZeroE = channels[0].length;
+        for (float[] channel : channels){
+            int i = endZeroE - 1;
+            while (channel[i] == 0){ i--; }
+            if(stZeroE < i) stZeroE = i;
+        }
+        float[][] newArrs = new float[channels.length][stZeroE - endZeroF];
+        for (int i = 0; i < newArrs.length; i++) {
+            System.arraycopy(channels[i], endZeroF, newArrs[i], 0, stZeroE - endZeroF);
+        }
+        channels = newArrs;
     }
 
 }
