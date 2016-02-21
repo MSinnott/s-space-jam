@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="933177a3-c705-41de-881d-4941e94a1377" name="Default" comment="I found code that will allow you to select a .au file and input its data into a byte[]. Does not include header information nor its metadata.&#10;">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/music/sngR.wav" afterPath="$PROJECT_DIR$/testing/music/sngR.wav" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioFileManager.java" afterPath="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioWindow.java" afterPath="$PROJECT_DIR$/testing/src/AudioWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/HumanReadable.java" afterPath="$PROJECT_DIR$/testing/src/HumanReadable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MainPane.java" afterPath="$PROJECT_DIR$/testing/src/MainPane.java" />
-    </list>
+    <list default="true" id="933177a3-c705-41de-881d-4941e94a1377" name="Default" comment="I found code that will allow you to select a .au file and input its data into a byte[]. Does not include header information nor its metadata.&#10;" />
     <ignored path="sSpaceJam.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
