@@ -7,7 +7,7 @@ public class baseRunner {
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
-        float[] song0 = generator.generateSongV2(16, 2 << 8);
+        float[] song0 = generator.generateSongV2(1, 2 << 8);
         AudioFileManager song = new AudioFileManager(song0, song0);
         float[] ramp0 = generator.toneRamp(Float.NaN, 4, 2 << 10, -128);
         AudioFileManager ramp = new AudioFileManager(ramp0, ramp0);
@@ -22,7 +22,7 @@ public class baseRunner {
         ramp.pAdd(new AudioFileManager(beat2, beat2), AudioFileManager.DEFAULT_SAMPLE_RATE * 4);
 
         //ramp.smallFFT(16);
-        ramp.buildFile("testing/music/sngR.wav");
+        ramp.buildFile("sngR.wav");
 
         mainWindow.buildWindow(ramp);
     }

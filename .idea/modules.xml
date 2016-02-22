@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/s-space-jam.iml" filepath="$PROJECT_DIR$/.idea/s-space-jam.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/sSpace.iml" filepath="$PROJECT_DIR$/.idea/sSpace.iml" />
     </modules>
   </component>

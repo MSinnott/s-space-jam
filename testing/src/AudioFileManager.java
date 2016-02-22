@@ -1,3 +1,4 @@
+import javax.sound.sampled.AudioFormat;
 import java.io.*;
 
 /*
@@ -182,13 +183,17 @@ public class AudioFileManager {
         return data;
     }
 
+    public byte[] getSoundData(){
+        return floatArrToByteArr(mergeData(decomplexify(channels)));
+    }
+
     //writes the file
     public void buildFile(String filepath) throws IOException {
         if(!filepath.contains(".wav") && !filepath.contains("mp3") ) filepath += ".wav";
         this.filePath = filepath;
         byte[] samples = new byte[0];
         try {
-            samples = floatArrToByteArr(mergeData(decomplexify(channels)));
+            samples = getSoundData();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -249,6 +254,10 @@ public class AudioFileManager {
         header[35] = (byte) (0);
 
         return header;
+    }
+
+    public AudioFormat getAudioFormat(){
+        return new AudioFormat(sampleRate, 16, channels.length, true, false);
     }
 
     //put transformations on the audio data below \/
@@ -420,6 +429,9 @@ public class AudioFileManager {
     }
 
     public void zeroFrom(int start, int end){
+        if(start < 0) start = 0;
+        if(end > channels[0].length) end = channels[0].length;
+        if(start > end) return;
         for(float[] channel: channels) {
             for (int i = start; i < end && i < channel.length; i++) {
                 channel[i] = 0;

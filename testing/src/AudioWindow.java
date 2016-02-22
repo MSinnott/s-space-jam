@@ -14,6 +14,8 @@ public class AudioWindow extends JInternalFrame{
     private AudioDesktop audioDesktop;
     private AudioWindow audioWindow = this;
 
+    private SoundPlayer player;
+
     private boolean saved = false;
     private String savePath = null;
 
@@ -22,6 +24,7 @@ public class AudioWindow extends JInternalFrame{
     public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
         super(fileManager.getName());
 
+        player = new SoundPlayer(fileManager);
         audioDesktop = aDesk;
 
         this.setSize(width, height);
@@ -180,6 +183,15 @@ public class AudioWindow extends JInternalFrame{
         selectionMenu.add(boxcarSelectionFilterButton);
         boxcarSelectionFilterButton.addActionListener(new BoxcarFilterAction(true));
         components.add(boxcarSelectionFilterButton);
+
+        JMenu playMenu = new JMenu("Play!");
+        menuBar.add(playMenu);
+        components.add(playMenu);
+
+        JMenuItem playButton = new JMenuItem("Play File!");
+        playMenu.add(playButton);
+        playButton.addActionListener(new PlayAction());
+        components.add(playButton);
 
         resetColors();
     }
@@ -440,6 +452,13 @@ public class AudioWindow extends JInternalFrame{
             float[] selection = pane.getSelection();
             pane.rescale((int) selection[0], (int) selection[1]);
             updatePane();
+        }
+    }
+
+    public class PlayAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            player.playFile(pane);
         }
     }
 

@@ -15,6 +15,8 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
     private int windowWidth = 0;
     private float samplesPerPixel;
 
+    private int playLoc = 0;
+
     public MainPane(Component parent){
         super();
         addKeyListener(this);
@@ -92,9 +94,14 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
         }
 
         g2.setColor(AudioDesktop.theme[0]);
+        g2.drawLine((int) getXfromIndex(playLoc), 0 , (int) getXfromIndex(playLoc), windowHeight);
+
+        g2.setColor(AudioDesktop.theme[0]);
         g2.fillRect(0, windowHeight - 20, windowWidth, 20);
         g2.setColor(AudioDesktop.theme[5]);
-        g2.drawString("Zoom: " + HumanReadable.neatenFloat((float) zoom) + " Selection: " + HumanReadable.neatenFloat(selection[0]) + " to " + HumanReadable.neatenFloat(selection[1]), 0, windowHeight);
+        g2.drawString("Zoom: " + HumanReadable.neatenFloat((float) zoom) + " Selection: " + HumanReadable.neatenFloat(selection[0]) + " to " + HumanReadable.neatenFloat(selection[1]) + " Playing @: " + playLoc, 0, windowHeight);
+
+
     }
 
     private int getYfromVal(float val){
@@ -168,6 +175,12 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
         } else {
             pan += panDirection * 5 * zoom;
         }
+    }
+
+    public void updateLoc(int loc){
+        playLoc = loc;
+        invalidate();
+        repaint();
     }
 
     public void setAudioFile(AudioFileManager fileManager){
