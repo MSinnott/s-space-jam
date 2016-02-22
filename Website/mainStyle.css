@@ -1,14 +1,32 @@
 body {
   background-color:rgb(255,145,0);
 }
-#panel, #flip {
+/*Image bounce on ssjam logo*/
+img.logoImg {
+  display: block;
+	margin:50px;
+	padding:3px;
+	outline:2px solid #DDD;
+	border:#a1a1a1;
+	/*float:left;*/
+	-webkit-transition: margin 0.5s ease-out;
+    -moz-transition: margin 0.5s ease-out;
+    -o-transition: margin 0.5s ease-out;
+}
+
+img.logoImg:hover {
+	cursor:pointer;
+    margin-top: 5px;
+}
+
+/*For Collaborators slide out panel*/
+#collabPanel, #collabFlip {
   padding: 5px;
   text-align: center;
   background-color: #e5eecc;
   border: solid 1px #c3c3c3;
 }
-
-#panel {
+#collabPanel {
   padding: 50px;
   display: none;
 }

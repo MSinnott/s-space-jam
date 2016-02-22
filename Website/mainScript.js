@@ -1,6 +1,6 @@
 // Collaborators dropdown bar
 $(document).ready(function(){
-    $("#flip").click(function(){
-        $("#panel").slideToggle("slow");
+    $("#collabFlip").click(function(){
+        $("#collabPanel").slideToggle("slow");
     });
 });
