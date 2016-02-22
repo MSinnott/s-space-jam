@@ -8,6 +8,9 @@ body {
 a {
 	margin-left: 10px;
 }
+p {
+	margin-left: 30px;
+}
 nav {
 	line-height:30px;
 	background-color: rgb(0,40,155);
