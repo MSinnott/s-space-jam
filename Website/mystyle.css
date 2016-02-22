@@ -2,11 +2,21 @@ head {
 	background-color:teal;
 }
 body {
-	background-color:gray;
+	background-color:rgb(255,145,0);
 }
+
 a {
 	margin-left: 10px;
 }
-a1 {
-	margin-left: 100px;
+p {
+	margin-left: 30px;
+}
+nav {
+	line-height:30px;
+	background-color: rgb(0,40,155);
+	color: white;
+	height:300px;
+	width:100px;
+	float:left;
+	padding:5px;
 }
