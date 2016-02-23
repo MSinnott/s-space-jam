@@ -50,4 +50,8 @@ public class ColoredComponent {
         c.repaint();
     }
 
+    public void setVisible(boolean setTo){
+        c.setVisible(setTo);
+    }
+
 }

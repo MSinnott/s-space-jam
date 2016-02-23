@@ -22,7 +22,7 @@ public class baseRunner {
         ramp.pAdd(new AudioFileManager(beat2, beat2), AudioFileManager.DEFAULT_SAMPLE_RATE * 4);
 
         //ramp.smallFFT(16);
-        ramp.buildFile("sngR.wav");
+        ramp.buildFile("testing/music/sngR.wav");
 
         mainWindow.buildWindow(ramp);
     }

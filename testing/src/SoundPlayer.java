@@ -19,7 +19,11 @@ public class SoundPlayer implements Runnable{
     }
 
     public void playFile(MainPane pane){
-        playFile(pane, 0, audioFile.getChannels().length * audioFile.getChannels()[0].length);
+        this.pane = pane;
+        this.stIndex = 0;
+        this.endIndex = -1;
+        Thread playThread = new Thread(this);
+        playThread.start();
     }
 
     public void playFile(MainPane pane, int stIndex, int endIndex){
@@ -43,15 +47,20 @@ public class SoundPlayer implements Runnable{
 
         sourceLine.start();
         byte[] soundData = audioFile.getSoundData();
-        for (int i = stIndex; i < endIndex; i+= FRAME_LEN, loc += FRAME_LEN) {
+        System.out.println("SD: " + soundData.length);
+
+        if(stIndex < 0) stIndex = 0;
+        if(endIndex < stIndex) endIndex = soundData.length / 2;
+        for (int i = stIndex, loc = stIndex; i < endIndex && i < soundData.length; i+= FRAME_LEN, loc += FRAME_LEN) {
             sourceLine.write(soundData, i, FRAME_LEN);
             pane.updateLoc(loc);
-            try { Thread.sleep(1); } catch (InterruptedException e) { e.printStackTrace(); }
+            Thread.yield();
         }
-
+        System.out.println("done");
         sourceLine.drain();
         sourceLine.close();
         loc = 0;
+        pane.updateLoc(loc);
     }
 
 }
