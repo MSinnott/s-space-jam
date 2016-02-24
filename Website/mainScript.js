@@ -4,3 +4,5 @@ $(document).ready(function(){
         $("#collabPanel").slideToggle("slow");
     });
 });
+
+// logoImg flip
