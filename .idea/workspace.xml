@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba40b175-e4b0-4d27-b864-734c3c7d2192" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioWindow.java" afterPath="$PROJECT_DIR$/testing/src/AudioWindow.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/ColoredComponent.java" afterPath="$PROJECT_DIR$/testing/src/ColoredComponent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/SoundPlayer.java" afterPath="$PROJECT_DIR$/testing/src/SoundPlayer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/baseRunner.java" afterPath="$PROJECT_DIR$/testing/src/baseRunner.java" />
     </list>
     <ignored path="sSpace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,24 +48,35 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SoundPlayer.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SoundPlayer.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/src/SoundPlayer.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
-              <folding />
+            <state vertical-scroll-proportion="0.37272727">
+              <caret line="54" column="41" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
+              <folding>
+                <element signature="e#2153#2154#0" expanded="true" />
+                <element signature="e#2189#2190#0" expanded="true" />
+                <element signature="e#2214#2215#0" expanded="true" />
+                <element signature="e#2248#2249#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AudioWindow.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="AudioWindow.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39545456">
-              <caret line="187" column="39" selection-start-line="187" selection-start-column="39" selection-end-line="187" selection-end-column="39" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="494" column="23" selection-start-line="494" selection-start-column="23" selection-end-line="494" selection-end-column="23" />
               <folding>
-                <element signature="e#572#590#0" expanded="true" />
-                <element signature="e#660#678#0" expanded="true" />
+                <element signature="e#570#588#0" expanded="true" />
+                <element signature="e#658#676#0" expanded="true" />
+                <element signature="e#19266#19267#0" expanded="true" />
+                <element signature="e#19318#19319#0" expanded="true" />
+                <element signature="e#19388#19389#0" expanded="true" />
+                <element signature="e#19449#19450#0" expanded="true" />
+                <element signature="e#19579#19580#0" expanded="true" />
+                <element signature="e#19616#19617#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -120,9 +128,9 @@
         <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
         <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
         <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
-        <option value="$PROJECT_DIR$/testing/src/SoundPlayer.java" />
         <option value="$PROJECT_DIR$/testing/src/ColoredComponent.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioWindow.java" />
+        <option value="$PROJECT_DIR$/testing/src/SoundPlayer.java" />
       </list>
     </option>
   </component>
@@ -545,7 +553,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20554273" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20554273" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18739903" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -632,7 +640,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#2153#2154#0" expanded="true" />
+            <element signature="e#2189#2190#0" expanded="true" />
+            <element signature="e#2214#2215#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -641,8 +654,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
           <folding>
-            <element signature="e#572#590#0" expanded="true" />
-            <element signature="e#660#678#0" expanded="true" />
+            <element signature="e#570#588#0" expanded="true" />
+            <element signature="e#658#676#0" expanded="true" />
+            <element signature="e#19266#19267#0" expanded="true" />
+            <element signature="e#19318#19319#0" expanded="true" />
+            <element signature="e#19388#19389#0" expanded="true" />
+            <element signature="e#19449#19450#0" expanded="true" />
+            <element signature="e#19579#19580#0" expanded="true" />
+            <element signature="e#19616#19617#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -680,8 +699,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="154" column="38" selection-start-line="154" selection-start-column="38" selection-end-line="154" selection-end-column="38" />
           <folding>
-            <element signature="e#572#590#0" expanded="true" />
-            <element signature="e#660#678#0" expanded="true" />
+            <element signature="e#570#588#0" expanded="true" />
+            <element signature="e#658#676#0" expanded="true" />
+            <element signature="e#19266#19267#0" expanded="true" />
+            <element signature="e#19318#19319#0" expanded="true" />
+            <element signature="e#19388#19389#0" expanded="true" />
+            <element signature="e#19449#19450#0" expanded="true" />
+            <element signature="e#19579#19580#0" expanded="true" />
+            <element signature="e#19616#19617#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -719,8 +744,14 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="154" column="38" selection-start-line="154" selection-start-column="38" selection-end-line="154" selection-end-column="38" />
           <folding>
-            <element signature="e#572#590#0" expanded="true" />
-            <element signature="e#660#678#0" expanded="true" />
+            <element signature="e#570#588#0" expanded="true" />
+            <element signature="e#658#676#0" expanded="true" />
+            <element signature="e#19266#19267#0" expanded="true" />
+            <element signature="e#19318#19319#0" expanded="true" />
+            <element signature="e#19388#19389#0" expanded="true" />
+            <element signature="e#19449#19450#0" expanded="true" />
+            <element signature="e#19579#19580#0" expanded="true" />
+            <element signature="e#19616#19617#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -780,21 +811,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/SoundPlayer.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
-          <folding />
+          <caret line="494" column="23" selection-start-line="494" selection-start-column="23" selection-end-line="494" selection-end-column="23" />
+          <folding>
+            <element signature="e#570#588#0" expanded="true" />
+            <element signature="e#658#676#0" expanded="true" />
+            <element signature="e#19266#19267#0" expanded="true" />
+            <element signature="e#19318#19319#0" expanded="true" />
+            <element signature="e#19388#19389#0" expanded="true" />
+            <element signature="e#19449#19450#0" expanded="true" />
+            <element signature="e#19579#19580#0" expanded="true" />
+            <element signature="e#19616#19617#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/SoundPlayer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39545456">
-          <caret line="187" column="39" selection-start-line="187" selection-start-column="39" selection-end-line="187" selection-end-column="39" />
+        <state vertical-scroll-proportion="0.37272727">
+          <caret line="54" column="41" selection-start-line="54" selection-start-column="41" selection-end-line="54" selection-end-column="41" />
           <folding>
-            <element signature="e#572#590#0" expanded="true" />
-            <element signature="e#660#678#0" expanded="true" />
+            <element signature="e#2153#2154#0" expanded="true" />
+            <element signature="e#2189#2190#0" expanded="true" />
+            <element signature="e#2214#2215#0" expanded="true" />
+            <element signature="e#2248#2249#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -7,8 +7,6 @@ import java.util.ArrayList;
 
 public class AudioWindow extends JInternalFrame{
 
-
-
     private MainPane pane;
     private AudioFileManager audioFile;
     private AudioDesktop audioDesktop;
@@ -198,6 +196,16 @@ public class AudioWindow extends JInternalFrame{
         playMenu.add(playSelectedButton);
         playSelectedButton.addActionListener(new PlaySelectedAction());
         selectionComponents.add(new ColoredComponent(playSelectedButton, 5, 0));
+
+        JCheckBoxMenuItem repeatButton = new JCheckBoxMenuItem("Repeat?");
+        playMenu.add(repeatButton);
+        repeatButton.addActionListener(new RepeatAction(repeatButton));
+        selectionComponents.add(new ColoredComponent(repeatButton, 5, 0));
+
+        JMenuItem stopButton = new JMenuItem("Stop");
+        playMenu.add(stopButton);
+        stopButton.addActionListener(new StopAction());
+        selectionComponents.add(new ColoredComponent(stopButton, 5, 0));
 
         resetColors();
     }
@@ -470,6 +478,24 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e){
             player.playFile(pane, (int) pane.getSelection()[0], (int) pane.getSelection()[1]);
+        }
+    }
+
+    public class RepeatAction extends AbstractAction {
+        JCheckBoxMenuItem checkBox;
+        public RepeatAction(JCheckBoxMenuItem jCheckBoxMenuItem){
+            checkBox = jCheckBoxMenuItem;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e){
+            player.setRepeat(checkBox.getState());
+        }
+    }
+
+    public class StopAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            player.stop();
         }
     }
 
