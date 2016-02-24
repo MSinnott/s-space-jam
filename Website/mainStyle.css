@@ -1,6 +1,6 @@
 /*General page and text edits*/
 #brandName {
-  margin-top: 100px;
+  margin-top: 300px;
   text-align: center;
 }
 body {
@@ -8,12 +8,10 @@ body {
 }
 
 /*Image animation on ssjam logo*/
-.logoAnimation {
+.ssjamLogo {
+  position:fixed; top: 10%; left: 46.25%;
   border: 2px solid white;
   display: block;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 100px;
   -webkit-animation: animation 750ms linear both;
   animation: animation 750ms linear both;
 }
@@ -70,6 +68,6 @@ body {
   border: solid 1px #c3c3c3;
 }
 #collabPanel {
-  padding: 50px;
+  padding: : 50px;
   display: none;
 }
