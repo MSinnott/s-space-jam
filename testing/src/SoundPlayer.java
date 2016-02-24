@@ -49,8 +49,6 @@ public class SoundPlayer implements Runnable{
 
         sourceLine.start();
         byte[] soundData = audioFile.getSoundData();
-
-        System.out.println("enter");
         do {
             if (stIndex < 0) stIndex = 0;
             if (endIndex < stIndex) endIndex = soundData.length / 2;
@@ -60,7 +58,7 @@ public class SoundPlayer implements Runnable{
                 Thread.yield();
                 if(stopPlaying) break;
             }
-        } while(repeat && !stopPlaying);
+        } while (repeat && !stopPlaying);
         stopPlaying = false;
         sourceLine.drain();
         sourceLine.close();
