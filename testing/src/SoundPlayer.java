@@ -11,6 +11,8 @@ public class SoundPlayer implements Runnable{
     private int stIndex;
     private int endIndex;
     private int loc = 0;
+    private boolean repeat = false;
+    private boolean stopPlaying = false;
 
     public SoundPlayer(AudioFileManager fileManager){
         audioFile = fileManager;
@@ -47,20 +49,30 @@ public class SoundPlayer implements Runnable{
 
         sourceLine.start();
         byte[] soundData = audioFile.getSoundData();
-        System.out.println("SD: " + soundData.length);
-
-        if(stIndex < 0) stIndex = 0;
-        if(endIndex < stIndex) endIndex = soundData.length / 2;
-        for (int i = stIndex, loc = stIndex; i < endIndex && i < soundData.length; i+= FRAME_LEN, loc += FRAME_LEN) {
-            sourceLine.write(soundData, i, FRAME_LEN);
-            pane.updateLoc(loc);
-            Thread.yield();
-        }
-        System.out.println("done");
+        do {
+            if (stIndex < 0) stIndex = 0;
+            if (endIndex < stIndex) endIndex = soundData.length / 2;
+            for (int i = stIndex, loc = stIndex; i < endIndex && i < soundData.length; i += FRAME_LEN, loc += FRAME_LEN) {
+                sourceLine.write(soundData, i, FRAME_LEN);
+                pane.updateLoc(loc);
+                Thread.yield();
+                if(stopPlaying) break;
+            }
+        } while (repeat && !stopPlaying);
+        stopPlaying = false;
         sourceLine.drain();
         sourceLine.close();
         loc = 0;
         pane.updateLoc(loc);
     }
+
+    public void setRepeat(boolean repeat){
+        this.repeat = repeat;
+    }
+
+    public void stop(){
+        stopPlaying = true;
+    }
+
 
 }

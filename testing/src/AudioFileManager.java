@@ -1,14 +1,14 @@
 import javax.sound.sampled.AudioFormat;
 import java.io.*;
 
-/*
+/**
     Class that handles audio I/O --reading, writing, etc
 
     when writing to the audio file, its a byte array. otherwise, its a float array
 
     when the audio file is transformed, this data changes as well
 
-    it handles data as two channels  - left & right
+    it handles data as channels - normally 2, but could have an arbitrarily large number
  */
 
 public class AudioFileManager {
@@ -86,7 +86,7 @@ public class AudioFileManager {
     public float[][] decomplexify(float[][] channelsIn){
         float[][] ret = new float[channelsIn.length][channelsIn[0].length/ 2];
         for (int i = 0; i < channelsIn.length; i++) {
-            for (int j = 0; j < channelsIn[i].length; j+=2) {
+            for (int j = 0; j < channelsIn[i].length - 1; j+=2) {
                 ret[i][j / 2] = channelsIn[i][j];
             }
         }
@@ -461,6 +461,18 @@ public class AudioFileManager {
             System.arraycopy(channels[i], endZeroF, newArrs[i], 0, stZeroE - endZeroF);
         }
         channels = newArrs;
+    }
+
+    public void addNoise(){
+        ftransform();
+        for (int i = 1; i < 2; i ++){
+            for (int j = 0; j < channels.length; j++) {
+                for (int k = 0; k < channels[0].length; k++) {
+                    if(i*k < channels[0].length) channels[j][i*k] = channels[j][k] / i;
+                }
+            }
+        }
+        btransform();
     }
 
 }
