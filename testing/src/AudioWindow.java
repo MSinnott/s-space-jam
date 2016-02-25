@@ -200,12 +200,12 @@ public class AudioWindow extends JInternalFrame{
         JCheckBoxMenuItem repeatButton = new JCheckBoxMenuItem("Repeat?");
         playMenu.add(repeatButton);
         repeatButton.addActionListener(new RepeatAction(repeatButton));
-        selectionComponents.add(new ColoredComponent(repeatButton, 5, 0));
+        components.add(new ColoredComponent(repeatButton, 5, 0));
 
         JMenuItem stopButton = new JMenuItem("Stop");
         playMenu.add(stopButton);
         stopButton.addActionListener(new StopAction());
-        selectionComponents.add(new ColoredComponent(stopButton, 5, 0));
+        components.add(new ColoredComponent(stopButton, 5, 0));
 
         resetColors();
     }

@@ -468,7 +468,7 @@ public class AudioFileManager {
         for (int i = 1; i < 2; i ++){
             for (int j = 0; j < channels.length; j++) {
                 for (int k = 0; k < channels[0].length; k++) {
-                    if(i*k < channels[0].length) channels[j][i*k] = channels[j][k] / i;
+                    if(i*k < channels[0].length) channels[j][i*k] = channels[j][k] / ((float) i);
                 }
             }
         }

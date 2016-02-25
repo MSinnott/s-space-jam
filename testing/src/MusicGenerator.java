@@ -13,7 +13,7 @@ public class MusicGenerator {
 
     public MusicGenerator(int samplesPerSec){
         for(int i = 0; i < key.length; i++){
-            key[i] = random.nextInt(440)+100;
+            key[i] = random.nextInt(660)+220;
         }
         key = sortAscending(key);
         sampleRate = samplesPerSec;
@@ -22,6 +22,26 @@ public class MusicGenerator {
     /*
         High level functions to build a song
      */
+
+    public float[] generateSongV3(int themeLen, float volumeMultiplier, float peakedness){
+        float[] theme = new float[themeLen];
+        float[] noteLen = new float[themeLen];
+        int totalLen = 0;
+        for (int i = 0; i < themeLen; i++) {
+            theme[i] = key[random.nextInt(key.length)];
+            noteLen[i] = (float) (2f / Math.pow(2, random.nextInt(3)));
+            totalLen += noteLen[i];
+        }
+        float[] music = new float[AudioFileManager.DEFAULT_SAMPLE_RATE * totalLen / 2];
+        float[] toAdd;
+        int loc = 0;
+        for (int i = 0; i < themeLen; i += 1) {
+            toAdd = getBeat(theme[i], noteLen[i], volumeMultiplier, 1f / noteLen[i], peakedness);
+            System.arraycopy(toAdd, 0, music, loc, toAdd.length / 2);
+            loc += toAdd.length / 3;
+        }
+        return music;
+    }
 
     public float[] generateSongV2(int numThemeRepeats, float volumeMultiplier){
         int numNotes = random.nextInt(20) + 10;
