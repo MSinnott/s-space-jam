@@ -2,7 +2,7 @@
   * @author Baoshe Zhang
   * @author Astronomical Instrument Group of University of Lethbridge.
 */
-class ComplexDoubleFFT_Mixed
+class ComplexFloatFFT_Mixed
 {
 
 /*----------------------------------------------------------------------
@@ -10,11 +10,11 @@ class ComplexDoubleFFT_Mixed
    isign is +1 for backward and -1 for forward transforms
   ----------------------------------------------------------------------*/
 
-     void passf2(int ido, int l1, final double cc[], double ch[], final double wtable[], int offset, int isign) 
+     void passf2(int ido, int l1, final float cc[], float ch[], final float wtable[], int offset, int isign)
                   /*isign==+1 for backward transform*/
      {
           int     i, k, ah, ac;
-          double  ti2, tr2;
+		 float  ti2, tr2;
           int iw1;
 
           iw1 = offset;
@@ -53,12 +53,12 @@ class ComplexDoubleFFT_Mixed
    passf3: Complex FFT's forward/backward processing of factor 3;
    isign is +1 for backward and -1 for forward transforms
   ----------------------------------------------------------------------*/
-     void passf3(int ido, int l1, final double cc[], double ch[], final double wtable[], int offset, int isign)
+     void passf3(int ido, int l1, final float cc[], float ch[], final float wtable[], int offset, int isign)
      {
-          final double taur=-0.5;
-          final double taui=0.866025403784439;
+          final float taur=-0.5f;
+          final float taui=0.866025403784439f;
           int     i, k, ac, ah;
-          double  ci2, ci3, di2, di3, cr2, cr3, dr2, dr3, ti2, tr2;
+		 float  ci2, ci3, di2, di3, cr2, cr3, dr2, dr3, ti2, tr2;
           int iw1, iw2;
  
           iw1 = offset;
@@ -119,10 +119,10 @@ class ComplexDoubleFFT_Mixed
    passf4: Complex FFT's forward/backward processing of factor 4;
    isign is +1 for backward and -1 for forward transforms
   ----------------------------------------------------------------------*/
-     void passf4(int ido, int l1, final double cc[], double ch[], final double wtable[], int offset, int isign)
+     void passf4(int ido, int l1, final float cc[], float ch[], final float wtable[], int offset, int isign)
      {
            int i, k, ac, ah;
-           double  ci2, ci3, ci4, cr2, cr3, cr4, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4;
+		 float  ci2, ci3, ci4, cr2, cr3, cr4, ti1, ti2, ti3, ti4, tr1, tr2, tr3, tr4;
            int iw1, iw2, iw3;
            iw1 = offset;
            iw2 = iw1 + ido;
@@ -191,15 +191,15 @@ class ComplexDoubleFFT_Mixed
    passf5: Complex FFT's forward/backward processing of factor 5;
    isign is +1 for backward and -1 for forward transforms
   ----------------------------------------------------------------------*/
-     void passf5(int ido, int l1, final double cc[], double ch[], final double wtable[], int offset, int isign)
+     void passf5(int ido, int l1, final float cc[], float ch[], final float wtable[], int offset, int isign)
                /*isign==-1 for forward transform and+1 for backward transform*/
      {
-    	final double tr11=0.309016994374947;
-    	final double ti11=0.951056516295154;
-    	final double tr12=-0.809016994374947;
-    	final double ti12=0.587785252292473;
+    	final float tr11=0.309016994374947f;
+    	final float ti11=0.951056516295154f;
+    	final float tr12=-0.809016994374947f;
+    	final float ti12=0.587785252292473f;
     	int     i, k, ac, ah;
-    	double  ci2, ci3, ci4, ci5, di3, di4, di5, di2, cr2, cr3, cr5, cr4,
+		 float  ci2, ci3, ci4, ci5, di3, di4, di5, di2, cr2, cr3, cr5, cr4,
         	    ti2, ti3, ti4, ti5, dr3, dr4, dr5, dr2, tr2, tr3, tr4, tr5;
         int iw1, iw2, iw3, iw4;
 
@@ -296,11 +296,11 @@ class ComplexDoubleFFT_Mixed
    isign is +1 for backward and -1 for forward transforms
   ----------------------------------------------------------------------*/
      void passfg(int nac[], int ido, int ip, int l1, int idl1,
-                       final double cc[], double c1[], double c2[], double ch[], double ch2[],
-                       final double wtable[], int offset, int isign)
+                       final float cc[], float c1[], float c2[], float ch[], float ch2[],
+                       final float wtable[], int offset, int isign)
      {
           int idij, idlj, idot, ipph, i, j, k, l, jc, lc, ik, nt, idj, idl, inc, idp;
-          double  wai, war;
+		 float  wai, war;
           int iw1;
 
           iw1 = offset;
@@ -446,7 +446,7 @@ class ComplexDoubleFFT_Mixed
 /*---------------------------------------------------------
    cfftf1: further processing of Complex forward FFT
   --------------------------------------------------------*/
-     void cfftf1(int n, double c[], final double wtable[], int isign)
+     void cfftf1(int n, float c[], final float wtable[], int isign)
      {
           int     idot, i;
           int     k1, l1, l2;
@@ -454,7 +454,7 @@ class ComplexDoubleFFT_Mixed
           int[]  nac = new int[1];
 
           int     iw1, iw2;
-          double[] ch = new double[2*n];
+		 float[] ch = new float[2*n];
 
           iw1=2*n;
           iw2=4*n;
@@ -543,7 +543,7 @@ class ComplexDoubleFFT_Mixed
 /*---------------------------------------------------------
    cfftf: Complex forward FFT
   --------------------------------------------------------*/
-     void cfftf(int n, double c[], double wtable[])
+     void cfftf(int n, float c[], float wtable[])
      {
           cfftf1(n, c, wtable, -1);
      } 
@@ -551,7 +551,7 @@ class ComplexDoubleFFT_Mixed
 /*---------------------------------------------------------
    cfftb: Complex borward FFT
   --------------------------------------------------------*/
-     void cfftb(int n, double c[], double wtable[])
+     void cfftb(int n, float c[], float wtable[])
      {
           cfftf1(n, c, wtable, +1);
      } 
@@ -559,11 +559,11 @@ class ComplexDoubleFFT_Mixed
 /*---------------------------------------------------------
    cffti1: further initialization of Complex FFT
   --------------------------------------------------------*/
-     void cffti1(int n, double wtable[])
+     void cffti1(int n, float wtable[])
      {
 
           final int[] ntryh = {3, 4, 2, 5};
-          final double twopi=2.0D*Math.PI;
+          final float twopi= (float) (2.0*Math.PI);
           double  argh;
           int     idot, ntry=0, i, j;
           double  argld;
@@ -631,8 +631,8 @@ class ComplexDoubleFFT_Mixed
 		       i+=2;
 		       fi+=1;
 		       arg=fi*argld;
-		       wtable[i-1+2*n]=Math.cos(arg);
-		       wtable[i+2*n]=Math.sin(arg);
+		       wtable[i-1+2*n]= (float) Math.cos(arg);
+		       wtable[i+2*n]= (float) Math.sin(arg);
 	           }
 	           if(ip>5)
 	           {
@@ -648,7 +648,7 @@ class ComplexDoubleFFT_Mixed
 /*---------------------------------------------------------
    cffti:  Initialization of Real forward FFT
   --------------------------------------------------------*/
-     void cffti(int n, double wtable[])
+     void cffti(int n, float wtable[])
      {
          if(n==1) return;
          cffti1(n, wtable);

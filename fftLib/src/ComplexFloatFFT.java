@@ -4,14 +4,14 @@
  * @author Baoshe Zhang
  * @author Astronomical Instrument Group of University of Lethbridge.
  */
-public class ComplexDoubleFFT extends ComplexDoubleFFT_Mixed {
+public class ComplexFloatFFT extends ComplexFloatFFT_Mixed {
     /**
      * <em>norm_factor</em> can be used to normalize this FFT transform. This is because
      * a call of forward transform (<em>ft</em>) followed by a call of backward transform
      * (<em>bt</em>) will multiply the input sequence by <em>norm_factor</em>.
      */
-    public double norm_factor;
-    private double wavetable[];
+    public float norm_factor;
+    private float wavetable[];
     private int ndim;
 
     /**
@@ -23,11 +23,11 @@ public class ComplexDoubleFFT extends ComplexDoubleFFT_Mixed {
      * @param n the size of a complex data sequence. When <em>n</em> is a multiplication of small
      *          numbers (4, 2, 3, 5), this FFT transform is very efficient.
      */
-    public ComplexDoubleFFT(int n) {
+    public ComplexFloatFFT(int n) {
         ndim = n;
         norm_factor = n;
         if (wavetable == null || wavetable.length != (4 * ndim + 15)) {
-            wavetable = new double[4 * ndim + 15];
+            wavetable = new float[4 * ndim + 15];
         }
         cffti(ndim, wavetable);
     }
@@ -44,7 +44,7 @@ public class ComplexDoubleFFT extends ComplexDoubleFFT_Mixed {
      *          <br>
      *          x[2*i+1] is the imaginary part of <em>i</em>-the complex data.
      */
-    public void ft(double x[]) {
+    public void ft(float x[]) {
         if (x.length != 2 * ndim)
             throw new IllegalArgumentException("The length of data can not match that of the wavetable");
         cfftf(ndim, x, wavetable);
@@ -87,7 +87,7 @@ public class ComplexDoubleFFT extends ComplexDoubleFFT_Mixed {
      *          <br>
      *          x[2*<em>i</em>+1] is the imaginary part of <em>i</em>-the complex data.
      */
-    public void bt(double x[]) {
+    public void bt(float x[]) {
         if (x.length != 2 * ndim)
             throw new IllegalArgumentException("The length of data can not match that of the wavetable");
         cfftb(ndim, x, wavetable);
