@@ -463,12 +463,12 @@ public class AudioFileManager {
         channels = newArrs;
     }
 
-    public void addNoise(){
+    public void addNoise(int noiseSteps, int noiseScale){
         ftransform();
-        for (int i = 1; i < 2; i ++){
+        for (int i = 1; i < noiseSteps; i ++){
             for (int j = 0; j < channels.length; j++) {
                 for (int k = 0; k < channels[0].length; k++) {
-                    if(i*k < channels[0].length) channels[j][i*k] = channels[j][k] / ((float) i);
+                    if(i*k < channels[0].length) channels[j][i*k] = channels[j][k] / (noiseScale);
                 }
             }
         }

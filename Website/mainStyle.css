@@ -9,7 +9,7 @@ body {
 
 /*Image animation on ssjam logo*/
 .ssjamLogo {
-  position:fixed; top: 10%; left: 46.25%;
+  position: fixed; top: 10%; left: 46.25%;
   border: 2px solid white;
   display: block;
   -webkit-animation: animation 750ms linear both;
