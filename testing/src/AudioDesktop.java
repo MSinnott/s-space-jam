@@ -244,8 +244,8 @@ public class AudioDesktop extends JFrame{
                     float[] song2 = generator.generateSongV1(4, 1);
                     AudioFileManager rSong2 = new AudioFileManager(song2, song2);
 
-                    rSong0.pAdd(rSong1.getChannels(), 0);
-                    rSong0.pAdd(rSong2.getChannels(), 0);
+                    rSong0.pAdd(rSong1.getChannels());
+                    rSong0.pAdd(rSong2.getChannels());
 
                     buildWindow(rSong0);
                     generateDialog.dispose();

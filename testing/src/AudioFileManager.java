@@ -14,6 +14,8 @@ import java.io.*;
 public class AudioFileManager {
 
     private ComplexFloatFFT fft;
+    private int fftlen;
+
     private File audioFile  = null;
     private String defaultName = "";
 
@@ -320,15 +322,19 @@ public class AudioFileManager {
         while (channels[0].length / powOfTwo > 1) {
             powOfTwo *= 2;
         }
-        powOfTwo *= 2;
 
-        fft = new ComplexFloatFFT(powOfTwo / 2);
+        if(fftlen != powOfTwo) {
+            fft = new ComplexFloatFFT(powOfTwo);
+            fftlen = powOfTwo;
+        }
 
         for (int i = 0; i < channels.length; i++) {
             float[] tempArr = new float[powOfTwo];
             System.arraycopy(channels[i], 0, tempArr, 0, channels[i].length);
             channels[i] = tempArr;
         }
+
+        System.out.println("C:" + channels[0].length + "P" + powOfTwo);
 
         for (int i = 0; i < channels.length; i++) {
 
@@ -347,9 +353,11 @@ public class AudioFileManager {
         while (channels[0].length / powOfTwo > 1) {
             powOfTwo *= 2;
         }
-        powOfTwo *= 2;
 
-        fft = new ComplexFloatFFT(powOfTwo / 2);
+        if(fftlen != powOfTwo) {
+            fft = new ComplexFloatFFT(powOfTwo);
+            fftlen = powOfTwo;
+        }
 
         for (int i = 0; i < channels.length; i++) {
             float[] tempArr = new float[powOfTwo];
