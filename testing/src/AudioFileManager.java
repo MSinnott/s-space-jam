@@ -13,7 +13,7 @@ import java.io.*;
 
 public class AudioFileManager {
 
-    private ComplexDoubleFFT fft;
+    private ComplexFloatFFT fft;
     private File audioFile  = null;
     private String defaultName = "";
 
@@ -286,9 +286,9 @@ public class AudioFileManager {
     }
 
     public void smallFFT(int fftSize){
-        double[][][] toTransform = new double[channels.length]
+        float[][][] toTransform = new float[channels.length]
                 [channels.length / fftSize + ((channels.length % fftSize != 0) ? 1 : 0)][fftSize];
-        fft = new ComplexDoubleFFT(fftSize / 2);
+        fft = new ComplexFloatFFT(fftSize / 2);
 
         for (int i = 0; i < channels.length; i++) {
             for (int j = 0; j < toTransform[0].length; j++) {
@@ -298,8 +298,8 @@ public class AudioFileManager {
             }
         }
 
-        for(double[][] channel: toTransform){
-            for(double[] smallData: channel){
+        for(float[][] channel: toTransform){
+            for(float[] smallData: channel){
                 fft.ft(smallData);
             }
         }
@@ -316,66 +316,56 @@ public class AudioFileManager {
     }
 
     public void ftransform(){
-        double powOfTwo = 1;
+        int powOfTwo = 1;
         while (channels[0].length / powOfTwo > 1) {
             powOfTwo *= 2;
         }
+        powOfTwo *= 2;
 
-        double[] toTransform = new double[(int) powOfTwo];
-        fft = new ComplexDoubleFFT(toTransform.length / 2);
+        fft = new ComplexFloatFFT(powOfTwo / 2);
 
         for (int i = 0; i < channels.length; i++) {
-            float[] toShift = channels[i];
+            float[] tempArr = new float[powOfTwo];
+            System.arraycopy(channels[i], 0, tempArr, 0, channels[i].length);
+            channels[i] = tempArr;
+        }
 
-            for (int j = 0; j < powOfTwo; j++) {
-                if (j < toShift.length) toTransform[j] = toShift[j];
-                else toTransform[j] = 0;
+        for (int i = 0; i < channels.length; i++) {
 
+            fft.ft(channels[i]);
+
+            double normalizer = 1 / Math.sqrt(channels[i].length / 2);
+
+            for (int j = 0; j < channels[i].length; j += 1) {
+                channels[i][j] *= normalizer;
             }
-
-            fft.ft(toTransform);
-
-            float[] res = new float[toTransform.length];
-
-            double normalizer = 1 / Math.sqrt(toTransform.length / 2);
-
-            for (int j = 0; j < toTransform.length; j += 1) {
-                res[j] = (float) (toTransform[j] * normalizer);
-            }
-
-            channels[i] = res;
         }
     }
 
     public void btransform(){
-        double powOfTwo = 1;
+        int powOfTwo = 1;
         while (channels[0].length / powOfTwo > 1) {
             powOfTwo *= 2;
         }
+        powOfTwo *= 2;
 
-        double[] toTransform = new double[(int) powOfTwo];
-        fft = new ComplexDoubleFFT(toTransform.length / 2);
+        fft = new ComplexFloatFFT(powOfTwo / 2);
 
         for (int i = 0; i < channels.length; i++) {
-            float[] toShift = channels[i];
+            float[] tempArr = new float[powOfTwo];
+            System.arraycopy(channels[i], 0, tempArr, 0, channels[i].length);
+            channels[i] = tempArr;
+        }
 
-            for (int j = 0; j < powOfTwo; j++) {
-                if (j < toShift.length) toTransform[j] = toShift[j];
-                else toTransform[j] = 0;
+        for (int i = 0; i < channels.length; i++) {
 
+            fft.bt(channels[i]);
+
+            double normalizer = 1 / Math.sqrt(channels[i].length / 2);
+
+            for (int j = 0; j < channels[i].length; j += 1) {
+                channels[i][j] *= normalizer;
             }
-
-            fft.bt(toTransform);
-
-            float[] res = new float[toTransform.length];
-
-            double normalizer = 1 / Math.sqrt(toTransform.length / 2);
-
-            for (int j = 0; j < toTransform.length; j += 1) {
-                res[j] = (float) (toTransform[j] * normalizer);
-            }
-
-            channels[i] = res;
         }
     }
 
@@ -394,21 +384,21 @@ public class AudioFileManager {
         pMult(audioFileManager.getChannels());
     }
 
-    public void pAdd(float[][] channelsIn, int offset){
-        int numArr = (channelsIn.length < channels.length) ? channels.length : channelsIn.length;
-        int arrInd = (channelsIn[0].length + offset < channels[0].length) ? channels[0].length : channelsIn[0].length + offset;
-        float[][] result = new float[numArr][arrInd];
-        for (int i = 0; i < numArr; i++) {
-            for (int j = 0; j < arrInd; j++) {
-                if(channels.length > i && channels[i].length > j) {
-                    result[i][j] += channels[i][j];
+    public void pAdd(float[][] channelsIn){
+        if(channelsIn[0].length > channels[0].length){
+            for (int i = 0; i < channels.length; i++) {
+                for (int j = 0; j < channels[0].length; j += 2) {
+                    channelsIn[i][j] += channels[i][j];
                 }
-                if(j >= offset && channelsIn.length > i && channelsIn[i].length > j - offset) {
-                    result[i][j] += channelsIn[i][j - offset];
+            }
+            channels = channelsIn;
+        } else {
+            for (int i = 0; i < channelsIn.length; i++) {
+                for (int j = 0; j < channelsIn[0].length; j += 2) {
+                    channels[i][j] += channelsIn[i][j];
                 }
             }
         }
-        channels = result;
     }
 
     public void boxcarFilter(int boxWidth){
@@ -439,8 +429,8 @@ public class AudioFileManager {
         }
     }
 
-    public void pAdd(AudioFileManager audioFileManager, int offset){
-        pAdd(audioFileManager.getChannels(), offset);
+    public void pAdd(AudioFileManager audioFileManager){
+        pAdd(audioFileManager.getChannels());
     }
 
     public void trim(){
