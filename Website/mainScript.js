@@ -5,13 +5,13 @@ $(document).ready(function() {
     $("#collabFlip").click(function(){
         $("#collabPanel").slideToggle("slow");
     });
-
-
 });
 
-document.getElementById("brandName").addEventListener("click", function(event){
-    alert("!");
+// Menubar
+$(document).ready(function() {
+  $("#logo_card").click(function(){
+    location.href = "https://github.com/MSinnott/s-space-jam";
+  })
 });
-
 
 // logoImg flip
