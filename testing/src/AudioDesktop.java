@@ -29,7 +29,6 @@ public class AudioDesktop extends JFrame{
     private JMenuItem newButton;
     private JMenuItem openButton;
     private JMenuItem exitButton;
-    private JMenu toolsMenu;
     private JMenuItem convertButton;
     private JMenu optionMenu;
     private JMenuItem themeButton;
@@ -176,9 +175,7 @@ public class AudioDesktop extends JFrame{
 
         if(themeDialog != null) themeDialog.resetColors();
 
-        for(AudioWindow aw: audioWindows){
-            aw.resetColors();
-        }
+        audioWindows.forEach(AudioWindow::resetColors);
     }
 
     public void removeWindow(AudioWindow aw){

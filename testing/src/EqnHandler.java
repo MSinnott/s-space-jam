@@ -240,9 +240,8 @@ public class EqnHandler {
     }
 
     //basic helper methods to make the parser easier to read
-    private static boolean isAt(String fnd, int loc, String str){
-        if(loc > str.length() || loc + fnd.length() > str.length()) return false;
-        return str.substring(loc, loc + fnd.length()).equals(fnd);
+    private static boolean isAt(String fnd, int loc, String str) {
+        return !(loc > str.length() || loc + fnd.length() > str.length()) && str.substring(loc, loc + fnd.length()).equals(fnd);
     }
 
     private static String charAt(String str, int loc){
@@ -256,9 +255,4 @@ public class EqnHandler {
         }
         return false;
     }
-
-    private static void printCol(Collection c){
-        for(Object o: c) System.out.println(o);
-    }
-
 }

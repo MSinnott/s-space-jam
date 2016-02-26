@@ -91,9 +91,7 @@ public class AdaptiveDialog extends JDialog {
 
     public void resetColors(){
         for (ArrayList<ColoredComponent> comps : components){
-            for (ColoredComponent comp : comps){
-                comp.resetColors();
-            }
+            comps.forEach(ColoredComponent::resetColors);
         }
         doneButton.setBackground(AudioDesktop.theme[0]);
         doneButton.setForeground(AudioDesktop.theme[5]);

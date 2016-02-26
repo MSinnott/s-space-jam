@@ -177,9 +177,7 @@ public class AudioFileManager {
                 }
             }
             data = new byte[fileSize - dataStart - 8]; // -8. b/cause it works
-            for(int i = 0; i < read.length - dataStart; i++){
-                data[i] = read[i + dataStart];
-            }
+            System.arraycopy(read, 0 + dataStart, data, 0, read.length - dataStart);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -205,12 +203,10 @@ public class AudioFileManager {
         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(audioFile));
         byte[] writeOut = new byte[chunkSize];
         byte[] header = buildHeader(chunkSize, DEFAULT_SAMPLE_RATE);
-        for(int i = 0; i < header.length; i++){
-            writeOut[i] = header[i];
-        }
-        for(int i = 40; i < chunkSize; i++){
-            writeOut[i] = samples[i - 40];
-        }
+
+        System.arraycopy(header, 0, writeOut, 0, header.length);
+        System.arraycopy(samples, 0, writeOut, 40, chunkSize - 40);
+
         fileOut.write(writeOut);
         fileOut.close();
         defaultName = audioFile.getName() + " - " + HumanReadable.memNumToReadable(chunkSize);
@@ -223,9 +219,8 @@ public class AudioFileManager {
         }
         byte[] header = new byte[40];
         byte[] headerSkeleton = WAVHEADER.getBytes();
-        for(int i = 0; i < headerSkeleton.length; i++) {
-            header[i] = headerSkeleton[i];
-        }
+        System.arraycopy(headerSkeleton, 0, header, 0, headerSkeleton.length);
+
         for(int i = 4; i < 8; i++) {
             header[i] = (byte) (chunkSize & 255);
             chunkSize >>= 8;
@@ -295,9 +290,7 @@ public class AudioFileManager {
 
         for (int i = 0; i < channels.length; i++) {
             for (int j = 0; j < toTransform[0].length; j++) {
-                for (int k = 0; k < fftSize; k++) {
-                    toTransform[i][j][k] = channels[i][k + fftSize * j];
-                }
+                System.arraycopy(channels[i], fftSize * j, toTransform[i][j], 0, fftSize);
             }
         }
 
