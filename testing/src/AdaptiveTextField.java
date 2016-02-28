@@ -1,12 +1,24 @@
 import javax.swing.*;
 import java.util.*;
 
+/**
+ * A text field that accepts and evaluates equations
+ */
 public class AdaptiveTextField extends JTextField{
 
+    /**
+     * Constructor
+     * @param text starting text in this text field
+     */
     public AdaptiveTextField(String text){
         super(text);
     }
 
+    /**
+     * Generates sound samples based on the text in the field
+     * @param numSamples number of samples to generate
+     * @return generated samples (as float[])
+     */
     public float[] generateSamples(int numSamples){
         ArrayList<String> rpnTokens = new ArrayList<String>();
         try {

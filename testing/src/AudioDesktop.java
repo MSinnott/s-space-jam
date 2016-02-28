@@ -6,11 +6,13 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Properties;
 
+/**
+ * Main JFrame class -- provides multi-document interface capability + theme
+ */
 public class AudioDesktop extends JFrame{
 
     public static Color[] theme = new Color[] { new Color(252, 53, 0), new Color(252, 127, 3), new Color(255, 201, 8), new Color(55, 236, 255), new Color(29, 46, 255), new Color(255, 255, 255),
                                                 new Color(0, 0, 0)  };
-
     //bgColor = new Color(252, 53, 0);
     //fgColor = new Color(252, 127, 3);
     //accColor = new Color(255, 201, 8);
@@ -36,12 +38,17 @@ public class AudioDesktop extends JFrame{
     private ArrayList<AudioWindow> audioWindows;
     private ArrayList<Component> components = new ArrayList<Component>();
 
-    private String propertiesPathname = "testing/resc/properties.txt";
-    private String iconPath = "testing/resc/s-Space-Jam-Logo.jpg";
+    private String propertiesPathname = "s-space-jam/testing/resc/properties.txt";
+    private String iconPath = "s-space-jam/testing/resc/s-Space-Jam-Logo.jpg";
 
     private Properties properties;
 
-    //Standard constructor -- builds window desktop, preps for user input
+    /**Standard constructor -- builds window desktop, preps for user input
+     *
+     * @param name name of the main window
+     * @param width width of the window
+     * @param height height of the window
+     */
     public AudioDesktop(String name, int width, int height){
         super(name);
 
@@ -120,6 +127,10 @@ public class AudioDesktop extends JFrame{
         this.repaint();
     }
 
+    /**
+     * Saves the theme to the properties file
+     * @throws IOException
+     */
     public void saveProperties() throws IOException {
         for(int i = 0; i < theme.length; i++){
             properties.setProperty("" + i + ":R", String.valueOf(theme[i].getRed()));
@@ -132,12 +143,20 @@ public class AudioDesktop extends JFrame{
         properties.store(propOut, "Colors");
     }
 
+    /**
+     * Updates the properties file
+     * @throws IOException
+     */
     public void updateProperties() throws IOException {
         File propFile = new File(propertiesPathname);
         FileInputStream propReader = new FileInputStream(propFile);
         properties.load(propReader);
     }
 
+    /**
+     * Resets the colors for this component and its children
+     * @param loadFromFile whether or not to load the theme from the properties file
+     */
     public void resetColors(boolean loadFromFile) {
         if(properties.isEmpty() || !loadFromFile) {
             try {
@@ -178,21 +197,36 @@ public class AudioDesktop extends JFrame{
         audioWindows.forEach(AudioWindow::resetColors);
     }
 
+    /**
+     * Removes the passed AudioWindow
+     * @param aw audioWindo to remove
+     */
     public void removeWindow(AudioWindow aw){
         audioWindows.remove(aw);
         aw.dispose();
     }
 
+    /**
+     * Adds the passed AudioWindow
+     * @param aw audioWindow to add
+     */
     public void addWindow(AudioWindow aw){
         audioWindows.add(aw);
         desktop.add(aw);
     }
 
+    /**
+     * Builds an audioWindow from an AudioFileManager
+     * @param fileManager source to build window
+     */
     public void buildWindow(AudioFileManager fileManager){
         AudioWindow newAW = new AudioWindow(200, 100, fileManager, this);
         addWindow(newAW);
     }
 
+    /**
+     *  Action that generates a song
+     */
     public class GenerateAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -267,6 +301,9 @@ public class AudioDesktop extends JFrame{
         }
     }
 
+    /**
+     *  Action that opens a WAV file
+     */
     public class OpenFileAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -286,6 +323,10 @@ public class AudioDesktop extends JFrame{
         }
     }
 
+    /**
+     *  Action that opens a nonWAV file -- unfinished
+     */
+    // TODO: 2/28/16
     public class ConverterOpenAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -305,7 +346,9 @@ public class AudioDesktop extends JFrame{
         }
     }
 
-    //Allows for recoloring of the window + runtime changes
+    /**
+     *  Action that allows for theme changes
+     */
     public class ThemeSelectorAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -331,6 +374,12 @@ public class AudioDesktop extends JFrame{
         }
     }
 
+    /**
+     * Adds a color choice to the theme dialog
+     * @param dialog dialog to add color choice to
+     * @param color color to set sample
+     * @param colorName name of the color
+     */
     private void addColorChoice(AdaptiveDialog dialog, int color, String colorName){
         JPanel p = new JPanel();
         dialog.addItem(p, 6, color, false);
@@ -340,6 +389,9 @@ public class AudioDesktop extends JFrame{
         dialog.addItem(b, 6, color, true);
     }
 
+    /**
+     *  Action that allows changing colors
+     */
     public class ColorAction extends AbstractAction {
 
         private int myColor;
