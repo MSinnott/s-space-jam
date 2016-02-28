@@ -345,7 +345,7 @@ public class AudioWindow extends JInternalFrame{
             int returnVal = fileChooser.showOpenDialog(audioWindow);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 AudioFileManager selection = new AudioFileManager(fileChooser.getSelectedFile());
-                audioFile.pAdd(selection.getChannels(), 0);
+                audioFile.pAdd(selection.getChannels());
                 updatePane();
             }
         }

@@ -96,10 +96,14 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
         g2.setColor(AudioDesktop.theme[0]);
         g2.drawLine((int) getXfromIndex(playLoc), 0 , (int) getXfromIndex(playLoc), windowHeight);
 
+        Font oldFont = g2.getFont();
+        g2.setFont(oldFont.deriveFont(windowWidth / 50f));
+        if(g2.getFont().getSize() > 24) g2.setFont(oldFont.deriveFont(20f));
+
         g2.setColor(AudioDesktop.theme[0]);
         g2.fillRect(0, windowHeight - 20, windowWidth, 20);
         g2.setColor(AudioDesktop.theme[5]);
-        g2.drawString("Zoom: " + HumanReadable.neatenFloat((float) zoom) + " Selection: " + HumanReadable.neatenFloat(selection[0]) + " to " + HumanReadable.neatenFloat(selection[1]) + " Playing @: " + playLoc, 0, windowHeight);
+        g2.drawString("Zoom: " + HumanReadable.neatenFloat((float) zoom) + " Selection: " + HumanReadable.neatenFloat(selection[0]) + " to " + HumanReadable.neatenFloat(selection[1]) + " Playing @: " + playLoc + " - (" +getIndexFromX(mouseLoc.x) + "," + getValfromY(mouseLoc.y)+ ")", 0, windowHeight);
 
 
     }
@@ -325,9 +329,10 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
         }
     }
 
+    private Point mouseLoc = new Point();
     @Override
     public void mouseMoved(MouseEvent e) {
-
+        mouseLoc = e.getPoint();
     }
 
     @Override

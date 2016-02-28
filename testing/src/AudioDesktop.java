@@ -29,7 +29,6 @@ public class AudioDesktop extends JFrame{
     private JMenuItem newButton;
     private JMenuItem openButton;
     private JMenuItem exitButton;
-    private JMenu toolsMenu;
     private JMenuItem convertButton;
     private JMenu optionMenu;
     private JMenuItem themeButton;
@@ -176,9 +175,7 @@ public class AudioDesktop extends JFrame{
 
         if(themeDialog != null) themeDialog.resetColors();
 
-        for(AudioWindow aw: audioWindows){
-            aw.resetColors();
-        }
+        audioWindows.forEach(AudioWindow::resetColors);
     }
 
     public void removeWindow(AudioWindow aw){
@@ -244,8 +241,8 @@ public class AudioDesktop extends JFrame{
                     float[] song2 = generator.generateSongV1(4, 1);
                     AudioFileManager rSong2 = new AudioFileManager(song2, song2);
 
-                    rSong0.pAdd(rSong1.getChannels(), 0);
-                    rSong0.pAdd(rSong2.getChannels(), 0);
+                    rSong0.pAdd(rSong1.getChannels());
+                    rSong0.pAdd(rSong2.getChannels());
 
                     buildWindow(rSong0);
                     generateDialog.dispose();
