@@ -7,8 +7,6 @@ public class MusicGenerator {
 
     private Random random = new Random();
     private int[] key = new int[7];
-    private float[] music;
-    private ArrayList<Integer> theme;
     private int sampleRate;
 
     public MusicGenerator(int samplesPerSec){
@@ -71,7 +69,7 @@ public class MusicGenerator {
     }
 
     public float[] generateSongV1(int numThemeRepeats, float volumeMultiplier){
-        theme = getSongV1(3, 0);
+        ArrayList<Integer> theme = getSongV1(3, 0);
 
         int[] themeNotes = new int[theme.size()];
 
@@ -81,13 +79,13 @@ public class MusicGenerator {
             themeNotes[i] = key[theme.get(i)];
         }
         int totalLength = 0;
-        for(int i = 1 ; i < theme.size(); i++){
+        for(int i = 1; i < theme.size(); i++){
             noteLengths[i] = (themeNotes[i-1] * themeNotes[i] * random.nextInt(themeNotes[i] + 1) / 50 +5000);
             totalLength += noteLengths[i];
         }
 
 
-        music = new float[totalLength];
+        float[] music = new float[totalLength];
         int loc = 0;
         int lastLoc = 0;
         for(int i = 0; i < theme.size(); i++) {
@@ -172,7 +170,7 @@ public class MusicGenerator {
         if(Float.valueOf(tone).isNaN()) tone = key[0];
         float[] beat = new float[(int) (numSeconds * sampleRate)];
         if(beatsPerSecond <= 0) return beat;
-        float volume = 0;
+        float volume;
         float scale = (float) (2 * Math.PI * beatsPerSecond / sampleRate );
         for(int phase = 0; phase < beat.length; phase++){
             volume = (float) (volumeMultiplier *  Math.pow(Math.cos(phase * scale) + 1, peakedness) / Math.pow(2, peakedness));

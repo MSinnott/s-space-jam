@@ -78,7 +78,7 @@ public class ComplexFloatFFT extends ComplexFloatFFT_Mixed {
      * Backward complex FFT transform. It is the unnormalized inverse transform of <em>ft</em>(double[]).
      *
      * @param x 2*<em>n</em> real double data representing <em>n</em> complex double data.
-     *          <p/>
+     *          <p>
      *          As an input parameter, <em>x</em> is an array of 2*<em>n</em>
      *          real data representing <em>n</em> complex data. As an output parameter, <em>x</em> represents
      *          <em>n</em> FFT'd complex data. Their relation as follows:

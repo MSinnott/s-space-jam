@@ -149,6 +149,11 @@ public class AudioWindow extends JInternalFrame{
         boxcarFilterButton.addActionListener(new BoxcarFilterAction(false));
         components.add(new ColoredComponent(boxcarFilterButton, 5, 0));
 
+        JMenuItem filterButton = new JMenuItem("Threshold Filter");
+        opMenu.add(filterButton);
+        filterButton.addActionListener(new FilterThresholdAction(false));
+        components.add(new ColoredComponent(filterButton, 5, 0));
+
         JMenu selectionMenu = new JMenu("Edit Selection");
         menuBar.add(selectionMenu);
         selectionComponents.add(new ColoredComponent(selectionMenu, 5, 0));
@@ -182,6 +187,11 @@ public class AudioWindow extends JInternalFrame{
         selectionMenu.add(boxcarSelectionFilterButton);
         boxcarSelectionFilterButton.addActionListener(new BoxcarFilterAction(true));
         selectionComponents.add(new ColoredComponent(boxcarSelectionFilterButton, 5, 0));
+
+        JMenuItem filterSelectionButton = new JMenuItem("Threshold Filter");
+        selectionMenu.add(filterSelectionButton);
+        filterButton.addActionListener(new FilterThresholdAction(true));
+        selectionComponents.add(new ColoredComponent(filterSelectionButton, 5, 0));
 
         JMenu playMenu = new JMenu("\t▶");
         menuBar.add(playMenu);
@@ -345,7 +355,7 @@ public class AudioWindow extends JInternalFrame{
             int returnVal = fileChooser.showOpenDialog(audioWindow);
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 AudioFileManager selection = new AudioFileManager(fileChooser.getSelectedFile());
-                audioFile.pAdd(selection.getChannels(), 0);
+                audioFile.pAdd(selection.getChannels());
                 updatePane();
             }
         }
@@ -496,6 +506,31 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e){
             player.stop();
+        }
+    }
+
+    public class FilterThresholdAction extends AbstractAction {
+        private boolean toSelection = false;
+        public FilterThresholdAction(boolean toSelection){
+            this.toSelection = toSelection;
+        }
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final AdaptiveDialog scaleDialog = new AdaptiveDialog("Filter");
+            final JTextField textField = new JTextField();
+            scaleDialog.addItem(textField, 0, 5, false);
+            scaleDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    if(toSelection) {
+                        audioFile.filter(Float.valueOf(textField.getText()), (int) pane.getSelection()[0], (int) pane.getSelection()[1]);
+                    } else {
+                        audioFile.filter(Float.valueOf(textField.getText()));
+                    }
+                    updatePane();
+                }
+            });
+            scaleDialog.buildDialog(audioWindow);
         }
     }
 

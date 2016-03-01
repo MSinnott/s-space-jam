@@ -14,6 +14,8 @@ import java.io.*;
 public class AudioFileManager {
 
     private ComplexFloatFFT fft;
+    private int fftlen;
+
     private File audioFile  = null;
     private String defaultName = "";
 
@@ -24,8 +26,11 @@ public class AudioFileManager {
     private static final String WAVHEADER = "RIFF____WAVEfmt ____________________data";
 
     private String filePath = null;
-    //5 constructors that override each other
 
+    /**
+     * Creates audio file from a string
+     * @param filepath path to file to use
+     */
     public AudioFileManager(String filepath){
         audioFile = new File(filepath);
         float[] data = byteArrToFloatArr(readFile(audioFile));
@@ -33,6 +38,10 @@ public class AudioFileManager {
         this.filePath = filepath;
     }
 
+    /**
+     * Creates audio file from a java File
+     * @param audioFileIn file to use
+     */
     public AudioFileManager(File audioFileIn) { //the one that I want -A
         audioFile = audioFileIn;
         filePath = audioFileIn.getAbsolutePath();
@@ -41,11 +50,21 @@ public class AudioFileManager {
         channels = complexify(split(data, 2));
     }
 
+    /**
+     * Creates a audio file from another AudioFileManager
+     * @param fileManager AudioFileManager to clone (effectively)
+     */
     public AudioFileManager(AudioFileManager fileManager){
         float[][] toCopy = fileManager.getChannels();
+        channels = new float[toCopy.length][toCopy[0].length];
         System.arraycopy(toCopy, 0, channels, 0 , toCopy.length);
     }
 
+    /**
+     * Creates two-channel audio file from two arrays
+     * @param leftSamples samples for left channel
+     * @param rightSamples samples for right channel
+     */
     public AudioFileManager(float[] leftSamples, float[] rightSamples){
         channels = new float[2][leftSamples.length];
         channels[0] = new float[leftSamples.length];
@@ -55,10 +74,19 @@ public class AudioFileManager {
         channels = complexify(channels);
     }
 
+    /**
+     * @return this objects channels
+     */
     public float[][] getChannels(){
         return channels;
     }
 
+    /**
+     * Evenly splits a float[] into a set number of subArrays
+     * @param toSplit array to split
+     * @param numSplits number to splits to make
+     * @return split array
+     */
     public float[][] split(float[] toSplit, int numSplits){
         float[][] ret = new float[numSplits][toSplit.length / numSplits + ((toSplit.length % numSplits == 0) ? 0 : 1)];
         int loc = 0;
@@ -70,7 +98,11 @@ public class AudioFileManager {
         return ret;
     }
 
-    //adds imaginary components
+    /**
+     * Adds imaginary components to the array
+     * @param channelsIn input channels
+     * @return complexified output
+     */
     public float[][] complexify(float[][] channelsIn){
         float[][] ret = new float[channelsIn.length][channelsIn[0].length * 2];
         for (int i = 0; i < channelsIn.length; i++) {
@@ -82,7 +114,11 @@ public class AudioFileManager {
         return ret;
     }
 
-    //removes imaginary components
+    /**
+     * Removes imaginary components from the array
+     * @param channelsIn input channels
+     * @return decomplexified output
+     */
     public float[][] decomplexify(float[][] channelsIn){
         float[][] ret = new float[channelsIn.length][channelsIn[0].length/ 2];
         for (int i = 0; i < channelsIn.length; i++) {
@@ -93,11 +129,19 @@ public class AudioFileManager {
         return ret;
     }
 
+    /**
+     * @param channelNum channel to get
+     * @return the specified channel
+     */
     public float[] getChannel(int channelNum){
         return channels[channelNum];
     }
 
-    //merges channels
+    /**
+     * Merges a channel group into a single channel
+     * @param channelGroup group of channels to merge
+     * @return new single channel
+     */
     private float[] mergeData(float[][] channelGroup) {
         float[] ret = new float[channelGroup.length * channelGroup[0].length];
         for(int i = 0; i < channelGroup[0].length; i++){
@@ -108,7 +152,11 @@ public class AudioFileManager {
         return ret;
     }
 
-    //array converter
+    /**
+     * Converts a float[] to a byte[] -- can lose information!!
+     * @param arr float[] to convert
+     * @return converted byte[]
+     */
     public byte[] floatArrToByteArr(float[] arr){
         byte[] ret = new byte[arr.length*2];
         for(int i = 0; i < arr.length; i++){
@@ -118,7 +166,11 @@ public class AudioFileManager {
         return ret;
     }
 
-    //array converter
+    /**
+     * Converts a byte[] to a float[]
+     * @param arr byte[] to convert
+     * @return converted float[]
+     */
     public float[] byteArrToFloatArr(byte[] arr){
         float[] ret = new float[arr.length / 2];
         for(int i = 0; i < ret.length; i+=1){
@@ -127,32 +179,53 @@ public class AudioFileManager {
         return ret;
     }
 
+    /**
+     * @return this file filepath
+     */
     public String getPath(){
         return filePath;
     }
 
+    /**
+     * @return this file's samplerate
+     */
     public int getSampleRate(){
         return sampleRate;
     }
 
-    //returns file name
+    /**
+     * @return Name to be displayed on an AudioWindow -- with filesize
+     */
     public String getName(){
         return (defaultName.equals("")) ? HumanReadable.memNumToReadable(channels[0].length) : defaultName;
     }
 
+    /**
+     * @return time for song to be played -- in seconds
+     */
     public float getSoundTime(){
         return channels[0].length / (2 * sampleRate);
     }
 
+    /**
+     * @return number of bytes the stored file will be
+     */
     public long getNumBytes(){
-        return channels[0].length * channels.length;
+        return channels[0].length * channels.length + 40;
     }
 
+    /**
+     * @param name new default name for this file
+     */
     public void setDefaultName(String name){
         defaultName = name;
     }
 
-    //reads in the file
+    /**
+     * Reads in a WAV file
+     * @param file file to read
+     * @return read in data
+     */
     public byte[] readFile(File file){
         byte[] data = null;
         try {
@@ -174,20 +247,25 @@ public class AudioFileManager {
                 }
             }
             data = new byte[fileSize - dataStart - 8]; // -8. b/cause it works
-            for(int i = 0; i < read.length - dataStart; i++){
-                data[i] = read[i + dataStart];
-            }
+            System.arraycopy(read, 0 + dataStart, data, 0, read.length - dataStart);
         } catch (IOException e) {
             e.printStackTrace();
         }
         return data;
     }
 
+    /**
+     * @return sound data in WAV format
+     */
     public byte[] getSoundData(){
         return floatArrToByteArr(mergeData(decomplexify(channels)));
     }
 
-    //writes the file
+    /**
+     * Writes this file's data into a WAV file
+     * @param filepath path to file
+     * @throws IOException
+     */
     public void buildFile(String filepath) throws IOException {
         if(!filepath.contains(".wav") && !filepath.contains("mp3") ) filepath += ".wav";
         this.filePath = filepath;
@@ -202,27 +280,29 @@ public class AudioFileManager {
         BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream(audioFile));
         byte[] writeOut = new byte[chunkSize];
         byte[] header = buildHeader(chunkSize, DEFAULT_SAMPLE_RATE);
-        for(int i = 0; i < header.length; i++){
-            writeOut[i] = header[i];
-        }
-        for(int i = 40; i < chunkSize; i++){
-            writeOut[i] = samples[i - 40];
-        }
+
+        System.arraycopy(header, 0, writeOut, 0, header.length);
+        System.arraycopy(samples, 0, writeOut, 40, chunkSize - 40);
+
         fileOut.write(writeOut);
         fileOut.close();
         defaultName = audioFile.getName() + " - " + HumanReadable.memNumToReadable(chunkSize);
     }
 
-    //builds a standard WAV header for the file
+    /**
+     * Build a WAV header for this file
+     * @param chunkSize size of data
+     * @param sampleRate this file's SampleRate
+     * @return built header
+     */
     public byte[] buildHeader(int chunkSize, int sampleRate){
         if(sampleRate < 0){
             sampleRate = DEFAULT_SAMPLE_RATE;
         }
         byte[] header = new byte[40];
         byte[] headerSkeleton = WAVHEADER.getBytes();
-        for(int i = 0; i < headerSkeleton.length; i++) {
-            header[i] = headerSkeleton[i];
-        }
+        System.arraycopy(headerSkeleton, 0, header, 0, headerSkeleton.length);
+
         for(int i = 4; i < 8; i++) {
             header[i] = (byte) (chunkSize & 255);
             chunkSize >>= 8;
@@ -256,6 +336,9 @@ public class AudioFileManager {
         return header;
     }
 
+    /**
+     * @return this file's AudioFormat
+     */
     public AudioFormat getAudioFormat(){
         return new AudioFormat(sampleRate, 16, channels.length, true, false);
     }
@@ -292,9 +375,7 @@ public class AudioFileManager {
 
         for (int i = 0; i < channels.length; i++) {
             for (int j = 0; j < toTransform[0].length; j++) {
-                for (int k = 0; k < fftSize; k++) {
-                    toTransform[i][j][k] = channels[i][k + fftSize * j];
-                }
+                System.arraycopy(channels[i], fftSize * j, toTransform[i][j], 0, fftSize);
             }
         }
 
@@ -317,12 +398,14 @@ public class AudioFileManager {
 
     public void ftransform(){
         int powOfTwo = 1;
-        while (channels[0].length / powOfTwo > 1) {
+        while (channels[0].length > powOfTwo) {
             powOfTwo *= 2;
         }
-        powOfTwo *= 2;
 
-        fft = new ComplexFloatFFT(powOfTwo / 2);
+        if(fftlen != powOfTwo) {
+            fft = new ComplexFloatFFT(powOfTwo / 2);
+            fftlen = powOfTwo;
+        }
 
         for (int i = 0; i < channels.length; i++) {
             float[] tempArr = new float[powOfTwo];
@@ -344,12 +427,14 @@ public class AudioFileManager {
 
     public void btransform(){
         int powOfTwo = 1;
-        while (channels[0].length / powOfTwo > 1) {
+        while (channels[0].length > powOfTwo) {
             powOfTwo *= 2;
         }
-        powOfTwo *= 2;
 
-        fft = new ComplexFloatFFT(powOfTwo / 2);
+        if(fftlen != powOfTwo) {
+            fft = new ComplexFloatFFT(powOfTwo / 2);
+            fftlen = powOfTwo;
+        }
 
         for (int i = 0; i < channels.length; i++) {
             float[] tempArr = new float[powOfTwo];
@@ -369,15 +454,15 @@ public class AudioFileManager {
         }
     }
 
-    public void pMult(float[][] channels0){
-        int numArr = (channels0.length > channels.length) ? channels.length : channels0.length;
-
-        for (int i = 0; i < numArr; i++) {
-            int arrInd = (channels0[i].length > channels[i].length) ? channels[i].length : channels0[i].length;
-            for (int j = 0; j < arrInd; j++) {
-                channels[i][j] *= channels0[i][j];
+    public void pMult(float[][] channelsIn){
+        float[][] toTraverse = (channelsIn[0].length > channels[0].length) ? channels : channelsIn;
+        float[][] resultant = (channelsIn[0].length < channels[0].length) ? channels : channelsIn;
+        for (int i = 0; i < toTraverse.length; i++) {
+            for (int j = 0; j < toTraverse[0].length; j += 2) {
+                resultant[i][j] += toTraverse[i][j];
             }
         }
+        channels = resultant;
     }
 
     public void pMult(AudioFileManager audioFileManager){
@@ -385,20 +470,14 @@ public class AudioFileManager {
     }
 
     public void pAdd(float[][] channelsIn){
-        if(channelsIn[0].length > channels[0].length){
-            for (int i = 0; i < channels.length; i++) {
-                for (int j = 0; j < channels[0].length; j += 2) {
-                    channelsIn[i][j] += channels[i][j];
-                }
-            }
-            channels = channelsIn;
-        } else {
-            for (int i = 0; i < channelsIn.length; i++) {
-                for (int j = 0; j < channelsIn[0].length; j += 2) {
-                    channels[i][j] += channelsIn[i][j];
-                }
+        float[][] toTraverse = (channelsIn[0].length > channels[0].length) ? channels : channelsIn;
+        float[][] resultant = (channelsIn[0].length < channels[0].length) ? channels : channelsIn;
+        for (int i = 0; i < toTraverse.length; i++) {
+            for (int j = 0; j < toTraverse[0].length; j += 2) {
+                resultant[i][j] += toTraverse[i][j];
             }
         }
+        channels = resultant;
     }
 
     public void boxcarFilter(int boxWidth){
@@ -463,6 +542,18 @@ public class AudioFileManager {
             }
         }
         btransform();
+    }
+
+    public void filter(float threshold, int stIndex, int endIndex){
+        for (float[] channel: channels) {
+            for (int i = stIndex; i < channel.length && i < endIndex; i++) {
+                if(Math.abs(channel[i]) < threshold) channel[i] = 0;
+            }
+        }
+    }
+
+    public void filter(float threshold){
+        filter(threshold, 0, channels[0].length);
     }
 
 }
