@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ba40b175-e4b0-4d27-b864-734c3c7d2192" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" afterPath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioDesktop.java" afterPath="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioFileManager.java" afterPath="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/EqnHandler.java" afterPath="$PROJECT_DIR$/testing/src/EqnHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MainPane.java" afterPath="$PROJECT_DIR$/testing/src/MainPane.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/baseRunner.java" afterPath="$PROJECT_DIR$/testing/src/baseRunner.java" />
     </list>
     <ignored path="sSpace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -708,7 +702,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456505782760</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add compatibility, fix threshold filter">
+      <created>1456851582737</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1456851582737</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -779,7 +779,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add noise -- sounds sound mre realistic (less pure)" />
     <MESSAGE value="Reduce memory usage" />
-    <option name="LAST_COMMIT_MESSAGE" value="Reduce memory usage" />
+    <MESSAGE value="Add compatibility, fix threshold filter" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add compatibility, fix threshold filter" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
