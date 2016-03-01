@@ -2,13 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ba40b175-e4b0-4d27-b864-734c3c7d2192" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fftLib/src/ComplexFloatFFT.java" afterPath="$PROJECT_DIR$/fftLib/src/ComplexFloatFFT.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fftLib/src/ComplexFloatFFT_Mixed.java" afterPath="$PROJECT_DIR$/fftLib/src/ComplexFloatFFT_Mixed.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AdaptiveDialog.java" afterPath="$PROJECT_DIR$/testing/src/AdaptiveDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" afterPath="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioDesktop.java" afterPath="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/AudioFileManager.java" afterPath="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/EqnHandler.java" afterPath="$PROJECT_DIR$/testing/src/EqnHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MusicGenerator.java" afterPath="$PROJECT_DIR$/testing/src/MusicGenerator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/MainPane.java" afterPath="$PROJECT_DIR$/testing/src/MainPane.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/src/baseRunner.java" afterPath="$PROJECT_DIR$/testing/src/baseRunner.java" />
     </list>
     <ignored path="sSpace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -32,36 +32,77 @@
       <file leaf-file-name="baseRunner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5166163">
-              <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.66952056">
+              <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AdaptiveDialog.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveDialog.java">
+      <file leaf-file-name="AudioDesktop.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/src/AudioDesktop.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ColoredComponent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testing/src/ColoredComponent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+              <caret line="251" column="55" selection-start-line="251" selection-start-column="55" selection-end-line="251" selection-end-column="55" />
               <folding>
-                <element signature="e#218#219#0" expanded="true" />
-                <element signature="e#244#245#0" expanded="true" />
-                <element signature="method#setBgColor#0;class#ColoredComponent#0" expanded="false" />
-                <element signature="method#setFgColor#0;class#ColoredComponent#0" expanded="false" />
-                <element signature="method#ColoredComponent#0;class#ColoredComponent#0" expanded="false" />
-                <element signature="method#resetColors#0;class#ColoredComponent#0" expanded="false" />
+                <element signature="docComment;class#AudioDesktop#0" expanded="false" />
+                <element signature="e#605#639#0" expanded="false" />
+                <element signature="docComment;method#AudioDesktop#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#AudioDesktop#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#3464:3949" expanded="false" />
+                <element signature="method#actionPerformed#0;class#3464:3949" expanded="false" />
+                <element signature="class#3681:3869" expanded="false" />
+                <element signature="docComment;method#saveProperties#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#saveProperties#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="docComment;method#updateProperties#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#updateProperties#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="docComment;method#resetColors#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#resetColors#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="docComment;method#removeWindow#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#removeWindow#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="docComment;method#addWindow#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#addWindow#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="docComment;method#buildWindow#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#buildWindow#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="docComment;class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#actionPerformed#0;class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#10205:11109" expanded="false" />
+                <element signature="method#actionPerformed#0;class#10205:11109" expanded="false" />
+                <element signature="class#11159:11483" expanded="false" />
+                <element signature="method#actionPerformed#0;class#11159:11483" expanded="false" />
+                <element signature="docComment;class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#actionPerformed#0;class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="e#12336#12417#0" expanded="false" />
+                <element signature="docComment;class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#actionPerformed#0;class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="e#13322#13403#0" expanded="false" />
+                <element signature="docComment;class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#actionPerformed#0;class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#14414:14682" expanded="false" />
+                <element signature="method#actionPerformed#0;class#14414:14682" expanded="false" />
+                <element signature="docComment;method#addColorChoice#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#addColorChoice#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="docComment;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#ColorAction#0;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="method#actionPerformed#0;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
+                <element signature="class#15979:16217" expanded="false" />
+                <element signature="method#actionPerformed#0;class#15979:16217" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AdaptiveTextField.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -70,8 +111,9 @@
         <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+              <caret line="57" column="50" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
               <folding>
+                <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
                 <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
                 <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
                 <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
@@ -88,18 +130,104 @@
                 <element signature="method#mouseEntered#0;class#MainPane#0" expanded="false" />
                 <element signature="method#mouseExited#0;class#MainPane#0" expanded="false" />
                 <element signature="method#mouseDragged#0;class#MainPane#0" expanded="false" />
-                <element signature="method#mouseWheelMoved#0;class#MainPane#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HumanReadable.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/testing/src/HumanReadable.java">
+      <file leaf-file-name="EqnHandler.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/src/EqnHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
-              <folding />
+              <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+              <folding>
+                <element signature="class#OFMap#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#put#0;class#OFMap#0;class#EqnHandler#0" expanded="false" />
+                <element signature="initializer##0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#evalSample#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#evalOp#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#evalFunc#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#isNumber#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#convertToRPN#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#isAt#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#charAt#0;class#EqnHandler#0" expanded="false" />
+                <element signature="method#contains#0;class#EqnHandler#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AudioFileManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="380" column="0" selection-start-line="380" selection-start-column="0" selection-end-line="380" selection-end-column="0" />
+              <folding>
+                <element signature="docComment;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#AudioFileManager#3;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#AudioFileManager#3;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getChannels#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#split#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#split#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#complexify#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#complexify#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#decomplexify#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#decomplexify#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getChannel#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#mergeData#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getPath#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getSampleRate#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getName#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getSoundTime#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getNumBytes#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#setDefaultName#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#readFile#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getSoundData#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#buildFile#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="docComment;method#getAudioFormat#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#vshift#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#vscale#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#boxcarFilter#1;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#zeroFrom#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#trim#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#addNoise#0;class#AudioFileManager#0" expanded="false" />
+                <element signature="method#filter#0;class#AudioFileManager#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SoundPlayer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/testing/src/SoundPlayer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+              <folding>
+                <element signature="method#SoundPlayer#0;class#SoundPlayer#0" expanded="false" />
+                <element signature="method#playFile#0;class#SoundPlayer#0" expanded="false" />
+                <element signature="method#playFile#1;class#SoundPlayer#0" expanded="false" />
+                <element signature="method#run#0;class#SoundPlayer#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -124,29 +252,31 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/testing/src/SoundPlayer.java" />
-        <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
         <option value="$PROJECT_DIR$/fftLib/src/ComplexDoubleFFT.java" />
         <option value="$PROJECT_DIR$/fftLib/src/ComplexDoubleFFT_Mixed.java" />
         <option value="$PROJECT_DIR$/testing/src/ComplexFloatFFT_MixedMov.java" />
         <option value="$PROJECT_DIR$/testing/src/ComplexFloatFFTMov.java" />
-        <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
         <option value="$PROJECT_DIR$/testing/src/AudioWindow.java" />
         <option value="$PROJECT_DIR$/fftLib/src/ComplexFloatFFT.java" />
         <option value="$PROJECT_DIR$/fftLib/src/ComplexFloatFFT_Mixed.java" />
-        <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
-        <option value="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
         <option value="$PROJECT_DIR$/testing/src/MusicGenerator.java" />
-        <option value="$PROJECT_DIR$/testing/src/EqnHandler.java" />
         <option value="$PROJECT_DIR$/testing/src/ColoredComponent.java" />
         <option value="$PROJECT_DIR$/testing/src/AdaptiveDialog.java" />
+        <option value="$PROJECT_DIR$/testing/src/SoundPlayer.java" />
+        <option value="$PROJECT_DIR$/testing/src/baseRunner.java" />
+        <option value="$PROJECT_DIR$/testing/src/AudioFileManager.java" />
+        <option value="$PROJECT_DIR$/testing/src/AudioDesktop.java" />
+        <option value="$PROJECT_DIR$/testing/src/AdaptiveTextField.java" />
+        <option value="$PROJECT_DIR$/testing/src/EqnHandler.java" />
+        <option value="$PROJECT_DIR$/testing/src/MainPane.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="27" />
-    <option name="width" value="1280" />
-    <option name="height" value="997" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -173,6 +303,20 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="s-space-jam">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -259,20 +403,6 @@
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="s-space-jam">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -553,7 +683,7 @@
       <option name="ENABLE_SWING_INSPECTOR" value="false" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="sSpace" />
+      <module name="s-space-jam" />
       <envs />
       <method />
     </configuration>
@@ -582,20 +712,21 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="27" width="1280" height="997" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3285528" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20208605" sideWeight="0.5025" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20323326" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20208605" sideWeight="0.4975" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Floobits" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18578352" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.165625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -605,7 +736,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Floobits" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290993" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
@@ -653,7 +783,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="8" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -662,6 +792,45 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <folding>
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#MainPane#0" expanded="false" />
+            <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
+            <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
+            <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
+            <element signature="method#findMin#0;class#MainPane#0" expanded="false" />
+            <element signature="method#pan#0;class#MainPane#0" expanded="false" />
+            <element signature="method#updateLoc#0;class#MainPane#0" expanded="false" />
+            <element signature="method#setMaxMinNotes#0;class#MainPane#0" expanded="false" />
+            <element signature="method#keyTyped#0;class#MainPane#0" expanded="false" />
+            <element signature="method#keyPressed#0;class#MainPane#0" expanded="false" />
+            <element signature="method#keyReleased#0;class#MainPane#0" expanded="false" />
+            <element signature="method#mouseClicked#0;class#MainPane#0" expanded="false" />
+            <element signature="method#mousePressed#0;class#MainPane#0" expanded="false" />
+            <element signature="method#mouseReleased#0;class#MainPane#0" expanded="false" />
+            <element signature="method#mouseEntered#0;class#MainPane#0" expanded="false" />
+            <element signature="method#mouseExited#0;class#MainPane#0" expanded="false" />
+            <element signature="method#mouseDragged#0;class#MainPane#0" expanded="false" />
+            <element signature="method#mouseWheelMoved#0;class#MainPane#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/HumanReadable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding>
+            <element signature="method#memNumToReadable#0;class#HumanReadable#0" expanded="false" />
+            <element signature="method#neatenFloat#0;class#HumanReadable#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -691,32 +860,22 @@
             <element signature="method#actionPerformed#0;class#CloneAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#11630:12106" expanded="false" />
-            <element signature="method#actionPerformed#0;class#11630:12106" expanded="false" />
             <element signature="class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#12697:13173" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12697:13173" expanded="false" />
             <element signature="class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#13698#13779#0" expanded="false" />
             <element signature="class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#14695#14776#0" expanded="false" />
             <element signature="class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#15815:16109" expanded="false" />
-            <element signature="method#actionPerformed#0;class#15815:16109" expanded="false" />
             <element signature="class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#17158:17650" expanded="false" />
-            <element signature="method#actionPerformed#0;class#17158:17650" expanded="false" />
             <element signature="class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
@@ -739,36 +898,53 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="250" column="45" selection-start-line="250" selection-start-column="45" selection-end-line="250" selection-end-column="45" />
           <folding>
-            <element signature="e#521#555#0" expanded="false" />
+            <element signature="docComment;class#AudioDesktop#0" expanded="false" />
+            <element signature="e#605#639#0" expanded="false" />
+            <element signature="docComment;method#AudioDesktop#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#AudioDesktop#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#2940:3425" expanded="false" />
-            <element signature="method#actionPerformed#0;class#2940:3425" expanded="false" />
-            <element signature="class#3157:3345" expanded="false" />
+            <element signature="class#3464:3949" expanded="false" />
+            <element signature="method#actionPerformed#0;class#3464:3949" expanded="false" />
+            <element signature="class#3681:3869" expanded="false" />
+            <element signature="docComment;method#saveProperties#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#saveProperties#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#updateProperties#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#updateProperties#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#resetColors#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#resetColors#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#removeWindow#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#removeWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#addWindow#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#addWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#buildWindow#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#buildWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#8354:9258" expanded="false" />
-            <element signature="method#actionPerformed#0;class#8354:9258" expanded="false" />
-            <element signature="class#9308:9632" expanded="false" />
-            <element signature="method#actionPerformed#0;class#9308:9632" expanded="false" />
+            <element signature="class#10205:11109" expanded="false" />
+            <element signature="method#actionPerformed#0;class#10205:11109" expanded="false" />
+            <element signature="class#11159:11483" expanded="false" />
+            <element signature="method#actionPerformed#0;class#11159:11483" expanded="false" />
+            <element signature="docComment;class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="e#10432#10513#0" expanded="false" />
-            <element signature="e#11327#11408#0" expanded="false" />
+            <element signature="e#12336#12417#0" expanded="false" />
+            <element signature="docComment;class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="e#13322#13403#0" expanded="false" />
+            <element signature="docComment;class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#12418:12686" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12418:12686" expanded="false" />
+            <element signature="class#14414:14682" expanded="false" />
+            <element signature="method#actionPerformed#0;class#14414:14682" expanded="false" />
+            <element signature="docComment;method#addColorChoice#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#addColorChoice#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#ColorAction#0;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#13728:13966" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13728:13966" expanded="false" />
+            <element signature="class#15979:16217" expanded="false" />
+            <element signature="method#actionPerformed#0;class#15979:16217" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -856,6 +1032,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
           <folding>
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#MainPane#0" expanded="false" />
             <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
@@ -951,6 +1129,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#MainPane#0" expanded="false" />
             <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
@@ -1105,32 +1285,22 @@
             <element signature="method#actionPerformed#0;class#CloneAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#11630:12106" expanded="false" />
-            <element signature="method#actionPerformed#0;class#11630:12106" expanded="false" />
             <element signature="class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#12697:13173" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12697:13173" expanded="false" />
             <element signature="class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#13698#13779#0" expanded="false" />
             <element signature="class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#14695#14776#0" expanded="false" />
             <element signature="class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#15815:16109" expanded="false" />
-            <element signature="method#actionPerformed#0;class#15815:16109" expanded="false" />
             <element signature="class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#17158:17650" expanded="false" />
-            <element signature="method#actionPerformed#0;class#17158:17650" expanded="false" />
             <element signature="class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
@@ -1166,6 +1336,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="96" column="98" selection-start-line="96" selection-start-column="98" selection-end-line="96" selection-end-column="98" />
           <folding>
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#MainPane#0" expanded="false" />
             <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
@@ -1263,32 +1435,22 @@
             <element signature="method#actionPerformed#0;class#CloneAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#11630:12106" expanded="false" />
-            <element signature="method#actionPerformed#0;class#11630:12106" expanded="false" />
             <element signature="class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#12697:13173" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12697:13173" expanded="false" />
             <element signature="class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#13698#13779#0" expanded="false" />
             <element signature="class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#14695#14776#0" expanded="false" />
             <element signature="class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#15815:16109" expanded="false" />
-            <element signature="method#actionPerformed#0;class#15815:16109" expanded="false" />
             <element signature="class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#17158:17650" expanded="false" />
-            <element signature="method#actionPerformed#0;class#17158:17650" expanded="false" />
             <element signature="class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
@@ -1311,6 +1473,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="96" column="98" selection-start-line="96" selection-start-column="98" selection-end-line="96" selection-end-column="98" />
           <folding>
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#MainPane#0" expanded="false" />
             <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
@@ -1396,32 +1560,22 @@
             <element signature="method#actionPerformed#0;class#CloneAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#11630:12106" expanded="false" />
-            <element signature="method#actionPerformed#0;class#11630:12106" expanded="false" />
             <element signature="class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#12697:13173" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12697:13173" expanded="false" />
             <element signature="class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#13698#13779#0" expanded="false" />
             <element signature="class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#14695#14776#0" expanded="false" />
             <element signature="class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#15815:16109" expanded="false" />
-            <element signature="method#actionPerformed#0;class#15815:16109" expanded="false" />
             <element signature="class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#17158:17650" expanded="false" />
-            <element signature="method#actionPerformed#0;class#17158:17650" expanded="false" />
             <element signature="class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
@@ -1444,6 +1598,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="82" column="0" selection-start-line="82" selection-start-column="0" selection-end-line="82" selection-end-column="0" />
           <folding>
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#MainPane#0" expanded="false" />
             <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
@@ -1529,32 +1685,22 @@
             <element signature="method#actionPerformed#0;class#CloneAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#11630:12106" expanded="false" />
-            <element signature="method#actionPerformed#0;class#11630:12106" expanded="false" />
             <element signature="class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#12697:13173" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12697:13173" expanded="false" />
             <element signature="class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#13698#13779#0" expanded="false" />
             <element signature="class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#14695#14776#0" expanded="false" />
             <element signature="class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#15815:16109" expanded="false" />
-            <element signature="method#actionPerformed#0;class#15815:16109" expanded="false" />
             <element signature="class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#TrimAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#17158:17650" expanded="false" />
-            <element signature="method#actionPerformed#0;class#17158:17650" expanded="false" />
             <element signature="class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="method#actionPerformed#0;class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
             <element signature="class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
@@ -1577,6 +1723,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#MainPane#0" expanded="false" />
             <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
@@ -1602,17 +1750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.3323263">
           <caret line="468" column="19" selection-start-line="468" selection-start-column="19" selection-end-line="468" selection-end-column="19" />
-          <folding>
-            <element signature="docComment;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-            <element signature="method#passf2#0;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-            <element signature="method#passf3#0;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-            <element signature="method#passf4#0;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-            <element signature="method#passf5#0;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-            <element signature="method#passfg#0;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-            <element signature="method#cfftf1#0;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-            <element signature="method#cffti1#0;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-            <element signature="method#cffti#0;class#ComplexFloatFFT_Mixed#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1633,144 +1770,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AudioDesktop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4833837">
-          <caret line="301" column="21" selection-start-line="301" selection-start-column="21" selection-end-line="301" selection-end-column="21" />
-          <folding>
-            <element signature="e#521#555#0" expanded="false" />
-            <element signature="method#AudioDesktop#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#2940:3425" expanded="false" />
-            <element signature="method#actionPerformed#0;class#2940:3425" expanded="false" />
-            <element signature="class#3157:3345" expanded="false" />
-            <element signature="method#saveProperties#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#updateProperties#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#removeWindow#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#addWindow#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#buildWindow#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#8354:9258" expanded="false" />
-            <element signature="method#actionPerformed#0;class#8354:9258" expanded="false" />
-            <element signature="class#9308:9632" expanded="false" />
-            <element signature="method#actionPerformed#0;class#9308:9632" expanded="false" />
-            <element signature="class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="e#10432#10513#0" expanded="false" />
-            <element signature="e#11327#11408#0" expanded="false" />
-            <element signature="class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#12418:12686" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12418:12686" expanded="false" />
-            <element signature="method#addColorChoice#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#ColorAction#0;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
-            <element signature="class#13728:13966" expanded="false" />
-            <element signature="method#actionPerformed#0;class#13728:13966" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43504533">
-          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
-          <folding>
-            <element signature="e#570#588#0" expanded="true" />
-            <element signature="e#658#676#0" expanded="true" />
-            <element signature="method#AudioWindow#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#loadFile#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#buildMenus#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#2835:3319" expanded="false" />
-            <element signature="method#actionPerformed#0;class#2835:3319" expanded="false" />
-            <element signature="class#3052:3240" expanded="false" />
-            <element signature="method#resetColors#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#setView#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#SaveAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#CloneAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#11630:12106" expanded="false" />
-            <element signature="method#actionPerformed#0;class#11630:12106" expanded="false" />
-            <element signature="class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#12697:13173" expanded="false" />
-            <element signature="method#actionPerformed#0;class#12697:13173" expanded="false" />
-            <element signature="class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#13698#13779#0" expanded="false" />
-            <element signature="class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="e#14695#14776#0" expanded="false" />
-            <element signature="class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#15815:16109" expanded="false" />
-            <element signature="method#actionPerformed#0;class#15815:16109" expanded="false" />
-            <element signature="class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#TrimAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#TrimAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#17158:17650" expanded="false" />
-            <element signature="method#actionPerformed#0;class#17158:17650" expanded="false" />
-            <element signature="class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#ZoomToSelectionAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#ZoomToSelectionAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#PlayAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#PlaySelectedAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#actionPerformed#0;class#PlaySelectedAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#RepeatAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="class#StopAction#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#updatePane#0;class#AudioWindow#0" expanded="false" />
-            <element signature="method#paintComponent#0;class#AudioWindow#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.7401813">
-          <caret line="158" column="37" selection-start-line="158" selection-start-column="37" selection-end-line="158" selection-end-column="37" />
-          <folding>
-            <element signature="docComment;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#AudioFileManager#3;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#split#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#complexify#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#decomplexify#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#vshift#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#vscale#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#smallFFT#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#boxcarFilter#1;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#zeroFrom#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#trim#0;class#AudioFileManager#0" expanded="false" />
-            <element signature="method#addNoise#0;class#AudioFileManager#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/MusicGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.223565">
@@ -1785,47 +1784,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/SoundPlayer.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveDialog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.326284">
-          <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        <state vertical-scroll-proportion="0.69863015">
+          <caret line="71" column="45" selection-start-line="71" selection-start-column="45" selection-end-line="71" selection-end-column="45" />
           <folding>
-            <element signature="method#SoundPlayer#0;class#SoundPlayer#0" expanded="false" />
-            <element signature="method#playFile#0;class#SoundPlayer#0" expanded="false" />
-            <element signature="method#playFile#1;class#SoundPlayer#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/EqnHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.305136">
-          <caret line="256" column="5" selection-start-line="256" selection-start-column="5" selection-end-line="256" selection-end-column="5" />
-          <folding>
-            <element signature="class#OFMap#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#put#0;class#OFMap#0;class#EqnHandler#0" expanded="false" />
-            <element signature="initializer##0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#evalSample#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#evalOp#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#evalFunc#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#isNumber#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#parse#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#getToken#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#convertToRPN#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#isAt#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#charAt#0;class#EqnHandler#0" expanded="false" />
-            <element signature="method#contains#0;class#EqnHandler#0" expanded="false" />
+            <element signature="docComment;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="docComment;method#AdaptiveDialog#0;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="method#AdaptiveDialog#0;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="docComment;method#addItem#0;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="method#addItem#0;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="docComment;method#addItem#1;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="method#addItem#1;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="docComment;method#buildDialog#0;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="method#buildDialog#0;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="docComment;method#buildDialog#1;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="method#buildDialog#1;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="class#3170:3318" expanded="false" />
+            <element signature="class#3365:3513" expanded="false" />
+            <element signature="docComment;method#resetColors#0;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="method#resetColors#0;class#AdaptiveDialog#0" expanded="false" />
+            <element signature="docComment;method#addDoneBinding#0;class#AdaptiveDialog#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/ColoredComponent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.29109588">
           <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
           <folding>
-            <element signature="e#218#219#0" expanded="true" />
-            <element signature="e#244#245#0" expanded="true" />
             <element signature="method#setBgColor#0;class#ColoredComponent#0" expanded="false" />
             <element signature="method#setFgColor#0;class#ColoredComponent#0" expanded="false" />
             <element signature="method#ColoredComponent#0;class#ColoredComponent#0" expanded="false" />
@@ -1834,19 +1822,180 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveDialog.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/HumanReadable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="43" selection-start-line="93" selection-start-column="43" selection-end-line="93" selection-end-column="43" />
-          <folding />
+          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <folding>
+            <element signature="method#memNumToReadable#0;class#HumanReadable#0" expanded="false" />
+            <element signature="method#neatenFloat#0;class#HumanReadable#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/SoundPlayer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding>
+            <element signature="method#SoundPlayer#0;class#SoundPlayer#0" expanded="false" />
+            <element signature="method#playFile#0;class#SoundPlayer#0" expanded="false" />
+            <element signature="method#playFile#1;class#SoundPlayer#0" expanded="false" />
+            <element signature="method#run#0;class#SoundPlayer#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/AudioFileManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="380" column="0" selection-start-line="380" selection-start-column="0" selection-end-line="380" selection-end-column="0" />
+          <folding>
+            <element signature="docComment;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#AudioFileManager#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#AudioFileManager#1;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#AudioFileManager#2;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#AudioFileManager#3;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#AudioFileManager#3;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getChannels#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#split#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#split#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#complexify#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#complexify#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#decomplexify#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#decomplexify#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getChannel#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#mergeData#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#mergeData#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#floatArrToByteArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#byteArrToFloatArr#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getPath#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getSampleRate#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#getName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getSoundTime#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getNumBytes#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#setDefaultName#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#readFile#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#readFile#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getSoundData#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#buildFile#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#buildFile#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#buildHeader#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="docComment;method#getAudioFormat#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#vshift#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#vscale#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#ftransform#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#btransform#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#pMult#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#pAdd#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#boxcarFilter#1;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#zeroFrom#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#trim#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#addNoise#0;class#AudioFileManager#0" expanded="false" />
+            <element signature="method#filter#0;class#AudioFileManager#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/AudioWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24315068">
+          <caret line="21" column="0" selection-start-line="21" selection-start-column="0" selection-end-line="21" selection-end-column="0" />
+          <folding>
+            <element signature="method#AudioWindow#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#loadFile#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#buildMenus#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#2835:3319" expanded="false" />
+            <element signature="method#actionPerformed#0;class#2835:3319" expanded="false" />
+            <element signature="class#3052:3240" expanded="false" />
+            <element signature="method#resetColors#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#setView#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#SaveAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#SaveAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#CloneAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#vscaleAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#12158:12634" expanded="false" />
+            <element signature="method#actionPerformed#0;class#12158:12634" expanded="false" />
+            <element signature="class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#vshiftAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#13225:13701" expanded="false" />
+            <element signature="method#actionPerformed#0;class#13225:13701" expanded="false" />
+            <element signature="class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#pbpAddAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#14226#14307#0" expanded="false" />
+            <element signature="class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#pbpMultAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="e#15223#15304#0" expanded="false" />
+            <element signature="class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#forwardFFtAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#stepforwardFFtAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#16343:16637" expanded="false" />
+            <element signature="method#actionPerformed#0;class#16343:16637" expanded="false" />
+            <element signature="class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#backwardFFtAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#TrimAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#TrimAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#BoxcarFilterAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#17686:18178" expanded="false" />
+            <element signature="method#actionPerformed#0;class#17686:18178" expanded="false" />
+            <element signature="class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#ZeroSelectedAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#ZeroNonSelectedAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#ZoomToSelectionAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#ZoomToSelectionAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#PlayAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#PlaySelectedAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#PlaySelectedAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#RepeatAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#StopAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#FilterThresholdAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#FilterThresholdAction#0;class#AudioWindow#0" expanded="false" />
+            <element signature="class#20661:21137" expanded="false" />
+            <element signature="method#actionPerformed#0;class#20661:21137" expanded="false" />
+            <element signature="method#updatePane#0;class#AudioWindow#0" expanded="false" />
+            <element signature="method#paintComponent#0;class#AudioWindow#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/EqnHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="0" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding>
+            <element signature="class#OFMap#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#put#0;class#OFMap#0;class#EqnHandler#0" expanded="false" />
+            <element signature="initializer##0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#evalSample#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#evalOp#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#evalFunc#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#isNumber#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#convertToRPN#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#isAt#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#charAt#0;class#EqnHandler#0" expanded="false" />
+            <element signature="method#contains#0;class#EqnHandler#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/MainPane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="101" column="0" selection-start-line="101" selection-start-column="0" selection-end-line="101" selection-end-column="0" />
+          <caret line="57" column="50" selection-start-line="57" selection-start-column="50" selection-end-line="57" selection-end-column="50" />
           <folding>
+            <element signature="method#MainPane#0;class#MainPane#0" expanded="false" />
             <element signature="method#getYfromVal#0;class#MainPane#0" expanded="false" />
             <element signature="method#rescale#0;class#MainPane#0" expanded="false" />
             <element signature="method#findMax#0;class#MainPane#0" expanded="false" />
@@ -1863,23 +2012,78 @@
             <element signature="method#mouseEntered#0;class#MainPane#0" expanded="false" />
             <element signature="method#mouseExited#0;class#MainPane#0" expanded="false" />
             <element signature="method#mouseDragged#0;class#MainPane#0" expanded="false" />
-            <element signature="method#mouseWheelMoved#0;class#MainPane#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/HumanReadable.java">
+    <entry file="file://$PROJECT_DIR$/testing/src/AdaptiveTextField.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="13" selection-start-line="0" selection-start-column="13" selection-end-line="0" selection-end-column="13" />
+          <caret line="28" column="9" selection-start-line="28" selection-start-column="9" selection-end-line="28" selection-end-column="9" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/AudioDesktop.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="251" column="55" selection-start-line="251" selection-start-column="55" selection-end-line="251" selection-end-column="55" />
+          <folding>
+            <element signature="docComment;class#AudioDesktop#0" expanded="false" />
+            <element signature="e#605#639#0" expanded="false" />
+            <element signature="docComment;method#AudioDesktop#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#AudioDesktop#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#3464:3949" expanded="false" />
+            <element signature="method#actionPerformed#0;class#3464:3949" expanded="false" />
+            <element signature="class#3681:3869" expanded="false" />
+            <element signature="docComment;method#saveProperties#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#saveProperties#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#updateProperties#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#updateProperties#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#resetColors#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#resetColors#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#removeWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#removeWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#addWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#addWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;method#buildWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#buildWindow#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#GenerateAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#10205:11109" expanded="false" />
+            <element signature="method#actionPerformed#0;class#10205:11109" expanded="false" />
+            <element signature="class#11159:11483" expanded="false" />
+            <element signature="method#actionPerformed#0;class#11159:11483" expanded="false" />
+            <element signature="docComment;class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#OpenFileAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="e#12336#12417#0" expanded="false" />
+            <element signature="docComment;class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#ConverterOpenAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="e#13322#13403#0" expanded="false" />
+            <element signature="docComment;class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#ThemeSelectorAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#14414:14682" expanded="false" />
+            <element signature="method#actionPerformed#0;class#14414:14682" expanded="false" />
+            <element signature="docComment;method#addColorChoice#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#addColorChoice#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="docComment;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#ColorAction#0;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="method#actionPerformed#0;class#ColorAction#0;class#AudioDesktop#0" expanded="false" />
+            <element signature="class#15979:16217" expanded="false" />
+            <element signature="method#actionPerformed#0;class#15979:16217" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/testing/src/baseRunner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5166163">
-          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.66952056">
+          <caret line="23" column="0" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
           <folding />
         </state>
       </provider>

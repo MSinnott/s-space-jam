@@ -24,7 +24,7 @@ public class EqnHandler {
     private static ArrayList<String> functions = new ArrayList<String>();
     private static Map<String, int[]> functors = new OFMap(functions);
 
-    private static String[] variables = new String[]{"t"};
+    private static String[] variables = new String[]{"t", "x"};
     private static String[] numbers =  new String[]{"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "." };
 
     private static String[] totalTokens;
@@ -80,7 +80,7 @@ public class EqnHandler {
                     args[i] = numStack.pop();
                 }
                 numStack.push(evalFunc(rpnTop, args));
-            } else if(rpnTop.equals("t")){
+            } else if(rpnTop.equals("t") || rpnTop.equals("x")){
                 numStack.push((float) t);
             }
             loc++;
@@ -127,7 +127,6 @@ public class EqnHandler {
         return true;
     }
 
-    //this is actually a very dece parser --m (need to fix ...)-123...)
     public static ArrayList<String> parse(String text){
         text = text.replace(" ", "");
         ArrayList<String> parsedTokens = new ArrayList<String>();
@@ -146,6 +145,7 @@ public class EqnHandler {
             }
             loc += toAdd.length();
             if(toAdd.length() > 0) parsedTokens.add(toAdd);
+            System.out.println(loc + " : " + toAdd);
         }
         return parsedTokens;
     }

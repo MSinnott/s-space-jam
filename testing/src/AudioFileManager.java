@@ -547,7 +547,7 @@ public class AudioFileManager {
     public void filter(float threshold, int stIndex, int endIndex){
         for (float[] channel: channels) {
             for (int i = stIndex; i < channel.length && i < endIndex; i++) {
-                if(channel[i] < threshold) channel[i] = 0;
+                if(Math.abs(channel[i]) < threshold) channel[i] = 0;
             }
         }
     }

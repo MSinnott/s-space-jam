@@ -3,8 +3,6 @@ import java.io.*;
 public class baseRunner {
 
     public static void main(String[] args) throws IOException {
-        System.out.println(System.getProperty("user.dir"));
-
         MusicGenerator generator = new MusicGenerator(AudioFileManager.DEFAULT_SAMPLE_RATE);
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
@@ -20,7 +18,9 @@ public class baseRunner {
         beat.addNoise(3, 2);
         beat.pAdd(song);
         beat.pAdd(ramp);
-        beat.buildFile("s-space-jam/testing/music/sngR.wav");
+        String rSngLocLinx = "s-space-jam/testing/music/sngR.wav";
+        String rSngLocWind = "testing/music/sngR.wav";
+        beat.buildFile(rSngLocWind);
 
         mainWindow.buildWindow(beat);
     }

@@ -38,8 +38,10 @@ public class AudioDesktop extends JFrame{
     private ArrayList<AudioWindow> audioWindows;
     private ArrayList<Component> components = new ArrayList<Component>();
 
-    private String propertiesPathname = "s-space-jam/testing/resc/properties.txt";
-    private String iconPath = "s-space-jam/testing/resc/s-Space-Jam-Logo.jpg";
+    private String propertiesPathnameLinux = "s-space-jam/testing/resc/properties.txt";
+    private String propertiesPathnameWindows = "testing/resc/properties.txt";
+    private String iconPathLinux = "s-space-jam/testing/resc/s-Space-Jam-Logo.jpg";
+    private String iconPathWindows = "testing/resc/s-Space-Jam-Logo.jpg";
 
     private Properties properties;
 
@@ -61,7 +63,9 @@ public class AudioDesktop extends JFrame{
         this.setSize(width, height);
 
         this.setResizable(true);
-        this.setIconImage(new ImageIcon(iconPath).getImage());
+        ImageIcon icon  =  new ImageIcon(iconPathWindows);
+        if(icon.getImage() == null) icon = new ImageIcon(iconPathLinux);
+        this.setIconImage(icon.getImage());
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         menuBar = new JMenuBar();
@@ -116,11 +120,8 @@ public class AudioDesktop extends JFrame{
 
         properties = new Properties();
 
-        try {
-            updateProperties();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        updateProperties();
+
         resetColors(true);
         this.setVisible(true);
         this.invalidate();
@@ -138,19 +139,40 @@ public class AudioDesktop extends JFrame{
             properties.setProperty("" + i + ":B", String.valueOf(theme[i].getBlue()));
         }
 
-        File propFile = new File(propertiesPathname);
-        BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
-        properties.store(propOut, "Colors");
+        try {
+            File propFile = new File(propertiesPathnameLinux);
+            BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
+            properties.store(propOut, "Colors");
+        } catch (Exception e0){
+            try {
+                File propFile = new File(propertiesPathnameWindows);
+                BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
+                properties.store(propOut, "Colors");
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
     }
 
     /**
      * Updates the properties file
      * @throws IOException
      */
-    public void updateProperties() throws IOException {
-        File propFile = new File(propertiesPathname);
-        FileInputStream propReader = new FileInputStream(propFile);
-        properties.load(propReader);
+    public void updateProperties() {
+        try {
+            File propFile = new File(propertiesPathnameLinux);
+            FileInputStream propReader = new FileInputStream(propFile);
+            properties.load(propReader);
+        } catch (Exception e0){
+            try {
+                File propFile = new File(propertiesPathnameWindows);
+                FileInputStream propReader = new FileInputStream(propFile);
+                properties.load(propReader);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
+
     }
 
     /**
