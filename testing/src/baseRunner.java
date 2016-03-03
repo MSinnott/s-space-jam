@@ -20,7 +20,7 @@ public class baseRunner {
         beat.pAdd(ramp);
         String rSngLocLinx = "s-space-jam/testing/music/sngR.wav";
         String rSngLocWind = "testing/music/sngR.wav";
-        beat.buildFile(rSngLocWind);
+        beat.buildFile(rSngLocLinx);
 
         mainWindow.buildWindow(beat);
     }
