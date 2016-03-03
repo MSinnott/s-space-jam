@@ -21,6 +21,16 @@ public class MusicGenerator {
         High level functions to build a song
      */
 
+    public float[] generateSongV4(int len, float volumeMultiplier){
+        float[] ret = new float[len];
+        float note = randFromKey();
+        for(int i = 0; i < len; i++){
+            ret[i] = volumeMultiplier * getTone(note, i);
+            if(i % 10000 == 0) note = randFromKey();
+        }
+        return ret;
+    }
+
     public float[] generateSongV3(int themeLen, float volumeMultiplier, float peakedness){
         float[] theme = new float[themeLen];
         float[] noteLen = new float[themeLen];
@@ -214,6 +224,10 @@ public class MusicGenerator {
             ret[phase] = getTone(freq, phase + startPhase);
         }
         return ret;
+    }
+
+    public float randFromKey(){
+        return key[random.nextInt(key.length)];
     }
 
 }

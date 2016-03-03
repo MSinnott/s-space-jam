@@ -470,11 +470,13 @@ public class AudioFileManager {
     }
 
     public void pAdd(float[][] channelsIn){
-        float[][] toTraverse = (channelsIn[0].length > channels[0].length) ? channels : channelsIn;
-        float[][] resultant = (channelsIn[0].length < channels[0].length) ? channels : channelsIn;
-        for (int i = 0; i < toTraverse.length; i++) {
-            for (int j = 0; j < toTraverse[0].length; j += 2) {
-                resultant[i][j] += toTraverse[i][j];
+        int mostChannels = (channelsIn.length > channels.length) ? channelsIn.length : channels.length;
+        int longestChannel = (channelsIn[0].length > channels[0].length) ? channelsIn[0].length : channels[0].length;
+        float[][] resultant = new float[mostChannels][longestChannel];
+        for (int i = 0; i < resultant.length; i++) {
+            for (int j = 0; j < resultant[0].length; j += 2) {
+                if(channels.length > i && channels[0].length > j) resultant[i][j] += channels[i][j];
+                if(channelsIn.length > i && channelsIn[0].length > j) resultant[i][j] += channelsIn[i][j];
             }
         }
         channels = resultant;

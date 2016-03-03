@@ -23,6 +23,12 @@ public class baseRunner {
         beat.buildFile(rSngLocLinx);
 
         mainWindow.buildWindow(beat);
+        mainWindow.buildWindow(song);
+
+        float[] songF = generator.generateSongV4(AudioFileManager.DEFAULT_SAMPLE_RATE * 4, 2 << 10);
+        AudioFileManager songFFT = new AudioFileManager(songF, songF);
+        songFFT.btransform();
+        mainWindow.buildWindow(songFFT);
     }
 
 }
