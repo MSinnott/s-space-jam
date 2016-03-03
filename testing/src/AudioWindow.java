@@ -59,6 +59,14 @@ public class AudioWindow extends JInternalFrame{
         updatePane();
     }
 
+    public MainPane getMainPane(){
+        return pane;
+    }
+
+    public AudioFileManager getFileManager(){
+        return audioFile;
+    }
+
     public void buildMenus(){
         JMenuBar menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
@@ -364,20 +372,27 @@ public class AudioWindow extends JInternalFrame{
     public class pbpMultAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setBackground(AudioDesktop.theme[0]);
-            fileChooser.setForeground(AudioDesktop.theme[5]);
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "WAV Files", "wav", "mp3 Files", "mp3");
-            //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
-            //looks like .au and .aiff files are already supported.
-            fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(audioWindow);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-                AudioFileManager selection = new AudioFileManager(fileChooser.getSelectedFile());
-                audioFile.pMult(selection.getChannels());
-                updatePane();
+            final AdaptiveDialog multDialog = new AdaptiveDialog("Scale Vertically");
+
+
+            JList<AudioFileManager> fileChooser = new JList<AudioFileManager>();
+
+            for(AudioWindow aw : audioDesktop.getAudioWindows()){
+                fileChooser.add(aw.getName(), aw);
             }
+
+
+            multDialog.addItem(fileChooser, 0, 5, false);
+            multDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    AudioFileManager selection = fileChooser.getModel().getElementAt(0);
+                    audioFile.pMult(selection.getChannels());
+                    updatePane();
+                }
+            });
+
+            multDialog.buildDialog(audioWindow);
         }
     }
 
@@ -518,14 +533,16 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog filterDialog = new AdaptiveDialog("Filter");
             final JTextField textField = new JTextField();
-            filterDialog.addItem(textField, 0, 5, false);
+            final JCheckBox removeBelowBox = new JCheckBox("Remove Below?");
+            filterDialog.addItem(textField, 5, 0, false);
+            filterDialog.addItem(removeBelowBox, 0, 5, false);
             filterDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(toSelection) {
-                        audioFile.filter(Float.valueOf(textField.getText()), (int) pane.getSelection()[0], (int) pane.getSelection()[1]);
+                        audioFile.filter(Float.valueOf(textField.getText()), (int) pane.getSelection()[0], (int) pane.getSelection()[1], removeBelowBox.isSelected());
                     } else {
-                        audioFile.filter(Float.valueOf(textField.getText()));
+                        audioFile.filter(Float.valueOf(textField.getText()), removeBelowBox.isSelected());
                     }
                     updatePane();
                 }

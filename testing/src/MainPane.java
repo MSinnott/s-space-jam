@@ -55,7 +55,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
         for (float[] channel : audioFile.getChannels()) {
             if(pan > channel.length) break;
             g2.setColor(AudioDesktop.theme[colorNum++]);
-            lX = 0;
+            lX = -5;
             lY = getYfromVal(channel[pan - pan % 2]);
             int lastI = pan - pan % 2;
             for (int i = pan - pan % 2; i < channel.length; i += (samplesPerPixel <= 1) ? 2 : 2 * samplesPerPixel) {

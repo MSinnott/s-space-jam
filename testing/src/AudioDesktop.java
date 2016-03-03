@@ -3,8 +3,8 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Properties;
+import java.util.*;
+import java.util.List;
 
 /**
  * Main JFrame class -- provides multi-document interface capability + theme
@@ -235,6 +235,13 @@ public class AudioDesktop extends JFrame{
     public void addWindow(AudioWindow aw){
         audioWindows.add(aw);
         desktop.add(aw);
+    }
+
+    /**
+     * @return ArrayList of AudioWindows owned by this component
+     */
+    public ArrayList<AudioWindow> getAudioWindows(){
+        return audioWindows;
     }
 
     /**
