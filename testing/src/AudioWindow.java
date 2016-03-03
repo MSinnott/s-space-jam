@@ -190,7 +190,7 @@ public class AudioWindow extends JInternalFrame{
 
         JMenuItem filterSelectionButton = new JMenuItem("Threshold Filter");
         selectionMenu.add(filterSelectionButton);
-        filterButton.addActionListener(new FilterThresholdAction(true));
+        filterSelectionButton.addActionListener(new FilterThresholdAction(true));
         selectionComponents.add(new ColoredComponent(filterSelectionButton, 5, 0));
 
         JMenu playMenu = new JMenu("\t▶");
@@ -516,10 +516,10 @@ public class AudioWindow extends JInternalFrame{
         }
         @Override
         public void actionPerformed(ActionEvent e) {
-            final AdaptiveDialog scaleDialog = new AdaptiveDialog("Filter");
+            final AdaptiveDialog filterDialog = new AdaptiveDialog("Filter");
             final JTextField textField = new JTextField();
-            scaleDialog.addItem(textField, 0, 5, false);
-            scaleDialog.addDoneBinding(new AbstractAction() {
+            filterDialog.addItem(textField, 0, 5, false);
+            filterDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     if(toSelection) {
@@ -530,7 +530,7 @@ public class AudioWindow extends JInternalFrame{
                     updatePane();
                 }
             });
-            scaleDialog.buildDialog(audioWindow);
+            filterDialog.buildDialog(audioWindow);
         }
     }
 
