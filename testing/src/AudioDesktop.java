@@ -249,6 +249,7 @@ public class AudioDesktop extends JFrame{
      * @param fileManager source to build window
      */
     public void buildWindow(AudioFileManager fileManager){
+        fileManager.setDefaultName(fileManager.getName() + " \\|/ " + audioWindows.size());
         AudioWindow newAW = new AudioWindow(200, 100, fileManager, this);
         addWindow(newAW);
     }

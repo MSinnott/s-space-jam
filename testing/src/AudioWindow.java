@@ -352,42 +352,78 @@ public class AudioWindow extends JInternalFrame{
     public class pbpAddAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setBackground(AudioDesktop.theme[0]);
-            fileChooser.setForeground(AudioDesktop.theme[5]);
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "WAV Files", "wav", "mp3 Files", "mp3");
-            //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
-            //looks like .au and .aiff files are already supported.
-            fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(audioWindow);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-                AudioFileManager selection = new AudioFileManager(fileChooser.getSelectedFile());
-                audioFile.pAdd(selection.getChannels());
-                updatePane();
+            final AdaptiveDialog addDialog = new AdaptiveDialog("Scale Vertically");
+            final ArrayList<AudioFileManager> toAdd = new ArrayList<AudioFileManager>();
+            for(AudioWindow aw : audioDesktop.getAudioWindows()){
+                JButton jTextButton = new JButton(aw.getFileManager().getName());
+                ColoredComponent coloredComp = new ColoredComponent(jTextButton, 5, 0);
+                jTextButton.addActionListener(new AbstractAction() {
+                    boolean selected = false;
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        if(selected) {
+                            coloredComp.setFgColor(5);
+                            coloredComp.setBgColor(0);
+                            toAdd.remove(aw.getFileManager());
+                            selected = false;
+                        } else {
+                            coloredComp.setFgColor(0);
+                            coloredComp.setBgColor(5);
+                            toAdd.add(aw.getFileManager());
+                            selected = true;
+                        }
+                    }
+                });
+                addDialog.addItem(coloredComp, false);
             }
+
+            addDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    for(AudioFileManager fileManager: toAdd) {
+                        audioFile.pAdd(fileManager);
+                    }
+                    updatePane();
+                }
+            });
+            addDialog.buildDialog(audioWindow);
         }
     }
-
+    
     public class pbpMultAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog multDialog = new AdaptiveDialog("Scale Vertically");
-
-
-            JList<AudioFileManager> fileChooser = new JList<AudioFileManager>();
-
+            final ArrayList<AudioFileManager> toMult = new ArrayList<AudioFileManager>();
             for(AudioWindow aw : audioDesktop.getAudioWindows()){
-                fileChooser.add(aw.getName(), aw);
+                JButton jTextButton = new JButton(aw.getFileManager().getName());
+                ColoredComponent coloredComp = new ColoredComponent(jTextButton, 5, 0);
+                jTextButton.addActionListener(new AbstractAction() {
+                    boolean selected = false;
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        if(selected) {
+                            coloredComp.setFgColor(5);
+                            coloredComp.setBgColor(0);
+                            toMult.remove(aw.getFileManager());
+                            selected = false;
+                        } else {
+                            coloredComp.setFgColor(0);
+                            coloredComp.setBgColor(5);
+                            toMult.add(aw.getFileManager());
+                            selected = true;
+                        }
+                    }
+                });
+                multDialog.addItem(coloredComp, false);
             }
 
-
-            multDialog.addItem(fileChooser, 0, 5, false);
             multDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
-                    AudioFileManager selection = fileChooser.getModel().getElementAt(0);
-                    audioFile.pMult(selection.getChannels());
+                    for(AudioFileManager fileManager: toMult) {
+                        audioFile.pMult(fileManager);
+                    }
                     updatePane();
                 }
             });
