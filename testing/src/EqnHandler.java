@@ -135,7 +135,8 @@ public class EqnHandler {
         while (loc < text.length()){
             String toAdd = getToken(text, loc);
             if(toAdd.equals("-")){
-                String lastOp = parsedTokens.get(parsedTokens.size() - 1);
+                String lastOp = "";
+                if(!parsedTokens.isEmpty()) lastOp = parsedTokens.get(parsedTokens.size() - 1);
                 if(operations.contains(lastOp) || functions.contains(lastOp) || lastOp.equals("(")){
                     parsedTokens.add("-1");
                     parsedTokens.add("*");

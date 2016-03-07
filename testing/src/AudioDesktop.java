@@ -38,10 +38,12 @@ public class AudioDesktop extends JFrame{
     private ArrayList<AudioWindow> audioWindows;
     private ArrayList<Component> components = new ArrayList<Component>();
 
-    private String propertiesPathnameLinux = "s-space-jam/testing/resc/properties.txt";
-    private String propertiesPathnameWindows = "testing/resc/properties.txt";
-    private String iconPathLinux = "s-space-jam/testing/resc/s-Space-Jam-Logo.jpg";
-    private String iconPathWindows = "testing/resc/s-Space-Jam-Logo.jpg";
+    public static final String LinuxPathHead = "s-space-jam/testing/";
+    public static final String WindowsPathHead = "testing/";
+    //private String propertiesPathnameLinux = "s-space-jam/testing/resc/properties.txt";
+    //private String propertiesPathnameWindows = "testing/resc/properties.txt";
+    //private String iconPathLinux = "s-space-jam/testing/resc/s-Space-Jam-Logo.jpg";
+    //private String iconPathWindows = "testing/resc/s-Space-Jam-Logo.jpg";
 
     private Properties properties;
 
@@ -63,8 +65,8 @@ public class AudioDesktop extends JFrame{
         this.setSize(width, height);
 
         this.setResizable(true);
-        ImageIcon icon  =  new ImageIcon(iconPathWindows);
-        if(icon.getImage() == null) icon = new ImageIcon(iconPathLinux);
+        ImageIcon icon  =  new ImageIcon(WindowsPathHead + "resc/s-Space-Jam-Logo.jpg");
+        if(icon.getImage() == null) icon = new ImageIcon(LinuxPathHead + "resc/s-Space-Jam-Logo.jpg");
         this.setIconImage(icon.getImage());
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -140,12 +142,12 @@ public class AudioDesktop extends JFrame{
         }
 
         try {
-            File propFile = new File(propertiesPathnameLinux);
+            File propFile = new File(LinuxPathHead + "resc/properties.txt");
             BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
             properties.store(propOut, "Colors");
         } catch (Exception e0){
             try {
-                File propFile = new File(propertiesPathnameWindows);
+                File propFile = new File(WindowsPathHead + "resc/properties.txt");
                 BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
                 properties.store(propOut, "Colors");
             } catch (Exception e1) {
@@ -160,12 +162,12 @@ public class AudioDesktop extends JFrame{
      */
     public void updateProperties() {
         try {
-            File propFile = new File(propertiesPathnameLinux);
+            File propFile = new File(LinuxPathHead + "resc/properties.txt");
             FileInputStream propReader = new FileInputStream(propFile);
             properties.load(propReader);
         } catch (Exception e0){
             try {
-                File propFile = new File(propertiesPathnameWindows);
+                File propFile = new File(WindowsPathHead + "resc/properties.txt");
                 FileInputStream propReader = new FileInputStream(propFile);
                 properties.load(propReader);
             } catch (Exception e1) {
@@ -216,7 +218,14 @@ public class AudioDesktop extends JFrame{
 
         if(themeDialog != null) themeDialog.resetColors();
 
-        audioWindows.forEach(AudioWindow::resetColors);
+        checkWindows();
+    }
+
+    public void checkWindows() {
+        for (AudioWindow aw: audioWindows) {
+            if(aw.isClosed()) removeWindow(aw);
+            aw.resetColors();
+        }
     }
 
     /**
@@ -249,7 +258,7 @@ public class AudioDesktop extends JFrame{
      * @param fileManager source to build window
      */
     public void buildWindow(AudioFileManager fileManager){
-        fileManager.setDefaultName(fileManager.getName() + " \\|/ " + audioWindows.size());
+        fileManager.setDefaultName(fileManager.getName() + " | " + audioWindows.size());
         AudioWindow newAW = new AudioWindow(200, 100, fileManager, this);
         addWindow(newAW);
     }
@@ -337,7 +346,13 @@ public class AudioDesktop extends JFrame{
     public class OpenFileAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
+            File root;
+            try {
+                root = new File(LinuxPathHead);
+            } catch (Exception ex) {
+                root = new File(WindowsPathHead);
+            }
+            JFileChooser fileChooser = new JFileChooser(root);
             fileChooser.setBackground(theme[0]);
             fileChooser.setForeground(theme[5]);
             FileNameExtensionFilter filter = new FileNameExtensionFilter(

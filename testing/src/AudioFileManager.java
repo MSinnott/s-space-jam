@@ -239,6 +239,8 @@ public class AudioFileManager {
             read = new byte[fileSize - 8];
             in.read(read);
 
+            System.out.println(fileSize);
+
             int dataStart = 40;
             for(int i = 0; i < read.length; i++){
                 if(read[i] == 'd' && read[i+1] == 'a' &&read[i+2] == 't' &&read[i+3] == 'a'){
@@ -247,7 +249,7 @@ public class AudioFileManager {
                 }
             }
             data = new byte[fileSize - dataStart - 8]; // -8. b/cause it works
-            System.arraycopy(read, 0 + dataStart, data, 0, read.length - dataStart);
+            System.arraycopy(read, dataStart, data, 0, read.length - dataStart);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -366,6 +368,22 @@ public class AudioFileManager {
 
     public void vscale(float amt){
         vscale(amt, 0, channels[0].length);
+    }
+
+    public void hshift(int amt){
+        if(amt > 0){
+            for (int i = 0; i < channels.length; i++) {
+                float[] shiftChannel = new float[channels[i].length + amt];
+                System.arraycopy(channels[i], 0, shiftChannel, amt, channels[i].length);
+                channels[i] = shiftChannel;
+            }
+        } else if(amt < 0){
+            for (int i = 0; i < channels.length; i++) {
+                float[] shiftChannel = new float[channels[i].length + amt];
+                System.arraycopy(channels[i], -amt, shiftChannel, 0, shiftChannel.length);
+                channels[i] = shiftChannel;
+            }
+        }
     }
 
     public void smallFFT(int fftSize){

@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -137,6 +138,11 @@ public class AudioWindow extends JInternalFrame{
         vshiftButton.addActionListener(new vshiftAction(false));
         components.add(new ColoredComponent(vshiftButton, 5, 0));
 
+        JMenuItem hshiftButton = new JMenuItem("Shift Horizontally");
+        opMenu.add(hshiftButton);
+        hshiftButton.addActionListener(new hshiftAction());
+        components.add(new ColoredComponent(hshiftButton, 5, 0));
+
         JMenuItem pbpAdd = new JMenuItem("Point-by-Point Add");
         opMenu.add(pbpAdd);
         pbpAdd.addActionListener(new pbpAddAction());
@@ -161,6 +167,11 @@ public class AudioWindow extends JInternalFrame{
         opMenu.add(filterButton);
         filterButton.addActionListener(new FilterThresholdAction(false));
         components.add(new ColoredComponent(filterButton, 5, 0));
+
+        JMenuItem noiseButton = new JMenuItem("Add noise");
+        opMenu.add(noiseButton);
+        noiseButton.addActionListener(new AddNoiseAction());
+        components.add(new ColoredComponent(noiseButton, 5, 0));
 
         JMenu selectionMenu = new JMenu("Edit Selection");
         menuBar.add(selectionMenu);
@@ -257,7 +268,13 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(!saved || "SaveAs".equals(type)){
-                JFileChooser fileChooser = new JFileChooser();
+                File root;
+                try {
+                    root = new File(AudioDesktop.LinuxPathHead);
+                } catch (Exception ex) {
+                    root = new File(AudioDesktop.WindowsPathHead);
+                }
+                JFileChooser fileChooser = new JFileChooser(root);
                 if (fileChooser.showSaveDialog(audioWindow) == JFileChooser.APPROVE_OPTION) {
                     try {
                         savePath = fileChooser.getSelectedFile().getAbsolutePath();
@@ -349,9 +366,27 @@ public class AudioWindow extends JInternalFrame{
         }
     }
 
+    public class hshiftAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            final AdaptiveDialog shiftDialog = new AdaptiveDialog("Shift Horizontally");
+            final JTextField textField = new JTextField();
+            shiftDialog.addItem(textField, 0, 5, false);
+            shiftDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    audioFile.hshift(Integer.valueOf(textField.getText()));
+                    updatePane();
+                }
+            });
+            shiftDialog.buildDialog(audioWindow);
+        }
+    }
+
     public class pbpAddAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
+            audioDesktop.checkWindows();
             final AdaptiveDialog addDialog = new AdaptiveDialog("Scale Vertically");
             final ArrayList<AudioFileManager> toAdd = new ArrayList<AudioFileManager>();
             for(AudioWindow aw : audioDesktop.getAudioWindows()){
@@ -389,10 +424,11 @@ public class AudioWindow extends JInternalFrame{
             addDialog.buildDialog(audioWindow);
         }
     }
-    
+
     public class pbpMultAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
+            audioDesktop.checkWindows();
             final AdaptiveDialog multDialog = new AdaptiveDialog("Scale Vertically");
             final ArrayList<AudioFileManager> toMult = new ArrayList<AudioFileManager>();
             for(AudioWindow aw : audioDesktop.getAudioWindows()){
@@ -580,6 +616,25 @@ public class AudioWindow extends JInternalFrame{
                     } else {
                         audioFile.filter(Float.valueOf(textField.getText()), removeBelowBox.isSelected());
                     }
+                    updatePane();
+                }
+            });
+            filterDialog.buildDialog(audioWindow);
+        }
+    }
+
+    public class AddNoiseAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            final AdaptiveDialog filterDialog = new AdaptiveDialog("Filter");
+            final JTextField noiseStepsBox = new JTextField();
+            final JTextField noiseScaleBox = new JTextField();
+            filterDialog.addItem(noiseStepsBox, 5, 0, false);
+            filterDialog.addItem(noiseScaleBox, 5, 0, false);
+            filterDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    audioFile.addNoise(Integer.valueOf(noiseStepsBox.getText()), Integer.valueOf(noiseScaleBox.getText()));
                     updatePane();
                 }
             });
