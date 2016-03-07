@@ -146,7 +146,6 @@ public class EqnHandler {
             }
             loc += toAdd.length();
             if(toAdd.length() > 0) parsedTokens.add(toAdd);
-            System.out.println(loc + " : " + toAdd);
         }
         return parsedTokens;
     }

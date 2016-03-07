@@ -1,10 +1,10 @@
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class AudioWindow extends JInternalFrame{
 
@@ -21,8 +21,12 @@ public class AudioWindow extends JInternalFrame{
     private ArrayList<ColoredComponent> selectionComponents = new ArrayList<ColoredComponent>();
     private ArrayList<ColoredComponent> components = new ArrayList<ColoredComponent>();
 
+    private String windowHistory = "";
+
     public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
         super(fileManager.getName());
+
+        addHistory(fileManager.getName());
 
         player = new SoundPlayer(fileManager);
         audioDesktop = aDesk;
@@ -53,6 +57,10 @@ public class AudioWindow extends JInternalFrame{
         setResizable(true);
         this.setSize(480, 360);
         this.setVisible(true);
+    }
+
+    private void addHistory(String histToAdd) {
+        windowHistory += "\n" + histToAdd;
     }
 
     public void loadFile(AudioFileManager fileManager){
@@ -113,61 +121,41 @@ public class AudioWindow extends JInternalFrame{
         menuBar.add(opMenu);
         components.add(new ColoredComponent(opMenu, 5, 0));
 
-        JMenuItem ftransformButton = new JMenuItem("Forward FFT");
-        opMenu.add(ftransformButton);
-        ftransformButton.addActionListener(new forwardFFtAction());
-        components.add(new ColoredComponent(ftransformButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Forward FFT"), 5, 0, new forwardFFtAction(), components);
 
-        JMenuItem fsteptransformButton = new JMenuItem("Step Forward FFT");
-        opMenu.add(fsteptransformButton);
-        fsteptransformButton.addActionListener(new stepforwardFFtAction());
-        components.add(new ColoredComponent(fsteptransformButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Step Forward FFT"), 5, 0, new stepforwardFFtAction(), components);
 
-        JMenuItem btransformButton = new JMenuItem("Backward FFT");
-        opMenu.add(btransformButton);
-        btransformButton.addActionListener(new backwardFFtAction());
-        components.add(new ColoredComponent(btransformButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
 
-        JMenuItem vscaleButton = new JMenuItem("Scale Vertically");
-        opMenu.add(vscaleButton);
-        vscaleButton.addActionListener(new vscaleAction(false));
-        components.add(new ColoredComponent(vscaleButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Scale Vertically"), 5, 0, new vscaleAction(false), components);
 
-        JMenuItem vshiftButton = new JMenuItem("Shift Vertically");
-        opMenu.add(vshiftButton);
-        vshiftButton.addActionListener(new vshiftAction(false));
-        components.add(new ColoredComponent(vshiftButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Shift Vertically"), 5, 0, new vshiftAction(false), components);
 
-        JMenuItem hshiftButton = new JMenuItem("Shift Horizontally");
-        opMenu.add(hshiftButton);
-        hshiftButton.addActionListener(new hshiftAction());
-        components.add(new ColoredComponent(hshiftButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Shift Horizontally"), 5, 0, new hshiftAction(), components);
 
-        JMenuItem pbpAdd = new JMenuItem("Point-by-Point Add");
-        opMenu.add(pbpAdd);
-        pbpAdd.addActionListener(new pbpAddAction());
-        components.add(new ColoredComponent(pbpAdd, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Point-by-Point Add"), 5, 0, new pbpAddAction(), components);
 
-        JMenuItem pbpMult = new JMenuItem("Point-by-Point Multiply");
-        opMenu.add(pbpMult);
-        pbpMult.addActionListener(new pbpMultAction());
-        components.add(new ColoredComponent(pbpMult, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Point-by-Point Multiply"), 5, 0, new pbpMultAction(), components);
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem trimButton = new JMenuItem("Trim");
         opMenu.add(trimButton);
         trimButton.addActionListener(new TrimAction());
         components.add(new ColoredComponent(trimButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem boxcarFilterButton = new JMenuItem("Boxcar Filter");
         opMenu.add(boxcarFilterButton);
         boxcarFilterButton.addActionListener(new BoxcarFilterAction(false));
         components.add(new ColoredComponent(boxcarFilterButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem filterButton = new JMenuItem("Threshold Filter");
         opMenu.add(filterButton);
         filterButton.addActionListener(new FilterThresholdAction(false));
         components.add(new ColoredComponent(filterButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem noiseButton = new JMenuItem("Add noise");
         opMenu.add(noiseButton);
         noiseButton.addActionListener(new AddNoiseAction());
@@ -177,36 +165,43 @@ public class AudioWindow extends JInternalFrame{
         menuBar.add(selectionMenu);
         selectionComponents.add(new ColoredComponent(selectionMenu, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem zeroSelect = new JMenuItem("Zero Selected");
         selectionMenu.add(zeroSelect);
         zeroSelect.addActionListener(new ZeroSelectedAction());
         selectionComponents.add(new ColoredComponent(zeroSelect, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem zeroDeSelect = new JMenuItem("Zero Non-Selected");
         selectionMenu.add(zeroDeSelect);
         zeroDeSelect.addActionListener(new ZeroNonSelectedAction());
         selectionComponents.add(new ColoredComponent(zeroDeSelect, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem vscaleSelectButton = new JMenuItem("Scale Selection Vertically");
         selectionMenu.add(vscaleSelectButton);
         vscaleSelectButton.addActionListener(new vscaleAction(true));
         selectionComponents.add(new ColoredComponent(vscaleSelectButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem vshiftSelectButton = new JMenuItem("Shift Selection Vertically");
         selectionMenu.add(vshiftSelectButton);
         vshiftSelectButton.addActionListener(new vshiftAction(true));
         selectionComponents.add(new ColoredComponent(vshiftSelectButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem zoomToSelection = new JMenuItem("Zoom to Selection");
         selectionMenu.add(zoomToSelection);
         zoomToSelection.addActionListener(new ZoomToSelectionAction());
         selectionComponents.add(new ColoredComponent(zoomToSelection, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem boxcarSelectionFilterButton = new JMenuItem("Boxcar Filter");
         selectionMenu.add(boxcarSelectionFilterButton);
         boxcarSelectionFilterButton.addActionListener(new BoxcarFilterAction(true));
         selectionComponents.add(new ColoredComponent(boxcarSelectionFilterButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem filterSelectionButton = new JMenuItem("Threshold Filter");
         selectionMenu.add(filterSelectionButton);
         filterSelectionButton.addActionListener(new FilterThresholdAction(true));
@@ -216,27 +211,37 @@ public class AudioWindow extends JInternalFrame{
         menuBar.add(playMenu);
         components.add(new ColoredComponent(playMenu, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem playButton = new JMenuItem("\t▶ File");
         playMenu.add(playButton);
         playButton.addActionListener(new PlayAction());
         components.add(new ColoredComponent(playButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem playSelectedButton = new JMenuItem("\t▶ Selected");
         playMenu.add(playSelectedButton);
         playSelectedButton.addActionListener(new PlaySelectedAction());
         selectionComponents.add(new ColoredComponent(playSelectedButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JCheckBoxMenuItem repeatButton = new JCheckBoxMenuItem("Repeat?");
         playMenu.add(repeatButton);
         repeatButton.addActionListener(new RepeatAction(repeatButton));
         components.add(new ColoredComponent(repeatButton, 5, 0));
 
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
         JMenuItem stopButton = new JMenuItem("Stop");
         playMenu.add(stopButton);
         stopButton.addActionListener(new StopAction());
         components.add(new ColoredComponent(stopButton, 5, 0));
 
         resetColors();
+    }
+
+    public void makeMenuItem(JMenu menu, JMenuItem j, int fgColr, int bgColr, AbstractAction action, ArrayList<ColoredComponent> collection){
+        j.addActionListener(action);
+        collection.add(new ColoredComponent(j, fgColr, bgColr));
+        menu.add(j);
     }
 
     public void resetColors(){
@@ -334,6 +339,7 @@ public class AudioWindow extends JInternalFrame{
                     } else {
                         audioFile.vscale(Float.valueOf(textField.getText()));
                     }
+                    addHistory("vScale: " + textField.getText() + " @ " + Arrays.toString(pane.getSelection()));
                     updatePane();
                 }
             });
@@ -359,6 +365,7 @@ public class AudioWindow extends JInternalFrame{
                     } else {
                         audioFile.vshift(Float.valueOf(textField.getText()));
                     }
+                    addHistory("vShift: " + textField.getText() + " @ " + Arrays.toString(pane.getSelection()));
                     updatePane();
                 }
             });
@@ -377,6 +384,7 @@ public class AudioWindow extends JInternalFrame{
                 public void actionPerformed(ActionEvent e) {
                     audioFile.hshift(Integer.valueOf(textField.getText()));
                     updatePane();
+                    addHistory("hShift: " + textField.getText() + " @ " + Arrays.toString(pane.getSelection()));
                 }
             });
             shiftDialog.buildDialog(audioWindow);
@@ -412,11 +420,13 @@ public class AudioWindow extends JInternalFrame{
                 addDialog.addItem(coloredComp, false);
             }
 
+            addHistory("pAdd: ");
             addDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     for(AudioFileManager fileManager: toAdd) {
                         audioFile.pAdd(fileManager);
+                        addHistory("\t" + fileManager.getName());
                     }
                     updatePane();
                 }
@@ -453,12 +463,13 @@ public class AudioWindow extends JInternalFrame{
                 });
                 multDialog.addItem(coloredComp, false);
             }
-
+            addHistory("pMult: ");
             multDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     for(AudioFileManager fileManager: toMult) {
                         audioFile.pMult(fileManager);
+                        addHistory("\t" + fileManager.getName());
                     }
                     updatePane();
                 }
@@ -472,6 +483,7 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             audioFile.ftransform();
+            addHistory("fftF");
             updatePane();
         }
     }
@@ -499,6 +511,7 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             audioFile.btransform();
+            addHistory("fftB");
             updatePane();
         }
     }
@@ -507,6 +520,7 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             audioFile.trim();
+            addHistory("trim");
             updatePane();
         }
     }
@@ -529,6 +543,7 @@ public class AudioWindow extends JInternalFrame{
                     } else {
                         audioFile.boxcarFilter(Integer.valueOf(textField.getText()));
                     }
+                    addHistory("bFilter: " + textField.getText() + " @ " + Arrays.toString(pane.getSelection()));
                     updatePane();
                 }
             });
@@ -541,6 +556,7 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e){
             float[] selection = pane.getSelection();
             audioFile.zeroFrom((int) selection[0], (int) selection[1]);
+            addHistory("zSelect: " + " @ " + Arrays.toString(pane.getSelection()));
             updatePane();
         }
     }
@@ -551,6 +567,7 @@ public class AudioWindow extends JInternalFrame{
             float[] selection = pane.getSelection();
             audioFile.zeroFrom(0, (int) selection[0]);
             audioFile.zeroFrom((int) selection[1], Integer.MAX_VALUE);
+            addHistory("z!Select: " + " @ " + Arrays.toString(pane.getSelection()));
             updatePane();
         }
     }
@@ -616,6 +633,7 @@ public class AudioWindow extends JInternalFrame{
                     } else {
                         audioFile.filter(Float.valueOf(textField.getText()), removeBelowBox.isSelected());
                     }
+                    addHistory("thFilter: " + textField.getText() + " @ " + Arrays.toString(pane.getSelection()));
                     updatePane();
                 }
             });
@@ -635,10 +653,18 @@ public class AudioWindow extends JInternalFrame{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     audioFile.addNoise(Integer.valueOf(noiseStepsBox.getText()), Integer.valueOf(noiseScaleBox.getText()));
+                    addHistory("aNoise: steps: " + noiseStepsBox.getText() + " scale: " + noiseScaleBox.getText());
                     updatePane();
                 }
             });
             filterDialog.buildDialog(audioWindow);
+        }
+    }
+
+    public class PrintHistoryAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.out.println(windowHistory);
         }
     }
 

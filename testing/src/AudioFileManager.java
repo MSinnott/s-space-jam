@@ -1,5 +1,6 @@
 import javax.sound.sampled.AudioFormat;
 import java.io.*;
+import java.util.Arrays;
 
 /**
     Class that handles audio I/O --reading, writing, etc
@@ -399,7 +400,11 @@ public class AudioFileManager {
 
         for(float[][] channel: toTransform){
             for(float[] smallData: channel){
+                float[] checkDiff = new float[fftSize];
+                System.arraycopy(smallData, 0, checkDiff, 0, fftSize);
                 fft.ft(smallData);
+                System.out.println(Arrays.toString(checkDiff));
+                System.out.println(Arrays.toString(smallData));
             }
         }
 
@@ -411,6 +416,7 @@ public class AudioFileManager {
                     channels[i][j * fftSize + k] = (float) (normalizer * toTransform[i][j][k]);
                 }
             }
+            System.out.println(Arrays.toString(channels[i]));
         }
     }
 
