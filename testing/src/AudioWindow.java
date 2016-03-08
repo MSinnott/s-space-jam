@@ -85,37 +85,13 @@ public class AudioWindow extends JInternalFrame{
         menuBar.add(fileMenu);
         components.add(new ColoredComponent(fileMenu, 5, 0));
 
-        JMenuItem cloneButton = new JMenuItem("Clone");
-        fileMenu.add(cloneButton);
-        cloneButton.addActionListener(new CloneAction(this));
-        components.add(new ColoredComponent(cloneButton, 5, 0));
+        makeMenuItem(fileMenu, new JMenuItem("Clone"), 5, 0, new CloneAction(this), components);
 
-        JMenuItem saveButton = new JMenuItem("Save");
-        fileMenu.add(saveButton);
-        saveButton.addActionListener(new SaveAction("Save"));
-        components.add(new ColoredComponent(saveButton, 5, 0));
+        makeMenuItem(fileMenu, new JMenuItem("Save"), 5, 0, new SaveAction("Save"), components);
 
-        JMenuItem saveAsButton = new JMenuItem("Save As ...");
-        fileMenu.add(saveAsButton);
-        saveAsButton.addActionListener(new SaveAction("SaveAs"));
-        components.add(new ColoredComponent(saveAsButton, 5, 0));
+        makeMenuItem(fileMenu, new JMenuItem("Save As ..."), 5, 0, new SaveAction("SaveAs"), components);
 
-        JMenuItem exitButton = new JMenuItem("Exit");
-        fileMenu.add(exitButton);
-        exitButton.addActionListener(new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                AdaptiveDialog exitDialog = new AdaptiveDialog("Exit?");
-                exitDialog.addDoneBinding(new AbstractAction() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        dispose();
-                    }
-                });
-                exitDialog.buildDialog(audioWindow);
-            }
-        });
-        components.add(new ColoredComponent(exitButton, 5, 0));
+        makeMenuItem(fileMenu, new JMenuItem("Exit"), 5, 0, new ExitAction(), components);
 
         JMenu opMenu = new JMenu("Operations");
         menuBar.add(opMenu);
@@ -137,103 +113,43 @@ public class AudioWindow extends JInternalFrame{
 
         makeMenuItem(opMenu, new JMenuItem("Point-by-Point Multiply"), 5, 0, new pbpMultAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem trimButton = new JMenuItem("Trim");
-        opMenu.add(trimButton);
-        trimButton.addActionListener(new TrimAction());
-        components.add(new ColoredComponent(trimButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Trim"), 5, 0, new TrimAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem boxcarFilterButton = new JMenuItem("Boxcar Filter");
-        opMenu.add(boxcarFilterButton);
-        boxcarFilterButton.addActionListener(new BoxcarFilterAction(false));
-        components.add(new ColoredComponent(boxcarFilterButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Boxcar Filter"), 5, 0, new BoxcarFilterAction(false), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem filterButton = new JMenuItem("Threshold Filter");
-        opMenu.add(filterButton);
-        filterButton.addActionListener(new FilterThresholdAction(false));
-        components.add(new ColoredComponent(filterButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Threshold Filter"), 5, 0, new FilterThresholdAction(false), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem noiseButton = new JMenuItem("Add noise");
-        opMenu.add(noiseButton);
-        noiseButton.addActionListener(new AddNoiseAction());
-        components.add(new ColoredComponent(noiseButton, 5, 0));
+        makeMenuItem(opMenu, new JMenuItem("Add noise"), 5, 0, new AddNoiseAction(), components);
 
         JMenu selectionMenu = new JMenu("Edit Selection");
         menuBar.add(selectionMenu);
         selectionComponents.add(new ColoredComponent(selectionMenu, 5, 0));
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem zeroSelect = new JMenuItem("Zero Selected");
-        selectionMenu.add(zeroSelect);
-        zeroSelect.addActionListener(new ZeroSelectedAction());
-        selectionComponents.add(new ColoredComponent(zeroSelect, 5, 0));
+        makeMenuItem(selectionMenu, new JMenuItem("Zero Selected"), 5, 0, new ZeroSelectedAction(), selectionComponents);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem zeroDeSelect = new JMenuItem("Zero Non-Selected");
-        selectionMenu.add(zeroDeSelect);
-        zeroDeSelect.addActionListener(new ZeroNonSelectedAction());
-        selectionComponents.add(new ColoredComponent(zeroDeSelect, 5, 0));
+        makeMenuItem(selectionMenu, new JMenuItem("Zero Non-Selected"), 5, 0, new ZeroNonSelectedAction(), selectionComponents);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem vscaleSelectButton = new JMenuItem("Scale Selection Vertically");
-        selectionMenu.add(vscaleSelectButton);
-        vscaleSelectButton.addActionListener(new vscaleAction(true));
-        selectionComponents.add(new ColoredComponent(vscaleSelectButton, 5, 0));
+        makeMenuItem(selectionMenu, new JMenuItem("Scale Selection Vertically"), 5, 0, new vscaleAction(true), selectionComponents);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem vshiftSelectButton = new JMenuItem("Shift Selection Vertically");
-        selectionMenu.add(vshiftSelectButton);
-        vshiftSelectButton.addActionListener(new vshiftAction(true));
-        selectionComponents.add(new ColoredComponent(vshiftSelectButton, 5, 0));
+        makeMenuItem(selectionMenu, new JMenuItem("Shift Selection Vertically"), 5, 0, new vshiftAction(true), selectionComponents);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem zoomToSelection = new JMenuItem("Zoom to Selection");
-        selectionMenu.add(zoomToSelection);
-        zoomToSelection.addActionListener(new ZoomToSelectionAction());
-        selectionComponents.add(new ColoredComponent(zoomToSelection, 5, 0));
+        makeMenuItem(selectionMenu, new JMenuItem("Zoom to Selection"), 5, 0, new ZoomToSelectionAction(), selectionComponents);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem boxcarSelectionFilterButton = new JMenuItem("Boxcar Filter");
-        selectionMenu.add(boxcarSelectionFilterButton);
-        boxcarSelectionFilterButton.addActionListener(new BoxcarFilterAction(true));
-        selectionComponents.add(new ColoredComponent(boxcarSelectionFilterButton, 5, 0));
+        makeMenuItem(selectionMenu, new JMenuItem("Boxcar Filter"), 5, 0, new BoxcarFilterAction(true), selectionComponents);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem filterSelectionButton = new JMenuItem("Threshold Filter");
-        selectionMenu.add(filterSelectionButton);
-        filterSelectionButton.addActionListener(new FilterThresholdAction(true));
-        selectionComponents.add(new ColoredComponent(filterSelectionButton, 5, 0));
+        makeMenuItem(selectionMenu, new JMenuItem("Threshold Filter"), 5, 0, new FilterThresholdAction(true), selectionComponents);
 
         JMenu playMenu = new JMenu("\t▶");
         menuBar.add(playMenu);
         components.add(new ColoredComponent(playMenu, 5, 0));
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem playButton = new JMenuItem("\t▶ File");
-        playMenu.add(playButton);
-        playButton.addActionListener(new PlayAction());
-        components.add(new ColoredComponent(playButton, 5, 0));
+        makeMenuItem(playMenu, new JMenuItem("\t▶ File"), 5, 0, new PlayAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem playSelectedButton = new JMenuItem("\t▶ Selected");
-        playMenu.add(playSelectedButton);
-        playSelectedButton.addActionListener(new PlaySelectedAction());
-        selectionComponents.add(new ColoredComponent(playSelectedButton, 5, 0));
+        makeMenuItem(playMenu, new JMenuItem("\t▶ Selected"), 5, 0, new PlaySelectedAction(), selectionComponents);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JCheckBoxMenuItem repeatButton = new JCheckBoxMenuItem("Repeat?");
-        playMenu.add(repeatButton);
-        repeatButton.addActionListener(new RepeatAction(repeatButton));
-        components.add(new ColoredComponent(repeatButton, 5, 0));
+        makeMenuItem(playMenu, new JMenuItem("Repeat?"), 5, 0, new RepeatAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
-        JMenuItem stopButton = new JMenuItem("Stop");
-        playMenu.add(stopButton);
-        stopButton.addActionListener(new StopAction());
-        components.add(new ColoredComponent(stopButton, 5, 0));
+        makeMenuItem(playMenu, new JMenuItem("Stop"), 5, 0, new StopAction(), components);
 
         resetColors();
     }
@@ -318,6 +234,20 @@ public class AudioWindow extends JInternalFrame{
             clone.moveToFront();
             clone.setLocation(audioWindow.getX() + 32, audioWindow.getY() + 32);
             clone.setView(pane.getPan(), pane.getZoom());
+        }
+    }
+
+    public class ExitAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AdaptiveDialog exitDialog = new AdaptiveDialog("Exit?");
+            exitDialog.addDoneBinding(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    audioDesktop.removeWindow(audioWindow);
+                }
+            });
+            exitDialog.buildDialog(audioWindow);
         }
     }
 
@@ -596,13 +526,11 @@ public class AudioWindow extends JInternalFrame{
     }
 
     public class RepeatAction extends AbstractAction {
-        JCheckBoxMenuItem checkBox;
-        public RepeatAction(JCheckBoxMenuItem jCheckBoxMenuItem){
-            checkBox = jCheckBoxMenuItem;
-        }
+        boolean toggle = false;
         @Override
         public void actionPerformed(ActionEvent e){
-            player.setRepeat(checkBox.getState());
+            toggle = !toggle;
+            player.setRepeat(toggle);
         }
     }
 
