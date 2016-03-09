@@ -91,6 +91,8 @@ public class AudioWindow extends JInternalFrame{
 
         makeMenuItem(fileMenu, new JMenuItem("Save As ..."), 5, 0, new SaveAction("SaveAs"), components);
 
+        makeMenuItem(fileMenu, new JMenuItem("Print History"), 5, 0, new PrintHistoryAction(), components);
+
         makeMenuItem(fileMenu, new JMenuItem("Exit"), 5, 0, new ExitAction(), components);
 
         JMenu opMenu = new JMenu("Operations");
