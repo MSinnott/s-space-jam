@@ -582,4 +582,21 @@ public class AudioFileManager {
         filter(threshold, 0, channels[0].length, remBelow);
     }
 
+    public void makeAudible(){
+        float avg = 0;
+        for (float[] channel : channels){
+                int t = 1;
+                for (float x : channel) {
+                    avg += (x - avg) / t;
+                    ++t;
+                }
+            }
+        float multiplier = 10 / avg;
+        for (int i = 0; i < channels.length; i++) {
+            for (int j = 0; j < channels[i].length; j++) {
+                channels[i][j] *= multiplier;
+            }
+        }
+    }
+
 }

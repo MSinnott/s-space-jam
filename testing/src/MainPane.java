@@ -41,11 +41,11 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
         windowWidth = this.getWidth();
 
         Graphics2D g2 = (Graphics2D) g;
-        g2.setBackground(AudioDesktop.theme[2]);
-        g2.setColor(AudioDesktop.theme[2]);
+        g2.setBackground(Theme.getThemeColor("accColor"));
+        g2.setColor(Theme.getThemeColor("accColor"));
         g2.fillRect(0 , 0 , this.getWidth(), this.getHeight());
 
-        g2.setColor(AudioDesktop.theme[2].darker());
+        g2.setColor(Theme.getThemeColor("accColor").darker());
         g2.fillRect((int) getXfromIndex(selection[0]), 0, (int)(getXfromIndex(selection[1]) - getXfromIndex(selection[0])), windowHeight);
 
         g2.setStroke(new BasicStroke(4));
@@ -54,9 +54,9 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
         int colorNum = 3;
         for (float[] channel : audioFile.getChannels()) {
             if(pan > channel.length) break;
-            g2.setColor(AudioDesktop.theme[colorNum++]);
+            g2.setColor(Theme.getThemeColor(colorNum));
             lX = -5;
-            lY =getYfromVal(channel[(pan < channel.length) ? pan - pan % 2  : channel.length - 2]);
+            lY = getYfromVal(channel[(pan < channel.length) ? pan - pan % 2  : channel.length - 2]);
             int lastI = pan - pan % 2;
             for (int i = pan - pan % 2; i < channel.length; i += (samplesPerPixel <= 1) ? 2 : 2 * samplesPerPixel) {
                 nX = lX + ((zoom > 1) ? (int) zoom : 1);
@@ -68,9 +68,10 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
                 lY = nY;
                 if (lX > windowWidth || nX > windowWidth) break;
             }
+            colorNum++;
         }
 
-        g2.setColor(AudioDesktop.theme[0]);
+        g2.setColor(Theme.getThemeColor("bgColor"));
         g2.setStroke(new BasicStroke(2));
         g2.drawLine(0, getYfromVal(0), this.getWidth(), getYfromVal(0));
         g2.drawString("" + 0, 16, getYfromVal(0) + 16);
@@ -95,16 +96,16 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
             }
         }
 
-        g2.setColor(AudioDesktop.theme[0]);
+        g2.setColor(Theme.getThemeColor("bgColor"));
         g2.drawLine((int) getXfromIndex(playLoc), 0 , (int) getXfromIndex(playLoc), windowHeight);
 
         Font oldFont = g2.getFont();
         g2.setFont(oldFont.deriveFont(windowWidth / 50f));
         if(g2.getFont().getSize() > 24) g2.setFont(oldFont.deriveFont(20f));
 
-        g2.setColor(AudioDesktop.theme[0]);
+        g2.setColor(Theme.getThemeColor("bgColor"));
         g2.fillRect(0, windowHeight - 20, windowWidth, 20);
-        g2.setColor(AudioDesktop.theme[5]);
+        g2.setColor(Theme.getThemeColor("txtColor"));
         g2.drawString("Zoom: " + HumanReadable.neatenFloat((float) zoom) + " Selection: " + HumanReadable.neatenFloat(selection[0]) + " to " + HumanReadable.neatenFloat(selection[1]) + " Playing @: " + playLoc + " - (" +getIndexFromX(mouseLoc.x) + "," + getValfromY(mouseLoc.y)+ ")", 0, windowHeight);
 
 

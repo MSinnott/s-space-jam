@@ -1,3 +1,5 @@
+import com.sun.org.apache.xpath.internal.SourceTree;
+
 import java.util.*;
 
 /*
@@ -137,7 +139,7 @@ public class EqnHandler {
             if(toAdd.equals("-")){
                 String lastOp = "";
                 if(!parsedTokens.isEmpty()) lastOp = parsedTokens.get(parsedTokens.size() - 1);
-                if(operations.contains(lastOp) || functions.contains(lastOp) || lastOp.equals("(")){
+                if(operations.contains(lastOp) || functions.contains(lastOp) || lastOp.equals("(") || parsedTokens.isEmpty()){
                     parsedTokens.add("-1");
                     parsedTokens.add("*");
                     loc += toAdd.length();

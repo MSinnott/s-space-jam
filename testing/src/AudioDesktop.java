@@ -7,19 +7,9 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Main JFrame class -- provides multi-document interface capability + theme
+ * Main JFrame class -- provides multi-document interface capability
  */
 public class AudioDesktop extends JFrame{
-
-    public static Color[] theme = new Color[] { new Color(252, 53, 0), new Color(252, 127, 3), new Color(255, 201, 8), new Color(55, 236, 255), new Color(29, 46, 255), new Color(255, 255, 255),
-                                                new Color(0, 0, 0)  };
-    //bgColor = new Color(252, 53, 0);
-    //fgColor = new Color(252, 127, 3);
-    //accColor = new Color(255, 201, 8);
-    //llnColor = new Color(55, 236, 255);
-    //rlnColor = new Color(29, 46, 255);
-    //txtColor = new Color(255, 255, 255);
-    //black = new Color(0, 0, 0);
 
     private AdaptiveDialog themeDialog;
     private AudioDesktop audioDesktop = this;
@@ -40,10 +30,6 @@ public class AudioDesktop extends JFrame{
 
     public static final String LinuxPathHead = "s-space-jam/testing/";
     public static final String WindowsPathHead = "testing/";
-    //private String propertiesPathnameLinux = "s-space-jam/testing/resc/properties.txt";
-    //private String propertiesPathnameWindows = "testing/resc/properties.txt";
-    //private String iconPathLinux = "s-space-jam/testing/resc/s-Space-Jam-Logo.jpg";
-    //private String iconPathWindows = "testing/resc/s-Space-Jam-Logo.jpg";
 
     private Properties properties;
 
@@ -135,10 +121,10 @@ public class AudioDesktop extends JFrame{
      * @throws IOException
      */
     public void saveProperties() throws IOException {
-        for(int i = 0; i < theme.length; i++){
-            properties.setProperty("" + i + ":R", String.valueOf(theme[i].getRed()));
-            properties.setProperty("" + i + ":G", String.valueOf(theme[i].getGreen()));
-            properties.setProperty("" + i + ":B", String.valueOf(theme[i].getBlue()));
+        for(int i = 0; i < Theme.theme.length; i++){
+            properties.setProperty("" + Theme.themeKeys[i] + ":R", String.valueOf(Theme.theme[i].getRed()));
+            properties.setProperty("" + Theme.themeKeys[i] + ":G", String.valueOf(Theme.theme[i].getGreen()));
+            properties.setProperty("" + Theme.themeKeys[i] + ":B", String.valueOf(Theme.theme[i].getBlue()));
         }
 
         try {
@@ -192,9 +178,11 @@ public class AudioDesktop extends JFrame{
 
         boolean configOk = true;
         if(loadFromFile) {
-            for(int i = 0; i < theme.length; i++){
-                if(properties.containsKey("" + i + ":R") && properties.containsKey("" + i + ":G") && properties.containsKey("" + i + ":B")){
-                    theme[i] = new Color(Integer.valueOf(properties.getProperty("" + i + ":R")), Integer.valueOf(properties.getProperty("" + i + ":G")), Integer.valueOf(properties.getProperty("" + i + ":B")));
+            for(int i = 0; i < Theme.theme.length; i++){
+                if(properties.containsKey("" + Theme.themeKeys[i] + ":R") && properties.containsKey("" + Theme.themeKeys[i] + ":G") && properties.containsKey("" + Theme.themeKeys[i] + ":B")){
+                    Theme.theme[i] = new Color(Integer.valueOf(properties.getProperty("" + Theme.themeKeys[i] + ":R")),
+                            Integer.valueOf(properties.getProperty("" + Theme.themeKeys[i] + ":G")),
+                            Integer.valueOf(properties.getProperty("" + Theme.themeKeys[i] + ":B")));
                 } else {
                     configOk = false;
                 }
@@ -209,11 +197,11 @@ public class AudioDesktop extends JFrame{
             }
         }
 
-        desktop.setBackground(theme[1]);
-        desktop.setForeground(theme[5]);
+        desktop.setBackground(Theme.getThemeColor("fgColor"));
+        desktop.setForeground(Theme.getThemeColor("bgColor"));
         for(Component c: components){
-            c.setForeground(AudioDesktop.theme[5]);
-            c.setBackground(AudioDesktop.theme[0]);
+            c.setForeground(Theme.getThemeColor("txtColor"));
+            c.setBackground(Theme.getThemeColor("bgColor"));
         }
 
         if(themeDialog != null) themeDialog.resetColors();
@@ -230,7 +218,7 @@ public class AudioDesktop extends JFrame{
 
     /**
      * Removes the passed AudioWindow
-     * @param aw audioWindo to remove
+     * @param aw audioWindow to remove
      */
     public void removeWindow(AudioWindow aw){
         audioWindows.remove(aw);
@@ -278,7 +266,7 @@ public class AudioDesktop extends JFrame{
             lEqnPane.setLayout(new BorderLayout());
             lEqnPane.add(lEqnLabel, BorderLayout.WEST);
             lEqnPane.add(lExprField, BorderLayout.CENTER);
-            generateDialog.addItem(lEqnPane, 5, 0, false);
+            generateDialog.addItem(lEqnPane, "txtColor", "bgColor", false);
 
             JTextField rEqnLabel = new JTextField("Right Eqn: ");
             rEqnLabel.setEditable(false);
@@ -287,7 +275,7 @@ public class AudioDesktop extends JFrame{
             rEqnPane.setLayout(new BorderLayout());
             rEqnPane.add(rEqnLabel, BorderLayout.WEST);
             rEqnPane.add(rExprField, BorderLayout.CENTER);
-            generateDialog.addItem(rEqnPane, 5, 0, false);
+            generateDialog.addItem(rEqnPane, "txtColor", "bgColor", false);
 
             JTextField sizeLabel = new JTextField("Size:");
             sizeLabel.setEditable(false);
@@ -296,10 +284,10 @@ public class AudioDesktop extends JFrame{
             sizePane.setLayout(new BorderLayout());
             sizePane.add(sizeLabel, BorderLayout.WEST);
             sizePane.add(sizeField, BorderLayout.CENTER);
-            generateDialog.addItem(sizePane, 5, 0, false);
+            generateDialog.addItem(sizePane, "txtColor", "bgColor", false);
 
             final JButton randButton = new JButton("Generate Random Song!");
-            generateDialog.addItem(randButton, 0, 5, false);
+            generateDialog.addItem(randButton, "txtColor", "bgColor", false);
             randButton.addActionListener(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
@@ -329,12 +317,12 @@ public class AudioDesktop extends JFrame{
                 }
             });
 
-            lEqnLabel.setBackground(theme[0]);
-            lEqnLabel.setForeground(theme[5]);
-            rEqnLabel.setBackground(theme[0]);
-            rEqnLabel.setForeground(theme[5]);
-            sizeLabel.setBackground(theme[0]);
-            sizeLabel.setForeground(theme[5]);
+            lEqnLabel.setBackground(Theme.getThemeColor("bgColor"));
+            lEqnLabel.setForeground(Theme.getThemeColor("txtColor"));
+            rEqnLabel.setBackground(Theme.getThemeColor("bgColor"));
+            rEqnLabel.setForeground(Theme.getThemeColor("txtColor"));
+            sizeLabel.setBackground(Theme.getThemeColor("bgColor"));
+            sizeLabel.setForeground(Theme.getThemeColor("txtColor"));
 
             generateDialog.buildDialog(320, 256, audioDesktop);
         }
@@ -353,8 +341,8 @@ public class AudioDesktop extends JFrame{
                 root = new File(WindowsPathHead);
             }
             JFileChooser fileChooser = new JFileChooser(root);
-            fileChooser.setBackground(theme[0]);
-            fileChooser.setForeground(theme[5]);
+            fileChooser.setBackground(Theme.getThemeColor("bgColor"));
+            fileChooser.setForeground(Theme.getThemeColor("txtColor"));
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
                     "WAV Files", "wav", "mp3 Files", "mp3");
             //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
@@ -376,8 +364,8 @@ public class AudioDesktop extends JFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setBackground(theme[0]);
-            fileChooser.setForeground(theme[5]);
+            fileChooser.setBackground(Theme.getThemeColor("bgColor"));
+            fileChooser.setForeground(Theme.getThemeColor("txtColor"));
             FileNameExtensionFilter filter = new FileNameExtensionFilter(
                     "mp3 Files", "mp3");
             //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
@@ -399,12 +387,9 @@ public class AudioDesktop extends JFrame{
         public void actionPerformed(ActionEvent e) {
             themeDialog = new AdaptiveDialog("Theme");
 
-            addColorChoice(themeDialog, 0, "bgColor");
-            addColorChoice(themeDialog, 1, "fgColor");
-            addColorChoice(themeDialog, 2, "accColor");
-            addColorChoice(themeDialog, 3, "llnColor");
-            addColorChoice(themeDialog, 4, "rlnColor");
-            addColorChoice(themeDialog, 5, "txtColor");
+            for(String colorKey : Theme.themeKeys){
+                addColorChoice(themeDialog, colorKey);
+            }
 
             themeDialog.addDoneBinding(new AbstractAction() {
                 @Override
@@ -422,16 +407,15 @@ public class AudioDesktop extends JFrame{
     /**
      * Adds a color choice to the theme dialog
      * @param dialog dialog to add color choice to
-     * @param color color to set sample
-     * @param colorName name of the color
+     * @param colorName color
      */
-    private void addColorChoice(AdaptiveDialog dialog, int color, String colorName){
+    private void addColorChoice(AdaptiveDialog dialog, String colorName){
         JPanel p = new JPanel();
-        dialog.addItem(p, 6, color, false);
+        dialog.addItem(p, "black", colorName, false);
 
         JButton b = new JButton(colorName);
-        b.addActionListener(new ColorAction(color, colorName));
-        dialog.addItem(b, 6, color, true);
+        b.addActionListener(new ColorAction(colorName));
+        dialog.addItem(b, "black", colorName, true);
     }
 
     /**
@@ -439,11 +423,9 @@ public class AudioDesktop extends JFrame{
      */
     public class ColorAction extends AbstractAction {
 
-        private int myColor;
         private String colorName;
 
-        public ColorAction(int toChange, String colorName){
-            myColor = toChange;
+        public ColorAction(String colorName){
             this.colorName = colorName;
         }
 
@@ -451,12 +433,12 @@ public class AudioDesktop extends JFrame{
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog colorDialog = new AdaptiveDialog(colorName);
             final JColorChooser colorChooser = new JColorChooser();
-            colorChooser.setColor(theme[myColor]);
-            colorDialog.addItem(colorChooser, myColor, 5, false);
+            colorChooser.setColor(Theme.getThemeColor(colorName));
+            colorDialog.addItem(colorChooser, colorName, "txtColor", false);
             colorDialog.addDoneBinding(new AbstractAction(){
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    theme[myColor] = colorChooser.getColor();
+                    Theme.setThemeColor(colorName, colorChooser.getColor());
                     resetColors(false);
                 }
             });

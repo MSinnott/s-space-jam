@@ -3,8 +3,8 @@ import java.awt.*;
 public class ColoredComponent {
 
     private Component c;
-    private int bgColor;
-    private int fgColor;
+    private String bgColor;
+    private String fgColor;
 
     public Component getC() {
         return c;
@@ -14,29 +14,29 @@ public class ColoredComponent {
         this.c = c;
     }
 
-    public int getBgColor() {
+    public String getBgColor() {
         return bgColor;
     }
 
-    public void setBgColor(int bgColor) {
+    public void setBgColor(String bgColor) {
         this.bgColor = bgColor;
-        c.setBackground(AudioDesktop.theme[bgColor]);
+        c.setBackground(Theme.getThemeColor(bgColor));
         c.invalidate();
         c.repaint();
     }
 
-    public int getFgColor() {
+    public String getFgColor() {
         return fgColor;
     }
 
-    public void setFgColor(int fgColor) {
+    public void setFgColor(String fgColor) {
         this.fgColor = fgColor;
-        c.setForeground(AudioDesktop.theme[fgColor]);
+        c.setForeground(Theme.getThemeColor(fgColor));
         c.invalidate();
         c.repaint();
     }
 
-    public ColoredComponent(Component c, int fgColor, int bgColor){
+    public ColoredComponent(Component c, String fgColor, String bgColor){
         this.c = c;
         this.fgColor = fgColor;
         this.bgColor = bgColor;
@@ -44,8 +44,8 @@ public class ColoredComponent {
     }
 
     public void resetColors(){
-        c.setForeground(AudioDesktop.theme[fgColor]);
-        c.setBackground(AudioDesktop.theme[bgColor]);
+        c.setForeground(Theme.getThemeColor(fgColor));
+        c.setBackground(Theme.getThemeColor(bgColor));
         c.invalidate();
         c.repaint();
     }

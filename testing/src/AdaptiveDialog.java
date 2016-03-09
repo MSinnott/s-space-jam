@@ -24,17 +24,17 @@ public class AdaptiveDialog extends JDialog {
         doneButton = new JButton("Done!");
         cancelButton = new JButton("Cancel!");
         setTitle(name);
-        this.setBackground(AudioDesktop.theme[2]);
+        this.setBackground(Theme.getThemeColor("bgColor"));
     }
 
     /**
      * Adds a component to this dialog (call only before dialog built)
      * @param c component to add
-     * @param bg index of background color in theme
-     * @param fg index of foreground color in theme
+     * @param bg background color in theme
+     * @param fg foreground color in theme
      * @param inLine whether or not to create the component in the current line
      */
-    public void addItem(Component c, int bg, int fg, boolean inLine){
+    public void addItem(Component c, String bg, String fg, boolean inLine){
         addItem(new ColoredComponent(c, bg, fg), inLine);
     }
 
@@ -77,7 +77,7 @@ public class AdaptiveDialog extends JDialog {
         for(ArrayList<ColoredComponent> comp: components){
             JPanel nextPane = new JPanel();
             contentPane.add(nextPane);
-            nextPane.setBackground(AudioDesktop.theme[2]);
+            nextPane.setBackground(Theme.getThemeColor("bgColor"));
             nextPane.setLayout(new GridLayout(1, comp.size(), 1, 0));
             for(ColoredComponent c: comp){
                 nextPane.add(c.getC());
@@ -86,7 +86,7 @@ public class AdaptiveDialog extends JDialog {
 
         JPanel nextPane = new JPanel();
         add(nextPane, BorderLayout.SOUTH);
-        nextPane.setBackground(AudioDesktop.theme[2]);
+        nextPane.setBackground(Theme.getThemeColor("bgColor"));
         nextPane.setLayout(new GridLayout(1, 2, 1, 0));
 
         doneButton.addActionListener(new AbstractAction() {
@@ -103,17 +103,14 @@ public class AdaptiveDialog extends JDialog {
             }
         });
 
-        doneButton.setForeground(AudioDesktop.theme[5]);
-        doneButton.setBackground(AudioDesktop.theme[0]);
-        cancelButton.setForeground(AudioDesktop.theme[5]);
-        cancelButton.setBackground(AudioDesktop.theme[0]);
-
         nextPane.add(doneButton);
         nextPane.add(cancelButton);
 
         pack();
         setLocation(parent.getX() + 64, parent.getY() + 64);
         setVisible(true);
+
+        resetColors();
     }
 
     /**
@@ -123,10 +120,10 @@ public class AdaptiveDialog extends JDialog {
         for (ArrayList<ColoredComponent> comps : components){
             comps.forEach(ColoredComponent::resetColors);
         }
-        doneButton.setBackground(AudioDesktop.theme[0]);
-        doneButton.setForeground(AudioDesktop.theme[5]);
-        cancelButton.setBackground(AudioDesktop.theme[0]);
-        cancelButton.setForeground(AudioDesktop.theme[5]);
+        doneButton.setForeground(Theme.getThemeColor("txtColor"));
+        doneButton.setBackground(Theme.getThemeColor("bgColor"));
+        cancelButton.setForeground(Theme.getThemeColor("txtColor"));
+        cancelButton.setBackground(Theme.getThemeColor("bgColor"));
         invalidate();
         repaint();
     }

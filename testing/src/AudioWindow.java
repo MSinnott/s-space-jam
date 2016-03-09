@@ -79,84 +79,86 @@ public class AudioWindow extends JInternalFrame{
     public void buildMenus(){
         JMenuBar menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
-        components.add(new ColoredComponent(menuBar, 5, 0));
+        components.add(new ColoredComponent(menuBar, "txtColor", "bgColor"));
 
         JMenu fileMenu = new JMenu("File");
         menuBar.add(fileMenu);
-        components.add(new ColoredComponent(fileMenu, 5, 0));
+        components.add(new ColoredComponent(fileMenu,"txtColor", "bgColor"));
 
-        makeMenuItem(fileMenu, new JMenuItem("Clone"), 5, 0, new CloneAction(this), components);
+        makeMenuItem(fileMenu, new JMenuItem("Clone"), "txtColor", "bgColor", new CloneAction(this), components);
 
-        makeMenuItem(fileMenu, new JMenuItem("Save"), 5, 0, new SaveAction("Save"), components);
+        makeMenuItem(fileMenu, new JMenuItem("Save"), "txtColor", "bgColor", new SaveAction("Save"), components);
 
-        makeMenuItem(fileMenu, new JMenuItem("Save As ..."), 5, 0, new SaveAction("SaveAs"), components);
+        makeMenuItem(fileMenu, new JMenuItem("Save As ..."), "txtColor", "bgColor", new SaveAction("SaveAs"), components);
 
-        makeMenuItem(fileMenu, new JMenuItem("Print History"), 5, 0, new PrintHistoryAction(), components);
+        makeMenuItem(fileMenu, new JMenuItem("Print History"), "txtColor", "bgColor", new PrintHistoryAction(), components);
 
-        makeMenuItem(fileMenu, new JMenuItem("Exit"), 5, 0, new ExitAction(), components);
+        makeMenuItem(fileMenu, new JMenuItem("Exit"), "txtColor", "bgColor", new ExitAction(), components);
 
         JMenu opMenu = new JMenu("Operations");
         menuBar.add(opMenu);
-        components.add(new ColoredComponent(opMenu, 5, 0));
+        components.add(new ColoredComponent(opMenu,"txtColor", "bgColor"));
 
-        makeMenuItem(opMenu, new JMenuItem("Forward FFT"), 5, 0, new forwardFFtAction(), components);
+        makeMenuItem(opMenu, new JMenuItem("Forward FFT"), "txtColor", "bgColor", new forwardFFtAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Step Forward FFT"), 5, 0, new stepforwardFFtAction(), components);
+        makeMenuItem(opMenu, new JMenuItem("Step Forward FFT"), "txtColor", "bgColor", new stepforwardFFtAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), 5, 0, new backwardFFtAction(), components);
+        makeMenuItem(opMenu, new JMenuItem("Backward FFT"), "txtColor", "bgColor", new backwardFFtAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Scale Vertically"), 5, 0, new vscaleAction(false), components);
+        makeMenuItem(opMenu, new JMenuItem("Scale Vertically"), "txtColor", "bgColor", new vscaleAction(false), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Shift Vertically"), 5, 0, new vshiftAction(false), components);
+        makeMenuItem(opMenu, new JMenuItem("Shift Vertically"), "txtColor", "bgColor", new vshiftAction(false), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Shift Horizontally"), 5, 0, new hshiftAction(), components);
+        makeMenuItem(opMenu, new JMenuItem("Shift Horizontally"), "txtColor", "bgColor", new hshiftAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Point-by-Point Add"), 5, 0, new pbpAddAction(), components);
+        makeMenuItem(opMenu, new JMenuItem("Point-by-Point Add"), "txtColor", "bgColor", new pbpAddAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Point-by-Point Multiply"), 5, 0, new pbpMultAction(), components);
+        makeMenuItem(opMenu, new JMenuItem("Point-by-Point Multiply"), "txtColor", "bgColor", new pbpMultAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Trim"), 5, 0, new TrimAction(), components);
+        makeMenuItem(opMenu, new JMenuItem("Trim"), "txtColor", "bgColor", new TrimAction(), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Boxcar Filter"), 5, 0, new BoxcarFilterAction(false), components);
+        makeMenuItem(opMenu, new JMenuItem("Boxcar Filter"), "txtColor", "bgColor", new BoxcarFilterAction(false), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Threshold Filter"), 5, 0, new FilterThresholdAction(false), components);
+        makeMenuItem(opMenu, new JMenuItem("Threshold Filter"), "txtColor", "bgColor", new FilterThresholdAction(false), components);
 
-        makeMenuItem(opMenu, new JMenuItem("Add noise"), 5, 0, new AddNoiseAction(), components);
+        makeMenuItem(opMenu, new JMenuItem("Add noise"), "txtColor", "bgColor", new AddNoiseAction(), components);
+
+        makeMenuItem(opMenu, new JMenuItem("Make Audible"), "txtColor", "bgColor", new MakeAudibleAction(), components);
 
         JMenu selectionMenu = new JMenu("Edit Selection");
         menuBar.add(selectionMenu);
-        selectionComponents.add(new ColoredComponent(selectionMenu, 5, 0));
+        selectionComponents.add(new ColoredComponent(selectionMenu, "txtColor", "bgColor"));
 
-        makeMenuItem(selectionMenu, new JMenuItem("Zero Selected"), 5, 0, new ZeroSelectedAction(), selectionComponents);
+        makeMenuItem(selectionMenu, new JMenuItem("Zero Selected"), "txtColor", "bgColor", new ZeroSelectedAction(), selectionComponents);
 
-        makeMenuItem(selectionMenu, new JMenuItem("Zero Non-Selected"), 5, 0, new ZeroNonSelectedAction(), selectionComponents);
+        makeMenuItem(selectionMenu, new JMenuItem("Zero Non-Selected"), "txtColor", "bgColor", new ZeroNonSelectedAction(), selectionComponents);
 
-        makeMenuItem(selectionMenu, new JMenuItem("Scale Selection Vertically"), 5, 0, new vscaleAction(true), selectionComponents);
+        makeMenuItem(selectionMenu, new JMenuItem("Scale Selection Vertically"), "txtColor", "bgColor", new vscaleAction(true), selectionComponents);
 
-        makeMenuItem(selectionMenu, new JMenuItem("Shift Selection Vertically"), 5, 0, new vshiftAction(true), selectionComponents);
+        makeMenuItem(selectionMenu, new JMenuItem("Shift Selection Vertically"), "txtColor", "bgColor", new vshiftAction(true), selectionComponents);
 
-        makeMenuItem(selectionMenu, new JMenuItem("Zoom to Selection"), 5, 0, new ZoomToSelectionAction(), selectionComponents);
+        makeMenuItem(selectionMenu, new JMenuItem("Zoom to Selection"), "txtColor", "bgColor", new ZoomToSelectionAction(), selectionComponents);
 
-        makeMenuItem(selectionMenu, new JMenuItem("Boxcar Filter"), 5, 0, new BoxcarFilterAction(true), selectionComponents);
+        makeMenuItem(selectionMenu, new JMenuItem("Boxcar Filter"), "txtColor", "bgColor", new BoxcarFilterAction(true), selectionComponents);
 
-        makeMenuItem(selectionMenu, new JMenuItem("Threshold Filter"), 5, 0, new FilterThresholdAction(true), selectionComponents);
+        makeMenuItem(selectionMenu, new JMenuItem("Threshold Filter"), "txtColor", "bgColor", new FilterThresholdAction(true), selectionComponents);
 
         JMenu playMenu = new JMenu("\t▶");
         menuBar.add(playMenu);
-        components.add(new ColoredComponent(playMenu, 5, 0));
+        components.add(new ColoredComponent(playMenu,"txtColor", "bgColor"));
 
-        makeMenuItem(playMenu, new JMenuItem("\t▶ File"), 5, 0, new PlayAction(), components);
+        makeMenuItem(playMenu, new JMenuItem("\t▶ File"), "txtColor", "bgColor", new PlayAction(), components);
 
-        makeMenuItem(playMenu, new JMenuItem("\t▶ Selected"), 5, 0, new PlaySelectedAction(), selectionComponents);
+        makeMenuItem(playMenu, new JMenuItem("\t▶ Selected"), "txtColor", "bgColor", new PlaySelectedAction(), selectionComponents);
 
-        makeMenuItem(playMenu, new JMenuItem("Repeat?"), 5, 0, new RepeatAction(), components);
+        makeMenuItem(playMenu, new JMenuItem("Repeat?"), "txtColor", "bgColor", new RepeatAction(), components);
 
-        makeMenuItem(playMenu, new JMenuItem("Stop"), 5, 0, new StopAction(), components);
+        makeMenuItem(playMenu, new JMenuItem("Stop"), "txtColor", "bgColor", new StopAction(), components);
 
         resetColors();
     }
 
-    public void makeMenuItem(JMenu menu, JMenuItem j, int fgColr, int bgColr, AbstractAction action, ArrayList<ColoredComponent> collection){
+    public void makeMenuItem(JMenu menu, JMenuItem j, String fgColr, String bgColr, AbstractAction action, ArrayList<ColoredComponent> collection){
         j.addActionListener(action);
         collection.add(new ColoredComponent(j, fgColr, bgColr));
         menu.add(j);
@@ -166,8 +168,8 @@ public class AudioWindow extends JInternalFrame{
         components.forEach(ColoredComponent::resetColors);
         selectionComponents.forEach(ColoredComponent::resetColors);
 
-        this.setBackground(AudioDesktop.theme[2]);
-        this.setForeground(AudioDesktop.theme[5]);
+        this.setBackground(Theme.getThemeColor("accColor"));
+        this.setForeground(Theme.getThemeColor("txtColor"));
 
         this.invalidate();
         this.repaint();
@@ -262,7 +264,7 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog scaleDialog = new AdaptiveDialog("Scale Vertically");
             final JTextField textField = new JTextField();
-            scaleDialog.addItem(textField, 0, 5, false);
+            scaleDialog.addItem(textField, "txtColor", "bgColor", false);
             scaleDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -288,7 +290,7 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog shiftDialog = new AdaptiveDialog("Shift Vertically");
             final JTextField textField = new JTextField();
-            shiftDialog.addItem(textField, 0, 5, false);
+            shiftDialog.addItem(textField, "txtColor", "bgColor", false);
             shiftDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -310,7 +312,7 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog shiftDialog = new AdaptiveDialog("Shift Horizontally");
             final JTextField textField = new JTextField();
-            shiftDialog.addItem(textField, 0, 5, false);
+            shiftDialog.addItem(textField, "txtColor", "bgColor", false);
             shiftDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -331,19 +333,19 @@ public class AudioWindow extends JInternalFrame{
             final ArrayList<AudioFileManager> toAdd = new ArrayList<AudioFileManager>();
             for(AudioWindow aw : audioDesktop.getAudioWindows()){
                 JButton jTextButton = new JButton(aw.getFileManager().getName());
-                ColoredComponent coloredComp = new ColoredComponent(jTextButton, 5, 0);
+                ColoredComponent coloredComp = new ColoredComponent(jTextButton, "txtColor", "bgColor");
                 jTextButton.addActionListener(new AbstractAction() {
                     boolean selected = false;
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         if(selected) {
-                            coloredComp.setFgColor(5);
-                            coloredComp.setBgColor(0);
+                            coloredComp.setFgColor("txtColor");
+                            coloredComp.setBgColor("bgColor");
                             toAdd.remove(aw.getFileManager());
                             selected = false;
                         } else {
-                            coloredComp.setFgColor(0);
-                            coloredComp.setBgColor(5);
+                            coloredComp.setFgColor("bgColor");
+                            coloredComp.setBgColor("txtColor");
                             toAdd.add(aw.getFileManager());
                             selected = true;
                         }
@@ -375,19 +377,19 @@ public class AudioWindow extends JInternalFrame{
             final ArrayList<AudioFileManager> toMult = new ArrayList<AudioFileManager>();
             for(AudioWindow aw : audioDesktop.getAudioWindows()){
                 JButton jTextButton = new JButton(aw.getFileManager().getName());
-                ColoredComponent coloredComp = new ColoredComponent(jTextButton, 5, 0);
+                ColoredComponent coloredComp = new ColoredComponent(jTextButton, "txtColor", "bgColor");
                 jTextButton.addActionListener(new AbstractAction() {
                     boolean selected = false;
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         if(selected) {
-                            coloredComp.setFgColor(5);
-                            coloredComp.setBgColor(0);
+                            coloredComp.setFgColor("txtColor");
+                            coloredComp.setBgColor("bgColor");
                             toMult.remove(aw.getFileManager());
                             selected = false;
                         } else {
-                            coloredComp.setFgColor(0);
-                            coloredComp.setBgColor(5);
+                            coloredComp.setFgColor("bgColor");
+                            coloredComp.setBgColor("txtColor");
                             toMult.add(aw.getFileManager());
                             selected = true;
                         }
@@ -425,7 +427,7 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog stepDialog = new AdaptiveDialog("Step FFT");
             final JTextField textField = new JTextField();
-            stepDialog.addItem(textField, 0, 5, false);
+            stepDialog.addItem(textField, "txtColor", "bgColor", false);
             stepDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -466,7 +468,7 @@ public class AudioWindow extends JInternalFrame{
         public void actionPerformed(ActionEvent e) {
             final AdaptiveDialog filterDialog = new AdaptiveDialog("Boxcar Filter");
             final JTextField textField = new JTextField();
-            filterDialog.addItem(textField, 0, 5, false);
+            filterDialog.addItem(textField, "txtColor", "bgColor", false);
             filterDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -553,8 +555,8 @@ public class AudioWindow extends JInternalFrame{
             final AdaptiveDialog filterDialog = new AdaptiveDialog("Filter");
             final JTextField textField = new JTextField();
             final JCheckBox removeBelowBox = new JCheckBox("Remove Below?");
-            filterDialog.addItem(textField, 5, 0, false);
-            filterDialog.addItem(removeBelowBox, 0, 5, false);
+            filterDialog.addItem(textField, "txtColor", "bgColor", false);
+            filterDialog.addItem(removeBelowBox, "txtColor", "bgColor", false);
             filterDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -577,8 +579,8 @@ public class AudioWindow extends JInternalFrame{
             final AdaptiveDialog filterDialog = new AdaptiveDialog("Filter");
             final JTextField noiseStepsBox = new JTextField();
             final JTextField noiseScaleBox = new JTextField();
-            filterDialog.addItem(noiseStepsBox, 5, 0, false);
-            filterDialog.addItem(noiseScaleBox, 5, 0, false);
+            filterDialog.addItem(noiseStepsBox, "txtColor", "bgColor", false);
+            filterDialog.addItem(noiseScaleBox, "txtColor", "bgColor", false);
             filterDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -588,6 +590,13 @@ public class AudioWindow extends JInternalFrame{
                 }
             });
             filterDialog.buildDialog(audioWindow);
+        }
+    }
+
+    public class MakeAudibleAction extends AbstractAction{
+        @Override
+        public void actionPerformed(ActionEvent actionEvent) {
+            audioFile.makeAudible();
         }
     }
 
