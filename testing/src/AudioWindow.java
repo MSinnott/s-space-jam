@@ -597,6 +597,7 @@ public class AudioWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
             audioFile.makeAudible();
+            updatePane();
         }
     }
 
