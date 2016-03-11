@@ -1,5 +1,6 @@
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 //Makes the musics
@@ -10,10 +11,10 @@ public class MusicGenerator {
     private int sampleRate;
 
     public MusicGenerator(int samplesPerSec){
-        for(int i = 0; i < key.length; i++){
+        for(int i = 2; i < key.length; i++){
             key[i] = random.nextInt(660)+220;
         }
-        key = sortAscending(key);
+//        key = sortAscending(key);
         sampleRate = samplesPerSec;
     }
 
@@ -31,25 +32,33 @@ public class MusicGenerator {
         return ret;
     }
 
-    public AudioFileManager genNewComplexSong(int themeLen, float stNum){
+    public AudioFileManager genNewComplexSong(int themeLen){
+        System.out.println(Arrays.toString(key));
         AudioFileManager res = new AudioFileManager(new float[]{0}, new float[]{0});
         int[] noteLens = new int[themeLen];
+        int phraseLen = 3 + random.nextInt(3);
         for (int i = 0; i < noteLens.length; i++) {
-            noteLens[i] = (int) (AudioFileManager.DEFAULT_SAMPLE_RATE * (4.0 / Math.pow(2, random.nextInt(2))));
+            if(i % phraseLen == 0) {
+                noteLens[i] = AudioFileManager.DEFAULT_SAMPLE_RATE / 2;
+            } else {
+                noteLens[i] = (int) (2 * AudioFileManager.DEFAULT_SAMPLE_RATE / (Math.pow(2, random.nextInt(3))));
+            }
         }
         int loc = 0;
         for(int a = 0; a < themeLen; a++) {
-            float[] seed = new float[noteLens[a]];
-            seed[4 * (int) randFromKey()] = stNum;
-            AudioFileManager addedNote = new AudioFileManager(seed, seed);
-            addedNote.btransform();
-            addedNote.addNoise(8, 1);
-            addedNote.ftransform();
-            addedNote.hshift((int) (-4 *randFromKey()));
-            addedNote.btransform();
-            res.pAdd(addedNote, loc);
-            loc+=addedNote.getSoundLen();
+            float note = randFromKey();
+            if (note != 0) {
+                float[] seed = getTone(note, 0, noteLens[a]);
+                AudioFileManager addedNote = new AudioFileManager(seed, seed);
+                addedNote.addNoise(4, 1);
+                res.pAdd(addedNote, loc);
+                loc += addedNote.getSoundLen() + AudioFileManager.DEFAULT_SAMPLE_RATE / 8;
+            } else{
+                loc += noteLens[a] + AudioFileManager.DEFAULT_SAMPLE_RATE / 8;
+            }
         }
+        res.vscale(1000);
+        res.pAdd(res, AudioFileManager.DEFAULT_SAMPLE_RATE);
         return res;
     }
 
