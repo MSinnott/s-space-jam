@@ -31,6 +31,28 @@ public class MusicGenerator {
         return ret;
     }
 
+    public AudioFileManager genNewComplexSong(int themeLen, float stNum){
+        AudioFileManager res = new AudioFileManager(new float[]{0}, new float[]{0});
+        int[] noteLens = new int[themeLen];
+        for (int i = 0; i < noteLens.length; i++) {
+            noteLens[i] = (int) (AudioFileManager.DEFAULT_SAMPLE_RATE * (4.0 / Math.pow(2, random.nextInt(2))));
+        }
+        int loc = 0;
+        for(int a = 0; a < themeLen; a++) {
+            float[] seed = new float[noteLens[a]];
+            seed[4 * (int) randFromKey()] = stNum;
+            AudioFileManager addedNote = new AudioFileManager(seed, seed);
+            addedNote.btransform();
+            addedNote.addNoise(8, 1);
+            addedNote.ftransform();
+            addedNote.hshift((int) (-4 *randFromKey()));
+            addedNote.btransform();
+            res.pAdd(addedNote, loc);
+            loc+=addedNote.getSoundLen();
+        }
+        return res;
+    }
+
     public float[] generateSongV3(int themeLen, float volumeMultiplier, float peakedness){
         float[] theme = new float[themeLen];
         float[] noteLen = new float[themeLen];

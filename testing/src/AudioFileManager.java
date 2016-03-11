@@ -201,6 +201,10 @@ public class AudioFileManager {
         return (defaultName.equals("")) ? HumanReadable.memNumToReadable(channels[0].length) : defaultName;
     }
 
+    public int getSoundLen(){
+        return channels[0].length;
+    }
+
     /**
      * @return time for song to be played -- in seconds
      */
@@ -493,14 +497,14 @@ public class AudioFileManager {
         pMult(audioFileManager.getChannels());
     }
 
-    public void pAdd(float[][] channelsIn){
+    public void pAdd(float[][] channelsIn, int offest){
         int mostChannels = (channelsIn.length > channels.length) ? channelsIn.length : channels.length;
-        int longestChannel = (channelsIn[0].length > channels[0].length) ? channelsIn[0].length : channels[0].length;
+        int longestChannel = (channelsIn[0].length + offest> channels[0].length) ? channelsIn[0].length + offest: channels[0].length;
         float[][] resultant = new float[mostChannels][longestChannel];
         for (int i = 0; i < resultant.length; i++) {
             for (int j = 0; j < resultant[0].length; j += 2) {
                 if(channels.length > i && channels[0].length > j) resultant[i][j] += channels[i][j];
-                if(channelsIn.length > i && channelsIn[0].length > j) resultant[i][j] += channelsIn[i][j];
+                if(j >= offest && channelsIn.length > i && channelsIn[0].length > j) resultant[i][j] += channelsIn[i][j - offest];
             }
         }
         channels = resultant;
@@ -534,8 +538,8 @@ public class AudioFileManager {
         }
     }
 
-    public void pAdd(AudioFileManager audioFileManager){
-        pAdd(audioFileManager.getChannels());
+    public void pAdd(AudioFileManager audioFileManager, int offset){
+        pAdd(audioFileManager.getChannels(), offset);
     }
 
     public void trim(){

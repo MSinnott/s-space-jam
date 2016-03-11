@@ -359,7 +359,7 @@ public class AudioWindow extends JInternalFrame{
                 @Override
                 public void actionPerformed(ActionEvent actionEvent) {
                     for(AudioFileManager fileManager: toAdd) {
-                        audioFile.pAdd(fileManager);
+                        audioFile.pAdd(fileManager, 0);
                         addHistory("\t" + fileManager.getName());
                     }
                     updatePane();
