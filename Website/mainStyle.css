@@ -1,10 +1,10 @@
 /*General page and text edits*/
 #brandName {
-  margin-top: 300px;
+  margin-top: 50px;
   text-align: center;
 }
 body {
-  background-color:rgb(255,145,0);
+  background-color: darkslateblue;
 }
 
 /*Image animation on ssjam logo*/
@@ -96,10 +96,12 @@ ssjamLogo {
 
 /*For Collaborators slide out panel*/
 #collabPanel, #collabFlip {
-  padding: 5px;
+  padding: 10px;
+  text-align: right;
+  /*padding: 5px;
   text-align: center;
   background-color: #e5eecc;
-  border: solid 1px #c3c3c3;
+  border: solid 1px #c3c3c3;*/
 }
 #collabPanel {
   padding: : 50px;
