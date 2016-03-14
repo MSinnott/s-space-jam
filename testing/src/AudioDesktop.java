@@ -293,19 +293,9 @@ public class AudioDesktop extends JFrame{
                 public void actionPerformed(ActionEvent actionEvent) {
                     MusicGenerator generator = new MusicGenerator(AudioFileManager.DEFAULT_SAMPLE_RATE);
 
-                    float[] song0 = generator.generateSongV1(4, 1);
-                    AudioFileManager rSong0 = new AudioFileManager(song0, song0);
-
-                    float[] song1 = generator.generateSongV1(4, 1);
-                    AudioFileManager rSong1 = new AudioFileManager(song1, song1);
-
-                    float[] song2 = generator.generateSongV1(4, 1);
-                    AudioFileManager rSong2 = new AudioFileManager(song2, song2);
-
-                    rSong0.pAdd(rSong1.getChannels(), 0);
-                    rSong0.pAdd(rSong2.getChannels(), 0);
-
-                    buildWindow(rSong0);
+                    AudioFileManager song = generator.genNewComplexSong((int) Math.rint(64), 16);
+                    
+                    buildWindow(song);
                     generateDialog.dispose();
                 }
             });

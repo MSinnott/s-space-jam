@@ -8,6 +8,8 @@ public class baseRunner {
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
         mainWindow.buildWindow(generator.genNewComplexSong(64, 16));
+        float[] arr = generator.getBeat(164, 16, 32, 3, 32);
+        mainWindow.buildWindow(new AudioFileManager(arr, arr));
     }
 
 }
