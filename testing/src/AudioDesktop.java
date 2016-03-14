@@ -293,8 +293,8 @@ public class AudioDesktop extends JFrame{
                 public void actionPerformed(ActionEvent actionEvent) {
                     MusicGenerator generator = new MusicGenerator(AudioFileManager.DEFAULT_SAMPLE_RATE);
 
-                    AudioFileManager song = generator.genNewComplexSong((int) Math.rint(64), 16);
-                    
+                    AudioFileManager song = generator.genNewComplexSong((int) Math.rint(64));
+
                     buildWindow(song);
                     generateDialog.dispose();
                 }
