@@ -499,12 +499,12 @@ public class AudioFileManager {
 
     public void pAdd(float[][] channelsIn, int offest){
         int mostChannels = (channelsIn.length > channels.length) ? channelsIn.length : channels.length;
-        int longestChannel = (channelsIn[0].length + offest> channels[0].length) ? channelsIn[0].length + offest: channels[0].length;
+        int longestChannel = (channelsIn[0].length + offest > channels[0].length) ? channelsIn[0].length + offest : channels[0].length;
         float[][] resultant = new float[mostChannels][longestChannel];
         for (int i = 0; i < resultant.length; i++) {
             for (int j = 0; j < resultant[0].length; j += 2) {
                 if(channels.length > i && channels[0].length > j) resultant[i][j] += channels[i][j];
-                if(j >= offest && channelsIn.length > i && channelsIn[0].length > j) resultant[i][j] += channelsIn[i][j - offest];
+                if(j >= offest && channelsIn.length > i && channelsIn[0].length + offest > j) resultant[i][j] += channelsIn[i][j - offest];
             }
         }
         channels = resultant;
@@ -540,6 +540,10 @@ public class AudioFileManager {
 
     public void pAdd(AudioFileManager audioFileManager, int offset){
         pAdd(audioFileManager.getChannels(), offset);
+    }
+
+    public void pAdd(AudioFileManager audioFileManager, boolean toEnd){
+        pAdd(audioFileManager.getChannels(), (toEnd) ? channels[0].length : 0);
     }
 
     public void trim(){
@@ -588,13 +592,13 @@ public class AudioFileManager {
 
     public void makeAudible(){
         float avg = 0;
+        int t = 1;
         for (float[] channel : channels){
-                int t = 1;
                 for (float x : channel) {
                     avg += (x - avg) / t;
                     ++t;
                 }
-            }
+        }
         float multiplier = 10 / avg;
         for (int i = 0; i < channels.length; i++) {
             for (int j = 0; j < channels[i].length; j++) {
