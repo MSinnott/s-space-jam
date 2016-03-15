@@ -7,14 +7,11 @@ import java.util.Random;
 public class MusicGenerator {
 
     private Random random = new Random();
-    private int[] key = new int[7];
     private int sampleRate;
+    private Scale scale;
 
     public MusicGenerator(int samplesPerSec){
-        for(int i = 2; i < key.length; i++){
-            key[i] = random.nextInt(660)+220;
-        }
-//        key = sortAscending(key);
+        scale = new Scale(7);
         sampleRate = samplesPerSec;
     }
 
@@ -24,16 +21,29 @@ public class MusicGenerator {
 
     public float[] generateSongV4(int len, float volumeMultiplier){
         float[] ret = new float[len];
-        float note = randFromKey();
+        float note = scale.getRandomFromScale();
         for(int i = 0; i < len; i++){
             ret[i] = volumeMultiplier * getTone(note, i);
-            if(i % 10000 == 0) note = randFromKey();
+            if(i % 10000 == 0) note = scale.getRandomFromScale();
         }
         return ret;
     }
 
-    public AudioFileManager genNewComplexSong(int themeLen){
-        System.out.println(Arrays.toString(key));
+    public AudioFileManager genNewComplexSong(){
+        AudioFileManager theme = genTheme(16);
+        AudioFileManager prologue = genTheme(4);
+        AudioFileManager beat = getBeatFile(scale.getNoteAt(0), 4 * theme.getSoundLen(), 2 << 11, 1.5f, 32);
+        int prologueLen = prologue.getSoundLen();
+        prologue.pAdd(beat, prologueLen / 2);
+        for (int i = 0; i < 4; i++) {
+            prologue.pAdd(theme, prologueLen);
+            prologueLen+=theme.getSoundLen();
+        }
+        return prologue;
+    }
+
+    public AudioFileManager genTheme(int themeLen){
+        System.out.println(Arrays.toString(scale.getScale()));
         AudioFileManager res = new AudioFileManager(new float[]{0}, new float[]{0});
         int[] noteLens = new int[themeLen];
         int phraseLen = 3 + random.nextInt(3);
@@ -46,7 +56,7 @@ public class MusicGenerator {
         }
         int loc = 0;
         for(int a = 0; a < themeLen; a++) {
-            float note = randFromKey();
+            float note = scale.getRandomFromScale();
             if (note != 0) {
                 float[] seed = getTone(note, 0, noteLens[a]);
                 AudioFileManager addedNote = new AudioFileManager(seed, seed);
@@ -67,7 +77,7 @@ public class MusicGenerator {
         float[] noteLen = new float[themeLen];
         int totalLen = 0;
         for (int i = 0; i < themeLen; i++) {
-            theme[i] = key[random.nextInt(key.length)];
+            theme[i] = scale.getRandomFromScale();
             noteLen[i] = (float) (2f / Math.pow(2, random.nextInt(3)));
             totalLen += noteLen[i];
         }
@@ -90,7 +100,7 @@ public class MusicGenerator {
         int themeLength = 0;
         for (int i = 0; i < numNotes; i++) {
             noteLen[i] = (float) (1.0 / (1 << random.nextInt(3)));
-            notes[i] = key[random.nextInt(key.length)];
+            notes[i] = scale.getRandomFromScale();
             themeLength += noteLen[i];
         }
 
@@ -112,16 +122,16 @@ public class MusicGenerator {
     public float[] generateSongV1(int numThemeRepeats, float volumeMultiplier){
         ArrayList<Integer> theme = getSongV1(3, 0);
 
-        int[] themeNotes = new int[theme.size()];
+        float[] themeNotes = new float[theme.size()];
 
         int[] noteLengths = new int[theme.size()];
 
         for (int i = 0; i < theme.size(); i++) {
-            themeNotes[i] = key[theme.get(i)];
+            themeNotes[i] = scale.getNoteAt(i);
         }
         int totalLength = 0;
         for(int i = 1; i < theme.size(); i++){
-            noteLengths[i] = (themeNotes[i-1] * themeNotes[i] * random.nextInt(themeNotes[i] + 1) / 50 +5000);
+            noteLengths[i] = (int) (themeNotes[i-1] * themeNotes[i] * random.nextInt((int) (themeNotes[i] + 1)) / 50 +5000);
             totalLength += noteLengths[i];
         }
 
@@ -153,7 +163,7 @@ public class MusicGenerator {
 
         int[] randMaps = new int[10];
         for (int i = 0; i < randMaps.length; i++) {
-            randMaps[i] = random.nextInt(key.length);
+            randMaps[i] = random.nextInt(scale.getScale().length);
         }
 
         for (int i = 0; i < numIterations; i++) {
@@ -188,9 +198,9 @@ public class MusicGenerator {
             (float tone, float numSeconds, float volumeMultiplier, ...)
      */
 
-    public float[] toneRamp(float tone, float numSeconds, float volumeMultiplier, float chngBy){
-        if(Float.valueOf(tone).isNaN()) tone = key[0];
-        float[] tune = new float[(int) (numSeconds * sampleRate)];
+    public float[] toneRamp(float tone, float numSamples, float volumeMultiplier, float chngBy){
+        if(Float.valueOf(tone).isNaN()) tone = scale.getNoteAt(0);
+        float[] tune = new float[(int) (numSamples)];
         float toneChng = (chngBy / (tune.length));
         for (int i = 0; i < tune.length; i++, tone+=toneChng) {
             tune[i] = (volumeMultiplier * ((float) i / tune.length) * getTone(tone, i));
@@ -207,9 +217,9 @@ public class MusicGenerator {
         return newTone;
     }
 
-    public float[] getBeat(float tone, float numSeconds, float volumeMultiplier, float beatsPerSecond, float peakedness){
-        if(Float.valueOf(tone).isNaN()) tone = key[0];
-        float[] beat = new float[(int) (numSeconds * sampleRate)];
+    public float[] getBeat(float tone, float numSamples, float volumeMultiplier, float beatsPerSecond, float peakedness){
+        if(Float.valueOf(tone).isNaN()) tone = scale.getNoteAt(0);
+        float[] beat = new float[(int) (numSamples)];
         if(beatsPerSecond <= 0) return beat;
         float volume;
         float scale = (float) (2 * Math.PI * beatsPerSecond / sampleRate );
@@ -218,6 +228,11 @@ public class MusicGenerator {
             beat[phase] = volume * getTone(tone, phase);
         }
         return beat;
+    }
+
+    public AudioFileManager getBeatFile(float tone, float numSamples, float volumeMultiplier, float beatsPerSecond, float peakedness){
+        float[] arr = getBeat(tone, numSamples, volumeMultiplier, beatsPerSecond, peakedness);
+        return new AudioFileManager(arr, arr);
     }
 
     //Useful methods
@@ -256,9 +271,4 @@ public class MusicGenerator {
         }
         return ret;
     }
-
-    public float randFromKey(){
-        return key[random.nextInt(key.length)];
-    }
-
 }
