@@ -12,7 +12,7 @@ public class SoundPlayer implements Runnable{
     private int endIndex;
     private int loc = 0;
     private boolean repeat = false;
-    private boolean stopPlaying = false;
+    private boolean playing = false;
 
     public SoundPlayer(AudioFileManager fileManager){
         audioFile = fileManager;
@@ -38,6 +38,8 @@ public class SoundPlayer implements Runnable{
 
     @Override
     public void run() {
+        if(playing) return;
+        playing = true;
         DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFile.getAudioFormat());
         try {
             sourceLine = (SourceDataLine) AudioSystem.getLine(info);
@@ -56,10 +58,10 @@ public class SoundPlayer implements Runnable{
                 sourceLine.write(soundData, i, FRAME_LEN);
                 pane.updateLoc(loc);
                 Thread.yield();
-                if(stopPlaying) break;
+                if(!playing) break;
             }
-        } while (repeat && !stopPlaying);
-        stopPlaying = false;
+        } while (repeat && playing);
+        playing = false;
         sourceLine.drain();
         sourceLine.close();
         loc = 0;
@@ -71,7 +73,7 @@ public class SoundPlayer implements Runnable{
     }
 
     public void stop(){
-        stopPlaying = true;
+        playing = false;
     }
 
 
