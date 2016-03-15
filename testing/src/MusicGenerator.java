@@ -32,7 +32,7 @@ public class MusicGenerator {
     public AudioFileManager genNewComplexSong(){
         AudioFileManager theme = genTheme(16);
         AudioFileManager prologue = genTheme(4);
-        AudioFileManager beat = getBeatFile(scale.getNoteAt(0), 4 * theme.getSoundLen(), 2 << 11, 1.5f, 32);
+        AudioFileManager beat = getBeatFile(scale.getNoteAt(0), 4 * theme.getSoundLen(), 2 << 11 , 1.5f, 32);
         int prologueLen = prologue.getSoundLen();
         prologue.pAdd(beat, prologueLen / 2);
         for (int i = 0; i < 4; i++) {
