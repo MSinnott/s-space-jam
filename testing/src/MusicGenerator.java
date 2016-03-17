@@ -10,7 +10,7 @@ public class MusicGenerator {
     private int sampleRate;
     private Scale scale;
 
-    public MusicGenerator(int samplesPerSec){
+    public MusicGenerator(int samplesPerSec) {
         scale = new Scale(7);
         sampleRate = samplesPerSec;
     }
@@ -19,12 +19,12 @@ public class MusicGenerator {
         High level functions to build a song
      */
 
-    public float[] generateSongV4(int len, float volumeMultiplier){
+    public float[] generateSongV4(int len, float volumeMultiplier) {
         float[] ret = new float[len];
         float note = scale.getRandomFromScale();
-        for(int i = 0; i < len; i++){
+        for (int i = 0; i < len; i++) {
             ret[i] = volumeMultiplier * getTone(note, i);
-            if(i % 10000 == 0) note = scale.getRandomFromScale();
+            if (i % 10000 == 0) note = scale.getRandomFromScale();
         }
         return ret;
     }
@@ -32,7 +32,7 @@ public class MusicGenerator {
     public AudioFileManager genNewComplexSong(){
         AudioFileManager theme = genTheme(16);
         AudioFileManager prologue = genTheme(8);
-        AudioFileManager beat = getBeatFile(scale.getNoteAt(0), 4 * theme.getSoundLen(), 2 << 10 , 1.5f, 32);
+        AudioFileManager beat = getBeatFile(600, 4 * theme.getSoundLen(), 2 << 10 , 1.5f, 32);
         int prologueLen = prologue.getSoundLen();
         prologue.pAdd(beat, prologueLen / 2);
         for (int i = 0; i < 4; i++) {
