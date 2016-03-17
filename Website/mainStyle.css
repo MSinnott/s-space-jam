@@ -92,17 +92,16 @@ ssjamLogo {
   81.48% { -webkit-transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   84.68% { -webkit-transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
   100% { -webkit-transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); transform: matrix3d(2, 0, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1); }
-}*/
+}
 
 /*For Collaborators slide out panel*/
 #collabPanel, #collabFlip {
   padding: 10px;
-  text-align: right;
-  color: red;
-  /*padding: 5px;
   text-align: center;
+  color: red;
+  padding: 5px;
   background-color: #e5eecc;
-  border: solid 1px #c3c3c3;*/
+  border: solid 1px #c3c3c3;
 }
 
 #collabPanel {
