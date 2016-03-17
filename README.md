@@ -1,13 +1,22 @@
-# s-space-jam
-Music generator -- creates music from a variety of sources
+## S Space Jam
+S-Space Jam is a piece of software that allows users to generate and edit music. See more on [our website](http://www.ssjam.com/)!
 
-Currently procedurally generates music, generates a sound file based on a function
+##
+#### Features:
+* Both forward and backward Fourier Transforms to see the component frequencies of music
+* High-Pass, Low-Pass, Band-Pass or Boxcar filters
+* File rescaling and overlaying of one file onto another
+* Pure tone generation
+* Adding harmonics to a pure tone
 
-Multi-document interface allows for editing and viewing of an audio file; gives fine control over the raw sound data
+##
+#### How to use:
+Currently the project is being developed in [Intellij Idea](https://www.jetbrains.com/idea/), however, once development ends, it will be a stand-alone .jar file
 
-Entire project runs in under 1G RAM; can do a FFT on a full (2+ min) song within 1G
+The software runs in under ``1G`` of RAM for ordinary file sizes, however larger file can cause issues (and take more memory)
 
-How to use:
-The project is currently an Intellij project, so it can only be used through the IDE. However, it will become a packaged JAR file that can be run on any upstanding JVM
+##
+#### Authors:
+[MSinnott](https://github.com/MSinnott): Primary java dev. Current Senior at Hammond High School hoping to double major in electrical engineering and computer science.
 
-We have a website! It too is a work in progress, so check back for updates on both facets of the project.
+[TrostAft](https://github.com/TrostAft): Primary website Dev. Current Senior at Hammond High School hoping to go into mathematics & physics
