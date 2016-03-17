@@ -31,8 +31,8 @@ public class MusicGenerator {
 
     public AudioFileManager genNewComplexSong(){
         AudioFileManager theme = genTheme(16);
-        AudioFileManager prologue = genTheme(4);
-        AudioFileManager beat = getBeatFile(scale.getNoteAt(0), 4 * theme.getSoundLen(), 2 << 11 , 1.5f, 32);
+        AudioFileManager prologue = genTheme(8);
+        AudioFileManager beat = getBeatFile(scale.getNoteAt(0), 4 * theme.getSoundLen(), 2 << 10 , 1.5f, 32);
         int prologueLen = prologue.getSoundLen();
         prologue.pAdd(beat, prologueLen / 2);
         for (int i = 0; i < 4; i++) {
@@ -60,7 +60,7 @@ public class MusicGenerator {
             if (note != 0) {
                 float[] seed = getTone(note, 0, noteLens[a]);
                 AudioFileManager addedNote = new AudioFileManager(seed, seed);
-                addedNote.addNoise(4, 1);
+                addedNote.addNoise(2, 1);
                 res.pAdd(addedNote, loc);
                 loc += addedNote.getSoundLen() + AudioFileManager.DEFAULT_SAMPLE_RATE / 8;
             } else{

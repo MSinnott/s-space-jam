@@ -32,13 +32,13 @@ public class SoundPlayer implements Runnable{
         this.pane = pane;
         this.stIndex = stIndex;
         this.endIndex = endIndex;
+        if(playing) return;
         Thread playThread = new Thread(this);
         playThread.start();
     }
 
     @Override
     public void run() {
-        if(playing) return;
         playing = true;
         DataLine.Info info = new DataLine.Info(SourceDataLine.class, audioFile.getAudioFormat());
         try {
@@ -58,7 +58,7 @@ public class SoundPlayer implements Runnable{
                 sourceLine.write(soundData, i, FRAME_LEN);
                 pane.updateLoc(loc);
                 Thread.yield();
-                if(!playing) break;
+                if(!pane.isDisplayable() || !playing) break;
             }
         } while (repeat && playing);
         playing = false;
