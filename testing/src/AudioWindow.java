@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class AudioWindow extends JInternalFrame{
+public class AudioWindow extends JInternalFrame {
 
     private MainPane pane;
     private AudioFileManager audioFile;

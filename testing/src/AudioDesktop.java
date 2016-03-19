@@ -234,6 +234,10 @@ public class AudioDesktop extends JFrame{
         desktop.add(aw);
     }
 
+    public void addWindow(SoundScriptingWindow swin){
+        desktop.add(swin);
+    }
+
     /**
      * @return ArrayList of AudioWindows owned by this component
      */

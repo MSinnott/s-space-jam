@@ -10,6 +10,7 @@ public class baseRunner {
         //mainWindow.buildWindow(generator.genNewComplexSong());
         //float[] arr = generator.getBeat(164, 16, 32, 3, 32);
         //mainWindow.buildWindow(new AudioFileManager(arr, arr));
+        mainWindow.addWindow(new SoundScriptingWindow());
     }
 
 }
