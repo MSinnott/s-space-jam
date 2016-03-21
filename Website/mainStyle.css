@@ -5,6 +5,7 @@
 }
 body {
   background-color: darkslateblue;
+  color: #000050;
 }
 
 /*Image animation on ssjam logo*/
@@ -36,14 +37,15 @@ body {
   backface-visibility: hidden;
 }
 .face.back {
-  display: block;
   transform: rotateY(180deg);
-  box-sizing: border-box;
-  padding: 10px;
-  color: white;
+  display: block;
+  padding: -10px;
+  color: 0000EE;
   text-align: center;
-  background-color: #aaa;
+  background-color: #000080;
+  box-sizing: border-box;
 }
+
 ssjamLogo {
   position: fixed; top: 10%; left: 46.25%;
   border: 2px solid white;
@@ -98,9 +100,9 @@ ssjamLogo {
 #collabPanel, #collabFlip {
   padding: 10px;
   text-align: center;
-  color: red;
+  color: #00CCEE;
   padding: 5px;
-  background-color: #e5eecc;
+  background-color: #000080;
   border: solid 1px #c3c3c3;
 }
 
