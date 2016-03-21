@@ -578,6 +578,18 @@ public class AudioFileManager {
         btransform();
     }
 
+    public void addHarmonics(float[] harmonicsToAdd){
+        ftransform();
+        for (int i = 0; i < channels.length; i++) {
+            for (int j = channels[i].length - 1; j > 0; j--) {
+                for (int k = 0; k < harmonicsToAdd.length; k++) {
+                    if(j * k < channels[i].length) channels[i][j * k] += channels[i][j] * harmonicsToAdd[k];
+                }
+            }
+        }
+        btransform();
+    }
+
     public void filter(float threshold, int stIndex, int endIndex, boolean remBelow){
         for (float[] channel: channels) {
             for (int i = stIndex; i < channel.length && i < endIndex; i++) {
