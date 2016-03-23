@@ -108,6 +108,7 @@ public class SoundScriptingWindow extends JInternalFrame {
                     e1.printStackTrace();
                 }
             }
+            saved = true;
         }
     }
 

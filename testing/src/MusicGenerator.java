@@ -15,6 +15,11 @@ public class MusicGenerator {
         sampleRate = samplesPerSec;
     }
 
+    public MusicGenerator(int samplesPerSec, Scale scaleIn) {
+        scale = scaleIn;
+        sampleRate = samplesPerSec;
+    }
+
     /*
         High level functions to build a song
      */

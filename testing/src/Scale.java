@@ -19,7 +19,16 @@ public class Scale {
 
     public Scale(int numNotes){
         int stIndex = rand.nextInt(notes.length - 3 * numNotes);
-        System.out.println(stIndex + " of " + notes.length);
+        int loc = 0;
+        scale = new float[numNotes];
+        for (int i = stIndex; loc < numNotes; i+= ((rand.nextBoolean()) ? 2 : 3)) {
+            scale[loc++] = notes[i];
+            System.out.println(i);
+        }
+    }
+
+    public Scale(int numNotes, int stNote){
+        int stIndex = stNote;
         int loc = 0;
         scale = new float[numNotes];
         for (int i = stIndex; loc < numNotes; i+= ((rand.nextBoolean()) ? 2 : 3)) {

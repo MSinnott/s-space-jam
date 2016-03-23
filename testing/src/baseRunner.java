@@ -3,11 +3,12 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import java.io.*;
+import java.util.ArrayList;
 
 public class baseRunner {
 
     public static void main(String[] args) throws IOException {
-        MusicGenerator generator = new MusicGenerator(AudioFileManager.DEFAULT_SAMPLE_RATE);
+        MusicGenerator generator = new MusicGenerator(AudioFileManager.DEFAULT_SAMPLE_RATE, new Scale(7, 40));
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
@@ -16,7 +17,8 @@ public class baseRunner {
         mainWindow.addWindow(new SoundScriptingWindow(mainWindow));
 
         byte[] soundData = null;
-        final byte[] finalSoundData = new byte[10000000];
+        ArrayList<byte[]> songs = new ArrayList<byte[]>();
+        final boolean[] addSong = {false};
         Thread audioThread = new Thread() {
             @Override
             public void run() {
@@ -29,18 +31,27 @@ public class baseRunner {
                     e.printStackTrace();
                     System.exit(1);
                 }
-
+                byte[] toWrite;
+                songs.add(generator.genNewComplexSong().getSoundData());
+                songs.add(generator.genNewComplexSong().getSoundData());
                 sourceLine.start();
                 do {
-                    sourceLine.write(finalSoundData, 0, finalSoundData.length);
+                    toWrite = songs.get(0);
+                    sourceLine.write(toWrite, 0, toWrite.length);
                     Thread.yield();
+                    addSong[0] = true;
                 } while (true);
             }
         };
         audioThread.start();
         do {
+            while(!addSong[0]){
+                Thread.yield();
+            }
             soundData = generator.genNewComplexSong().getSoundData();
-            System.arraycopy(soundData, 0, finalSoundData, 0, finalSoundData.length);
+            songs.add(soundData);
+            songs.remove(0);
+            addSong[0] = false;
         } while (true);
     }
 
