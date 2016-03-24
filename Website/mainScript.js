@@ -13,5 +13,3 @@ $(document).ready(function() {
     location.href = "https://github.com/MSinnott/s-space-jam";
   })
 });
-
-// logoImg flip
