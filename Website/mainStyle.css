@@ -58,3 +58,8 @@ body {
   padding: : 50px;
   display: none;
 }
+
+#descText {
+  text-align: left;
+  text-indent: inherit;
+}
