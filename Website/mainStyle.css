@@ -32,7 +32,7 @@ body {
   display: block;
   height: 250px;
   width: 250px;
-  margin:0px auto 0px auto;
+  margin:0px 96px;
   border: 3px solid black;
 }
 
@@ -40,7 +40,7 @@ body {
   display: block;
   height: 250px;
   width: 250px;
-  margin:0px auto 0px auto;
+  margin: 0px  96px ;
   border: 3px solid black;
 }
 
