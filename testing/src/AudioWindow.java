@@ -182,6 +182,10 @@ public class AudioWindow extends JInternalFrame {
         pane.setZoom(zoom);
     }
 
+    public void playSong(){
+        player.playFile(pane);
+    }
+
     //Saves the file
     public class SaveAction extends AbstractAction{
         private String type;

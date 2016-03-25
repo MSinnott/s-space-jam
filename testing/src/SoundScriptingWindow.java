@@ -48,6 +48,12 @@ public class SoundScriptingWindow extends JInternalFrame {
         makeMenuItem(fileMenu, new JMenuItem("Save As ..."), "txtColor", "bgColor", new SaveAction("SaveAs"), components);
 
         makeMenuItem(fileMenu, new JMenuItem("Exit"), "txtColor", "bgColor", new ExitAction(), components);
+
+        JMenu playMenu = new JMenu("Play!");
+        menuBar.add(playMenu);
+        components.add(new ColoredComponent(playMenu, "txtColor", "bgColor"));
+
+        makeMenuItem(playMenu, new JMenuItem("Play Script"), "txtColor", "bgColor", new PlayAction(), components);
     }
 
     public void makeMenuItem(JMenu menu, JMenuItem j, String fgColr, String bgColr, AbstractAction action, ArrayList<ColoredComponent> collection){
@@ -56,6 +62,10 @@ public class SoundScriptingWindow extends JInternalFrame {
         menu.add(j);
     }
 
+    //TODO @MSinnott: Write this
+    public AudioFileManager genAudioFile(){
+        return new AudioFileManager(new float[1], new float[1]);
+    }
 
     public void resetColors(){
         components.forEach(ColoredComponent::resetColors);
@@ -125,4 +135,13 @@ public class SoundScriptingWindow extends JInternalFrame {
             exitDialog.buildDialog(scriptingWindow);
         }
     }
+
+    public class PlayAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            AudioWindow aw = new AudioWindow(320, 320, genAudioFile(), audioDesktop);
+            aw.playSong();
+        }
+    }
+
 }
