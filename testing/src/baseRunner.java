@@ -12,8 +12,6 @@ public class baseRunner {
         //making and initializing window --m
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
 
-        mainWindow.addWindow(new SoundScriptingWindow(mainWindow));
-
         SoundPlayer soundPlayer = new SoundPlayer();
     }
 

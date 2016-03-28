@@ -225,11 +225,6 @@ public class AudioDesktop extends JFrame{
         aw.dispose();
     }
 
-    public void removeWindow(SoundScriptingWindow sw){
-        audioWindows.remove(sw);
-        sw.dispose();
-    }
-
     /**
      * Adds the passed AudioWindow
      * @param aw audioWindow to add
@@ -237,10 +232,6 @@ public class AudioDesktop extends JFrame{
     public void addWindow(AudioWindow aw){
         audioWindows.add(aw);
         desktop.add(aw);
-    }
-
-    public void addWindow(SoundScriptingWindow sw){
-        desktop.add(sw);
     }
 
     /**
