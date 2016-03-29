@@ -1,7 +1,13 @@
 import java.util.Random;
 
+/**
+ *  Class to manage notes - constructs a scale of pure musical tones
+ */
 public class Scale {
 
+    /**
+     *  This scale goes from low to high C (9 octaves)
+     */
     private float[] notes = new float[]{
         16.35f, 17.32f, 18.35f, 19.45f, 20.60f, 21.83f, 23.12f, 24.50f, 25.96f, 27.50f, 29.14f, 30.87f,
         32.70f, 34.65f, 36.71f, 38.89f, 41.20f, 43.65f, 46.25f, 49.00f, 51.91f, 55.00f, 58.27f, 61.74f,
@@ -17,6 +23,10 @@ public class Scale {
     float[] scale;
     private Random rand = new Random();
 
+    /**
+     * Constructs a scale
+     * @param numNotes number of notes in the scale
+     */
     public Scale(int numNotes){
         int stIndex = rand.nextInt(notes.length - 3 * numNotes);
         int loc = 0;
@@ -27,6 +37,11 @@ public class Scale {
         }
     }
 
+    /**
+     * Constructs a scale
+     * @param numNotes number of notes in the scale
+     * @param stNote index of the bass note
+     */
     public Scale(int numNotes, int stNote){
         int stIndex = stNote;
         int loc = 0;
@@ -37,15 +52,25 @@ public class Scale {
         }
     }
 
+    /**
+     * @param loc position of note in scale
+     * @return the note @ position loc
+     */
     public float getNoteAt(int loc){
         if(loc < 0 || loc > scale.length) return 0;
         return scale[loc];
     }
 
+    /**
+     * @return a random note from the scale
+     */
     public float getRandomFromScale(){
         return scale[rand.nextInt(scale.length)];
     }
 
+    /**
+     * @return the scale
+     */
     public float[] getScale() {
         return scale;
     }

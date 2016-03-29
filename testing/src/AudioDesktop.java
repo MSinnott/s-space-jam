@@ -21,7 +21,6 @@ public class AudioDesktop extends JFrame{
     private JMenuItem newButton;
     private JMenuItem openButton;
     private JMenuItem exitButton;
-    private JMenuItem convertButton;
     private JMenu optionMenu;
     private JMenuItem themeButton;
 
@@ -74,11 +73,6 @@ public class AudioDesktop extends JFrame{
         openButton.addActionListener(new OpenFileAction());
         components.add(openButton);
 
-        convertButton = new JMenuItem("File Convert");
-        fileMenu.add(convertButton);
-        convertButton.addActionListener(new ConverterOpenAction());
-        components.add(convertButton);
-
         exitButton = new JMenuItem("Exit");
         fileMenu.add(exitButton);
         exitButton.addActionListener(new AbstractAction() {
@@ -104,7 +98,6 @@ public class AudioDesktop extends JFrame{
         optionMenu.add(themeButton);
         themeButton.addActionListener(new ThemeSelectorAction());
         components.add(themeButton);
-
 
         properties = new Properties();
 
@@ -209,6 +202,9 @@ public class AudioDesktop extends JFrame{
         checkWindows();
     }
 
+    /**
+     * Basic sanity check for windows
+     */
     public void checkWindows() {
         for (AudioWindow aw: audioWindows) {
             if(aw.isClosed()) removeWindow(aw);
@@ -342,29 +338,6 @@ public class AudioDesktop extends JFrame{
             if(returnVal == JFileChooser.APPROVE_OPTION) {
                 File selection = fileChooser.getSelectedFile();
                 buildWindow(new AudioFileManager(selection));
-            }
-        }
-    }
-
-    /**
-     *  Action that opens a nonWAV file -- unfinished
-     */
-    // TODO: 2/28/16
-    public class ConverterOpenAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setBackground(Theme.getThemeColor("bgColor"));
-            fileChooser.setForeground(Theme.getThemeColor("txtColor"));
-            FileNameExtensionFilter filter = new FileNameExtensionFilter(
-                    "mp3 Files", "mp3");
-            //need to throw an if mp3 file, call decode function. Use Jlayer / MP3SPI library
-            //looks like .au and .aiff files are already supported.
-            fileChooser.setFileFilter(filter);
-            int returnVal = fileChooser.showOpenDialog(desktop);
-            if(returnVal == JFileChooser.APPROVE_OPTION) {
-                File selection = fileChooser.getSelectedFile();
-                //code for conversion goes here
             }
         }
     }
