@@ -3,9 +3,27 @@
   margin-top: 50px;
   text-align: center;
 }
+
 body {
   background-color: darkslateblue;
   color: #000050;
+}
+
+.descText {
+  width: 100%;
+}
+
+.leftTextPane, .rightTextPane {
+  float:left;
+  width: 50%;
+  height: 400px;
+  background-color: darkslateblue;
+  border: solid 1px white;
+
+}
+
+.rightTextPane {
+  width: 50%;
 }
 
 /*ssjam logo and github logo underneath*/
@@ -51,15 +69,10 @@ body {
   color: #00CCEE;
   padding: 5px;
   background-color: #000080;
-  border: solid 1px #c3c3c3;
+  border: solid 1px white;
 }
 
 #collabPanel {
   padding: : 50px;
   display: none;
-}
-
-#descText {
-  text-align: left;
-  text-indent: inherit;
 }
