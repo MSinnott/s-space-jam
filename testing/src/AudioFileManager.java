@@ -195,7 +195,7 @@ public class AudioFileManager {
     }
 
     /**
-     * @return Name to be displayed on an AudioWindow -- with filesize
+     * @return Name to be displayed on an AudioFileWindow -- with filesize
      */
     public String getName(){
         return (defaultName.equals("")) ? HumanReadable.memNumToReadable(channels[0].length) : defaultName;

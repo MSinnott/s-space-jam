@@ -15,7 +15,8 @@ public class SoundPlayer implements Runnable{
     private boolean repeat = false;
     private boolean playing = false;
 
-    public SoundPlayer(AudioFileManager fileManager){
+    public SoundPlayer(AudioFileManager fileManager, MainPane pane){
+        this.pane = pane;
         audioFile = fileManager;
         stIndex = 0;
         endIndex = audioFile.getSoundData().length;
@@ -63,16 +64,14 @@ public class SoundPlayer implements Runnable{
         } while (true);
     }
 
-    public void playFile(MainPane pane){
-        this.pane = pane;
+    public void playFile(){
         this.stIndex = 0;
         this.endIndex = -1;
         Thread playThread = new Thread(this);
         playThread.start();
     }
 
-    public void playFile(MainPane pane, int stIndex, int endIndex){
-        this.pane = pane;
+    public void playFile(int stIndex, int endIndex){
         this.stIndex = stIndex;
         this.endIndex = endIndex;
         if(playing) return;

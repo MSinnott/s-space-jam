@@ -4,7 +4,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.*;
 import java.util.*;
-import java.util.List;
 
 /**
  * Main JFrame class -- provides multi-document interface capability
@@ -24,7 +23,7 @@ public class AudioDesktop extends JFrame{
     private JMenu optionMenu;
     private JMenuItem themeButton;
 
-    private ArrayList<AudioWindow> audioWindows;
+    private ArrayList<InternalWindow> audioFileWindows;
     private ArrayList<Component> components = new ArrayList<Component>();
 
     public static final String LinuxPathHead = "s-space-jam/testing/";
@@ -42,7 +41,7 @@ public class AudioDesktop extends JFrame{
         super(name);
 
         components.add(this);
-        audioWindows = new ArrayList<AudioWindow>();
+        audioFileWindows = new ArrayList<InternalWindow>();
 
         desktop = new JDesktopPane();
         this.setLayout(new BorderLayout());
@@ -55,6 +54,19 @@ public class AudioDesktop extends JFrame{
         this.setIconImage(icon.getImage());
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+        buildMenus();
+
+        properties = new Properties();
+
+        updateProperties();
+
+        resetColors(true);
+        this.setVisible(true);
+        this.invalidate();
+        this.repaint();
+    }
+
+    public void buildMenus(){
         menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
         components.add(menuBar);
@@ -98,15 +110,6 @@ public class AudioDesktop extends JFrame{
         optionMenu.add(themeButton);
         themeButton.addActionListener(new ThemeSelectorAction());
         components.add(themeButton);
-
-        properties = new Properties();
-
-        updateProperties();
-
-        resetColors(true);
-        this.setVisible(true);
-        this.invalidate();
-        this.repaint();
     }
 
     /**
@@ -206,35 +209,35 @@ public class AudioDesktop extends JFrame{
      * Basic sanity check for windows
      */
     public void checkWindows() {
-        for (AudioWindow aw: audioWindows) {
-            if(aw.isClosed()) removeWindow(aw);
-            aw.resetColors();
+        for (InternalWindow iw: audioFileWindows) {
+            if(iw.isClosed()) removeWindow(iw);
+            iw.resetColors();
         }
     }
 
     /**
-     * Removes the passed AudioWindow
-     * @param aw audioWindow to remove
+     * Removes the passed AudioFileWindow
+     * @param iw audioWindow to remove
      */
-    public void removeWindow(AudioWindow aw){
-        audioWindows.remove(aw);
-        aw.dispose();
+    public void removeWindow(InternalWindow iw){
+        audioFileWindows.remove(iw);
+        iw.dispose();
     }
 
     /**
-     * Adds the passed AudioWindow
-     * @param aw audioWindow to add
+     * Adds the passed AudioFileWindow
+     * @param iw audioWindow to add
      */
-    public void addWindow(AudioWindow aw){
-        audioWindows.add(aw);
-        desktop.add(aw);
+    public void addWindow(InternalWindow iw){
+        audioFileWindows.add(iw);
+        desktop.add(iw);
     }
 
     /**
      * @return ArrayList of AudioWindows owned by this component
      */
-    public ArrayList<AudioWindow> getAudioWindows(){
-        return audioWindows;
+    public ArrayList<InternalWindow> getAudioFileWindows(){
+        return audioFileWindows;
     }
 
     /**
@@ -242,8 +245,8 @@ public class AudioDesktop extends JFrame{
      * @param fileManager source to build window
      */
     public void buildWindow(AudioFileManager fileManager){
-        fileManager.setDefaultName(fileManager.getName() + " | " + audioWindows.size());
-        AudioWindow newAW = new AudioWindow(200, 100, fileManager, this);
+        fileManager.setDefaultName(fileManager.getName() + " | " + audioFileWindows.size());
+        AudioFileWindow newAW = new AudioFileWindow(200, 100, fileManager, this);
         addWindow(newAW);
     }
 
@@ -293,6 +296,18 @@ public class AudioDesktop extends JFrame{
 
                     buildWindow(song);
                     generateDialog.dispose();
+                }
+            });
+
+            final JButton randSButton = new JButton("Generate Music Stream!");
+            generateDialog.addItem(randSButton, "txtColor", "bgColor", false);
+            randSButton.addActionListener(new AbstractAction() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    AudioStreamWindow streamWindow = new AudioStreamWindow(480, 360, audioDesktop);
+                    addWindow(streamWindow);
+                    generateDialog.dispose();
+                    streamWindow.beginStream();
                 }
             });
 

@@ -6,37 +6,23 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class AudioWindow extends JInternalFrame {
+public class AudioFileWindow extends InternalWindow {
 
-    private MainPane pane;
+
     private AudioFileManager audioFile;
-    private AudioDesktop audioDesktop;
-    private AudioWindow audioWindow = this;
-
-    private SoundPlayer player;
-
-    private boolean saved = false;
-    private String savePath = null;
-
-    private ArrayList<ColoredComponent> selectionComponents = new ArrayList<ColoredComponent>();
-    private ArrayList<ColoredComponent> components = new ArrayList<ColoredComponent>();
 
     private String windowHistory = "";
 
-    public AudioWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
-        super(fileManager.getName());
+    public AudioFileWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
+        super(width, height, aDesk);
+        pane = new MainPane(this);
 
         addHistory(fileManager.getName());
 
-        player = new SoundPlayer(fileManager);
-        audioDesktop = aDesk;
-
-        this.setSize(width, height);
-        this.setResizable(true);
+        player = new SoundPlayer(fileManager, pane);
 
         this.setLayout(new BorderLayout());
 
-        pane = new MainPane(this);
         loadFile(fileManager);
         savePath = fileManager.getPath();
         if(savePath != null) saved = true;
@@ -50,13 +36,6 @@ public class AudioWindow extends JInternalFrame {
         pane.addKeyListener(pane);
 
         buildMenus();
-
-        setClosable(true);
-        setIconifiable(true);
-        setMaximizable(true);
-        setResizable(true);
-        this.setSize(480, 360);
-        this.setVisible(true);
     }
 
     private void addHistory(String histToAdd) {
@@ -158,32 +137,13 @@ public class AudioWindow extends JInternalFrame {
         resetColors();
     }
 
-    public void makeMenuItem(JMenu menu, JMenuItem j, String fgColr, String bgColr, AbstractAction action, ArrayList<ColoredComponent> collection){
-        j.addActionListener(action);
-        collection.add(new ColoredComponent(j, fgColr, bgColr));
-        menu.add(j);
-    }
-
-    public void resetColors(){
-        components.forEach(ColoredComponent::resetColors);
-        selectionComponents.forEach(ColoredComponent::resetColors);
-
-        this.setBackground(Theme.getThemeColor("accColor"));
-        this.setForeground(Theme.getThemeColor("txtColor"));
-
-        this.invalidate();
-        this.repaint();
-        pane.invalidate();
-        pane.repaint();
-    }
-
     public void setView(int pan, double zoom){
         pane.setPan(pan);
         pane.setZoom(zoom);
     }
 
-    public void playSong(){
-        player.playFile(pane);
+    public void play(){
+        player.playFile();
     }
 
     //Saves the file
@@ -204,13 +164,13 @@ public class AudioWindow extends JInternalFrame {
                     root = new File(AudioDesktop.WindowsPathHead);
                 }
                 JFileChooser fileChooser = new JFileChooser(root);
-                if (fileChooser.showSaveDialog(audioWindow) == JFileChooser.APPROVE_OPTION) {
+                if (fileChooser.showSaveDialog(window) == JFileChooser.APPROVE_OPTION) {
                     try {
                         savePath = fileChooser.getSelectedFile().getAbsolutePath();
                         audioFile.buildFile(savePath);
                         saved = true;
                         String name = audioFile.getName();
-                        audioWindow.setTitle(name);
+                        window.setTitle(name);
                     } catch (IOException e1) {
                         e1.printStackTrace();
                     }
@@ -219,7 +179,7 @@ public class AudioWindow extends JInternalFrame {
                 try {
                     audioFile.buildFile(savePath);
                     String name = audioFile.getName();
-                    audioWindow.setTitle(name);
+                    window.setTitle(name);
                 } catch (IOException e1) {
                     e1.printStackTrace();
                 }
@@ -229,18 +189,18 @@ public class AudioWindow extends JInternalFrame {
 
     //Creates + adds a clone of this object to the desktop
     public class CloneAction extends AbstractAction {
-        private AudioWindow audioWindow;
-        public CloneAction(AudioWindow window){
-            audioWindow = window;
+        private AudioFileWindow audioFileWindow;
+        public CloneAction(AudioFileWindow window){
+            audioFileWindow = window;
         }
         @Override
         public void actionPerformed(ActionEvent e) {
             AudioFileManager newAudioFile = new AudioFileManager(audioFile);
             newAudioFile.setDefaultName("Clone of - " + audioFile.getName());
-            AudioWindow clone = new AudioWindow(audioWindow.getWidth(), audioWindow.getHeight(), newAudioFile, audioDesktop);
+            AudioFileWindow clone = new AudioFileWindow(audioFileWindow.getWidth(), audioFileWindow.getHeight(), newAudioFile, audioDesktop);
             audioDesktop.addWindow(clone);
             clone.moveToFront();
-            clone.setLocation(audioWindow.getX() + 32, audioWindow.getY() + 32);
+            clone.setLocation(audioFileWindow.getX() + 32, audioFileWindow.getY() + 32);
             clone.setView(pane.getPan(), pane.getZoom());
         }
     }
@@ -252,10 +212,10 @@ public class AudioWindow extends JInternalFrame {
             exitDialog.addDoneBinding(new AbstractAction() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    audioDesktop.removeWindow(audioWindow);
+                    audioDesktop.removeWindow(window);
                 }
             });
-            exitDialog.buildDialog(audioWindow);
+            exitDialog.buildDialog(window);
         }
     }
 
@@ -281,7 +241,7 @@ public class AudioWindow extends JInternalFrame {
                     updatePane();
                 }
             });
-            scaleDialog.buildDialog(audioWindow);
+            scaleDialog.buildDialog(window);
         }
     }
 
@@ -307,7 +267,7 @@ public class AudioWindow extends JInternalFrame {
                     updatePane();
                 }
             });
-            shiftDialog.buildDialog(audioWindow);
+            shiftDialog.buildDialog(window);
         }
     }
 
@@ -325,7 +285,7 @@ public class AudioWindow extends JInternalFrame {
                     addHistory("hShift: " + textField.getText() + " @ " + Arrays.toString(pane.getSelection()));
                 }
             });
-            shiftDialog.buildDialog(audioWindow);
+            shiftDialog.buildDialog(window);
         }
     }
 
@@ -335,7 +295,7 @@ public class AudioWindow extends JInternalFrame {
             audioDesktop.checkWindows();
             final AdaptiveDialog addDialog = new AdaptiveDialog("Scale Vertically");
             final ArrayList<AudioFileManager> toAdd = new ArrayList<AudioFileManager>();
-            for(AudioWindow aw : audioDesktop.getAudioWindows()){
+            for(InternalWindow aw : audioDesktop.getAudioFileWindows()){
                 JButton jTextButton = new JButton(aw.getFileManager().getName());
                 ColoredComponent coloredComp = new ColoredComponent(jTextButton, "txtColor", "bgColor");
                 jTextButton.addActionListener(new AbstractAction() {
@@ -369,7 +329,7 @@ public class AudioWindow extends JInternalFrame {
                     updatePane();
                 }
             });
-            addDialog.buildDialog(audioWindow);
+            addDialog.buildDialog(window);
         }
     }
 
@@ -379,7 +339,7 @@ public class AudioWindow extends JInternalFrame {
             audioDesktop.checkWindows();
             final AdaptiveDialog multDialog = new AdaptiveDialog("Scale Vertically");
             final ArrayList<AudioFileManager> toMult = new ArrayList<AudioFileManager>();
-            for(AudioWindow aw : audioDesktop.getAudioWindows()){
+            for(InternalWindow aw : audioDesktop.getAudioFileWindows()){
                 JButton jTextButton = new JButton(aw.getFileManager().getName());
                 ColoredComponent coloredComp = new ColoredComponent(jTextButton, "txtColor", "bgColor");
                 jTextButton.addActionListener(new AbstractAction() {
@@ -413,7 +373,7 @@ public class AudioWindow extends JInternalFrame {
                 }
             });
 
-            multDialog.buildDialog(audioWindow);
+            multDialog.buildDialog(window);
         }
     }
 
@@ -440,7 +400,7 @@ public class AudioWindow extends JInternalFrame {
                     updatePane();
                 }
             });
-            stepDialog.buildDialog(audioWindow);
+            stepDialog.buildDialog(window);
             System.out.println("????");
         }
     }
@@ -485,7 +445,7 @@ public class AudioWindow extends JInternalFrame {
                     updatePane();
                 }
             });
-            filterDialog.buildDialog(audioWindow);
+            filterDialog.buildDialog(window);
         }
     }
 
@@ -522,14 +482,14 @@ public class AudioWindow extends JInternalFrame {
     public class PlayAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e){
-            player.playFile(pane);
+            player.playFile();
         }
     }
 
     public class PlaySelectedAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e){
-            player.playFile(pane, (int) pane.getSelection()[0], (int) pane.getSelection()[1]);
+            player.playFile((int) pane.getSelection()[0], (int) pane.getSelection()[1]);
         }
     }
 
@@ -573,7 +533,7 @@ public class AudioWindow extends JInternalFrame {
                     updatePane();
                 }
             });
-            filterDialog.buildDialog(audioWindow);
+            filterDialog.buildDialog(window);
         }
     }
 
@@ -593,7 +553,7 @@ public class AudioWindow extends JInternalFrame {
                     updatePane();
                 }
             });
-            filterDialog.buildDialog(audioWindow);
+            filterDialog.buildDialog(window);
         }
     }
 
@@ -612,16 +572,9 @@ public class AudioWindow extends JInternalFrame {
         }
     }
 
-    public void updatePane(){
-        pane.setAudioFile(audioFile);
-        pane.invalidate();
-        pane.repaint();
-        this.invalidate();
-        this.repaint();
-    }
-
     @Override
     public void paintComponent(Graphics g){
+        pane.setAudioFile(audioFile);
         if(pane.getSelection()[0] ==  pane.getSelection()[1]){
             for(ColoredComponent c: selectionComponents) {
                 c.setVisible(false);
