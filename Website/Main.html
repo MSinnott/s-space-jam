@@ -1,64 +1,168 @@
 <!DOCTYPE html>
-
-<!---Mainpage HTML for ssjam.com--->
-
 <html>
-
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="theme-color" content="#2196F3">
+    <title>S Space Jam</title>
 
-  <!--imports-->
-  <link rel="stylesheet" type="text/css" href="mainStyle.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="mainScript.js"></script>
-
-  <title>SSJam</title>
-
+    <!-- CSS  -->
+    <link href="min/plugin-min.css" type="text/css" rel="stylesheet">
+    <link href="min/custom-min.css" type="text/css" rel="stylesheet" >
 </head>
+<body id="top" class="scrollspy">
 
-<body>
+<!-- Pre Loader -->
+<div id="loader-wrapper">
+    <div id="loader"></div>
 
-<!-- Logo + Git Logo -->
-  <a href="https://github.com/MSinnott/s-space-jam">
-    <div id="cf">
-      <img class="bottom" src="Images/GitHub-Mark.png"/>
-      <img class="top" src="Images/ssjamNewLogo.jpg"/>
+    <div class="loader-section section-left"></div>
+    <div class="loader-section section-right"></div>
+
+</div>
+
+<!--Navigation-->
+ <div class="navbar-fixed">
+    <nav id="nav_f" class="default_color" role="navigation">
+        <div class="container">
+            <div class="nav-wrapper">
+            <a href="#" id="logo-container" class="brand-logo">S Space Jam</a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="#intro">Service</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="https://github.com/MSinnott/s-space-jam" target="_blank">Download</a></li>
+                </ul>
+                <ul id="nav-mobile" class="side-nav">
+                    <li><a href="#intro">Service</a></li>
+                    <li><a href="#team">Team</a></li>
+                    <li><a href="https://github.com/joashp/material-design-template" target="_blank">Download</a></li>
+                </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<!--Hero-->
+<div class="section no-pad-bot" id="index-banner">
+    <div class="container">
+        <h1 class="text_h center header cd-headline letters type">
+            <span>I Love</span>
+            <span class="cd-words-wrapper waiting">
+                <b class="is-visible">creating</b>
+                <b>Refining</b>
+                <b>Jamming!</b>
+            </span>
+        </h1>
     </div>
-  </a>
-  <!--Brand name-->
-  <div id="brandName">
-    <h1> S Space Jam </h1>
-  </div>
+</div>
 
-  <div id= "descText">
-      <p>
-        S-Space Jam is a piece of software that allows users to generate and edit music. <br>
-        Features: <br>
-        <ul>
-          <li>Both forward and backward Fourier Transforms to see the component frequencies of music</li>
-          <li>High-Pass, Low-Pass, Band-Pass or Boxcar filters</li>
-          <li>File rescaling and overlaying of one file onto another</li>
-          <li>Pure tone generation</li>
-          <li>Adding harmonics to a pure tone</li>
-        </ul>
-      </p>
-      How to use:
-      <p>
-        Currently the project is being developed in Intellij Idea, however, once development ends, it will be a stand-alone .jar file <br>
-        The software runs in under 1G of RAM for ordinary file sizes, however larger files can cause issues (and take more memory). <br>
-      </p>
-  </div>
+<!--Intro and service-->
+<div id="intro" class="section scrollspy">
+    <div class="container">
+        <div class="row">
+            <div  class="col s12">
+                <h2 class="center header text_h2"> <span class="span_h2">S-Space-Jam</span> is a piece of software that allows users to generate and edit music.
+                  <span class="span_h2"> Innovate  </span>with our built in fourier transform to <span class="span_h2"> discover</span> secrets hidden in the frequencies</h2>
+            </div>
 
-  <!--Collaborators table-->
-  <div id="collabFlip">Collaborators</div>
-  <div id="collabPanel">
-    <h3> Abhijit Chowdhary </h3>
-    <p> Primary website Dev.
-      <br>Current Senior at Hammond High School hoping to go into mathematics & physics  </p>
-    <h3> Matthew Sinnott </h3>
-    <p> Code Factory. Primary java dev.
-      <br>Current Senior at Hammond High School hoping to double major in electrical engineering and computer science. </p>
-  </div>
+            <div  class="col s12 m4 l4">
+                <div class="center promo promo-example">
+                    <i class="mdi-image-flash-on"></i>
+                    <h5 class="promo-caption">Speeds up development</h5>
+                    <p class="light center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Cum sociis natoque penatibus et magnis dis parturient montes.</p>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="center promo promo-example">
+                    <i class="mdi-social-group"></i>
+                    <h5 class="promo-caption">User Experience Focused</h5>
+                    <p class="light center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+                </div>
+            </div>
+            <div class="col s12 m4 l4">
+                <div class="center promo promo-example">
+                    <i class="mdi-hardware-desktop-windows"></i>
+                    <h5 class="promo-caption">Fully responsive</h5>
+                    <p class="light center">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-</body>
 
+<!--Team-->
+<div class="section scrollspy" id="team">
+    <div class="container">
+        <h2 class="header text_b"> Our Team </h2>
+        <div class="row">
+            <div class="col s12 m3">
+                <div class="card card-avatar">
+                    <div class="waves-effect waves-block waves-light">
+                        <img class="activator" src="img/avatar1.png">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Matthew Sinnott <br/>
+                            <small><em><a class="red-text text-darken-1" href="#">Code Factory. <br>Primary Java Dev.</br></a></em></small></span>
+                        <p>
+                            <!-- <a class="blue-text text-lighten-2" href="https://www.facebook.com/joash.c.pereira">
+                                <i class="fa fa-facebook-square"></i>
+                            </a> -->
+                            <a class="blue-text text-lighten-2" href="https://github.com/MSinnott">
+                                <i class="fa fa-github-square"></i>
+                            </a>
+                            <a class="blue-text text-lighten-2" href="https://plus.google.com/106042006918612004127">
+                                <i class="fa fa-google-plus-square"></i>
+                            </a>
+                            <!-- <a class="blue-text text-lighten-2" href="https://www.linkedin.com/in/joashp">
+                                <i class="fa fa-linkedin-square"></i>
+                            </a> -->
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col s12 m3">
+                <div class="card card-avatar">
+                    <div class="waves-effect waves-block waves-light">
+                        <img class="activator" src="img/avatar2.png">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-title activator grey-text text-darken-4">Abhijit Chowdhary<br/>
+                            <small><em><a class="red-text text-darken-1" href="#">Web Designer</a href=""></em></small>
+                        </span>
+                        <p>
+                            <a class="blue-text text-lighten-2" href="https://www.facebook.com/abhijit.chowdhary.9">
+                                <i class="fa fa-facebook-square"></i>
+                            </a>
+                            <a class="blue-text text-lighten-2" href="https://twitter.com/TrostAft">
+                                <i class="fa fa-twitter-square"></i>
+                            </a>
+                            <a class="blue-text text-lighten-2" href="https://www.github.com/TrostAft">
+                                <i class="fa fa-github-square"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Footer-->
+<footer id="contact" class="page-footer default_color scrollspy">
+    <div class="footer-copyright default_color">
+        <div class="container">
+            Made by <a class="white-text" href="http://github.com/TrostAft">Abhijit Chowdhary</a>.
+            Thanks to <a class="white-text" href="http://materializecss.com/">materializecss</a>
+        </div>
+    </div>
+</footer>
+
+
+    <!--  Scripts-->
+    <script src="min/plugin-min.js"></script>
+    <script src="min/custom-min.js"></script>
+
+    </body>
 </html>
