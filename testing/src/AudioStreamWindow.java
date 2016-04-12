@@ -1,14 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.io.IOException;
 
 public class AudioStreamWindow extends InternalWindow implements Runnable{
+
+    private AudioFileManager audioStreamFile;
 
     public AudioStreamWindow(int width, int height, AudioDesktop aDesk) {
         super(width, height, aDesk);
         resetColors();
+        audioStreamFile = new AudioFileManager(new float[0], new float[0]);
     }
 
     public void beginStream(){
@@ -18,7 +19,7 @@ public class AudioStreamWindow extends InternalWindow implements Runnable{
 
     @Override
     public AudioFileManager getFileManager() {
-        return null;
+        return audioStreamFile;
     }
 
     @Override
