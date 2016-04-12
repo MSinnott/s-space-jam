@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 public class AudioFileWindow extends InternalWindow {
 
-
     private AudioFileManager audioFile;
 
     private String windowHistory = "";
@@ -19,7 +18,7 @@ public class AudioFileWindow extends InternalWindow {
 
         addHistory(fileManager.getName());
 
-        player = new SoundPlayer(fileManager, pane);
+        player = new StaticSoundPlayer(fileManager, pane);
 
         this.setLayout(new BorderLayout());
 

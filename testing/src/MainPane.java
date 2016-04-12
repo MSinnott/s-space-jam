@@ -29,6 +29,7 @@ public class MainPane extends JPanel implements KeyListener, MouseListener, Mous
     /* pretty graphical window for the music --m */
     @Override
     public void paintComponent(Graphics g){
+        if(audioFile == null) return;
         for(float[] channel: audioFile.getChannels()){
             if (channel == null || channel.length < 2) return;
         }

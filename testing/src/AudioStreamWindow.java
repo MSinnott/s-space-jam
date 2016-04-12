@@ -2,14 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 
-public class AudioStreamWindow extends InternalWindow implements Runnable{
+public class AudioStreamWindow extends InternalWindow implements Runnable {
 
     private AudioFileManager audioStreamFile;
+    private MusicGenerator generator = new MusicGenerator(AudioFileManager.DEFAULT_SAMPLE_RATE);
+    private StreamingSoundPlayer soundPlayer = new StreamingSoundPlayer(pane, this);
+
+    private boolean streaming = true;
 
     public AudioStreamWindow(int width, int height, AudioDesktop aDesk) {
         super(width, height, aDesk);
         resetColors();
         audioStreamFile = new AudioFileManager(new float[0], new float[0]);
+        pane = new MainPane(this);
+        add(pane);
     }
 
     public void beginStream(){
@@ -22,9 +28,34 @@ public class AudioStreamWindow extends InternalWindow implements Runnable{
         return audioStreamFile;
     }
 
+    private boolean needLine = true;
+
     @Override
     public void run() {
-        player = new SoundPlayer();
+        player = new StreamingSoundPlayer(pane, this);
+        Thread music = new Thread(player);
+        music.start();
+        while(streaming){
+            if(needLine){
+                AudioFileManager songLine = generator.genNewComplexSong();
+                soundPlayer.addLine(songLine.getSoundData());
+                audioStreamFile.pAdd(songLine, true);
+                needLine = false;
+            }
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void queryNewLine(){
+        needLine = true;
+    }
+
+    public boolean isStreaming(){
+        return streaming;
     }
 
     public void buildMenus(){
