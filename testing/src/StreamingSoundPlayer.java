@@ -45,6 +45,7 @@ public class StreamingSoundPlayer extends SoundPlayer {
         } while (playing);
     }
 
+    //:(
     public void addLine(byte[] bytes){
         streamComponents.add(bytes);
         System.out.println("Added: " + streamComponents.size());
