@@ -34,22 +34,18 @@ public class AudioStreamWindow extends InternalWindow implements Runnable {
 
     @Override
     public void run() {
-        player = new StreamingSoundPlayer(pane, this);
-        Thread music = new Thread(player);
+        soundPlayer = new StreamingSoundPlayer(pane, this);
+        Thread music = new Thread(soundPlayer);
         music.start();
-        List<byte[]> streamComponents = soundPlayer.getStreamComponents();
         while(streaming) {
             if(needLine){
                 needLine = false;
                 AudioFileManager songLine = generator.genNewComplexSong();
                 songLine.trim();
-                streamComponents.add(songLine.getSoundData());
+                soundPlayer.addLine(songLine.getSoundData());
                 audioStreamFile.pAdd(songLine, true);
-
                 pane.setAudioFile(audioStreamFile);
                 updatePane();
-
-                System.out.println(streamComponents.size() + "!");
             }
             try {
                 Thread.sleep(50);
@@ -57,11 +53,6 @@ public class AudioStreamWindow extends InternalWindow implements Runnable {
                 e.printStackTrace();
             }
         }
-    }
-
-    public String getView(){
-        System.out.println(soundPlayer.getStreamComponents().size() + "?");
-        return soundPlayer.getStreamComponents().size() + "?";
     }
 
     public void queryNewLine(){
