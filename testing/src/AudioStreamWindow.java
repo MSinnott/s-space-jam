@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.util.*;
+import java.util.List;
 
 public class AudioStreamWindow extends InternalWindow implements Runnable {
 
@@ -35,12 +37,19 @@ public class AudioStreamWindow extends InternalWindow implements Runnable {
         player = new StreamingSoundPlayer(pane, this);
         Thread music = new Thread(player);
         music.start();
-        while(streaming){
+        List<byte[]> streamComponents = soundPlayer.getStreamComponents();
+        while(streaming) {
             if(needLine){
-                AudioFileManager songLine = generator.genNewComplexSong();
-                soundPlayer.addLine(songLine.getSoundData());
-                audioStreamFile.pAdd(songLine, true);
                 needLine = false;
+                AudioFileManager songLine = generator.genNewComplexSong();
+                songLine.trim();
+                streamComponents.add(songLine.getSoundData());
+                audioStreamFile.pAdd(songLine, true);
+
+                pane.setAudioFile(audioStreamFile);
+                updatePane();
+
+                System.out.println(streamComponents.size() + "!");
             }
             try {
                 Thread.sleep(50);
@@ -48,6 +57,11 @@ public class AudioStreamWindow extends InternalWindow implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String getView(){
+        System.out.println(soundPlayer.getStreamComponents().size() + "?");
+        return soundPlayer.getStreamComponents().size() + "?";
     }
 
     public void queryNewLine(){
