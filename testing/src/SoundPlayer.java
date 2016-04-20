@@ -3,7 +3,7 @@ import javax.sound.sampled.*;
 public abstract class SoundPlayer implements Runnable{
 
     protected AudioFileManager audioFile;
-    protected final int FRAME_LEN = 10000;
+    protected final int FRAME_LEN = 1000;
     protected SourceDataLine sourceLine;
 
     protected MainPane pane;
@@ -33,9 +33,16 @@ public abstract class SoundPlayer implements Runnable{
         this.repeat = repeat;
     }
 
-    public void stop(){
+    public void stop(StopCode stype){
         playing = false;
     }
 
+    public int getLoc(){
+        return loc;
+    }
+
+    public abstract void addSound(byte[] b);
+
+    public enum StopCode { CLOSE, PAUSE, ENDSTREAM};
 
 }

@@ -8,16 +8,13 @@ import java.util.List;
 public class StreamingSoundPlayer extends SoundPlayer {
 
     private AudioStreamWindow streamWindow;
-    private final static List<byte[]> streamComponents = new ArrayList<>();;
+    private final List<byte[]> streamComponents = new ArrayList<>();;
+    private int sloc;
 
     public StreamingSoundPlayer(MainPane pane, AudioStreamWindow streamWindow){
         this.pane = pane;
         this.streamWindow = streamWindow;
         audioFile = new AudioFileManager(new float[1], new float[1]);
-    }
-
-    public List<byte[]> getStreamComponents(){
-        return streamComponents;
     }
 
     @Override
@@ -35,22 +32,33 @@ public class StreamingSoundPlayer extends SoundPlayer {
 
         sourceLine.start();
         do {
-                System.out.println(streamComponents.size() + " :(");
-
-                if (streamComponents.size() != 0) {
-                    System.out.println("W");
-                    streamWindow.queryNewLine();
-                    int slen = streamComponents.get(streamComponents.size() - 1).length;
-                    sourceLine.write(streamComponents.get(streamComponents.size() - 1), 0,  slen/2 - ((slen/2) % 4));
-                } else {
-                    streamWindow.getView();
+            if (streamComponents.size() != 0) {
+                streamWindow.queryNewLine();
+                int slen = streamComponents.get(streamComponents.size() - 1).length;
+                int index = streamComponents.size() - 1;
+                while (sloc < slen / 2 && playing) {
+                    sourceLine.write(streamComponents.get(index), sloc, FRAME_LEN);
+                    loc += FRAME_LEN;
+                    sloc += FRAME_LEN;
                 }
+                sloc = 0;
+            }
             try {
-                Thread.sleep(10);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } while (playing);
+    }
+
+    public void addSound(byte[] b){
+        streamComponents.add(b);
+    }
+
+    @Override
+    public void stop(StopCode stype){
+        playing = false;
+        if(stype == StopCode.ENDSTREAM) streamWindow.convertToFileWindow();
     }
 
 }
