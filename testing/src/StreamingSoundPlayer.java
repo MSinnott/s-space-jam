@@ -3,13 +3,13 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class StreamingSoundPlayer extends SoundPlayer {
 
     private AudioStreamWindow streamWindow;
-    private final List<byte[]> streamComponents = Collections.synchronizedList(new ArrayList<>());
+    private final List<byte[]> streamComponents = new ArrayList<>();;
+    private int sloc;
 
     public StreamingSoundPlayer(MainPane pane, AudioStreamWindow streamWindow){
         this.pane = pane;
@@ -35,18 +35,30 @@ public class StreamingSoundPlayer extends SoundPlayer {
             if (streamComponents.size() != 0) {
                 streamWindow.queryNewLine();
                 int slen = streamComponents.get(streamComponents.size() - 1).length;
-                sourceLine.write(streamComponents.get(streamComponents.size() - 1), 0, slen / 2 - ((slen / 2) % 4));
+                int index = streamComponents.size() - 1;
+                while (sloc < slen / 2 && playing) {
+                    sourceLine.write(streamComponents.get(index), sloc, FRAME_LEN);
+                    loc += FRAME_LEN;
+                    sloc += FRAME_LEN;
+                }
+                sloc = 0;
             }
             try {
-                Thread.sleep(100);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         } while (playing);
     }
 
-    public void addLine(byte[] b){
+    public void addSound(byte[] b){
         streamComponents.add(b);
+    }
+
+    @Override
+    public void stop(StopCode stype){
+        playing = false;
+        if(stype == StopCode.ENDSTREAM) streamWindow.convertToFileWindow();
     }
 
 }

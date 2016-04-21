@@ -40,4 +40,9 @@ public class StaticSoundPlayer extends SoundPlayer {
         loc = 0;
         pane.updateLoc(loc);
     }
+
+    public void addSound(byte[] b){
+        audioFile.pAdd(new AudioFileManager(b), true);
+    }
+
 }

@@ -75,6 +75,10 @@ public class AudioFileManager {
         channels = complexify(channels);
     }
 
+    public AudioFileManager(byte[] b) {
+        channels = split(byteArrToFloatArr(b), 2);
+    }
+
     /**
      * @return this objects channels
      */

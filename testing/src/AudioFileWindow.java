@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.event.InternalFrameEvent;
+import javax.swing.event.InternalFrameListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -145,79 +147,7 @@ public class AudioFileWindow extends InternalWindow {
         player.playFile();
     }
 
-    //Saves the file
-    public class SaveAction extends AbstractAction{
-        private String type;
-
-        public SaveAction(String type){
-            this.type = type;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(!saved || "SaveAs".equals(type)){
-                File root;
-                try {
-                    root = new File(AudioDesktop.LinuxPathHead);
-                } catch (Exception ex) {
-                    root = new File(AudioDesktop.WindowsPathHead);
-                }
-                JFileChooser fileChooser = new JFileChooser(root);
-                if (fileChooser.showSaveDialog(window) == JFileChooser.APPROVE_OPTION) {
-                    try {
-                        savePath = fileChooser.getSelectedFile().getAbsolutePath();
-                        audioFile.buildFile(savePath);
-                        saved = true;
-                        String name = audioFile.getName();
-                        window.setTitle(name);
-                    } catch (IOException e1) {
-                        e1.printStackTrace();
-                    }
-                }
-            } else {
-                try {
-                    audioFile.buildFile(savePath);
-                    String name = audioFile.getName();
-                    window.setTitle(name);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        }
-    }
-
     //Creates + adds a clone of this object to the desktop
-    public class CloneAction extends AbstractAction {
-        private AudioFileWindow audioFileWindow;
-        public CloneAction(AudioFileWindow window){
-            audioFileWindow = window;
-        }
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            AudioFileManager newAudioFile = new AudioFileManager(audioFile);
-            newAudioFile.setDefaultName("Clone of - " + audioFile.getName());
-            AudioFileWindow clone = new AudioFileWindow(audioFileWindow.getWidth(), audioFileWindow.getHeight(), newAudioFile, audioDesktop);
-            audioDesktop.addWindow(clone);
-            clone.moveToFront();
-            clone.setLocation(audioFileWindow.getX() + 32, audioFileWindow.getY() + 32);
-            clone.setView(pane.getPan(), pane.getZoom());
-        }
-    }
-
-    public class ExitAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            AdaptiveDialog exitDialog = new AdaptiveDialog("Exit?");
-            exitDialog.addDoneBinding(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    audioDesktop.removeWindow(window);
-                }
-            });
-            exitDialog.buildDialog(window);
-        }
-    }
-
     public class vscaleAction extends AbstractAction {
         private boolean toSelection = false;
         public vscaleAction(boolean toSelection){
@@ -498,13 +428,6 @@ public class AudioFileWindow extends InternalWindow {
         public void actionPerformed(ActionEvent e){
             toggle = !toggle;
             player.setRepeat(toggle);
-        }
-    }
-
-    public class StopAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e){
-            player.stop();
         }
     }
 
