@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -24,16 +23,6 @@ public class MusicGenerator {
         High level functions to build a song
      */
 
-    public float[] generateSongV4(int len, float volumeMultiplier) {
-        float[] ret = new float[len];
-        float note = scale.getRandomFromScale();
-        for (int i = 0; i < len; i++) {
-            ret[i] = volumeMultiplier * getTone(note, i);
-            if (i % 10000 == 0) note = scale.getRandomFromScale();
-        }
-        return ret;
-    }
-
     public AudioFileManager genNewComplexSong(){
         AudioFileManager theme = genTheme(8);
         AudioFileManager prologue = genTheme(8);
@@ -46,7 +35,6 @@ public class MusicGenerator {
     }
 
     public AudioFileManager genTheme(int themeLen){
-        System.out.println(Arrays.toString(scale.getScale()));
         AudioFileManager res = new AudioFileManager(new float[]{0}, new float[]{0});
         int[] noteLens = new int[themeLen];
         int phraseLen = 3 + random.nextInt(3);
@@ -73,126 +61,6 @@ public class MusicGenerator {
         res.vscale(1000);
         res.pAdd(res, AudioFileManager.DEFAULT_SAMPLE_RATE);
         return res;
-    }
-
-    public float[] generateSongV3(int themeLen, float volumeMultiplier, float peakedness){
-        float[] theme = new float[themeLen];
-        float[] noteLen = new float[themeLen];
-        int totalLen = 0;
-        for (int i = 0; i < themeLen; i++) {
-            theme[i] = scale.getRandomFromScale();
-            noteLen[i] = (float) (2f / Math.pow(2, random.nextInt(3)));
-            totalLen += noteLen[i];
-        }
-        float[] music = new float[AudioFileManager.DEFAULT_SAMPLE_RATE * totalLen / 2];
-        float[] toAdd;
-        int loc = 0;
-        for (int i = 0; i < themeLen; i += 1) {
-            toAdd = getBeat(theme[i], noteLen[i], volumeMultiplier, 1f / noteLen[i], peakedness);
-            System.arraycopy(toAdd, 0, music, loc, toAdd.length / 2);
-            loc += toAdd.length / 3;
-        }
-        return music;
-    }
-
-    public float[] generateSongV2(int numThemeRepeats, float volumeMultiplier){
-        int numNotes = random.nextInt(20) + 10;
-        float[] noteLen = new float[numNotes];
-        float[] notes = new float[numNotes];
-
-        int themeLength = 0;
-        for (int i = 0; i < numNotes; i++) {
-            noteLen[i] = (float) (1.0 / (1 << random.nextInt(3)));
-            notes[i] = scale.getRandomFromScale();
-            themeLength += noteLen[i];
-        }
-
-        float[] theme = new float[themeLength * numThemeRepeats * sampleRate];
-
-        int loc = 0;
-        for (int i = 0; i < numThemeRepeats; i++) {
-            for (int j = 0; j < noteLen.length; j++) {
-                for (int k = 0; k < noteLen[j] * sampleRate; k++, loc++) {
-                    if(loc == theme.length) break;
-                    theme[loc] = volumeMultiplier * getTone(notes[j], loc);
-                }
-            }
-        }
-
-        return theme;
-    }
-
-    public float[] generateSongV1(int numThemeRepeats, float volumeMultiplier){
-        ArrayList<Integer> theme = getSongV1(3, 0);
-
-        float[] themeNotes = new float[theme.size()];
-
-        int[] noteLengths = new int[theme.size()];
-
-        for (int i = 0; i < theme.size(); i++) {
-            themeNotes[i] = scale.getNoteAt(i);
-        }
-        int totalLength = 0;
-        for(int i = 1; i < theme.size(); i++){
-            noteLengths[i] = (int) (themeNotes[i-1] * themeNotes[i] * random.nextInt((int) (themeNotes[i] + 1)) / 50 +5000);
-            totalLength += noteLengths[i];
-        }
-
-
-        float[] music = new float[totalLength];
-        int loc = 0;
-        int lastLoc = 0;
-        for(int i = 0; i < theme.size(); i++) {
-            int volume = random.nextInt(6000) + 2000;
-            float noteFreq = themeNotes[i];
-            for(int j = lastLoc; j < noteLengths[i] + lastLoc; j++, loc++) {
-                music[loc] = (float) (volume * Math.cos(2 * Math.PI * j / noteFreq));
-            }
-            lastLoc = loc;
-        }
-
-        float[] samples  = new float[numThemeRepeats * music.length];
-
-        for(int i = 0; i < samples.length; i++){
-            samples[i] = volumeMultiplier * music[i % music.length];
-        }
-
-        return samples;
-    }
-
-    public ArrayList<Integer> getSongV1(int numIterations, int seed){
-        ArrayList<Integer> notes  = new ArrayList<Integer>();
-        notes.add(seed);
-
-        int[] randMaps = new int[10];
-        for (int i = 0; i < randMaps.length; i++) {
-            randMaps[i] = random.nextInt(scale.getScale().length);
-        }
-
-        for (int i = 0; i < numIterations; i++) {
-            int loc = 0;
-            while (loc < notes.size()){
-                if(notes.get(loc) == 0){
-                    notes.add(loc + 1, randMaps[0]);
-                    notes.add(loc + 1, randMaps[1]);
-                } else if(notes.get(loc) == 1){
-                    notes.add(loc + 1, randMaps[2]);
-                    notes.add(loc + 1, randMaps[3]);
-                } else if(notes.get(loc) == 2){
-                    notes.add(loc + 1, randMaps[4]);
-                    notes.add(loc + 1, randMaps[5]);
-                } else if(notes.get(loc) == 3){
-                    notes.add(loc + 1, randMaps[6]);
-                    notes.add(loc + 1, randMaps[7]);
-                } else if(notes.get(loc) == 4){
-                    notes.add(loc + 1, randMaps[8]);
-                    notes.add(loc + 1, randMaps[9]);
-                }
-                loc+=3;
-            }
-        }
-
-        return notes;
     }
 
     /*

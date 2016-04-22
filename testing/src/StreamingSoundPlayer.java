@@ -34,9 +34,9 @@ public class StreamingSoundPlayer extends SoundPlayer {
         do {
             if (streamComponents.size() != 0) {
                 streamWindow.queryNewLine();
-                int slen = streamComponents.get(streamComponents.size() - 1).length;
+                int streamLen = streamComponents.get(streamComponents.size() - 1).length;
                 int index = streamComponents.size() - 1;
-                while (sloc < slen / 2 && playing) {
+                while (sloc < streamLen / 2 && playing) {
                     sourceLine.write(streamComponents.get(index), sloc, FRAME_LEN);
                     loc += FRAME_LEN;
                     sloc += FRAME_LEN;

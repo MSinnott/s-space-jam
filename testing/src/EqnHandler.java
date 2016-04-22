@@ -1,11 +1,8 @@
-import com.sun.org.apache.xpath.internal.SourceTree;
-
 import java.util.*;
 
-/*
+/**
     Parses, converts to Reverse Polish Notation and evaluates an expression
  */
-
 public class EqnHandler {
 
     public static class OFMap extends HashMap<String, int[]> {
@@ -257,4 +254,5 @@ public class EqnHandler {
         }
         return false;
     }
+
 }

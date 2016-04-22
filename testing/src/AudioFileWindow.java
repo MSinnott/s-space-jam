@@ -8,12 +8,22 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ *  Displays the audio files, allows, editing, playback, etc
+ */
 public class AudioFileWindow extends InternalWindow {
 
     private AudioFileManager audioFile;
 
     private String windowHistory = "";
 
+    /**
+     * Creates a window to display an audio file
+     * @param width width of the window
+     * @param height height of the window
+     * @param fileManager the file to use
+     * @param aDesk the desktop to be put in, used for tracking purposes
+     */
     public AudioFileWindow(int width, int height, AudioFileManager fileManager, AudioDesktop aDesk){
         super(width, height, aDesk);
         pane = new MainPane(this);
@@ -39,23 +49,33 @@ public class AudioFileWindow extends InternalWindow {
         buildMenus();
     }
 
+    /**
+     * Adds a line to the history file
+     * @param histToAdd line to add
+     */
     private void addHistory(String histToAdd) {
         windowHistory += "\n" + histToAdd;
     }
 
+    /**
+     * Updates the used file
+     * @param fileManager new file to use
+     */
     public void loadFile(AudioFileManager fileManager){
         audioFile = fileManager;
         updatePane();
     }
 
-    public MainPane getMainPane(){
-        return pane;
-    }
-
+    /**
+     * @return the currently used file
+     */
     public AudioFileManager getFileManager(){
         return audioFile;
     }
 
+    /**
+     * Builds the menus for the frame, used to save space
+     */
     public void buildMenus(){
         JMenuBar menuBar = new JMenuBar();
         this.add(menuBar, BorderLayout.NORTH);
@@ -138,16 +158,26 @@ public class AudioFileWindow extends InternalWindow {
         resetColors();
     }
 
+    /**
+     * Fixes pane location and zoom
+     * @param pan the new pan
+     * @param zoom the new zoom
+     */
     public void setView(int pan, double zoom){
         pane.setPan(pan);
         pane.setZoom(zoom);
     }
 
+    /**
+     * Starts the file playing
+     */
     public void play(){
         player.playFile();
     }
 
-    //Creates + adds a clone of this object to the desktop
+    /**
+     * Adds a clone of this window to the desktop
+     */
     public class vscaleAction extends AbstractAction {
         private boolean toSelection = false;
         public vscaleAction(boolean toSelection){
@@ -174,6 +204,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Shifts the audio data vertically
+     */
     public class vshiftAction extends AbstractAction {
         private boolean toSelection = false;
         public vshiftAction(boolean toSelection){
@@ -200,6 +233,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Shifts the audio data horizontally
+     */
     public class hshiftAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -218,6 +254,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Adds the audio data to other audio data
+     */
     public class pbpAddAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -262,6 +301,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Multiplies the audio data with other audio data
+     */
     public class pbpMultAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -306,6 +348,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Runs a forward fft on the audio data
+     */
     public class forwardFFtAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -315,6 +360,7 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    // TODO: 4/20/16
     public class stepforwardFFtAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -334,6 +380,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Runs an inverse fft on the audio data
+     */
     public class backwardFFtAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -343,6 +392,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Trims out zero sound from the front and end
+     */
     public class TrimAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -352,6 +404,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Runs the audio data through a boxcar filter
+     */
     public class BoxcarFilterAction extends AbstractAction {
         private boolean toSelection = false;
         public BoxcarFilterAction(boolean toSelection){
@@ -378,6 +433,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Zeroes the selected audio data
+     */
     public class ZeroSelectedAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e){
@@ -388,6 +446,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Zeroes the nonselected audio data
+     */
     public class ZeroNonSelectedAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e){
@@ -399,6 +460,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Rescales the viewing window to match the selection
+     */
     public class ZoomToSelectionAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e){
@@ -408,6 +472,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Plays the audio file
+     */
     public class PlayAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e){
@@ -415,6 +482,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Plays the selected audio
+     */
     public class PlaySelectedAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e){
@@ -422,6 +492,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Toggles autorepeat
+     */
     public class RepeatAction extends AbstractAction {
         boolean toggle = false;
         @Override
@@ -431,6 +504,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Runs the audio data through a threshold filter
+     */
     public class FilterThresholdAction extends AbstractAction {
         private boolean toSelection = false;
         public FilterThresholdAction(boolean toSelection){
@@ -459,6 +535,9 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Adds noise to the audio data
+     */
     public class AddNoiseAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
@@ -479,6 +558,7 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    // TODO: 4/20/16
     public class MakeAudibleAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
@@ -487,6 +567,10 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Prints the history -- debug only!
+     */
+    // TODO: 4/20/16
     public class PrintHistoryAction extends AbstractAction{
         @Override
         public void actionPerformed(ActionEvent e){
@@ -494,6 +578,10 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
+    /**
+     * Repaints the component
+     * @param g gMoney here be MAGIC!
+     */
     @Override
     public void paintComponent(Graphics g){
         pane.setAudioFile(audioFile);

@@ -48,7 +48,6 @@ public class Scale {
         scale = new float[numNotes];
         for (int i = stIndex; loc < numNotes; i+= ((rand.nextBoolean()) ? 2 : 3)) {
             scale[loc++] = notes[i];
-            System.out.println(i);
         }
     }
 

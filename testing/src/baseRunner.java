@@ -1,10 +1,13 @@
-import java.io.*;
-
+/**
+ * Runs the project
+ */
 public class baseRunner {
 
-    public static void main(String[] args) throws IOException {
-        MusicGenerator generator = new MusicGenerator(AudioFileManager.DEFAULT_SAMPLE_RATE, new Scale(7, 40));
-        //making and initializing window --m
+    /**
+     * Where it all begins...
+     * @param args arguments that I don't care about!
+     */
+    public static void main(String[] args) {
         AudioDesktop mainWindow = new AudioDesktop("sSpace -- Music Creator!", 600, 500);
     }
 

@@ -75,6 +75,10 @@ public class AudioFileManager {
         channels = complexify(channels);
     }
 
+    /**
+     * Builds audiofile from byte array
+     * @param b sound data to build with
+     */
     public AudioFileManager(byte[] b) {
         channels = split(byteArrToFloatArr(b), 2);
     }
