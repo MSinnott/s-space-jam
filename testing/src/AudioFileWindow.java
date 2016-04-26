@@ -91,8 +91,6 @@ public class AudioFileWindow extends InternalWindow {
 
         makeMenuItem(fileMenu, new JMenuItem("Save As ..."), "txtColor", "bgColor", new SaveAction("SaveAs"), components);
 
-        makeMenuItem(fileMenu, new JMenuItem("Print History"), "txtColor", "bgColor", new PrintHistoryAction(), components);
-
         makeMenuItem(fileMenu, new JMenuItem("Exit"), "txtColor", "bgColor", new ExitAction(), components);
 
         JMenu opMenu = new JMenu("Operations");
@@ -100,8 +98,6 @@ public class AudioFileWindow extends InternalWindow {
         components.add(new ColoredComponent(opMenu,"txtColor", "bgColor"));
 
         makeMenuItem(opMenu, new JMenuItem("Forward FFT"), "txtColor", "bgColor", new forwardFFtAction(), components);
-
-        makeMenuItem(opMenu, new JMenuItem("Step Forward FFT"), "txtColor", "bgColor", new stepforwardFFtAction(), components);
 
         makeMenuItem(opMenu, new JMenuItem("Backward FFT"), "txtColor", "bgColor", new backwardFFtAction(), components);
 
@@ -122,8 +118,6 @@ public class AudioFileWindow extends InternalWindow {
         makeMenuItem(opMenu, new JMenuItem("Threshold Filter"), "txtColor", "bgColor", new FilterThresholdAction(false), components);
 
         makeMenuItem(opMenu, new JMenuItem("Add noise"), "txtColor", "bgColor", new AddNoiseAction(), components);
-
-        makeMenuItem(opMenu, new JMenuItem("Make Audible"), "txtColor", "bgColor", new MakeAudibleAction(), components);
 
         JMenu selectionMenu = new JMenu("Edit Selection");
         menuBar.add(selectionMenu);
@@ -360,26 +354,6 @@ public class AudioFileWindow extends InternalWindow {
         }
     }
 
-    // TODO: 4/20/16
-    public class stepforwardFFtAction extends AbstractAction {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            final AdaptiveDialog stepDialog = new AdaptiveDialog("Step FFT");
-            final JTextField textField = new JTextField();
-            stepDialog.addItem(textField, "txtColor", "bgColor", false);
-            stepDialog.addDoneBinding(new AbstractAction() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("!");
-                    audioFile.smallFFT(Integer.valueOf(textField.getText()));
-                    updatePane();
-                }
-            });
-            stepDialog.buildDialog(window);
-            System.out.println("????");
-        }
-    }
-
     /**
      * Runs an inverse fft on the audio data
      */
@@ -555,26 +529,6 @@ public class AudioFileWindow extends InternalWindow {
                 }
             });
             filterDialog.buildDialog(window);
-        }
-    }
-
-    // TODO: 4/20/16
-    public class MakeAudibleAction extends AbstractAction{
-        @Override
-        public void actionPerformed(ActionEvent actionEvent) {
-            audioFile.makeAudible();
-            updatePane();
-        }
-    }
-
-    /**
-     * Prints the history -- debug only!
-     */
-    // TODO: 4/20/16
-    public class PrintHistoryAction extends AbstractAction{
-        @Override
-        public void actionPerformed(ActionEvent e){
-            System.out.println(windowHistory);
         }
     }
 
