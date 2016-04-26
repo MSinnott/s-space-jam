@@ -100,12 +100,8 @@ public abstract class InternalWindow extends JInternalFrame{
         @Override
         public void actionPerformed(ActionEvent e) {
             if(!saved || "SaveAs".equals(type)){
-                File root;
-                try {
-                    root = new File(AudioDesktop.LinuxPathHead);
-                } catch (Exception ex) {
-                    root = new File(AudioDesktop.WindowsPathHead);
-                }
+                File root = new File("");
+
                 JFileChooser fileChooser = new JFileChooser(root);
                 if (fileChooser.showSaveDialog(window) == JFileChooser.APPROVE_OPTION) {
                     try {

@@ -22,7 +22,7 @@ public class AdaptiveTextField extends JTextField{
     public float[] generateSamples(int numSamples){
         ArrayList<String> rpnTokens = new ArrayList<String>();
         try {
-            ArrayList parsed = EqnHandler.parse(getText());
+            ArrayList<String> parsed = EqnHandler.parse(getText());
             rpnTokens = EqnHandler.convertToRPN(parsed);
         } catch (Exception e) {
             e.printStackTrace();

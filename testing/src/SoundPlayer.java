@@ -43,6 +43,6 @@ public abstract class SoundPlayer implements Runnable{
 
     public abstract void addSound(byte[] b);
 
-    public enum StopCode { CLOSE, PAUSE, ENDSTREAM};
+    public enum StopCode { CLOSE, PAUSE, ENDSTREAM}
 
 }

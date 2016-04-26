@@ -26,8 +26,7 @@ public class AudioDesktop extends JFrame{
     private ArrayList<InternalWindow> audioFileWindows;
     private ArrayList<Component> components = new ArrayList<Component>();
 
-    public static final String LinuxPathHead = "s-space-jam/testing/";
-    public static final String WindowsPathHead = "testing/";
+    public static final String propPath = "resc/";
 
     private Properties properties;
 
@@ -49,8 +48,8 @@ public class AudioDesktop extends JFrame{
         this.setSize(width, height);
 
         this.setResizable(true);
-        ImageIcon icon  =  new ImageIcon(WindowsPathHead + "resc/s-Space-Jam-Logo.jpg");
-        if(icon.getImage() == null) icon = new ImageIcon(LinuxPathHead + "resc/s-Space-Jam-Logo.jpg");
+        ImageIcon icon  =  new ImageIcon(propPath + "/s-Space-Jam-Logo.jpg");
+        if(icon.getImage() == null) icon = new ImageIcon(propPath + "/s-Space-Jam-Logo.jpg");
         this.setIconImage(icon.getImage());
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -116,7 +115,7 @@ public class AudioDesktop extends JFrame{
      * Saves the theme to the properties file
      * @throws IOException
      */
-    public void saveProperties() throws IOException {
+    public void saveProperties() {
         for(int i = 0; i < Theme.theme.length; i++){
             properties.setProperty("" + Theme.themeKeys[i] + ":R", String.valueOf(Theme.theme[i].getRed()));
             properties.setProperty("" + Theme.themeKeys[i] + ":G", String.valueOf(Theme.theme[i].getGreen()));
@@ -124,37 +123,23 @@ public class AudioDesktop extends JFrame{
         }
 
         try {
-            File propFile = new File(LinuxPathHead + "resc/properties.txt");
+            File propFile = new File(propPath + "properties.txt");
             BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
             properties.store(propOut, "Colors");
         } catch (Exception e0){
-            try {
-                File propFile = new File(WindowsPathHead + "resc/properties.txt");
-                BufferedWriter propOut = new BufferedWriter(new FileWriter(propFile));
-                properties.store(propOut, "Colors");
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
         }
     }
 
     /**
      * Updates the properties file
-     * @throws IOException
      */
     public void updateProperties() {
         try {
-            File propFile = new File(LinuxPathHead + "resc/properties.txt");
+            File propFile = new File(propPath + "properties.txt");
+            if(!propFile.exists()) propFile.createNewFile();
             FileInputStream propReader = new FileInputStream(propFile);
             properties.load(propReader);
         } catch (Exception e0){
-            try {
-                File propFile = new File(WindowsPathHead + "resc/properties.txt");
-                FileInputStream propReader = new FileInputStream(propFile);
-                properties.load(propReader);
-            } catch (Exception e1) {
-                e1.printStackTrace();
-            }
         }
 
     }
@@ -165,11 +150,7 @@ public class AudioDesktop extends JFrame{
      */
     public void resetColors(boolean loadFromFile) {
         if(properties.isEmpty() || !loadFromFile) {
-            try {
-                saveProperties();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            saveProperties();
         }
 
         boolean configOk = true;
@@ -185,11 +166,7 @@ public class AudioDesktop extends JFrame{
             }
 
             if (!configOk) {
-                try {
-                    saveProperties();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                saveProperties();
             }
         }
 
@@ -335,12 +312,8 @@ public class AudioDesktop extends JFrame{
     public class OpenFileAction extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
-            File root;
-            try {
-                root = new File(LinuxPathHead);
-            } catch (Exception ex) {
-                root = new File(WindowsPathHead);
-            }
+            File root = new File("");
+
             JFileChooser fileChooser = new JFileChooser(root);
             fileChooser.setBackground(Theme.getThemeColor("bgColor"));
             fileChooser.setForeground(Theme.getThemeColor("txtColor"));

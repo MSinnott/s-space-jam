@@ -33,7 +33,6 @@ public class Scale {
         scale = new float[numNotes];
         for (int i = stIndex; loc < numNotes; i+= ((rand.nextBoolean()) ? 2 : 3)) {
             scale[loc++] = notes[i];
-            System.out.println(i);
         }
     }
 
@@ -43,10 +42,9 @@ public class Scale {
      * @param stNote index of the bass note
      */
     public Scale(int numNotes, int stNote){
-        int stIndex = stNote;
         int loc = 0;
         scale = new float[numNotes];
-        for (int i = stIndex; loc < numNotes; i+= ((rand.nextBoolean()) ? 2 : 3)) {
+        for (int i = stNote; loc < numNotes; i+= ((rand.nextBoolean()) ? 2 : 3)) {
             scale[loc++] = notes[i];
         }
     }

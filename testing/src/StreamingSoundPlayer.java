@@ -8,7 +8,7 @@ import java.util.List;
 public class StreamingSoundPlayer extends SoundPlayer {
 
     private AudioStreamWindow streamWindow;
-    private final List<byte[]> streamComponents = new ArrayList<>();;
+    private final List<byte[]> streamComponents = new ArrayList<>();
     private int sloc;
 
     public StreamingSoundPlayer(MainPane pane, AudioStreamWindow streamWindow){
