@@ -8,10 +8,11 @@ S-Space Jam is a piece of software that allows users to generate and edit music.
 * File rescaling and overlaying of one file onto another
 * Pure tone generation
 * Adding harmonics to a pure tone
+* Music stream generation
 
 ##
 #### How to use:
-Currently the project is being developed in [Intellij Idea](https://www.jetbrains.com/idea/), however, once development ends, it will be a stand-alone .jar file
+Download -- the .jar will be in the "SSJamFinalVersion" folder
 
 The software runs in under ``1G`` of RAM for ordinary file sizes, however larger file can cause issues (and take more memory)
 
